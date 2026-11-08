@@ -161,7 +161,7 @@ body {
     font: 400 11px/1.8 'EllipsisFix', "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
     color: oklch(47.5% 0.056 249);
     font-variant-east-asian: normal;
-    font-feature-settings: "palt";
+    font-feature-settings: normal;
     font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
     overflow-wrap: normal;
@@ -169,6 +169,7 @@ body {
 
 body > :where(:not(a, nav[aria-label="breadcrumb"], .btn-spacing)) {
     font-family: var(--en-font);
+    font-feature-settings: "palt";
 }
 
 :is(body > a, nav[aria-label="breadcrumb"], .btn-spacing, .post-head, .post-actions, .per-page),
@@ -1107,6 +1108,18 @@ main,
     -webkit-font-smoothing: antialiased;
 }
 
+.g_box {
+    box-shadow:
+        inset 0 0 0 1px oklch(from var(--gjo) calc(l + 0.2) calc(c * 0.6) h / 0.24),
+        0 0 20px oklch(100% 0 0 / 0.04);
+}
+
+.n_box {
+    box-shadow:
+        inset 0 0 0 1px oklch(from var(--nanami) calc(l + 0.2) calc(c * 0.6) h / 0.24),
+        0 0 20px oklch(100% 0 0 / 0.04);
+}
+
 main>*:first-child,
 :is(.g_box, .n_box)>*:first-child,
 :is(.hs, .gx, .yu, .um, .aj)>*:first-child {
@@ -1577,6 +1590,14 @@ main h3,
 
 :is(.g_box, .n_box) h2 {
     padding-bottom: 3.045em;
+}
+
+.g_box>h2 {
+    border-bottom-color: oklch(from var(--gjo) calc(l + 0.2) calc(c * 0.6) h / 0.16);
+}
+
+.n_box>h2 {
+    border-bottom-color: oklch(from var(--nanami) calc(l + 0.2) calc(c * 0.6) h / 0.16);
 }
 
 .n_box h2.klee {
@@ -7622,7 +7643,7 @@ body>a span[style*="color"] {
     position: relative;
     margin: 31px 10px !important;
     --lk-tone: var(--color);
-    padding: 56px 30px 24px;
+    padding: 56px 30px 46px;
     background: oklch(21.5% 0.060 254 / 0.4);
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
@@ -7695,7 +7716,7 @@ body>a span[style*="color"] {
 
 :is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) .post-lock {
     margin: 18px 0 0 !important;
-    padding: 22px 20px 18px;
+    padding: 22px 20px 40px;
     border-left: 2px solid color-mix(in srgb, var(--lk-tone) 40%, transparent);
     border-radius: 0 4px 4px 0;
     background: color-mix(in srgb, var(--ui-border) 15%, transparent);
@@ -7777,11 +7798,11 @@ body>a span[style*="color"] {
 .post-lock .unlock-form {
     position: relative;
     display: grid !important;
-    grid-template-columns: var(--lk-w) 34px;
+    grid-template-columns: var(--lk-w) 30px;
     align-items: center;
     gap: 0 6px !important;
-    --lk-w: min(58vw, 190px);
-    width: calc(var(--lk-w) + 40px) !important;
+    --lk-w: min(52vw, 170px);
+    width: calc(var(--lk-w) + 36px) !important;
     max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -7799,14 +7820,14 @@ body>a span[style*="color"] {
     grid-column: 1;
     width: 100% !important;
     max-width: none !important;
-    height: 34px !important;
-    padding: 0 12px !important;
+    height: 30px !important;
+    padding: 0 10px !important;
     border: 1px solid oklch(100% 0 0 / 0.1);
     border-radius: 4px;
     background: oklch(27% 0.05 254 / 0.22);
     color: color-mix(in srgb, var(--black) 78%, transparent);
     font-family: inherit;
-    font-size: 12px !important;
+    font-size: 11px !important;
     letter-spacing: 0.08em;
     line-height: normal;
     color-scheme: dark;
@@ -7825,12 +7846,12 @@ body>a span[style*="color"] {
 .post-lock .unlock-form:has(input[type="text"]:placeholder-shown)::before {
     content: "Password";
     position: absolute;
-    top: 17px;
-    left: 13px;
+    top: 15px;
+    left: 11px;
     z-index: 1;
     transform: translateY(-50%);
     font-family: var(--en-font);
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.12em;
     color: color-mix(in srgb, var(--color) 45%, transparent);
     pointer-events: none;
@@ -7871,8 +7892,8 @@ body>a span[style*="color"] {
 
 .post-lock .unlock-form input[type="submit"] {
     grid-column: 2;
-    width: 34px !important;
-    height: 34px !important;
+    width: 30px !important;
+    height: 30px !important;
     padding: 0 !important;
     border: 1px solid oklch(100% 0 0 / 0.1);
     border-radius: 4px;
@@ -7887,12 +7908,12 @@ body>a span[style*="color"] {
 .post-lock .unlock-form::after {
     content: "\E300";
     position: absolute;
-    top: 17px;
+    top: 15px;
     right: 0;
-    width: 34px;
+    width: 30px;
     transform: translateY(-50%);
     font-family: "Phosphor-Light";
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1;
     text-align: center;
     color: color-mix(in srgb, var(--black) 45%, transparent);
@@ -7908,11 +7929,11 @@ body>a span[style*="color"] {
 }
 
 .post-lock:has(.unlock-msg:not(:empty)) {
-    padding-bottom: 24px;
+    padding-bottom: 46px;
 }
 
 :is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) .post-lock:has(.unlock-msg:not(:empty)) {
-    padding-bottom: 18px;
+    padding-bottom: 40px;
 }
 
 .post-lock:has(.unlock-msg:not(:empty))::after {
