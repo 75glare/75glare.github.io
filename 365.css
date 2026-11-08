@@ -158,13 +158,17 @@ body {
     padding: 5px;
     padding-bottom: max(5px, env(safe-area-inset-bottom));
     background: transparent !important;
-    font: 400 11px/1.8 var(--en-font);
+    font: 400 11px/1.8 'EllipsisFix', "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
     color: oklch(47.5% 0.056 249);
     font-variant-east-asian: normal;
     font-feature-settings: "palt";
     font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
     overflow-wrap: normal;
+}
+
+body > :where(:not(a, nav[aria-label="breadcrumb"], .btn-spacing)) {
+    font-family: var(--en-font);
 }
 
 :is(body > a, nav[aria-label="breadcrumb"], .btn-spacing, .post-head, .post-actions, .per-page),
