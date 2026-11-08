@@ -8130,6 +8130,71 @@ body>a span[style*="color"] {
     top: 38%;
 }
 
+:is(main, .g_box, .n_box) > .or-bg[data-o]:first-child + * {
+    margin-top: 0;
+}
+
+:is(main, .g_box, .n_box) > .or-bg[data-o]:not(.ce) {
+    font-size: 3.5rem;
+    color: oklch(100% 0 0 / 0.12);
+    right: calc(16px - 0.024em);
+    bottom: calc(16px - var(--d, 0.17) * 1em);
+}
+
+:is(main, .g_box, .n_box) > .or-bg[data-o].ce {
+    inset: 0;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    padding-top: calc(var(--m, 0.06) * 2em);
+    font-size: 14rem;
+    color: oklch(100% 0 0 / 0.08);
+}
+
+:is(main, .g_box, .n_box):has(> .or-bg[data-o].ce) {
+    min-height: 19rem;
+}
+
+.or-bg[data-o="#"] {
+    --d: 0.228;
+    --m: 0.076;
+}
+
+.or-bg[data-o="6"] {
+    --d: 0.075;
+    --m: 0.032;
+}
+
+.or-bg[data-o="A"] {
+    --d: 0.196;
+    --m: 0.067;
+}
+
+.or-bg[data-o="H"] {
+    --d: 0.232;
+    --m: 0.062;
+}
+
+.or-bg[data-o="I"] {
+    --d: 0.148;
+    --m: 0.046;
+}
+
+.or-bg[data-o="O"] {
+    --d: 0.217;
+    --m: 0.055;
+}
+
+.or-bg[data-o="Q"] {
+    --d: 0.131;
+    --m: 0.047;
+}
+
+.or-bg[data-o="Y"] {
+    --d: 0.169;
+    --m: 0.083;
+}
+
 /* =======================================
     Media Queries
 ======================================= */
@@ -8186,6 +8251,14 @@ body>a span[style*="color"] {
         font-size: 13rem;
         color: oklch(100% 0 0 / 0.06);
         top: 48%;
+    }
+
+    :is(main, .g_box, .n_box) > .or-bg[data-o].ce {
+        font-size: 12rem;
+    }
+
+    :is(main, .g_box, .n_box):has(> .or-bg[data-o].ce) {
+        min-height: 16.5rem;
     }
 }
 
