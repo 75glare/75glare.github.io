@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ページの編集室</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet">
+<link href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+<style>
+:root {
+    color-scheme: dark;
+    --bg: oklch(18% 0.045 258);
+    --panel: oklch(23% 0.05 255);
+    --field: oklch(28% 0.05 252);
+    --line: oklch(100% 0 0 / 0.14);
+    --text: oklch(92% 0.015 235);
+    --sub: oklch(72% 0.03 240);
+    --accent: oklch(75% 0.07 215);
+    --gjo: oklch(70% 0.075 230);
+    --nanami: oklch(70% 0.065 100);
+    --warn: oklch(72% 0.13 30);
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    padding: 20px 16px 60px;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.7 "Zen Kaku Gothic Antique", system-ui, sans-serif;
+}
+h1 { margin: 0 0 4px; font-size: 1.25rem; font-weight: 500; letter-spacing: 0.08em; }
+.lead { margin: 0 0 18px; color: var(--sub); font-size: 0.9em; }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.tabs button, .btn {
+    padding: 7px 14px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--field);
+    color: var(--text);
+    font: inherit;
+    cursor: pointer;
+}
+.tabs button[aria-pressed="true"] {
+    border-color: var(--accent);
+    background: color-mix(in oklch, var(--accent) 25%, var(--field));
+}
+.btn.small { padding: 3px 9px; font-size: 0.85em; }
+.btn.warn { color: var(--warn); }
+.wrap { display: grid; gap: 18px; }
+@media (min-width: 1000px) {
+    .wrap { grid-template-columns: minmax(0, 1fr) 420px; align-items: start; }
+    .side { position: sticky; top: 16px; }
+}
+.panel {
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--panel);
+}
+.panel + .panel { margin-top: 14px; }
+.panel h2 { margin: 0 0 10px; font-size: 1rem; font-weight: 500; color: var(--accent); letter-spacing: 0.05em; }
+label { display: block; margin: 10px 0 4px; color: var(--sub); font-size: 0.88em; }
+input[type="text"], textarea, select {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--field);
+    color: var(--text);
+    font: inherit;
+}
+textarea { min-height: 70px; resize: vertical; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent); }
+.hint { margin: 4px 0 0; color: var(--sub); font-size: 0.82em; }
+.row { display: grid; gap: 8px; align-items: end; }
+.row label { margin-top: 0; }
+.item {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--c, var(--line));
+    border-radius: 8px;
+    background: oklch(100% 0 0 / 0.03);
+}
+.item.gjo { --c: var(--gjo); }
+.item.na { --c: var(--nanami); }
+.item-head { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 4px; }
+.item-head .name { flex: 1; min-width: 8em; font-weight: 500; }
+.ic-prev { display: inline-grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 6px; font-size: 18px; color: var(--c, var(--accent)); }
+.ic-prev i { font-style: normal; }
+.swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; vertical-align: -2px; border: 1px solid var(--line); }
+.out { width: 100%; min-height: 150px; font: 12px/1.6 ui-monospace, monospace; }
+.count { margin: 6px 0 0; color: var(--sub); font-size: 0.85em; }
+.count.over { color: var(--warn); font-weight: 700; }
+.acts { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+.check { display: inline-flex; gap: 6px; align-items: center; margin: 0; color: var(--sub); }
+.pv-frame { position: relative; overflow: hidden; height: 560px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
+iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var(--bg); transform-origin: 0 0; }
+.pv-size { display: flex; gap: 6px; margin-bottom: 8px; }
+.pv-size button[aria-pressed="true"] { border-color: var(--accent); }
+.stored { display: flex; flex-wrap: wrap; gap: 6px; }
+.stored .btn { display: inline-flex; gap: 6px; align-items: center; }
+.import { margin-bottom: 14px; }
+.nudge { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; color: var(--accent); }
+.import textarea { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
+[hidden] { display: none !important; }
+@media (max-width: 520px) { .row { grid-template-columns: 1fr !important; } }
+</style>
+</head>
+<body>
+<h1>ページの編集室</h1>
+<p class="lead">Attention・Storage・愛読書のページを作るところ。書き換えると下に貼る用の HTML ができるから、コピーして書き込みの本文をまるごと貼り替えてね。</p>
+
+<div class="tabs" id="tabs">
+    <button type="button" data-tab="at">Attention（2）</button>
+    <button type="button" data-tab="st">Storage（41）</button>
+    <button type="button" data-tab="bs">愛読書（7）</button>
+</div>
+
+<div class="panel import">
+    <h2>今のページを読み取る</h2>
+    <p class="hint">掲示板の書き込みの編集画面から、本文をまるごとコピーして貼ってね。「読み取る」を押すと、Attention・Storage・愛読書のどれかを見分けて、下の入力欄に今の内容を入れるよ。</p>
+    <textarea id="imp-src" placeholder="ここに貼る"></textarea>
+    <div class="acts">
+        <button type="button" class="btn" id="imp-go">読み取る</button>
+        <span class="hint" id="imp-msg" role="status"></span>
+    </div>
+</div>
+
+<div class="wrap">
+    <div id="forms">
+        <section data-form="at" hidden>
+            <div class="panel">
+                <h2>見出しとアイコン</h2>
+                <label for="at-title">見出し</label>
+                <input type="text" id="at-title" data-k="at.title">
+                <div id="at-icons"></div>
+                <div class="acts"><button type="button" class="btn small" data-add="at.icons">アイコンを足す</button></div>
+            </div>
+            <div class="panel">
+                <h2>注意書き</h2>
+                <label for="at-tag0">タグ（1行目）</label>
+                <input type="text" id="at-tag0" data-k="at.tags.0">
+                <label for="at-tag1">タグ（2行目）</label>
+                <input type="text" id="at-tag1" data-k="at.tags.1">
+                <p class="hint">空白か「、」で区切ると、1つずつの札になるよ。スマホではこの2行のまま並ぶ。</p>
+                <label for="at-notes">その下の文</label>
+                <textarea id="at-notes" data-k="at.notes"></textarea>
+                <label for="at-warnS">注意の折りたたみ（見出し）</label>
+                <input type="text" id="at-warnS" data-k="at.warnS">
+                <label for="at-warnB">注意の折りたたみ（中身）</label>
+                <textarea id="at-warnB" data-k="at.warnB"></textarea>
+            </div>
+            <div class="panel">
+                <h2>This is</h2>
+                <label for="at-thisis">本文</label>
+                <textarea id="at-thisis" data-k="at.thisis"></textarea>
+                <label for="at-prevS">本の折りたたみ（見出し）</label>
+                <input type="text" id="at-prevS" data-k="at.prevS">
+                <label for="at-prevB">本の折りたたみ（中身）</label>
+                <textarea id="at-prevB" data-k="at.prevB"></textarea>
+                <p class="hint">&lt;kt&gt; や &lt;gy&gt; などのタグもそのまま書ける。改行はそのまま改行になるよ。</p>
+            </div>
+            <div class="panel">
+                <h2>Who is</h2>
+                <div id="at-people"></div>
+            </div>
+        </section>
+
+        <section data-form="st" hidden>
+            <div class="panel">
+                <h2>見出しとアイコン</h2>
+                <label for="st-title">見出し</label>
+                <input type="text" id="st-title" data-k="st.title">
+                <div id="st-icons"></div>
+                <div class="acts"><button type="button" class="btn small" data-add="st.icons">アイコンを足す</button></div>
+            </div>
+            <div class="panel">
+                <h2>カード</h2>
+                <p class="hint">五条が作ったものは青、七海のものは黄色になるよ。題名の上に、ペンと名前（Gojo Satoru／Nanami Kento）が出る。右の番号は上から順に 01、02…と自動で付くから、並べ替えると番号も変わるよ。</p>
+                <div id="st-items"></div>
+                <div class="acts"><button type="button" class="btn small" data-add="st.items">カードを足す</button></div>
+            </div>
+            <div class="panel">
+                <h2>下の部分</h2>
+                <label for="st-quote">英文</label>
+                <input type="text" id="st-quote" data-k="st.quote">
+                <label for="st-date">Last Updated</label>
+                <div class="row" style="grid-template-columns: 1fr auto">
+                    <input type="text" id="st-date" data-k="st.date">
+                    <button type="button" class="btn small" id="st-today">今日の日付</button>
+                </div>
+                <p class="hint nudge" id="st-nudge" hidden>カードが変わったよ。Last Updated を今日にする？ <button type="button" class="btn small" id="st-nudge-yes">今日にする</button></p>
+            </div>
+        </section>
+
+        <section data-form="bs" hidden>
+            <div class="panel">
+                <h2>本棚</h2>
+                <p class="hint">上から順に並ぶよ（スマホでは7冊ずつ）。アイコンは「E9BA」のような番号でも、「cat」「ph-cat」のような名前でも入れられる。</p>
+                <div id="bs-books"></div>
+                <div class="acts"><button type="button" class="btn small" data-add="bs.books">本を足す</button></div>
+            </div>
+            <div class="panel">
+                <h2>しまってある本</h2>
+                <p class="hint">「しまう」を押した本はここに残るよ。押すと本棚のいちばん下に戻る。</p>
+                <div class="stored" id="bs-stored"></div>
+            </div>
+        </section>
+    </div>
+
+    <div class="side">
+        <div class="panel">
+            <h2>貼る用の HTML</h2>
+            <textarea class="out" id="out" readonly></textarea>
+            <p class="count" id="count"></p>
+            <div class="acts">
+                <button type="button" class="btn" id="copy">コピー</button>
+                <label class="check"><input type="checkbox" id="links" checked>CSS の読み込みも付ける</label>
+                <button type="button" class="btn small warn" id="reset">このページを最初の状態に戻す</button>
+            </div>
+            <p class="hint">&lt;br&gt; は使っていないよ。改行は掲示板が自動で &lt;br /&gt; にするから、そのまま貼ってね。</p>
+            <div class="acts">
+                <label class="check" for="board">掲示板</label>
+                <select id="board" style="width:auto">
+                    <option value="old">今の掲示板（5,000 文字まで）</option>
+                    <option value="new">新しい掲示板（20,000 文字まで）</option>
+                </select>
+            </div>
+            <p class="hint">新しい掲示板は日記の CSS を入れる欄があるから、選ぶと「CSS の読み込みも付ける」が外れるよ。</p>
+        </div>
+        <div class="panel">
+            <h2>下書きの保存</h2>
+            <p class="hint">書きかけはこのブラウザの中にも自動で残るけど、ブラウザの掃除や設定で消えることがあるよ。大事なときはファイルにも保存してね（「ダウンロード」フォルダに入る）。</p>
+            <div class="acts">
+                <button type="button" class="btn" id="file-save">下書きをファイルに保存</button>
+                <button type="button" class="btn" id="file-load">ファイルから読み込む</button>
+                <input type="file" id="file-input" accept=".json,application/json" hidden>
+                <span class="hint" id="file-msg" role="status"></span>
+            </div>
+        </div>
+        <div class="panel">
+            <h2>プレビュー</h2>
+            <div class="pv-size" id="pv-size">
+                <button type="button" class="btn small" data-pv="pc" aria-pressed="true">パソコン</button>
+                <button type="button" class="btn small" data-pv="phone" aria-pressed="false">iPhone 17 の幅</button>
+            </div>
+            <div class="pv-frame" id="pv-frame"><iframe class="preview" id="preview" title="プレビュー"></iframe></div>
+            <p class="hint">プレビューはサイトに上がっている 365.css で表示しているよ。</p>
+        </div>
+    </div>
+</div>
+
+<i id="ph-probe" aria-hidden="true" style="position:absolute;left:-9999px"></i>
+
+<script>
+(() => {
+    const DEFAULTS = {"at": {"title": "Attention", "icons": [{"cls": "ph-fill ph-books", "href": "https://2colorless.nieru.net/57/7"}, {"cls": "ph-fill ph-treasure-chest", "href": "https://2colorless.nieru.net/57/41"}, {"cls": "ph-light ph-code", "href": "https://2colorless.nieru.net/57/3"}, {"cls": "ph-fill ph-house-line", "href": "https://2colorless.nieru.net/57"}], "tags": ["2PL固定　半完混合　時系列混在　捏造　惚気", "同性愛表現　検索避け省略　背後透過"], "notes": "多方面に配慮しないため閲覧は自己責任で。\n有事の際は日記名もしくは日記番号で反応しまーす。", "warnS": "背後透過などについて", "warnB": "同時視聴した映画などの感想や一緒に遊んだゲームの詳細な内容は折りたたみにて、アダルトな話題などはモザイクで配慮してまーす。ワンタップで表示されるからご注意！", "thisis": "胃袋を掴み合ってるGTGと脱サラ呪術師の日常。\n去年の秋から新居でまったりと同棲中。ナチュラルに引っ越し作業を押し付けたら「<kt>喧嘩しますか？<\/kt>」って言われた。あの時の七海は恐かったな……。", "prevS": "前回までのあらすじ", "prevB": "目標だった73ページは書き切ったからそのまま終わりにするつもりだったけど、誰かさんが寂しそうだったので共同日記としてセカンドシーズンスタート！！\nタイトルは七海クンが考えてくれました〜！拍手〜！\n<gy>旧題：『たぶん』五条悟／『きっと』七海建人<\/gy>", "people": [{"ch": "gjo", "name": "五条悟", "roma": "Gojo Satoru", "tag": "na", "text": "無茶振りをして私を困らせるのが好き。(七海限定：五条談)たまに語彙が小学生。可愛いよりかっこいいと言われたい人。しかし可愛いが勝つ。スパダリ。"}, {"ch": "na", "name": "七海建人", "roma": "Nanami Kento", "tag": "go", "text": "口下手なのに直球しか投げない。心配性。すぐ噛む。生意気。手元の本を閉じるだけで僕を呼び寄せることが出来るのはたぶん七海だけだと思う。"}]}, "st": {"title": "Storage", "icons": [{"cls": "ph-fill ph-film-reel", "href": "https://2colorless.nieru.net/57/95,53,52"}, {"cls": "ph-fill ph-game-controller", "href": "https://2colorless.nieru.net/57/70"}, {"cls": "ph-fill ph-cake", "href": "https://2colorless.nieru.net/57/42"}, {"cls": "ph-fill ph-house-line", "href": "https://2colorless.nieru.net/57"}], "items": [{"ch": "gjo", "href": "https://2colorless.nieru.net/57/16", "title": "惚気バトン(仮)", "desc": "僕が七海のために作ってあげたバトン！"}, {"ch": "gjo", "href": "https://2colorless.nieru.net/57/47", "title": "好きを紡ぐ日常バトン", "desc": "僕が七海のために作ってあげたバトン第二弾！"}, {"ch": "na", "href": "https://2colorless.nieru.net/57/49", "title": "好きを紡ぐ日常バトン", "desc": "回答者：七海建人　おまけは後日掲載予定。"}], "quote": "Bound here, so our days never fade.", "date": "2026.10.02"}, "bs": {"books": [{"color": "oklch(78% 0.10 95)", "icon": "E9BA", "font": "Light", "href": "https://1colorless.nieru.net/20", "title": "Lemon"}, {"color": "oklch(63% 0.10 25)", "icon": "E9BA", "font": "Fill", "href": "https://2colorless.nieru.net/14", "title": "終のしとね"}, {"color": "oklch(64% 0.09 245)", "icon": "E6DE", "font": "Light", "href": "https://1colorless.nieru.net/19", "title": "まにまに"}, {"color": "oklch(60% 0.09 285)", "icon": "EC48", "font": "Fill", "href": "https://2colorless.nieru.net/113", "title": "憎"}, {"color": "oklch(58% 0.12 18)", "icon": "E8F4", "font": "Fill", "href": "https://2colorless.nieru.net/36", "title": "三途の川より"}, {"color": "oklch(68% 0.11 55)", "icon": "E8F4", "font": "Fill", "href": "https://2colorless.nieru.net/87", "title": "地獄巡り"}, {"color": "oklch(66% 0.08 155)", "icon": "E6A2", "font": "Fill", "href": "https://2colorless.nieru.net/156", "title": "星を綴じる夜"}, {"color": "oklch(64% 0.08 305)", "icon": "E31C", "font": "Light", "href": "https://1colorless.nieru.net/129", "title": "reversible"}, {"color": "oklch(66% 0.035 240)", "icon": "E652", "font": "Fill", "href": "https://2colorless.nieru.net/15", "title": "異星交友"}, {"color": "oklch(66% 0.050 75)", "icon": "E648", "font": "Light", "href": "https://1colorless.nieru.net/40", "title": "恩讐の彼方に"}, {"color": "oklch(72% 0.08 350)", "icon": "E74A", "font": "Light", "href": "https://1colorless.nieru.net/43", "title": "抱き枕の行方"}], "stored": [{"color": "", "icon": "E28A", "font": "Light", "href": "https://1colorless.nieru.net/26", "title": "SSRS"}, {"color": "", "icon": "E8C4", "font": "Light", "href": "https://1colorless.nieru.net/25", "title": "きみは守るが世界は壊す"}, {"color": "", "icon": "EDC8", "font": "Light", "href": "https://1colorless.nieru.net/55", "title": "僕にとっては君が、俺にとってはお前が…─"}, {"color": "", "icon": "E9C0", "font": "Fill", "href": "https://2colorless.nieru.net/44", "title": "烏有に帰す。"}, {"color": "", "icon": "E2B8", "font": "Light", "href": "https://1colorless.nieru.net/306", "title": "すこしずつ、ふたり"}]}};
+    const LIMIT = 5000;
+    const LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500&family=Klee+One:wght@400;600&family=Open+Sans:wght@400;500&family=Scope+One&display=swap" rel="stylesheet"><link href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet"><link href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet"><link href="https://75glare.github.io/365.css" rel="stylesheet">';
+    const COLORS = [
+        ['', 'おまかせ（並び順の色）'],
+        ['oklch(78% 0.10 95)', '黄'],
+        ['oklch(63% 0.10 25)', '赤'],
+        ['oklch(58% 0.12 18)', '深い赤'],
+        ['oklch(68% 0.11 55)', 'オレンジ'],
+        ['oklch(72% 0.08 350)', 'ピンク'],
+        ['oklch(64% 0.08 305)', '赤みの紫'],
+        ['oklch(60% 0.09 285)', '青みの紫'],
+        ['oklch(64% 0.09 245)', '青'],
+        ['oklch(66% 0.035 240)', '灰青'],
+        ['oklch(66% 0.08 155)', '緑'],
+        ['oklch(66% 0.050 75)', '砂色'],
+    ];
+    const KEY = 'pages-gen-v1';
+    const $ = (id) => document.getElementById(id);
+    const clone = (o) => JSON.parse(JSON.stringify(o));
+    const attr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+    const text = (s) => String(s).replace(/\r/g, '').replace(/^\n+|\n+$/g, '');
+
+    let state;
+    try { state = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { state = null; }
+    if (!state || !state.at || !state.st || !state.bs) state = { tab: 'at', ...clone(DEFAULTS) };
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+
+    const get = (path) => path.split('.').reduce((o, k) => (o == null ? o : o[k]), state);
+    const set = (path, v) => {
+        const ks = path.split('.');
+        const last = ks.pop();
+        const o = ks.reduce((o, k) => o[k], state);
+        o[last] = v;
+    };
+
+    // ---- アイコン：番号でも名前でも受け付ける
+    const probe = $('ph-probe');
+    function iconCode(v, font) {
+        v = String(v || '').trim();
+        if (/^\\?[0-9a-f]{4}$/i.test(v)) return v.replace('\\', '').toUpperCase();
+        const name = v.replace(/^ph-(light|fill)\s+/, '').replace(/^ph-/, '');
+        if (!/^[a-z0-9-]+$/.test(name)) return '';
+        probe.className = `ph-${font === 'Fill' ? 'fill' : 'light'} ph-${name}`;
+        const c = getComputedStyle(probe, '::before').content;
+        const m = c && c.match(/^["'](.)["']$/u);
+        return m ? m[1].codePointAt(0).toString(16).toUpperCase() : '';
+    }
+    const glyph = (code, font) => (code ? `<i style="font-family:'Phosphor-${font === 'Fill' ? 'Fill' : 'Light'}'">&#x${code};</i>` : '<i>?</i>');
+
+    // ---- 出力
+    const iconLinks = (icons) => icons.filter((i) => i.cls.trim()).map((i) => `<a href="${attr(i.href)}" class="icon"><i class="${attr(i.cls.trim())} ic_wr"></i></a>`).join('');
+    const tagRow = (s) => {
+        const tags = String(s || '').split(/[\s、,]+/).filter(Boolean);
+        return tags.length ? `<div>${tags.map((t) => `<span>${t}</span>`).join('')}</div>` : '';
+    };
+    function buildAt(a) {
+        // 前の紹介があるときは、名前の横の時計の印で切り替えられるようにする
+        const people = a.people.map((p) => {
+            const old = text(p.old || '');
+            const mark = old ? '<details><summary title="前の紹介"></summary></details>' : '';
+            return `<div class="int-ti" data-ch="${p.ch}">${p.name}<span>${p.roma}</span>${mark}</div><${p.tag}>${text(p.text)}</${p.tag}>${old ? `<${p.tag} class="old">${old}</${p.tag}>` : ''}`;
+        }).join('');
+        return `<main class="at"><div class="ti-tr">${a.title}<div class="ic-tr">${iconLinks(a.icons)}</div></div>`
+            + `<div class="at-tg">${a.tags.map(tagRow).join('')}</div>`
+            + `<p>${text(a.notes)}</p><details><summary>${a.warnS}</summary><p>${text(a.warnB)}</p></details>\n`
+            + `<div class="lg-sq">This is</div><p>${text(a.thisis)}</p><details><summary>${a.prevS}</summary><p>${text(a.prevB)}</p></details>\n`
+            + `<div class="lg-sq">Who is</div>\n<div class="int">${people}</div></main>`;
+    }
+    function buildSt(s) {
+        const items = s.items.map((it) => `<div class="il-it" data-ch="${it.ch}" style="--icon: '\\E58E';--font: 'Phosphor-Light';"><dt class="il-ti"><a href="${attr(it.href)}" class="il-lk">${it.title}</a></dt><dd class="il-ds">${it.desc}</dd></div>`).join('');
+        return `<main><div class="ti-tr">${s.title}<div class="ic-tr">${iconLinks(s.icons)}</div></div><dl class="il sg">${items}</dl>`
+            + `<p class="pg-qt"><span class="pg-en">${s.quote}</span></p><p class="pg-now up">Last Updated ―<b>${s.date}</b></p></main>`;
+    }
+    const bookHTML = (b) => `<div class="il-it" style="${b.color ? `--bk: ${b.color};` : ''}--icon: '\\${b.icon}';--font: 'Phosphor-${b.font}';"><dt class="il-ti"><a href="${attr(b.href)}" class="il-lk">${b.title}</a></dt></div>`;
+    const buildBs = (b) => `<main><div class="ti-tr"><span>Bookshelf<small>愛読書</small></span></div><dl class="il bs">${b.books.map(bookHTML).join('')}</dl></main>`;
+    const build = () => (state.tab === 'at' ? buildAt(state.at) : state.tab === 'st' ? buildSt(state.st) : buildBs(state.bs));
+
+    // ---- 一覧の入力欄
+    const moveBtns = (list, i, n) => `<button type="button" class="btn small" data-mv="${list}:${i}:-1" ${i === 0 ? 'disabled' : ''} aria-label="上へ">↑</button><button type="button" class="btn small" data-mv="${list}:${i}:1" ${i === n - 1 ? 'disabled' : ''} aria-label="下へ">↓</button>`;
+    function renderIcons(key) {
+        const list = get(`${key}.icons`);
+        $(`${key}-icons`).innerHTML = list.map((ic, i) => `
+            <div class="row" style="grid-template-columns: 40px 1fr 1.4fr auto">
+                <span class="ic-prev"><i class="${attr(ic.cls)}"></i></span>
+                <div><label>アイコン</label><input type="text" data-k="${key}.icons.${i}.cls" value="${attr(ic.cls)}"></div>
+                <div><label>リンク先</label><input type="text" data-k="${key}.icons.${i}.href" value="${attr(ic.href)}"></div>
+                <div>${moveBtns(`${key}.icons`, i, list.length)}<button type="button" class="btn small warn" data-del="${key}.icons:${i}">消す</button></div>
+            </div>`).join('');
+    }
+    function renderPeople() {
+        $('at-people').innerHTML = state.at.people.map((p, i) => `
+            <div class="item ${p.ch}">
+                <div class="row" style="grid-template-columns: 1fr 1fr">
+                    <div><label>名前</label><input type="text" data-k="at.people.${i}.name" value="${attr(p.name)}"></div>
+                    <div><label>ローマ字</label><input type="text" data-k="at.people.${i}.roma" value="${attr(p.roma)}"></div>
+                </div>
+                <label>紹介文（${p.tag === 'na' ? '七海が書く' : '五条が書く'}）</label>
+                <textarea data-k="at.people.${i}.text">${attr(p.text)}</textarea>
+                <label>前の紹介（なくてもOK）</label>
+                <textarea data-k="at.people.${i}.old">${attr(p.old || '')}</textarea>
+                <div class="acts"><button type="button" class="btn small" data-to-old="${i}">今の紹介文を「前の紹介」に移す</button></div>
+            </div>`).join('');
+    }
+    function renderSt() {
+        const list = state.st.items;
+        $('st-items').innerHTML = list.map((it, i) => `
+            <div class="item ${it.ch}">
+                <div class="item-head">
+                    <span class="name">${i + 1}. ${attr(it.title) || '（題名なし）'}</span>
+                    ${moveBtns('st.items', i, list.length)}
+                    <button type="button" class="btn small warn" data-del="st.items:${i}">消す</button>
+                </div>
+                <div class="row" style="grid-template-columns: 1fr 9em">
+                    <div><label>題名</label><input type="text" data-k="st.items.${i}.title" value="${attr(it.title)}"></div>
+                    <div><label>誰のもの</label><select data-k="st.items.${i}.ch" data-rerender>
+                        <option value="gjo" ${it.ch === 'gjo' ? 'selected' : ''}>五条（青）</option>
+                        <option value="na" ${it.ch === 'na' ? 'selected' : ''}>七海（黄）</option>
+                    </select></div>
+                </div>
+                <label>説明</label><input type="text" data-k="st.items.${i}.desc" value="${attr(it.desc)}">
+                <label>リンク先</label><input type="text" data-k="st.items.${i}.href" value="${attr(it.href)}">
+            </div>`).join('');
+    }
+    function colorOptions(cur) {
+        const known = COLORS.some(([v]) => v === cur);
+        return COLORS.map(([v, n]) => `<option value="${v}" ${v === cur ? 'selected' : ''}>${n}</option>`).join('')
+            + `<option value="__custom" ${known ? '' : 'selected'}>自分で入力</option>`;
+    }
+    function renderBs() {
+        const list = state.bs.books;
+        $('bs-books').innerHTML = list.map((b, i) => {
+            const known = COLORS.some(([v]) => v === b.color);
+            return `
+            <div class="item" style="--c: ${attr(b.color || 'var(--accent)')}">
+                <div class="item-head">
+                    <span class="ic-prev">${glyph(b.icon, b.font)}</span>
+                    <span class="name">${i + 1}. ${attr(b.title) || '（題名なし）'}</span>
+                    ${moveBtns('bs.books', i, list.length)}
+                    <button type="button" class="btn small" data-store="${i}">しまう</button>
+                </div>
+                <div class="row" style="grid-template-columns: 1fr 1fr">
+                    <div><label>題名</label><input type="text" data-k="bs.books.${i}.title" value="${attr(b.title)}"></div>
+                    <div><label>リンク先</label><input type="text" data-k="bs.books.${i}.href" value="${attr(b.href)}"></div>
+                </div>
+                <div class="row" style="grid-template-columns: 1fr 7em 1fr">
+                    <div><label>アイコン</label><input type="text" data-icon="${i}" value="${attr(b.icon)}"></div>
+                    <div><label>書体</label><select data-k="bs.books.${i}.font" data-rerender>
+                        <option value="Light" ${b.font === 'Light' ? 'selected' : ''}>Light</option>
+                        <option value="Fill" ${b.font === 'Fill' ? 'selected' : ''}>Fill</option>
+                    </select></div>
+                    <div><label>色 <span class="swatch" style="background:${attr(b.color || 'transparent')}"></span></label><select data-color="${i}">${colorOptions(b.color)}</select></div>
+                </div>
+                <div ${known ? 'hidden' : ''}><label>色（oklch などで入力）</label><input type="text" data-k="bs.books.${i}.color" data-rerender-blur value="${attr(b.color)}"></div>
+            </div>`;
+        }).join('');
+        $('bs-stored').innerHTML = state.bs.stored.length
+            ? state.bs.stored.map((b, i) => `<button type="button" class="btn small" data-restore="${i}">${glyph(b.icon, b.font)}${attr(b.title)}</button>`).join('')
+            : '<p class="hint">しまってある本はないよ。</p>';
+    }
+    function renderForms() {
+        document.querySelectorAll('[data-form]').forEach((f) => { f.hidden = f.dataset.form !== state.tab; });
+        document.querySelectorAll('#tabs button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.tab === state.tab));
+        document.querySelectorAll('[data-form] [data-k]').forEach((el) => {
+            const v = get(el.dataset.k);
+            if (v !== undefined && el.value !== v) el.value = v;
+        });
+        renderIcons('at');
+        renderIcons('st');
+        renderPeople();
+        renderSt();
+        renderBs();
+    }
+
+    // ---- 出力とプレビュー
+    let pvTimer;
+    function render() {
+        const html = build();
+        const out = ($('links').checked ? LINKS : '') + html;
+        $('out').value = out;
+        const n = out.length + (out.match(/\n/g) || []).length;
+        const limit = state.board === 'new' ? 20000 : LIMIT;
+        $('count').textContent = `${n.toLocaleString()} / ${limit.toLocaleString()} 文字`;
+        $('count').classList.toggle('over', n > limit);
+        const changed = JSON.stringify(state.st.items) !== stItemsAt && state.st.date !== today();
+        $('st-nudge').hidden = !changed;
+        clearTimeout(pvTimer);
+        pvTimer = setTimeout(() => preview(html.replace(/\n/g, '<br />\n')), 500);
+        save();
+    }
+    function preview(body) {
+        const links = LINKS.replace('365.css"', `365.css?v=${Date.now()}"`);
+        $('preview').srcdoc = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="https://2colorless.nieru.net/style.css"></head><body>${body}${links}<style>html,html::before,html::after,body::before,body::after{animation:none !important;}</style></body></html>`;
+    }
+
+    // ---- 操作
+    const today = () => {
+        const d = new Date();
+        return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+    };
+    let stItemsAt = JSON.stringify(state.st.items);
+
+    // ---- 今のページを読み取る
+    const inner = (el) => (el ? el.innerHTML.replace(/<br\s*\/?>\n?/gi, '\n').replace(/\r/g, '').replace(/^\n+|\n+$/g, '') : '');
+    const ownText = (el) => (el ? [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent).join('').trim() : '');
+    const readIcons = (m) => [...m.querySelectorAll('.ti-tr .ic-tr a.icon')].map((a) => ({
+        cls: (a.querySelector('i') ? a.querySelector('i').className : '').replace(/\s*\bic_wr\b/, '').trim(),
+        href: a.getAttribute('href') || '',
+    }));
+    const kids = (m) => [...m.children];
+    function readAt(m) {
+        const ch = kids(m);
+        const sq = ch.filter((e) => e.matches('.lg-sq'));
+        const before = (e) => ch.slice(0, e ? ch.indexOf(e) : ch.length);
+        const after = (a, b) => ch.slice(ch.indexOf(a) + 1, b ? ch.indexOf(b) : ch.length);
+        const top = before(sq[0]);
+        const mid = sq[0] ? after(sq[0], sq[1]) : [];
+        const tp = top.find((e) => e.tagName === 'P');
+        const td = top.find((e) => e.tagName === 'DETAILS');
+        const mp = mid.find((e) => e.tagName === 'P');
+        const md = mid.find((e) => e.tagName === 'DETAILS');
+        const tags = [...m.querySelectorAll('.at-tg > div')].map((d) => [...d.querySelectorAll('span')].map((x) => x.textContent.trim()).join('　'));
+        const people = [...m.querySelectorAll('.int .int-ti')].map((t) => {
+            const body = t.nextElementSibling;
+            const tag = body && /^(NA|GO)$/.test(body.tagName) ? body.tagName.toLowerCase() : 'na';
+            const old = body && body.nextElementSibling && body.nextElementSibling.matches('.old') ? body.nextElementSibling : null;
+            return { ch: t.dataset.ch || (tag === 'na' ? 'gjo' : 'na'), name: ownText(t), roma: t.querySelector('span') ? t.querySelector('span').textContent.trim() : '', tag, text: inner(body), old: inner(old) };
+        });
+        return {
+            title: ownText(m.querySelector('.ti-tr')),
+            icons: readIcons(m),
+            tags: [tags[0] || '', tags[1] || ''],
+            notes: inner(tp),
+            warnS: td ? inner(td.querySelector('summary')) : '',
+            warnB: td ? inner(td.querySelector('p')) : '',
+            thisis: inner(mp),
+            prevS: md ? inner(md.querySelector('summary')) : '',
+            prevB: md ? inner(md.querySelector('p')) : '',
+            people,
+        };
+    }
+    function readSt(m) {
+        const items = [...m.querySelectorAll('dl.il.sg .il-it')].map((it) => {
+            const a = it.querySelector('.il-lk');
+            return { ch: it.dataset.ch || 'gjo', href: a ? a.getAttribute('href') || '' : '', title: inner(a), desc: inner(it.querySelector('.il-ds')) };
+        });
+        const date = m.querySelector('.pg-now b');
+        return { title: ownText(m.querySelector('.ti-tr')), icons: readIcons(m), items, quote: inner(m.querySelector('.pg-qt .pg-en')), date: date ? date.textContent.trim() : '' };
+    }
+    function readBs(m) {
+        const books = [...m.querySelectorAll('dl.il.bs .il-it')].map((it) => {
+            const st = it.getAttribute('style') || '';
+            const a = it.querySelector('.il-lk');
+            const bk = st.match(/--bk:\s*([^;]+);/);
+            const ic = st.match(/--icon:\s*['"]\\?([0-9a-f]{4})['"]/i);
+            const fn = st.match(/--font:\s*['"]Phosphor-(Light|Fill)['"]/);
+            return { color: bk ? bk[1].trim() : '', icon: ic ? ic[1].toUpperCase() : 'E9BA', font: fn ? fn[1] : 'Light', href: a ? a.getAttribute('href') || '' : '', title: inner(a) };
+        });
+        return { books, stored: clone(state.bs.stored || []) };
+    }
+    $('imp-go').addEventListener('click', () => {
+        const msg = $('imp-msg');
+        const src = $('imp-src').value.replace(/<link[^>]*>/gi, '');
+        const d = new DOMParser().parseFromString(src, 'text/html');
+        const m = d.querySelector('main');
+        let tab = '';
+        if (m && (m.matches('.at') || m.querySelector('.int'))) tab = 'at';
+        else if (m && m.querySelector('dl.il.sg')) tab = 'st';
+        else if (m && m.querySelector('dl.il.bs')) tab = 'bs';
+        if (!tab) {
+            msg.textContent = 'Attention・Storage・愛読書のどれか分からなかったよ。<main> から </main> までまるごと貼ってね。';
+            return;
+        }
+        const read = tab === 'at' ? readAt(m) : tab === 'st' ? readSt(m) : readBs(m);
+        state[tab] = read;
+        state.tab = tab;
+        if (tab === 'st') stItemsAt = JSON.stringify(read.items);
+        renderForms();
+        render();
+        const names = { at: 'Attention', st: 'Storage', bs: '愛読書' };
+        const again = build().replace(/\n/g, '') === $('imp-src').value.replace(/<link[^>]*>/gi, '').replace(/<br\s*\/?>/gi, '').replace(/\n/g, '').trim();
+        msg.textContent = `${names[tab]} として読み取ったよ。` + (again ? '貼ったものと同じ HTML が出ているよ。' : '貼ったものと少し違う所があるから、下の入力欄とプレビューを確かめてね。');
+    });
+
+    $('tabs').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        state.tab = b.dataset.tab;
+        renderForms();
+        render();
+    });
+    $('forms').addEventListener('input', (ev) => {
+        const el = ev.target;
+        if (el.dataset.k) {
+            const ks = el.dataset.k.split('.');
+            if (ks[0] === 'at' && ks[1] === 'tags') state.at.tags[Number(ks[2])] = el.value;
+            else set(el.dataset.k, el.value);
+            if (ks[1] === 'icons') el.closest('.row').querySelector('.ic-prev i').className = el.closest('.row').querySelector('[data-k$=".cls"]').value;
+            const head = el.closest('.item') && el.closest('.item').querySelector('.item-head .name');
+            if (head && ks[ks.length - 1] === 'title') head.textContent = `${Number(ks[2]) + 1}. ${el.value || '（題名なし）'}`;
+        }
+        if (el.dataset.icon !== undefined) {
+            const b = state.bs.books[Number(el.dataset.icon)];
+            const code = iconCode(el.value, b.font);
+            if (code) {
+                b.icon = code;
+                el.closest('.item').querySelector('.ic-prev').innerHTML = glyph(code, b.font);
+            }
+        }
+        render();
+    });
+    $('forms').addEventListener('change', (ev) => {
+        const el = ev.target;
+        if (el.dataset.color !== undefined) {
+            const i = Number(el.dataset.color);
+            if (el.value !== '__custom') state.bs.books[i].color = el.value;
+            renderBs();
+            if (el.value === '__custom') {
+                const inp = document.querySelector(`[data-k="bs.books.${i}.color"]`);
+                inp.closest('div').hidden = false;
+                inp.focus();
+            }
+            render();
+            return;
+        }
+        if (el.dataset.icon !== undefined) {
+            const b = state.bs.books[Number(el.dataset.icon)];
+            el.value = b.icon;
+        }
+        if (el.hasAttribute('data-rerender') || el.hasAttribute('data-rerender-blur')) {
+            if (el.dataset.k) set(el.dataset.k, el.value);
+            renderForms();
+            render();
+        }
+    });
+    $('forms').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        if (b.dataset.add) {
+            const list = get(b.dataset.add);
+            if (b.dataset.add.endsWith('icons')) list.push({ cls: 'ph-fill ph-star', href: 'https://2colorless.nieru.net/57' });
+            if (b.dataset.add === 'st.items') list.push({ ch: 'gjo', href: 'https://2colorless.nieru.net/57/', title: '', desc: '' });
+            if (b.dataset.add === 'bs.books') list.push({ color: '', icon: 'E9BA', font: 'Light', href: 'https://', title: '' });
+        } else if (b.dataset.mv) {
+            const [path, i, d] = b.dataset.mv.split(':');
+            const list = get(path);
+            const a = Number(i);
+            const t = a + Number(d);
+            if (t < 0 || t >= list.length) return;
+            [list[a], list[t]] = [list[t], list[a]];
+        } else if (b.dataset.del) {
+            const [path, i] = b.dataset.del.split(':');
+            get(path).splice(Number(i), 1);
+        } else if (b.dataset.store !== undefined) {
+            state.bs.stored.push(...state.bs.books.splice(Number(b.dataset.store), 1));
+        } else if (b.dataset.restore !== undefined) {
+            state.bs.books.push(...state.bs.stored.splice(Number(b.dataset.restore), 1));
+        } else if (b.dataset.toOld !== undefined) {
+            const p = state.at.people[Number(b.dataset.toOld)];
+            p.old = p.text;
+            p.text = '';
+        } else if (b.id === 'st-today' || b.id === 'st-nudge-yes') {
+            state.st.date = today();
+        } else return;
+        renderForms();
+        render();
+    });
+    $('links').addEventListener('change', () => { state.links = $('links').checked; render(); });
+    $('board').addEventListener('change', () => {
+        state.board = $('board').value;
+        state.links = state.board !== 'new';
+        $('links').checked = state.links;
+        render();
+    });
+    $('file-save').addEventListener('click', () => {
+        const d = new Date();
+        const stamp = `${today().replace(/\./g, '')}-${String(d.getHours()).padStart(2, '0')}${String(d.getMinutes()).padStart(2, '0')}`;
+        const blob = new Blob([JSON.stringify({ app: 'pages-gen', version: 1, saved: d.toISOString(), state }, null, 1)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `ページの編集室_下書き_${stamp}.json`;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+        $('file-msg').textContent = `${a.download} を保存したよ。`;
+    });
+    $('file-load').addEventListener('click', () => $('file-input').click());
+    $('file-input').addEventListener('change', () => {
+        const f = $('file-input').files[0];
+        if (!f) return;
+        const r = new FileReader();
+        r.onload = () => {
+            try {
+                const data = JSON.parse(r.result);
+                const st = data && data.state ? data.state : data;
+                if (!st || !st.at || !st.st || !st.bs) throw new Error('形が違う');
+                state = st;
+                stItemsAt = JSON.stringify(state.st.items);
+                $('board').value = state.board || 'old';
+                $('links').checked = state.links !== undefined ? state.links : state.board !== 'new';
+                renderForms();
+                render();
+                $('file-msg').textContent = `${f.name} を読み込んだよ。`;
+            } catch (e) {
+                $('file-msg').textContent = 'このファイルは読み込めなかったよ。ここで保存したファイルを選んでね。';
+            }
+            $('file-input').value = '';
+        };
+        r.readAsText(f);
+    });
+    $('copy').addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText($('out').value);
+            $('copy').textContent = 'コピーした';
+        } catch (e) {
+            $('out').select();
+            $('copy').textContent = '選んだから ⌘C でコピーしてね';
+        }
+        setTimeout(() => { $('copy').textContent = 'コピー'; }, 1800);
+    });
+    $('reset').addEventListener('click', () => {
+        const names = { at: 'Attention', st: 'Storage', bs: '愛読書' };
+        if (!$('reset').dataset.armed) {
+            $('reset').dataset.armed = '1';
+            $('reset').textContent = `もう一度押すと ${names[state.tab]} を最初に戻すよ`;
+            setTimeout(() => { delete $('reset').dataset.armed; $('reset').textContent = 'このページを最初の状態に戻す'; }, 3000);
+            return;
+        }
+        delete $('reset').dataset.armed;
+        $('reset').textContent = 'このページを最初の状態に戻す';
+        state[state.tab] = clone(DEFAULTS[state.tab]);
+        if (state.tab === 'st') stItemsAt = JSON.stringify(state.st.items);
+        renderForms();
+        render();
+    });
+    // プレビューはパソコンの表示になる幅（800px）か iPhone 17 の幅（402px）で描いて、枠に合わせて縮める
+    let pvMode = 'pc';
+    function fitPreview() {
+        const fr = $('pv-frame');
+        const w = pvMode === 'pc' ? 800 : 402;
+        const h = pvMode === 'pc' ? 1000 : 874;
+        const k = Math.min(1, fr.clientWidth / w);
+        const ifr = $('preview');
+        ifr.style.width = `${w}px`;
+        ifr.style.height = `${h}px`;
+        ifr.style.transform = `scale(${k})`;
+        ifr.style.left = `${Math.max(0, (fr.clientWidth - w * k) / 2)}px`;
+        fr.style.height = `${Math.round(h * k)}px`;
+    }
+    $('pv-size').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        $('pv-size').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+        pvMode = b.dataset.pv;
+        fitPreview();
+    });
+    addEventListener('resize', fitPreview);
+    fitPreview();
+
+    $('board').value = state.board || 'old';
+    $('links').checked = state.links !== undefined ? state.links : state.board !== 'new';
+    renderForms();
+    render();
+    window.__build = { buildAt, buildSt, buildBs, DEFAULTS };
+})();
+</script>
+</body>
+</html>
