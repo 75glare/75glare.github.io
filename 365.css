@@ -2183,6 +2183,60 @@ main.at details[open]:first-of-type summary:not(.cl-sm)::before {
     }
 }
 
+main.at .int na {
+    font-size: 1.02em !important;
+    letter-spacing: 0 !important;
+}
+
+main.at .int go {
+    font-size: 0.96em !important;
+}
+
+main.at .int-ti details {
+    display: inline-block;
+    margin-left: 0.5em;
+    vertical-align: -0.08em;
+    line-height: 1;
+}
+
+main.at .int-ti details > summary {
+    display: block;
+    padding: 0;
+    opacity: 1;
+    text-decoration: none;
+}
+
+main.at .int .int-ti details summary:not(.cl-sm)::before,
+main.at .int .int-ti details[open] summary:not(.cl-sm)::before {
+    content: "\E1A0";
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    font-family: "Phosphor-Light";
+    font-size: 1em;
+    line-height: 1;
+    color: color-mix(in srgb, var(--c) 85%, transparent);
+    animation: none;
+    transform: none;
+}
+
+main.at .int .int-ti details[open] summary:not(.cl-sm)::before {
+    content: "\E19E";
+}
+
+main.at .int .int-ti details summary:not(.cl-sm):hover::before {
+    transform: none;
+}
+
+main.at .int :is(na, go).old,
+main.at .int-ti:has(details[open]) + :is(na, go) {
+    display: none;
+}
+
+main.at .int-ti:has(details[open]) + * + .old {
+    display: block;
+}
+
 @media screen and (max-width: 480px) {
     .at-tg,
     .at-tg > div {
