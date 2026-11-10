@@ -52,6 +52,13 @@
 }
 
 @font-face {
+    font-family: 'LineStar';
+    src: url('https://75glare.github.io/line-star.woff2') format('woff2');
+    font-display: block;
+    unicode-range: U+0020, U+2726;
+}
+
+@font-face {
     font-family: 'ScopeOneHd';
     src: url('https://fonts.gstatic.com/s/scopeone/v15/WBLnrEXKYFlGHrOKmGDFXEXNBsKhiA.woff2') format('woff2');
     font-display: block;
@@ -1089,7 +1096,7 @@ main,
     margin: 3em 10px;
     padding-block: 3.5em 5em !important;
     padding-inline: 30px;
-    background: linear-gradient(170deg, oklch(32% 0.055 256 / 0.34), oklch(19% 0.055 256 / 0.27) 55%, oklch(16% 0.05 258 / 0.31));
+    background: linear-gradient(170deg, oklch(26% 0.058 256 / 0.34), oklch(19% 0.055 256 / 0.27) 55%, oklch(16% 0.05 258 / 0.31));
     -webkit-backdrop-filter: blur(5px) saturate(130%);
     backdrop-filter: blur(5px) saturate(130%);
     isolation: isolate;
@@ -2567,19 +2574,8 @@ q {
 
 .line:not(.plain) {
     padding-block: 0.5em;
-    font-family: var(--en-font);
+    font-family: 'LineStar', var(--en-font);
     line-height: 1;
-}
-
-@supports (font: -apple-system-body) {
-    .line:not(.plain) {
-        font-family: "Hiragino Sans", var(--en-font);
-    }
-
-    .line:not(.plain)::before,
-    .line:not(.plain)::after {
-        background-position: center calc(50% - 0.1em);
-    }
 }
 
 .line.plain {
