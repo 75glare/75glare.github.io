@@ -1123,6 +1123,32 @@ main,
         0 10px 30px oklch(0% 0 0 / 0.22);
 }
 
+:is(main, .g_box, .n_box):has(> h2[data-date]):not(:has(> .or-bg:not(.ce))) {
+    padding-bottom: 6.5em !important;
+}
+
+:is(main, .g_box, .n_box):has(> h2[data-date]):not(:has(> .or-bg:not(.ce)))::after {
+    content: "\E6A2\2002 Two cups on one table";
+    position: absolute;
+    right: 22px;
+    bottom: 18px;
+    font: 300 9px/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
+    letter-spacing: 0.14em;
+    white-space: nowrap;
+    color: color-mix(in srgb, var(--color) 50%, transparent);
+    pointer-events: none;
+}
+
+.n_box:has(> h2[data-date]):not(:has(> .or-bg:not(.ce)))::after {
+    content: "\E1C2\2002 Until the coffee goes cold";
+    color: color-mix(in srgb, var(--nanami) 55%, transparent);
+}
+
+.g_box:has(> h2[data-date]):not(:has(> .or-bg:not(.ce)))::after {
+    content: "\E58E\2002 The moon was listening";
+    color: color-mix(in srgb, var(--gjo) 55%, transparent);
+}
+
 main>*:first-child,
 :is(.g_box, .n_box)>*:first-child,
 :is(.hs, .gx, .yu, .um, .aj)>*:first-child {
@@ -2543,6 +2569,17 @@ q {
     padding-block: 0.5em;
     font-family: var(--en-font);
     line-height: 1;
+}
+
+@supports (font: -apple-system-body) {
+    .line:not(.plain) {
+        font-family: "Hiragino Sans", var(--en-font);
+    }
+
+    .line:not(.plain)::before,
+    .line:not(.plain)::after {
+        background-position: center calc(50% - 0.1em);
+    }
 }
 
 .line.plain {
@@ -7788,6 +7825,30 @@ body>a span[style*="color"] {
 
 :is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) .post-lock::after {
     margin-left: 0;
+}
+
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) .post-lock:not(:has(.post-lock-msg)) {
+    padding-top: 50px;
+}
+
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) .post-lock:not(:has(.post-lock-msg)) .unlock-msg:empty {
+    display: block;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+}
+
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) .post-lock:not(:has(.post-lock-msg)) .unlock-msg::before {
+    content: "sealed \2014  for your eyes only";
+    position: absolute;
+    top: -105px;
+    left: 0;
+    white-space: nowrap;
+    font: 300 8.5px/1 var(--en-font);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--lk-tone) 55%, transparent);
+    pointer-events: none;
 }
 
 .post:has(a.name[href]) main .post-lock {
