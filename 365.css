@@ -1097,8 +1097,8 @@ main,
     padding-block: 3.5em 5em !important;
     padding-inline: 30px;
     background: linear-gradient(170deg, oklch(26% 0.058 256 / 0.34), oklch(19% 0.055 256 / 0.27) 55%, oklch(16% 0.05 258 / 0.31));
-    -webkit-backdrop-filter: blur(5px) saturate(130%);
-    backdrop-filter: blur(5px) saturate(130%);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
     isolation: isolate;
     border: none;
     box-shadow:
@@ -1482,10 +1482,6 @@ main .tp-rx .rx {
 /* =======================================
     Character Typography (na / go)
 ======================================= */
-.g_box > :is(p, h2:not(.klee)) {
-    font-family: "Zen Maru Gothic", var(--en-font);
-}
-
 .n_box,
 blockquote p,
 na,
