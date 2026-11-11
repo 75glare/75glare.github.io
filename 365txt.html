@@ -1910,6 +1910,55 @@ iframe {
     $('line-insert').addEventListener('click', () => insertAtCursor(lineHTML(), true));
     showLine();
 
+    // 表紙：北極星と二人の星座の絵に、タイトルと英文。カードは線の間に文章、手紙は表紙を押すと文章が開く
+    const COVER_TYPES = [['cover', '表紙だけ'], ['card', 'カード'], ['letter', '手紙']];
+    const cover = { type: 'cover' };
+
+    $('line-section').insertAdjacentHTML('afterend', `
+        <div id="cv-section">
+        <p>表紙</p>
+        <div class="tools" id="cv-types">${COVER_TYPES.map(([v, l]) => `<button type="button" data-type="${v}">${l}</button>`).join('')}</div>
+        <p class="hint" id="cv-hint"></p>
+        <div class="row">
+            <div><p>タイトル</p><input id="cv-title" type="text" autocomplete="off" placeholder="例：Polaris"></div>
+            <div><p>英文</p><input id="cv-en" type="text" autocomplete="off" placeholder="例：We turn around the same light."></div>
+        </div>
+        <div id="cv-text-box"><p id="cv-text-label"></p><textarea id="cv-text" class="short"></textarea></div>
+        <div class="tools"><button type="button" id="cv-insert">この表紙を入れる</button></div>
+        </div>
+    `);
+
+    function coverHTML() {
+        const title = safe($('cv-title').value.trim()) || 'Polaris';
+        const en = safe($('cv-en').value.trim());
+        const head = `<span>${title}${en ? `<small>${en}</small>` : ''}</span>`;
+        const text = flat($('cv-text').value).trim().split('\n').map((l) => safe(l.trim())).join('\n');
+        if (cover.type === 'card') return `<div class="ti-tr cv">${head}</div><div class="cv-tx">${text}</div>`;
+        if (cover.type === 'letter') return `<details class="cv-lt"><summary class="ti-tr cv">${head}</summary><div class="cv-tx">${text}</div></details>`;
+        return `<div class="ti-tr cv">${head}</div>`;
+    }
+
+    function showCover() {
+        document.querySelectorAll('#cv-types button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.type === cover.type));
+        $('cv-text-box').hidden = cover.type === 'cover';
+        $('cv-text-label').textContent = cover.type === 'letter' ? '手紙の文章（表紙を押すと開く）' : '線の間に入れる文章（真ん中そろえ）';
+        $('cv-hint').textContent = {
+            cover: '表紙の下線の下に、本文をいつも通り書いてね。',
+            card: '上下の線の間に、文章が真ん中そろえで入るよ。',
+            letter: '表紙の下に封筒の印が出て、押すと手紙が開くよ。'
+        }[cover.type];
+    }
+
+    $('cv-types').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        cover.type = b.dataset.type;
+        showCover();
+    });
+
+    $('cv-insert').addEventListener('click', () => insertAtCursor(coverHTML(), true));
+    showCover();
+
     // 装飾ボタンは、最後にタップした欄（本文か、呟きの欄）に効く
     let activeTA = null;
     document.addEventListener('focusin', (ev) => {
