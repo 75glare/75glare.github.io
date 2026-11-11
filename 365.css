@@ -2163,14 +2163,10 @@ na+.int-ti {
 .at-tg span {
     padding: 0.4em 0.7em;
     letter-spacing: 0.06em;
-    color: oklch(from var(--sky-text) l c h / 0.8);
-    background: oklch(21.5% 0.060 254 / 0.35);
-    border: 1px solid oklch(100% 0 0 / 0.08);
+    color: oklch(from var(--sky-text) l c h / 0.95);
+    background: oklch(100% 0 0 / 0.04);
+    border: 1px solid oklch(100% 0 0 / 0.12);
     border-radius: 2px;
-}
-
-.at-tg + p {
-    opacity: 0.8;
 }
 
 main.at details + br,
