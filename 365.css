@@ -186,7 +186,7 @@ body > :where(:not(a, nav[aria-label="breadcrumb"], .btn-spacing)) {
 :is(body > a, nav[aria-label="breadcrumb"], .btn-spacing, .post-head, .post-actions, .per-page),
 html #board-footer {
     color: var(--sky-ink) !important;
-    animation: skyInk 40s steps(40) infinite alternate;
+    animation: skyInk 60s steps(60) infinite alternate;
 }
 
 .line-text {
@@ -290,7 +290,7 @@ html::before {
         oklch(7.0% 0.021 253 / 0.03) 58%,
         transparent 72%);
     background-image: var(--sky-zenith), var(--sky-depth);
-    animation: nightSky 40s steps(80) infinite alternate;
+    animation: nightSky 60s steps(120) infinite alternate;
 }
 
 @property --sky-edge {
@@ -329,11 +329,11 @@ html::before {
 
 @supports (font: -apple-system-body) {
     html {
-        animation: skyEdgeBg 40s steps(80) infinite alternate;
+        animation: skyEdgeBg 60s steps(120) infinite alternate;
     }
 
     html::before {
-        animation: nightSky 40s steps(80) infinite alternate, skyEdge 40s steps(80) infinite alternate;
+        animation: nightSky 60s steps(120) infinite alternate, skyEdge 60s steps(120) infinite alternate;
         background-image:
             linear-gradient(to bottom, var(--sky-edge) 0%, transparent 5%),
             var(--sky-zenith),
@@ -371,11 +371,11 @@ html::before {
 
 @supports (-webkit-touch-callout: none) {
     html {
-        animation: skyEdgeTouchBg 40s steps(80) infinite alternate;
+        animation: skyEdgeTouchBg 60s steps(120) infinite alternate;
     }
 
     html::before {
-        animation: nightSky 40s steps(80) infinite alternate, skyEdgeTouch 40s steps(80) infinite alternate;
+        animation: nightSky 60s steps(120) infinite alternate, skyEdgeTouch 60s steps(120) infinite alternate;
     }
 
     @media (orientation: portrait) {
@@ -432,7 +432,7 @@ html::before {
     html,
     html::before,
     body {
-        animation-duration: 80s !important;
+        animation-duration: 120s !important;
         animation-timing-function: linear !important;
     }
 }
@@ -593,7 +593,7 @@ html::after {
             background-size:
                 307px 283px, 307px 283px, 307px 283px, 307px 283px, 307px 283px, 419px 397px, 419px 397px, 419px 397px, 419px 397px, 419px 397px, 587px 541px, 587px 541px, 587px 541px, 587px 541px, 587px 541px, 307px 283px, auto, auto, auto, auto, auto;
             background-repeat: repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
-            animation: skyFade 80s linear infinite alternate;
+            animation: skyFade 120s linear infinite alternate;
         }
     }
 }
@@ -2699,6 +2699,8 @@ q {
         linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 12.9px 10.7px / 3.299999999999999px 5.5px no-repeat,
         linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 16.2px 16.2px / 9.900000000000002px 11.0px no-repeat,
         linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 3.0px 16.2px / 13.2px 9.900000000000002px no-repeat;
+    gap: 1.1em;
+    margin-block: 3.6em;
     justify-content: center;
     color: var(--cst-c);
     opacity: 0.95;
@@ -2706,6 +2708,19 @@ q {
 
 .line.plain:has(> i.cst)::before,
 .line.plain:has(> i.cst)::after {
+    display: block;
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to left, color-mix(in oklch, currentColor 40%, transparent), transparent);
+}
+
+.line.plain:has(> i.cst)::after {
+    background: linear-gradient(to right, color-mix(in oklch, currentColor 40%, transparent), transparent);
+}
+
+br:is(:has(+ .line.plain > i.cst), :has(+ br + .line.plain > i.cst)),
+.line.plain:has(> i.cst) + br,
+.line.plain:has(> i.cst) + br + br {
     display: none;
 }
 
