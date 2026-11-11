@@ -100,12 +100,12 @@
     --lightblue: oklch(65% 0.065 212);
 
     /* --- Sky & Mugen (Theme Animation) --- */
-    --sky-base: oklch(23.8% 0.060 243);
+    --sky-base: oklch(23.8% 0.060 248);
     --sky-deep: oklch(16.7% 0.025 240);
     --sky-moon: oklch(75% 0.07 215);
     --sky-text: oklch(85% 0.02 220);
     --svu: 1vh;
-    --sky-edge: oklch(17.6% 0.047 242);
+    --sky-edge: oklch(17.6% 0.047 248);
 
     /* --- Fonts --- */
     --hd-font: "ScopeOneHd", "Scope One", sans-serif;
@@ -267,10 +267,10 @@ html::before {
             oklch(6.2% 0.015 268 / 0.06) 72%,
             transparent 88%),
         radial-gradient(ellipse 120% 60% at 50% 105%,
-            oklch(35.2% 0.085 236 / calc(0.65 * var(--sky-glow))),
-            oklch(35.2% 0.085 236 / calc(0.42 * var(--sky-glow))) 28%,
-            oklch(35.2% 0.085 236 / calc(0.18 * var(--sky-glow))) 52%,
-            oklch(35.2% 0.085 236 / calc(0.05 * var(--sky-glow))) 70%,
+            oklch(35.2% 0.085 248 / calc(0.65 * var(--sky-glow))),
+            oklch(35.2% 0.085 248 / calc(0.42 * var(--sky-glow))) 28%,
+            oklch(35.2% 0.085 248 / calc(0.18 * var(--sky-glow))) 52%,
+            oklch(35.2% 0.085 248 / calc(0.05 * var(--sky-glow))) 70%,
             transparent 85%),
         radial-gradient(ellipse 80% 45% at 90% 100%,
             oklch(31.7% 0.073 254 / calc(0.4 * var(--sky-glow))),
@@ -296,16 +296,16 @@ html::before {
 @property --sky-edge {
     syntax: '<color>';
     inherits: false;
-    initial-value: oklch(17.6% 0.047 242);
+    initial-value: oklch(17.6% 0.047 248);
 }
 
 @keyframes skyEdgeBg {
     0% {
-        background-color: oklch(19.4% 0.051 237);
+        background-color: oklch(19.4% 0.051 248);
     }
 
     50% {
-        background-color: oklch(15.8% 0.046 243);
+        background-color: oklch(15.8% 0.046 248);
     }
 
     100% {
@@ -315,11 +315,11 @@ html::before {
 
 @keyframes skyEdge {
     0% {
-        --sky-edge: oklch(19.4% 0.051 237);
+        --sky-edge: oklch(19.4% 0.051 248);
     }
 
     50% {
-        --sky-edge: oklch(15.8% 0.046 243);
+        --sky-edge: oklch(15.8% 0.046 248);
     }
 
     100% {
@@ -343,11 +343,11 @@ html::before {
 
 @keyframes skyEdgeTouchBg {
     0% {
-        background-color: oklch(23.8% 0.060 233);
+        background-color: oklch(23.8% 0.060 248);
     }
 
     50% {
-        background-color: oklch(18.9% 0.051 242);
+        background-color: oklch(18.9% 0.051 248);
     }
 
     100% {
@@ -357,11 +357,11 @@ html::before {
 
 @keyframes skyEdgeTouch {
     0% {
-        --sky-edge: oklch(23.8% 0.060 233);
+        --sky-edge: oklch(23.8% 0.060 248);
     }
 
     50% {
-        --sky-edge: oklch(18.9% 0.051 242);
+        --sky-edge: oklch(18.9% 0.051 248);
     }
 
     100% {
@@ -382,7 +382,7 @@ html::before {
         html::before {
             --sky-depth:
                 radial-gradient(ellipse 160% 45% at 50% 24%, oklch(7.9% 0.025 253 / 0.45), transparent 75%),
-                radial-gradient(ellipse 150% 50% at 50% 66%, oklch(31.7% 0.076 238 / calc(0.45 * var(--sky-glow))), transparent 75%),
+                radial-gradient(ellipse 150% 50% at 50% 66%, oklch(31.7% 0.076 248 / calc(0.45 * var(--sky-glow))), transparent 75%),
                 radial-gradient(ellipse 70% 35% at 95% 62%, oklch(29.9% 0.068 254 / calc(0.4 * var(--sky-glow))), transparent 75%);
             background-image:
                 linear-gradient(to bottom,
@@ -521,10 +521,10 @@ html::after {
                     oklch(6.2% 0.015 268 / 0.06) 72%,
                     transparent 88%),
                 radial-gradient(ellipse 120% 60% at 50% 105%,
-                    oklch(35.2% 0.085 236 / calc(0.65 * 0.55)),
-                    oklch(35.2% 0.085 236 / calc(0.42 * 0.55)) 28%,
-                    oklch(35.2% 0.085 236 / calc(0.18 * 0.55)) 52%,
-                    oklch(35.2% 0.085 236 / calc(0.05 * 0.55)) 70%,
+                    oklch(35.2% 0.085 248 / calc(0.65 * 0.55)),
+                    oklch(35.2% 0.085 248 / calc(0.42 * 0.55)) 28%,
+                    oklch(35.2% 0.085 248 / calc(0.18 * 0.55)) 52%,
+                    oklch(35.2% 0.085 248 / calc(0.05 * 0.55)) 70%,
                     transparent 85%),
                 radial-gradient(ellipse 80% 45% at 90% 100%,
                     oklch(31.7% 0.073 254 / calc(0.4 * 0.55)),
@@ -543,7 +543,7 @@ html::after {
         }
 
         html::after {
-            background-color: oklch(23.8% 0.060 233);
+            background-color: oklch(23.8% 0.060 248);
             background-image:
                 radial-gradient(circle at 41px 57px, color-mix(in oklch, var(--dust) 21%, transparent) 0.6px, transparent 1.3px),
                 radial-gradient(circle at 188px 23px, color-mix(in oklch, var(--dust) 12%, transparent) 0.5px, transparent 1.2px),
@@ -574,10 +574,10 @@ html::after {
                     oklch(6.2% 0.015 268 / 0.06) 72%,
                     transparent 88%),
                 radial-gradient(ellipse 120% 60% at 50% 105%,
-                    oklch(35.2% 0.085 236 / calc(0.65 * 1)),
-                    oklch(35.2% 0.085 236 / calc(0.42 * 1)) 28%,
-                    oklch(35.2% 0.085 236 / calc(0.18 * 1)) 52%,
-                    oklch(35.2% 0.085 236 / calc(0.05 * 1)) 70%,
+                    oklch(35.2% 0.085 248 / calc(0.65 * 1)),
+                    oklch(35.2% 0.085 248 / calc(0.42 * 1)) 28%,
+                    oklch(35.2% 0.085 248 / calc(0.18 * 1)) 52%,
+                    oklch(35.2% 0.085 248 / calc(0.05 * 1)) 70%,
                     transparent 85%),
                 radial-gradient(ellipse 80% 45% at 90% 100%,
                     oklch(31.7% 0.073 254 / calc(0.4 * 1)),
@@ -870,12 +870,12 @@ body::after {
 
 @keyframes nightSky {
     0% {
-        background-color: oklch(23.8% 0.060 233);
+        background-color: oklch(23.8% 0.060 248);
         --sky-glow: 1;
     }
 
     50% {
-        background-color: oklch(18.9% 0.051 242);
+        background-color: oklch(18.9% 0.051 248);
         --sky-glow: 0.8;
     }
 
@@ -2668,16 +2668,21 @@ q {
         linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 28.6px 6.3px / 10.1px 11.7px no-repeat,
         linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 17.4px 6.3px / 11.2px 4.7px no-repeat,
         linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 3.0px 3.0px / 14.4px 8.0px no-repeat;
-    --cst-cnc:
-        radial-gradient(circle 2.47px at 9.6px 3.0px, color-mix(in srgb, currentColor 85%, white) 0 0.59px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.09px, transparent),
-        radial-gradient(circle 3.33px at 12.9px 10.7px, color-mix(in srgb, currentColor 85%, white) 0 0.80px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.47px, transparent),
-        radial-gradient(circle 2.47px at 16.2px 16.2px, color-mix(in srgb, currentColor 85%, white) 0 0.59px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.09px, transparent),
-        radial-gradient(circle 3.33px at 26.1px 27.2px, color-mix(in srgb, currentColor 85%, white) 0 0.80px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.47px, transparent),
-        radial-gradient(circle 2.47px at 3.0px 26.1px, color-mix(in srgb, currentColor 85%, white) 0 0.59px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.09px, transparent),
-        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 9.6px 3.0px / 3.3px 7.7px no-repeat,
-        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 12.9px 10.7px / 3.3px 5.5px no-repeat,
-        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 16.2px 16.2px / 9.9px 11.0px no-repeat,
-        linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 3.0px 16.2px / 13.2px 9.9px no-repeat;
+    --cst-dip:
+        radial-gradient(circle 3.33px at 50.0px 3.0px, color-mix(in srgb, currentColor 85%, white) 0 0.80px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.47px, transparent),
+        radial-gradient(circle 3.33px at 48.7px 13.0px, color-mix(in srgb, currentColor 85%, white) 0 0.80px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.47px, transparent),
+        radial-gradient(circle 3.33px at 34.2px 15.6px, color-mix(in srgb, currentColor 85%, white) 0 0.80px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.47px, transparent),
+        radial-gradient(circle 2.47px at 29.7px 8.4px, color-mix(in srgb, currentColor 85%, white) 0 0.59px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.09px, transparent),
+        radial-gradient(circle 3.33px at 19.2px 8.6px, color-mix(in srgb, currentColor 85%, white) 0 0.80px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.47px, transparent),
+        radial-gradient(circle 3.33px at 11.0px 9.2px, color-mix(in srgb, currentColor 85%, white) 0 0.80px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.47px, transparent),
+        radial-gradient(circle 3.33px at 3.0px 18.5px, color-mix(in srgb, currentColor 85%, white) 0 0.80px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.47px, transparent),
+        linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 48.7px 3.0px / 1.3px 10.0px no-repeat,
+        linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 34.2px 13.0px / 14.5px 2.6px no-repeat,
+        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 29.7px 8.4px / 4.5px 7.2px no-repeat,
+        linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 29.7px 3.0px / 20.3px 5.4px no-repeat,
+        linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 19.2px 8.4px / 10.5px 1px no-repeat,
+        linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 11.0px 8.6px / 8.2px 1px no-repeat,
+        linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 3.0px 9.2px / 8.0px 9.3px no-repeat;
     gap: 1.1em;
     margin-block: 3.6em;
     justify-content: center;
@@ -2732,9 +2737,9 @@ main .line.plain:has(> i.cst) {
 
 .n_box .line.plain > i.cst,
 .line.plain > i.cst.n {
-    width: 30.1px;
-    height: 31.2px;
-    background: var(--cst-cnc);
+    width: 53px;
+    height: 21.5px;
+    background: var(--cst-dip);
 }
 
 .line.plain > i.cst.g {
@@ -3198,6 +3203,7 @@ main details[open] summary:not(.cl-sm)::before {
 details.ic-cards { --sm-icon: "\E0F8"; }
 details.ic-sparkle { --sm-icon: "\E6A2"; }
 details.ic-moon-stars { --sm-icon: "\E58E"; }
+details.ic-star { --sm-icon: "\ECFA"; }
 details.ic-rain { --sm-icon: "\E1B4"; }
 details.ic-snow { --sm-icon: "\E5AA"; }
 details.ic-wave { --sm-icon: "\E6DE"; }
@@ -3213,7 +3219,7 @@ details.ic-pop { --sm-icon: "\EB4E"; }
     content: var(--sm-icon);
 }
 
-main details.mv[class*=" ic-"]:is(.ic-sparkle, .ic-moon-stars, .ic-rain, .ic-snow, .ic-wave, .ic-flower) summary:not(.cl-sm)::before {
+main details.mv[class*=" ic-"]:is(.ic-sparkle, .ic-moon-stars, .ic-star, .ic-rain, .ic-snow, .ic-wave, .ic-flower) summary:not(.cl-sm)::before {
     font-family: "Phosphor-Light";
 }
 
@@ -4011,6 +4017,131 @@ main.lib details[open].mv[class*=" ic-"] details.fav>summary::before {
 .ti-tr:has(+ .il.bs) small {
     margin-top: 4px;
     font-size: 0.6em;
+}
+
+.ti-tr.cv {
+    flex-direction: column;
+    justify-content: center;
+    margin: 0.6em 0 3.2em;
+    padding: 2.4em 0 2em;
+    text-align: center;
+    border-top: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+}
+
+.ti-tr.cv::before,
+details.cv-lt > summary.ti-tr.cv::before {
+    content: "";
+    display: block;
+    width: 197.7px;
+    height: 85.8px;
+    margin: 0 0 1.6em;
+    background:
+        radial-gradient(circle 4.04px at 34.2px 71.9px, color-mix(in srgb, var(--gjo) 85%, white) 0 0.96px, color-mix(in srgb, var(--gjo) 30%, transparent) 1.79px, transparent),
+        radial-gradient(circle 4.04px at 24.1px 59.6px, color-mix(in srgb, var(--gjo) 85%, white) 0 0.96px, color-mix(in srgb, var(--gjo) 30%, transparent) 1.79px, transparent),
+        radial-gradient(circle 4.04px at 36.8px 52.1px, color-mix(in srgb, var(--gjo) 85%, white) 0 0.96px, color-mix(in srgb, var(--gjo) 30%, transparent) 1.79px, transparent),
+        radial-gradient(circle 4.04px at 35.8px 40.3px, color-mix(in srgb, var(--gjo) 85%, white) 0 0.96px, color-mix(in srgb, var(--gjo) 30%, transparent) 1.79px, transparent),
+        radial-gradient(circle 2.99px at 48.3px 31.5px, color-mix(in srgb, var(--gjo) 85%, white) 0 0.71px, color-mix(in srgb, var(--gjo) 30%, transparent) 1.32px, transparent),
+        radial-gradient(circle 4.04px at 146.6px 12.9px, color-mix(in srgb, var(--nanami) 85%, white) 0 0.96px, color-mix(in srgb, var(--nanami) 30%, transparent) 1.79px, transparent),
+        radial-gradient(circle 4.04px at 160.8px 4.0px, color-mix(in srgb, var(--nanami) 85%, white) 0 0.96px, color-mix(in srgb, var(--nanami) 30%, transparent) 1.79px, transparent),
+        radial-gradient(circle 4.04px at 178.1px 23.4px, color-mix(in srgb, var(--nanami) 85%, white) 0 0.96px, color-mix(in srgb, var(--nanami) 30%, transparent) 1.79px, transparent),
+        radial-gradient(circle 2.99px at 170.4px 35.8px, color-mix(in srgb, var(--nanami) 85%, white) 0 0.71px, color-mix(in srgb, var(--nanami) 30%, transparent) 1.32px, transparent),
+        radial-gradient(circle 4.04px at 175.7px 52.9px, color-mix(in srgb, var(--nanami) 85%, white) 0 0.96px, color-mix(in srgb, var(--nanami) 30%, transparent) 1.79px, transparent),
+        radial-gradient(circle 4.04px at 178.3px 67.0px, color-mix(in srgb, var(--nanami) 85%, white) 0 0.96px, color-mix(in srgb, var(--nanami) 30%, transparent) 1.79px, transparent),
+        radial-gradient(circle 4.04px at 193.7px 81.8px, color-mix(in srgb, var(--nanami) 85%, white) 0 0.96px, color-mix(in srgb, var(--nanami) 30%, transparent) 1.79px, transparent),
+        radial-gradient(circle at 98.9px 50.3px,
+            oklch(97% 0.01 220 / var(--lk-tw)) 0 1.5px,
+            color-mix(in srgb, var(--color) calc(70% * var(--lk-tw)), transparent) 2.5px,
+            color-mix(in srgb, var(--color) calc(25% * var(--lk-tw)), transparent) 5px,
+            transparent 8px),
+        linear-gradient(to top right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--gjo) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 24.1px 59.6px / 10.1px 12.3px no-repeat,
+        linear-gradient(to bottom right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--gjo) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 24.1px 52.1px / 12.7px 7.5px no-repeat,
+        linear-gradient(to top right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--gjo) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 35.8px 40.3px / 1.0px 11.8px no-repeat,
+        linear-gradient(to bottom right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--gjo) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 35.8px 31.5px / 12.5px 8.8px no-repeat,
+        linear-gradient(to bottom right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--nanami) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 146.6px 4.0px / 14.2px 8.9px no-repeat,
+        linear-gradient(to top right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--nanami) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 160.8px 4.0px / 17.3px 19.4px no-repeat,
+        linear-gradient(to bottom right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--nanami) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 170.4px 23.4px / 7.7px 12.4px no-repeat,
+        linear-gradient(to top right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--nanami) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 146.6px 12.9px / 23.8px 22.9px no-repeat,
+        linear-gradient(to top right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--nanami) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 170.4px 35.8px / 5.3px 17.1px no-repeat,
+        linear-gradient(to top right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--nanami) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 175.7px 52.9px / 2.6px 14.1px no-repeat,
+        linear-gradient(to top right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--nanami) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 178.3px 67.0px / 15.4px 14.8px no-repeat;
+    animation: lk-tw 3.2s ease-in-out infinite;
+}
+
+.ti-tr.cv span {
+    font-size: 1.15em;
+    letter-spacing: 0.22em;
+    color: var(--pure-white);
+}
+
+.ti-tr.cv small {
+    margin-top: 0.9em;
+    font-size: 0.5em;
+    letter-spacing: 0.24em;
+    opacity: 1;
+    color: color-mix(in srgb, var(--color) 75%, transparent);
+}
+
+@media screen and (min-width: 768px) {
+    .ti-tr.cv::before {
+        zoom: 1.5;
+    }
+}
+
+div.ti-tr.cv:has(+ .cv-tx),
+details.cv-lt[open] > summary.ti-tr.cv {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.cv-tx {
+    margin: 0 0 3.2em;
+    padding: 0.4em 1.2em 2.4em;
+    text-align: center;
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+}
+
+details.cv-lt > summary.ti-tr.cv {
+    display: flex;
+    width: 100%;
+    padding: 2.4em 0 1.6em;
+}
+
+details.cv-lt > summary.ti-tr.cv small::after {
+    content: "\E218";
+    display: block;
+    margin-top: 1.6em;
+    font-family: "Phosphor-Light";
+    font-size: 2.4em;
+    line-height: 1;
+    letter-spacing: 0;
+    color: color-mix(in srgb, var(--color) 60%, transparent);
+    transition: color 0.4s ease;
+}
+
+details.cv-lt[open] > summary.ti-tr.cv small::after {
+    content: "\E21A";
+    color: color-mix(in srgb, var(--color) 85%, transparent);
+}
+
+details.cv-lt > .cv-tx {
+    transform-origin: top;
+}
+
+details.cv-lt[open] > .cv-tx {
+    animation: cv-unfold 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes cv-unfold {
+    from {
+        opacity: 0;
+        transform: perspective(700px) rotateX(-75deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 .bs .il-it {
