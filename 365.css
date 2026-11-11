@@ -1815,7 +1815,7 @@ main h3,
     line-height: 1;
     background: transparent;
     border: 1px solid color-mix(in srgb, var(--h2-color) 45%, transparent);
-    color: var(--h2-color);
+    color: color-mix(in srgb, var(--h2-color) 80%, transparent);
     opacity: 0.85;
     -webkit-text-stroke: 0;
 }
@@ -3147,6 +3147,7 @@ main details[open] summary:not(.cl-sm)::before {
 
 details.ic-cards { --sm-icon: "\E0F8"; }
 details.ic-sparkle { --sm-icon: "\E6A2"; }
+details.ic-moon-stars { --sm-icon: "\E58E"; }
 details.ic-rain { --sm-icon: "\E1B4"; }
 details.ic-snow { --sm-icon: "\E5AA"; }
 details.ic-wave { --sm-icon: "\E6DE"; }
@@ -3162,7 +3163,7 @@ details.ic-pop { --sm-icon: "\EB4E"; }
     content: var(--sm-icon);
 }
 
-main details.mv[class*=" ic-"]:is(.ic-sparkle, .ic-rain, .ic-snow, .ic-wave, .ic-flower) summary:not(.cl-sm)::before {
+main details.mv[class*=" ic-"]:is(.ic-sparkle, .ic-moon-stars, .ic-rain, .ic-snow, .ic-wave, .ic-flower) summary:not(.cl-sm)::before {
     font-family: "Phosphor-Light";
 }
 
