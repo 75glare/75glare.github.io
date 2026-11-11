@@ -4095,7 +4095,10 @@ details.cv-lt[open] > summary.ti-tr.cv {
 .cv-tx {
     margin: 0 0 3.2em;
     padding: 0.4em 1.2em 2.4em;
+    font-size: 0.92em;
+    letter-spacing: 0.1em;
     text-align: center;
+    color: color-mix(in srgb, var(--black) 72%, transparent);
     border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
 }
 
@@ -4146,6 +4149,68 @@ details.cv-lt[open] > .cv-tx {
         opacity: 1;
         transform: none;
     }
+}
+
+add:has(+ :is(div.ti-tr.cv, details.cv-lt)) {
+    margin: 0.6em 0 0;
+    padding: 0 0.2em 0.9em;
+    font: 300 0.68em/1.6 var(--en-font);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-align: left;
+    color: color-mix(in srgb, var(--color) 60%, transparent);
+}
+
+add:has(+ :is(div.ti-tr.cv, details.cv-lt)) small {
+    display: block;
+    margin-top: 0.2em;
+    font-size: 1em;
+    letter-spacing: 0.12em;
+    text-transform: none;
+    color: color-mix(in srgb, var(--color) 40%, transparent);
+}
+
+add + div.ti-tr.cv,
+add + details.cv-lt > summary.ti-tr.cv {
+    margin-top: 0;
+}
+
+:is(div.ti-tr.cv, div.cv-tx):has(+ add),
+details.cv-lt:has(+ add) > :is(summary, .cv-tx) {
+    margin-bottom: 0;
+}
+
+:is(div.ti-tr.cv, div.cv-tx, details.cv-lt) + add {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 1.2em;
+    margin: 0 0 3.2em;
+    padding: 0.7em 0.2em 0;
+    font: 300 0.68em/1.6 var(--en-font);
+    letter-spacing: 0.16em;
+    text-align: right;
+    color: color-mix(in srgb, var(--color) 45%, transparent);
+}
+
+:is(div.ti-tr.cv, div.cv-tx, details.cv-lt) + add:last-child {
+    margin-bottom: 0;
+}
+
+:is(div.ti-tr.cv, div.cv-tx, details.cv-lt) + add :is(go, na) {
+    order: 1;
+    padding: 0;
+    font: 200 1.6em/1.6 "Playwrite DE LA", "Snell Roundhand", cursive !important;
+    letter-spacing: 0.04em !important;
+    opacity: 0.7;
+}
+
+:is(div.ti-tr.cv, div.cv-tx, details.cv-lt) + add :is(go, na)::before {
+    content: "\E3AC";
+    margin-right: 0.5em;
+    font: 1em/1 "Phosphor-Light";
+    vertical-align: -0.05em;
+    opacity: 0.7;
 }
 
 .bs .il-it {
