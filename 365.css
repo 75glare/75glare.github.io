@@ -1880,7 +1880,7 @@ h3.pin small {
 }
 
 h3.pin + add {
-    margin: 0 0 1.4em;
+    margin: 0 0 4.1em;
     padding: 0 0 1.3em;
     font: 300 0.8em/1.4 var(--en-font);
     letter-spacing: 0.08em;
@@ -1911,8 +1911,14 @@ h3.pin:not(:has(+ add)) {
 }
 
 br:is(:has(+ h3.pin), :has(+ br + h3.pin)),
-h3.pin + add + br {
+h3.pin + add + br,
+h3.pin + add + br + br,
+h3.pin + add + p > br:first-child {
     display: none;
+}
+
+h3.pin + add + p {
+    margin-top: 0;
 }
 
 h3.trip::before {
