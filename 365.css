@@ -1825,6 +1825,31 @@ main h3,
     font-size: 0.746em;
 }
 
+:is(.g_box, .n_box) > h2 {
+    --h2-scale: 1.08;
+    font-size: calc(1.03em * var(--h2-scale));
+    padding-top: calc(0.2em / var(--h2-scale));
+    padding-bottom: calc(3.045em / var(--h2-scale));
+}
+
+:is(.g_box, .n_box) > h2.klee {
+    font-size: calc(1.07em * var(--h2-scale));
+}
+
+.n_box > h2.klee {
+    padding-bottom: calc(2.784em / var(--h2-scale));
+}
+
+:is(.g_box, .n_box) > h2::before,
+:is(.g_box, .n_box) > h2::after {
+    font-size: calc(0.816em / var(--h2-scale));
+}
+
+.n_box > h2.klee::before,
+.n_box > h2.klee::after {
+    font-size: calc(0.746em / var(--h2-scale));
+}
+
 h3:is(.film, .game, .icons, .food, .pin, .trip, .gift)::before {
     display: inline-block;
     font-family: "Phosphor-Light";
