@@ -916,7 +916,7 @@ header::before {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     transform: rotate(-15deg) translateZ(0);
-    filter: drop-shadow(0 0 16px oklch(72% 0.14 255 / 0.62)) drop-shadow(0 0 55px oklch(60% 0.17 262 / 0.40));
+    filter: drop-shadow(0 0 14px oklch(80% 0.07 238 / 0.55)) drop-shadow(0 0 42px oklch(66% 0.10 244 / 0.40));
 }
 
 header::after {
@@ -938,17 +938,6 @@ header::after {
     pointer-events: none;
     will-change: transform, opacity;
     animation: orbit 22s linear infinite, orbitPulse 3s ease-in-out infinite;
-}
-
-@keyframes moon-halo {
-    0%,
-    100% {
-        opacity: 0.45;
-    }
-
-    50% {
-        opacity: 1;
-    }
 }
 
 @keyframes orbitPulse {
@@ -974,49 +963,54 @@ header h1::before {
     top: 50%;
     left: 50%;
     z-index: -1;
-    width: 480px;
-    height: 480px;
-    margin: -240px 0 0 -240px;
+    width: 340px;
+    height: 340px;
+    margin: -170px 0 0 -170px;
     border-radius: 50%;
-    background: radial-gradient(circle closest-side, oklch(62% 0.12 258 / 0.17) 0%, oklch(61% 0.122 258 / 0.155) 12%, oklch(59% 0.126 260 / 0.125) 25%, oklch(57% 0.13 261 / 0.09) 38%, oklch(56% 0.13 262 / 0.058) 50%, oklch(55% 0.13 262 / 0.032) 62%, oklch(55% 0.13 262 / 0.015) 74%, oklch(55% 0.13 262 / 0.005) 86%, oklch(55% 0.13 262 / 0) 100%);
-    -webkit-mask-image: radial-gradient(circle closest-side, black 0%, black 30%, rgb(0 0 0 / 0.55) 55%, rgb(0 0 0 / 0.2) 75%, transparent 95%);
-    mask-image: radial-gradient(circle closest-side, black 0%, black 30%, rgb(0 0 0 / 0.55) 55%, rgb(0 0 0 / 0.2) 75%, transparent 95%);
+    background: radial-gradient(circle closest-side,
+        oklch(62.0% 0.070 244 / 0.1700) 0%,
+        oklch(61.6% 0.070 244 / 0.1475) 6%,
+        oklch(61.2% 0.070 244 / 0.1268) 12%,
+        oklch(60.9% 0.070 244 / 0.1076) 19%,
+        oklch(60.5% 0.070 244 / 0.0903) 25%,
+        oklch(60.1% 0.070 244 / 0.0746) 31%,
+        oklch(59.8% 0.070 244 / 0.0604) 38%,
+        oklch(59.4% 0.070 244 / 0.0479) 44%,
+        oklch(59.0% 0.070 244 / 0.0370) 50%,
+        oklch(58.6% 0.070 244 / 0.0276) 56%,
+        oklch(58.2% 0.070 244 / 0.0197) 62%,
+        oklch(57.9% 0.070 244 / 0.0132) 69%,
+        oklch(57.5% 0.070 244 / 0.0080) 75%,
+        oklch(57.1% 0.070 244 / 0.0043) 81%,
+        oklch(56.8% 0.070 244 / 0.0018) 88%,
+        oklch(56.4% 0.070 244 / 0.0004) 94%,
+        oklch(56.0% 0.070 244 / 0.0000) 100%);
     pointer-events: none;
-    will-change: opacity;
-    animation: moon-halo 12s ease-in-out infinite;
 }
 
 @media (hover: hover) and (pointer: fine) {
     header h1::before {
-        width: 620px;
-        height: 620px;
-        margin: -310px 0 0 -310px;
+        width: 400px;
+        height: 400px;
+        margin: -200px 0 0 -200px;
         background: radial-gradient(circle closest-side,
-            oklch(62.0% 0.120 258 / 0.1700) 0%,
-            oklch(61.6% 0.120 258 / 0.1676) 5%,
-            oklch(61.3% 0.121 258 / 0.1606) 10%,
-            oklch(61.0% 0.121 259 / 0.1496) 15%,
-            oklch(60.6% 0.122 259 / 0.1355) 20%,
-            oklch(60.2% 0.122 259 / 0.1193) 25%,
-            oklch(59.9% 0.123 259 / 0.1021) 30%,
-            oklch(59.5% 0.123 259 / 0.0849) 35%,
-            oklch(59.2% 0.124 260 / 0.0686) 40%,
-            oklch(58.9% 0.124 260 / 0.0539) 45%,
-            oklch(58.5% 0.125 260 / 0.0412) 50%,
-            oklch(58.1% 0.126 260 / 0.0306) 55%,
-            oklch(57.8% 0.126 260 / 0.0221) 60%,
-            oklch(57.5% 0.127 261 / 0.0155) 65%,
-            oklch(57.1% 0.127 261 / 0.0106) 70%,
-            oklch(56.8% 0.128 261 / 0.0070) 75%,
-            oklch(56.4% 0.128 261 / 0.0045) 80%,
-            oklch(56.0% 0.129 261 / 0.0028) 85%,
-            oklch(55.7% 0.129 262 / 0.0017) 90%,
-            oklch(55.4% 0.130 262 / 0.0010) 95%,
-            oklch(55.0% 0.130 262 / 0.0000) 100%);
-        -webkit-mask-image: none;
-        mask-image: none;
-        opacity: 0.72;
-        animation: none;
+            oklch(62.0% 0.070 244 / 0.1700) 0%,
+            oklch(61.6% 0.070 244 / 0.1475) 6%,
+            oklch(61.2% 0.070 244 / 0.1268) 12%,
+            oklch(60.9% 0.070 244 / 0.1076) 19%,
+            oklch(60.5% 0.070 244 / 0.0903) 25%,
+            oklch(60.1% 0.070 244 / 0.0746) 31%,
+            oklch(59.8% 0.070 244 / 0.0604) 38%,
+            oklch(59.4% 0.070 244 / 0.0479) 44%,
+            oklch(59.0% 0.070 244 / 0.0370) 50%,
+            oklch(58.6% 0.070 244 / 0.0276) 56%,
+            oklch(58.2% 0.070 244 / 0.0197) 62%,
+            oklch(57.9% 0.070 244 / 0.0132) 69%,
+            oklch(57.5% 0.070 244 / 0.0080) 75%,
+            oklch(57.1% 0.070 244 / 0.0043) 81%,
+            oklch(56.8% 0.070 244 / 0.0018) 88%,
+            oklch(56.4% 0.070 244 / 0.0004) 94%,
+            oklch(56.0% 0.070 244 / 0.0000) 100%);
     }
 }
 
