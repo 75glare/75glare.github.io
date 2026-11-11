@@ -993,24 +993,6 @@ header h1::before {
         width: 400px;
         height: 400px;
         margin: -200px 0 0 -200px;
-        background: radial-gradient(circle closest-side,
-            oklch(62.0% 0.070 244 / 0.1700) 0%,
-            oklch(61.6% 0.070 244 / 0.1475) 6%,
-            oklch(61.2% 0.070 244 / 0.1268) 12%,
-            oklch(60.9% 0.070 244 / 0.1076) 19%,
-            oklch(60.5% 0.070 244 / 0.0903) 25%,
-            oklch(60.1% 0.070 244 / 0.0746) 31%,
-            oklch(59.8% 0.070 244 / 0.0604) 38%,
-            oklch(59.4% 0.070 244 / 0.0479) 44%,
-            oklch(59.0% 0.070 244 / 0.0370) 50%,
-            oklch(58.6% 0.070 244 / 0.0276) 56%,
-            oklch(58.2% 0.070 244 / 0.0197) 62%,
-            oklch(57.9% 0.070 244 / 0.0132) 69%,
-            oklch(57.5% 0.070 244 / 0.0080) 75%,
-            oklch(57.1% 0.070 244 / 0.0043) 81%,
-            oklch(56.8% 0.070 244 / 0.0018) 88%,
-            oklch(56.4% 0.070 244 / 0.0004) 94%,
-            oklch(56.0% 0.070 244 / 0.0000) 100%);
     }
 }
 
@@ -2239,11 +2221,6 @@ main.at .int go {
     padding: 0 0 1.2em 1.55em;
 }
 
-main.at .int na {
-    margin-bottom: 1.2em;
-    border-bottom: 1px dotted color-mix(in srgb, var(--color) 30%, transparent);
-}
-
 main.at na + .int-ti {
     margin-top: 0;
 }
@@ -2297,8 +2274,10 @@ main.at details[open]:first-of-type summary:not(.cl-sm)::before {
 }
 
 main.at .int na {
+    margin-bottom: 1.2em;
     font-size: 1.02em !important;
     letter-spacing: 0 !important;
+    border-bottom: 1px dotted color-mix(in srgb, var(--color) 30%, transparent);
 }
 
 main.at .int go {
@@ -2685,20 +2664,20 @@ q {
         radial-gradient(circle 3.33px at 28.6px 6.3px, color-mix(in srgb, currentColor 85%, white) 0 0.80px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.47px, transparent),
         radial-gradient(circle 3.33px at 17.4px 11.0px, color-mix(in srgb, currentColor 85%, white) 0 0.80px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.47px, transparent),
         radial-gradient(circle 2.47px at 3.0px 3.0px, color-mix(in srgb, currentColor 85%, white) 0 0.59px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.09px, transparent),
-        linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 38.7px 6.2px / 10.299999999999997px 11.8px no-repeat,
-        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 28.6px 6.3px / 10.100000000000001px 11.7px no-repeat,
-        linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 17.4px 6.3px / 11.200000000000003px 4.7px no-repeat,
-        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 3.0px 3.0px / 14.399999999999999px 8.0px no-repeat;
+        linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 38.7px 6.2px / 10.3px 11.8px no-repeat,
+        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 28.6px 6.3px / 10.1px 11.7px no-repeat,
+        linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 17.4px 6.3px / 11.2px 4.7px no-repeat,
+        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 3.0px 3.0px / 14.4px 8.0px no-repeat;
     --cst-cnc:
         radial-gradient(circle 2.47px at 9.6px 3.0px, color-mix(in srgb, currentColor 85%, white) 0 0.59px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.09px, transparent),
         radial-gradient(circle 3.33px at 12.9px 10.7px, color-mix(in srgb, currentColor 85%, white) 0 0.80px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.47px, transparent),
         radial-gradient(circle 2.47px at 16.2px 16.2px, color-mix(in srgb, currentColor 85%, white) 0 0.59px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.09px, transparent),
         radial-gradient(circle 3.33px at 26.1px 27.2px, color-mix(in srgb, currentColor 85%, white) 0 0.80px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.47px, transparent),
         radial-gradient(circle 2.47px at 3.0px 26.1px, color-mix(in srgb, currentColor 85%, white) 0 0.59px, color-mix(in srgb, var(--cst-c) 30%, transparent) 1.09px, transparent),
-        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 9.6px 3.0px / 3.3000000000000007px 7.699999999999999px no-repeat,
-        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 12.9px 10.7px / 3.299999999999999px 5.5px no-repeat,
-        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 16.2px 16.2px / 9.900000000000002px 11.0px no-repeat,
-        linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 3.0px 16.2px / 13.2px 9.900000000000002px no-repeat;
+        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 9.6px 3.0px / 3.3px 7.7px no-repeat,
+        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 12.9px 10.7px / 3.3px 5.5px no-repeat,
+        linear-gradient(to top right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 16.2px 16.2px / 9.9px 11.0px no-repeat,
+        linear-gradient(to bottom right, transparent calc(50% - 0.35px), color-mix(in srgb, currentColor 45%, transparent) calc(50% - 0.35px) calc(50% + 0.35px), transparent calc(50% + 0.35px)) 3.0px 16.2px / 13.2px 9.9px no-repeat;
     gap: 1.1em;
     margin-block: 3.6em;
     justify-content: center;
@@ -2746,17 +2725,12 @@ main .line.plain:has(> i.cst) {
 
 .line.plain > i.cst {
     display: inline-block;
-    width: 53.0px;
-    height: 22.0px;
+    width: 53px;
+    height: 22px;
     background: var(--cst-cas);
 }
 
-.n_box .line.plain > i.cst {
-    width: 30.1px;
-    height: 31.2px;
-    background: var(--cst-cnc);
-}
-
+.n_box .line.plain > i.cst,
 .line.plain > i.cst.n {
     width: 30.1px;
     height: 31.2px;
@@ -2764,8 +2738,8 @@ main .line.plain:has(> i.cst) {
 }
 
 .line.plain > i.cst.g {
-    width: 53.0px;
-    height: 22.0px;
+    width: 53px;
+    height: 22px;
     background: var(--cst-cas);
 }
 
