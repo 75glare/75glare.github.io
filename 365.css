@@ -1857,8 +1857,8 @@ h3.pin {
     align-items: flex-start;
     gap: 0.6em;
     width: auto;
-    margin: 4.3em 0 0;
-    padding: 1.3em 0 0.5em;
+    margin: 3.8em 0 0;
+    padding: 1.3em 0.9em 0.5em;
     font-size: 1em;
     letter-spacing: 0.1em;
     border-top: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
@@ -1881,7 +1881,7 @@ h3.pin small {
 
 h3.pin + add {
     margin: 0 0 4.1em;
-    padding: 0 0 1.625em;
+    padding: 0 1.125em 1.625em;
     font: 300 0.8em/1.4 var(--en-font);
     letter-spacing: 0.08em;
     text-align: right;
