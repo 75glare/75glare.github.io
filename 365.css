@@ -1852,11 +1852,67 @@ h3.food::before {
     -moz-osx-font-smoothing: grayscale;
 }
 
+h3.pin {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6em;
+    width: auto;
+    margin: 3.3em 0 0;
+    padding: 1.3em 0 0.9em;
+    font-size: 1em;
+    letter-spacing: 0.1em;
+    border-top: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+    border-bottom: none;
+}
+
 h3.pin::before {
-    content: "\E3E2";
-    font-family: "Phosphor-Fill";
-    color: oklch(48% 0.09 22);
-    transform: scaleX(-1);
+    content: "\E6A4\00A0 Baton";
+    font: 300 0.8em/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color) 75%, transparent);
+}
+
+h3.pin small {
+    font: 300 0.8em/1.4 var(--en-font);
+    letter-spacing: 0.08em;
+    color: color-mix(in srgb, var(--color) 95%, transparent);
+}
+
+h3.pin + add {
+    margin: 0.35em 0 0;
+    padding: 0 0 1.3em;
+    font: 300 0.8em/1.4 var(--en-font);
+    letter-spacing: 0.08em;
+    text-align: right;
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+}
+
+h3.pin + add :is(na, go) {
+    font: inherit;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    letter-spacing: inherit !important;
+    -webkit-text-stroke: 0;
+}
+
+h3.pin + add :is(na, go)::before {
+    content: "\E3AC";
+    display: inline-block;
+    margin-right: 0.7em;
+    font-family: "Phosphor-Light";
+    font-size: 1.15em;
+    vertical-align: -0.1em;
+}
+
+h3.pin:not(:has(+ add)) {
+    padding-bottom: 1.3em;
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+}
+
+br:is(:has(+ h3.pin), :has(+ br + h3.pin)),
+h3.pin + add + br {
+    display: none;
 }
 
 h3.trip::before {
