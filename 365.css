@@ -122,7 +122,6 @@
     /* --- Glass --- */
     --glass-bg: linear-gradient(170deg, oklch(26% 0.058 256 / 0.34), oklch(19% 0.055 256 / 0.27) 55%, oklch(16% 0.05 258 / 0.31));
     --glass-top: inset 0 1px 0 oklch(100% 0 0 / 0.05);
-    --glass-drop: 0 10px 30px oklch(0% 0 0 / 0.22);
 
     /* --- Board --- */
     --text: var(--pure-white);
@@ -1109,7 +1108,7 @@ main,
     backdrop-filter: blur(5px);
     isolation: isolate;
     border: none;
-    box-shadow: var(--glass-top), inset 0 0 0 1px var(--glass-line), var(--glass-drop);
+    box-shadow: var(--glass-top), inset 0 0 0 1px var(--glass-line);
     font-size: 0.95em;
     line-height: var(--base-line-height);
     letter-spacing: var(--base-letter-spacing);
@@ -1857,7 +1856,7 @@ h3.pin {
     align-items: flex-start;
     gap: 0.6em;
     width: auto;
-    margin: 3.3em 0 0;
+    margin: 4.3em 0 0;
     padding: 1.3em 0 0.5em;
     font-size: 1em;
     letter-spacing: 0.1em;
@@ -1919,6 +1918,13 @@ h3.pin + add + p > br:first-child {
 
 h3.pin + add + p {
     margin-top: 0;
+}
+
+@media screen and (min-width: 768px) {
+    h3.pin,
+    h3.pin + add {
+        width: 62%;
+    }
 }
 
 h3.trip::before {
@@ -7894,7 +7900,7 @@ body>a span[style*="color"] {
     background: var(--glass-bg);
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
-    box-shadow: var(--glass-top), inset 0 0 0 1px var(--glass-line), var(--glass-drop);
+    box-shadow: var(--glass-top), inset 0 0 0 1px var(--glass-line);
     text-align: left;
     font-size: 0;
 }
