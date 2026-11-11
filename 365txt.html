@@ -1688,7 +1688,7 @@ iframe {
 (() => {
     const LIMIT = 5000;
     const LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500&family=Klee+One:wght@400;600&family=Open+Sans:wght@400;500&family=Scope+One&display=swap" rel="stylesheet"><link href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet"><link href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet"><link href="https://75glare.github.io/365.css" rel="stylesheet">';
-    const BLOCK = /^<(p|div|ul|ol|details|blockquote|h[1-6])[\s>]|^<span class="cl-(lb|dt)">/;
+    const BLOCK = /^(?:<add>.*?<\/add>)?<(p|div|ul|ol|details|blockquote|h[1-6])[\s>]|^<span class="cl-(lb|dt)">/;
 
     const $ = (id) => document.getElementById(id);
     const fields = ['dl-title', 'dl-code', 'vs-title', 'title', 'date', 'tag', 'time', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-date', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule'];
@@ -1924,6 +1924,16 @@ iframe {
             <div><p>英文</p><input id="cv-en" type="text" autocomplete="off" placeholder="例：We turn around the same light."></div>
         </div>
         <div id="cv-text-box"><p id="cv-text-label"></p><textarea id="cv-text" class="short"></textarea></div>
+        <p class="hint">線の上と線の下は、空けておけば出ません。</p>
+        <div class="row">
+            <div><p>線の上（左寄せ）</p><input id="cv-top" type="text" autocomplete="off" placeholder="例：Midnight Letter — for Nanami"></div>
+            <div><p>その下の小さな英文</p><input id="cv-top2" type="text" autocomplete="off" placeholder="例：Written while the moon was still up."></div>
+        </div>
+        <div class="row">
+            <div><p>線の下の署名（手書きの字）</p><input id="cv-sign" type="text" autocomplete="off" placeholder="例：Satoru"></div>
+            <div><p>署名の色</p><select id="cv-who"><option value="go">五条</option><option value="na">七海</option></select></div>
+            <div><p>署名の横（日付など）</p><input id="cv-date" type="text" autocomplete="off" placeholder="例：Nov. 12, 2026 · 2:14 a.m."></div>
+        </div>
         <div class="tools"><button type="button" id="cv-insert">この表紙を入れる</button></div>
         </div>
     `);
@@ -1933,9 +1943,17 @@ iframe {
         const en = safe($('cv-en').value.trim());
         const head = `<span>${title}${en ? `<small>${en}</small>` : ''}</span>`;
         const text = flat($('cv-text').value).trim().split('\n').map((l) => safe(l.trim())).join('\n');
-        if (cover.type === 'card') return `<div class="ti-tr cv">${head}</div><div class="cv-tx">${text}</div>`;
-        if (cover.type === 'letter') return `<details class="cv-lt"><summary class="ti-tr cv">${head}</summary><div class="cv-tx">${text}</div></details>`;
-        return `<div class="ti-tr cv">${head}</div>`;
+        const top = safe($('cv-top').value.trim());
+        const top2 = safe($('cv-top2').value.trim());
+        const sign = safe($('cv-sign').value.trim());
+        const date = safe($('cv-date').value.trim());
+        const who = $('cv-who').value;
+        const above = top || top2 ? `<add>${top}${top2 ? `<small>${top2}</small>` : ''}</add>` : '';
+        const below = sign || date ? `<add>${sign ? `<${who}>${sign}</${who}>` : ''}${date}</add>` : '';
+        let body = `<div class="ti-tr cv">${head}</div>`;
+        if (cover.type === 'card') body = `<div class="ti-tr cv">${head}</div><div class="cv-tx">${text}</div>`;
+        if (cover.type === 'letter') body = `<details class="cv-lt"><summary class="ti-tr cv">${head}</summary><div class="cv-tx">${text}</div></details>`;
+        return above + body + below;
     }
 
     function showCover() {
