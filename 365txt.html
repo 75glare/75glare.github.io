@@ -1840,7 +1840,7 @@ iframe {
         }).join('') + '</div>'
     ).join('');
 
-    const LINE_TYPES = [['star', '✦の線'], ['plain', 'アイコン付きの線'], ['row', 'アイコンを並べる']];
+    const LINE_TYPES = [['star', '✦の線'], ['cst', '星座の線'], ['plain', 'アイコン付きの線'], ['row', 'アイコンを並べる']];
     const LINE_ICONS = [['heart', 'ハート'], ['star-four', '星'], ['sparkle', 'きらめき'], ['moon-stars', '月と星'], ['umbrella-simple', '傘'], ['potted-plant', '植物'], ['drop', 'しずく'], ['sailboat', 'ヨット'], ['sunglasses', 'サングラス'], ['paw-print', '足あと']];
     const LINE_COLORS = [['', '色なし'], ['pr', '紫'], ['lb', '水色'], ['bl', '青'], ['mt', 'ミント'], ['bg', 'ベージュ'], ['rd', '赤'], ['gy', '灰色']];
     const line = { type: 'plain', icon: 'heart' };
@@ -1879,6 +1879,7 @@ iframe {
 
     function lineHTML() {
         if (line.type === 'star') return '<div class="line">✦</div>';
+        if (line.type === 'cst') return '<div class="line plain"><i class="cst"></i></div>';
         const color = $('line-color').value;
         const i = `<i class="${iconClass()}${color ? ' ' + color : ''}"></i>`;
         if (line.type === 'plain') return `<div class="line plain">${i}</div>`;
@@ -1888,7 +1889,7 @@ iframe {
     function showLine() {
         document.querySelectorAll('#line-types button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.type === line.type));
         document.querySelectorAll('#line-icons button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.iconName === line.icon));
-        $('line-opts').hidden = line.type === 'star';
+        $('line-opts').hidden = line.type === 'star' || line.type === 'cst';
         $('line-count-box').hidden = line.type !== 'row';
     }
 
@@ -1967,7 +1968,7 @@ iframe {
 
     $('icons').addEventListener('click', (ev) => {
         const b = ev.target.closest('button');
-        if (!b) return;
+        if (!b || !b.dataset.icon) return;
         const item = ICONS[b.dataset.icon];
         insertAtCursor(item.html, item.block);
     });
