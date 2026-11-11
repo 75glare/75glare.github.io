@@ -1116,7 +1116,7 @@ main,
     text-justify: inter-character;
     overflow-wrap: break-word;
     text-spacing-trim: trim-start;
-    color: var(--black);
+    color: color-mix(in srgb, var(--black) 90%, transparent);
     -webkit-font-smoothing: antialiased;
 }
 
