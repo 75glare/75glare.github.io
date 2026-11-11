@@ -100,12 +100,12 @@
     --lightblue: oklch(65% 0.065 212);
 
     /* --- Sky & Mugen (Theme Animation) --- */
-    --sky-base: oklch(27% 0.07 255);
-    --sky-deep: oklch(19% 0.03 252);
+    --sky-base: oklch(23.8% 0.060 243);
+    --sky-deep: oklch(16.7% 0.025 240);
     --sky-moon: oklch(75% 0.07 215);
     --sky-text: oklch(85% 0.02 220);
     --svu: 1vh;
-    --sky-edge: oklch(20% 0.055 254);
+    --sky-edge: oklch(17.6% 0.047 242);
 
     /* --- Fonts --- */
     --hd-font: "ScopeOneHd", "Scope One", sans-serif;
@@ -261,33 +261,33 @@ html::before {
     background-color: var(--sky-base);
     --sky-depth:
         radial-gradient(ellipse 80% 80% at 0% 0%,
-            oklch(7% 0.018 280 / 0.8),
-            oklch(7% 0.018 280 / 0.5) 28%,
-            oklch(7% 0.018 280 / 0.22) 52%,
-            oklch(7% 0.018 280 / 0.06) 72%,
+            oklch(6.2% 0.015 268 / 0.8),
+            oklch(6.2% 0.015 268 / 0.5) 28%,
+            oklch(6.2% 0.015 268 / 0.22) 52%,
+            oklch(6.2% 0.015 268 / 0.06) 72%,
             transparent 88%),
         radial-gradient(ellipse 120% 60% at 50% 105%,
-            oklch(40% 0.100 248 / calc(0.65 * var(--sky-glow))),
-            oklch(40% 0.100 248 / calc(0.42 * var(--sky-glow))) 28%,
-            oklch(40% 0.100 248 / calc(0.18 * var(--sky-glow))) 52%,
-            oklch(40% 0.100 248 / calc(0.05 * var(--sky-glow))) 70%,
+            oklch(35.2% 0.085 236 / calc(0.65 * var(--sky-glow))),
+            oklch(35.2% 0.085 236 / calc(0.42 * var(--sky-glow))) 28%,
+            oklch(35.2% 0.085 236 / calc(0.18 * var(--sky-glow))) 52%,
+            oklch(35.2% 0.085 236 / calc(0.05 * var(--sky-glow))) 70%,
             transparent 85%),
         radial-gradient(ellipse 80% 45% at 90% 100%,
-            oklch(36% 0.086 266 / calc(0.4 * var(--sky-glow))),
-            oklch(36% 0.086 266 / calc(0.22 * var(--sky-glow))) 35%,
-            oklch(36% 0.086 266 / calc(0.06 * var(--sky-glow))) 62%,
+            oklch(31.7% 0.073 254 / calc(0.4 * var(--sky-glow))),
+            oklch(31.7% 0.073 254 / calc(0.22 * var(--sky-glow))) 35%,
+            oklch(31.7% 0.073 254 / calc(0.06 * var(--sky-glow))) 62%,
             transparent 85%),
         radial-gradient(ellipse 70% 70% at 100% 5%,
-            oklch(10% 0.035 262 / 0.75),
-            oklch(10% 0.035 262 / 0.48) 28%,
-            oklch(10% 0.035 262 / 0.2) 52%,
-            oklch(10% 0.035 262 / 0.05) 72%,
+            oklch(8.8% 0.030 250 / 0.75),
+            oklch(8.8% 0.030 250 / 0.48) 28%,
+            oklch(8.8% 0.030 250 / 0.2) 52%,
+            oklch(8.8% 0.030 250 / 0.05) 72%,
             transparent 88%);
     --sky-zenith: linear-gradient(to bottom,
-        oklch(8% 0.025 265 / 0.35),
-        oklch(8% 0.025 265 / 0.22) 20%,
-        oklch(8% 0.025 265 / 0.1) 40%,
-        oklch(8% 0.025 265 / 0.03) 58%,
+        oklch(7.0% 0.021 253 / 0.35),
+        oklch(7.0% 0.021 253 / 0.22) 20%,
+        oklch(7.0% 0.021 253 / 0.1) 40%,
+        oklch(7.0% 0.021 253 / 0.03) 58%,
         transparent 72%);
     background-image: var(--sky-zenith), var(--sky-depth);
     animation: nightSky 40s steps(80) infinite alternate;
@@ -296,34 +296,34 @@ html::before {
 @property --sky-edge {
     syntax: '<color>';
     inherits: false;
-    initial-value: oklch(20% 0.055 254);
+    initial-value: oklch(17.6% 0.047 242);
 }
 
 @keyframes skyEdgeBg {
     0% {
-        background-color: oklch(22% 0.060 249);
+        background-color: oklch(19.4% 0.051 237);
     }
 
     50% {
-        background-color: oklch(18% 0.054 255);
+        background-color: oklch(15.8% 0.046 243);
     }
 
     100% {
-        background-color: oklch(13.5% 0.042 261);
+        background-color: oklch(11.9% 0.036 249);
     }
 }
 
 @keyframes skyEdge {
     0% {
-        --sky-edge: oklch(22% 0.060 249);
+        --sky-edge: oklch(19.4% 0.051 237);
     }
 
     50% {
-        --sky-edge: oklch(18% 0.054 255);
+        --sky-edge: oklch(15.8% 0.046 243);
     }
 
     100% {
-        --sky-edge: oklch(13.5% 0.042 261);
+        --sky-edge: oklch(11.9% 0.036 249);
     }
 }
 
@@ -343,29 +343,29 @@ html::before {
 
 @keyframes skyEdgeTouchBg {
     0% {
-        background-color: oklch(27% 0.070 245);
+        background-color: oklch(23.8% 0.060 233);
     }
 
     50% {
-        background-color: oklch(21.5% 0.060 254);
+        background-color: oklch(18.9% 0.051 242);
     }
 
     100% {
-        background-color: oklch(16% 0.046 262);
+        background-color: oklch(14.1% 0.039 250);
     }
 }
 
 @keyframes skyEdgeTouch {
     0% {
-        --sky-edge: oklch(27% 0.070 245);
+        --sky-edge: oklch(23.8% 0.060 233);
     }
 
     50% {
-        --sky-edge: oklch(21.5% 0.060 254);
+        --sky-edge: oklch(18.9% 0.051 242);
     }
 
     100% {
-        --sky-edge: oklch(16% 0.046 262);
+        --sky-edge: oklch(14.1% 0.039 250);
     }
 }
 
@@ -381,9 +381,9 @@ html::before {
     @media (orientation: portrait) {
         html::before {
             --sky-depth:
-                radial-gradient(ellipse 160% 45% at 50% 24%, oklch(9% 0.030 265 / 0.45), transparent 75%),
-                radial-gradient(ellipse 150% 50% at 50% 66%, oklch(36% 0.090 250 / calc(0.45 * var(--sky-glow))), transparent 75%),
-                radial-gradient(ellipse 70% 35% at 95% 62%, oklch(34% 0.080 266 / calc(0.4 * var(--sky-glow))), transparent 75%);
+                radial-gradient(ellipse 160% 45% at 50% 24%, oklch(7.9% 0.025 253 / 0.45), transparent 75%),
+                radial-gradient(ellipse 150% 50% at 50% 66%, oklch(31.7% 0.076 238 / calc(0.45 * var(--sky-glow))), transparent 75%),
+                radial-gradient(ellipse 70% 35% at 95% 62%, oklch(29.9% 0.068 254 / calc(0.4 * var(--sky-glow))), transparent 75%);
             background-image:
                 linear-gradient(to bottom,
                     var(--sky-edge) 0%,
@@ -490,7 +490,7 @@ html::after {
         html::before {
             --dust: oklch(95% 0.01 230);
             animation: none !important;
-            background-color: oklch(16% 0.046 262);
+            background-color: oklch(14.1% 0.039 250);
             background-image:
                 radial-gradient(circle at 41px 57px, color-mix(in oklch, var(--dust) 21%, transparent) 0.6px, transparent 1.3px),
                 radial-gradient(circle at 188px 23px, color-mix(in oklch, var(--dust) 12%, transparent) 0.5px, transparent 1.2px),
@@ -509,33 +509,33 @@ html::after {
                 radial-gradient(circle at 379px 29px, color-mix(in oklch, var(--dust) 18%, transparent) 0.6px, transparent 1.3px),
                 radial-gradient(circle at 268px 238px, color-mix(in oklch, var(--dust) 11%, transparent) 0.5px, transparent 1.2px),
                 linear-gradient(to bottom,
-                    oklch(8% 0.025 265 / 0.35),
-                    oklch(8% 0.025 265 / 0.22) 20%,
-                    oklch(8% 0.025 265 / 0.1) 40%,
-                    oklch(8% 0.025 265 / 0.03) 58%,
+                    oklch(7.0% 0.021 253 / 0.35),
+                    oklch(7.0% 0.021 253 / 0.22) 20%,
+                    oklch(7.0% 0.021 253 / 0.1) 40%,
+                    oklch(7.0% 0.021 253 / 0.03) 58%,
                     transparent 72%),
                 radial-gradient(ellipse 80% 80% at 0% 0%,
-                    oklch(7% 0.018 280 / 0.8),
-                    oklch(7% 0.018 280 / 0.5) 28%,
-                    oklch(7% 0.018 280 / 0.22) 52%,
-                    oklch(7% 0.018 280 / 0.06) 72%,
+                    oklch(6.2% 0.015 268 / 0.8),
+                    oklch(6.2% 0.015 268 / 0.5) 28%,
+                    oklch(6.2% 0.015 268 / 0.22) 52%,
+                    oklch(6.2% 0.015 268 / 0.06) 72%,
                     transparent 88%),
                 radial-gradient(ellipse 120% 60% at 50% 105%,
-                    oklch(40% 0.100 248 / calc(0.65 * 0.55)),
-                    oklch(40% 0.100 248 / calc(0.42 * 0.55)) 28%,
-                    oklch(40% 0.100 248 / calc(0.18 * 0.55)) 52%,
-                    oklch(40% 0.100 248 / calc(0.05 * 0.55)) 70%,
+                    oklch(35.2% 0.085 236 / calc(0.65 * 0.55)),
+                    oklch(35.2% 0.085 236 / calc(0.42 * 0.55)) 28%,
+                    oklch(35.2% 0.085 236 / calc(0.18 * 0.55)) 52%,
+                    oklch(35.2% 0.085 236 / calc(0.05 * 0.55)) 70%,
                     transparent 85%),
                 radial-gradient(ellipse 80% 45% at 90% 100%,
-                    oklch(36% 0.086 266 / calc(0.4 * 0.55)),
-                    oklch(36% 0.086 266 / calc(0.22 * 0.55)) 35%,
-                    oklch(36% 0.086 266 / calc(0.06 * 0.55)) 62%,
+                    oklch(31.7% 0.073 254 / calc(0.4 * 0.55)),
+                    oklch(31.7% 0.073 254 / calc(0.22 * 0.55)) 35%,
+                    oklch(31.7% 0.073 254 / calc(0.06 * 0.55)) 62%,
                     transparent 85%),
                 radial-gradient(ellipse 70% 70% at 100% 5%,
-                    oklch(10% 0.035 262 / 0.75),
-                    oklch(10% 0.035 262 / 0.48) 28%,
-                    oklch(10% 0.035 262 / 0.2) 52%,
-                    oklch(10% 0.035 262 / 0.05) 72%,
+                    oklch(8.8% 0.030 250 / 0.75),
+                    oklch(8.8% 0.030 250 / 0.48) 28%,
+                    oklch(8.8% 0.030 250 / 0.2) 52%,
+                    oklch(8.8% 0.030 250 / 0.05) 72%,
                     transparent 88%);
             background-size:
                 307px 283px, 307px 283px, 307px 283px, 307px 283px, 307px 283px, 419px 397px, 419px 397px, 419px 397px, 419px 397px, 419px 397px, 587px 541px, 587px 541px, 587px 541px, 587px 541px, 587px 541px, 307px 283px, auto, auto, auto, auto, auto;
@@ -543,7 +543,7 @@ html::after {
         }
 
         html::after {
-            background-color: oklch(27% 0.070 245);
+            background-color: oklch(23.8% 0.060 233);
             background-image:
                 radial-gradient(circle at 41px 57px, color-mix(in oklch, var(--dust) 21%, transparent) 0.6px, transparent 1.3px),
                 radial-gradient(circle at 188px 23px, color-mix(in oklch, var(--dust) 12%, transparent) 0.5px, transparent 1.2px),
@@ -562,33 +562,33 @@ html::after {
                 radial-gradient(circle at 379px 29px, color-mix(in oklch, var(--dust) 18%, transparent) 0.6px, transparent 1.3px),
                 radial-gradient(circle at 268px 238px, color-mix(in oklch, var(--dust) 11%, transparent) 0.5px, transparent 1.2px),
                 linear-gradient(to bottom,
-                    oklch(8% 0.025 265 / 0.35),
-                    oklch(8% 0.025 265 / 0.22) 20%,
-                    oklch(8% 0.025 265 / 0.1) 40%,
-                    oklch(8% 0.025 265 / 0.03) 58%,
+                    oklch(7.0% 0.021 253 / 0.35),
+                    oklch(7.0% 0.021 253 / 0.22) 20%,
+                    oklch(7.0% 0.021 253 / 0.1) 40%,
+                    oklch(7.0% 0.021 253 / 0.03) 58%,
                     transparent 72%),
                 radial-gradient(ellipse 80% 80% at 0% 0%,
-                    oklch(7% 0.018 280 / 0.8),
-                    oklch(7% 0.018 280 / 0.5) 28%,
-                    oklch(7% 0.018 280 / 0.22) 52%,
-                    oklch(7% 0.018 280 / 0.06) 72%,
+                    oklch(6.2% 0.015 268 / 0.8),
+                    oklch(6.2% 0.015 268 / 0.5) 28%,
+                    oklch(6.2% 0.015 268 / 0.22) 52%,
+                    oklch(6.2% 0.015 268 / 0.06) 72%,
                     transparent 88%),
                 radial-gradient(ellipse 120% 60% at 50% 105%,
-                    oklch(40% 0.100 248 / calc(0.65 * 1)),
-                    oklch(40% 0.100 248 / calc(0.42 * 1)) 28%,
-                    oklch(40% 0.100 248 / calc(0.18 * 1)) 52%,
-                    oklch(40% 0.100 248 / calc(0.05 * 1)) 70%,
+                    oklch(35.2% 0.085 236 / calc(0.65 * 1)),
+                    oklch(35.2% 0.085 236 / calc(0.42 * 1)) 28%,
+                    oklch(35.2% 0.085 236 / calc(0.18 * 1)) 52%,
+                    oklch(35.2% 0.085 236 / calc(0.05 * 1)) 70%,
                     transparent 85%),
                 radial-gradient(ellipse 80% 45% at 90% 100%,
-                    oklch(36% 0.086 266 / calc(0.4 * 1)),
-                    oklch(36% 0.086 266 / calc(0.22 * 1)) 35%,
-                    oklch(36% 0.086 266 / calc(0.06 * 1)) 62%,
+                    oklch(31.7% 0.073 254 / calc(0.4 * 1)),
+                    oklch(31.7% 0.073 254 / calc(0.22 * 1)) 35%,
+                    oklch(31.7% 0.073 254 / calc(0.06 * 1)) 62%,
                     transparent 85%),
                 radial-gradient(ellipse 70% 70% at 100% 5%,
-                    oklch(10% 0.035 262 / 0.75),
-                    oklch(10% 0.035 262 / 0.48) 28%,
-                    oklch(10% 0.035 262 / 0.2) 52%,
-                    oklch(10% 0.035 262 / 0.05) 72%,
+                    oklch(8.8% 0.030 250 / 0.75),
+                    oklch(8.8% 0.030 250 / 0.48) 28%,
+                    oklch(8.8% 0.030 250 / 0.2) 52%,
+                    oklch(8.8% 0.030 250 / 0.05) 72%,
                     transparent 88%);
             background-size:
                 307px 283px, 307px 283px, 307px 283px, 307px 283px, 307px 283px, 419px 397px, 419px 397px, 419px 397px, 419px 397px, 419px 397px, 587px 541px, 587px 541px, 587px 541px, 587px 541px, 587px 541px, 307px 283px, auto, auto, auto, auto, auto;
@@ -870,17 +870,17 @@ body::after {
 
 @keyframes nightSky {
     0% {
-        background-color: oklch(27% 0.070 245);
+        background-color: oklch(23.8% 0.060 233);
         --sky-glow: 1;
     }
 
     50% {
-        background-color: oklch(21.5% 0.060 254);
+        background-color: oklch(18.9% 0.051 242);
         --sky-glow: 0.8;
     }
 
     100% {
-        background-color: oklch(16% 0.046 262);
+        background-color: oklch(14.1% 0.039 250);
         --sky-glow: 0.55;
     }
 }
