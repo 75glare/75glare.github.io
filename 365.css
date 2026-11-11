@@ -120,7 +120,7 @@
     --moon-arc: 60.13%;
 
     /* --- Glass --- */
-    --glass-bg: linear-gradient(170deg, oklch(26% 0.058 256 / 0.24), oklch(19% 0.055 256 / 0.18) 55%, oklch(16% 0.05 258 / 0.22));
+    --glass-bg: linear-gradient(170deg, oklch(26% 0.058 256 / 0.29), oklch(19% 0.055 256 / 0.225) 55%, oklch(16% 0.05 258 / 0.265));
     --glass-top: inset 0 1px 0 oklch(100% 0 0 / 0.05);
 
     /* --- Board --- */
