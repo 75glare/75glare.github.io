@@ -1856,11 +1856,11 @@ h3.pin {
     align-items: flex-start;
     gap: 0.6em;
     width: auto;
-    margin: 3.8em 0 0;
+    margin: 2.1em 0 0;
     padding: 1.3em 0.9em 0.5em;
     font-size: 1em;
     letter-spacing: 0.1em;
-    border-top: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+    border-top: 1px solid color-mix(in srgb, var(--black) 10%, transparent);
     border-bottom: none;
 }
 
@@ -1884,7 +1884,7 @@ h3.pin + add {
     font: 300 0.8em/1.4 var(--en-font);
     letter-spacing: 0.08em;
     text-align: right;
-    border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 10%, transparent);
 }
 
 h3.pin + add :is(na, go) {
@@ -1906,7 +1906,7 @@ h3.pin + add :is(na, go)::before {
 
 h3.pin:not(:has(+ add)) {
     padding-bottom: 1.3em;
-    border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 10%, transparent);
 }
 
 br:is(:has(+ h3.pin), :has(+ br + h3.pin)),
