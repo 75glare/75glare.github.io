@@ -120,7 +120,7 @@
     --moon-arc: 60.13%;
 
     /* --- Glass --- */
-    --glass-bg: linear-gradient(170deg, oklch(40% 0.05 252 / 0.26), oklch(33% 0.048 254 / 0.22) 55%, oklch(30% 0.045 256 / 0.24));
+    --glass-bg: linear-gradient(170deg, oklch(40% 0.075 252 / 0.26), oklch(33% 0.072 254 / 0.22) 55%, oklch(30% 0.068 256 / 0.24));
     --glass-top: inset 0 1px 0 oklch(100% 0 0 / 0.05);
 
     /* --- Board --- */
@@ -4077,7 +4077,7 @@ details.cv-lt > summary.ti-tr.cv::before {
     font-size: 0.5em;
     letter-spacing: 0.24em;
     opacity: 1;
-    color: color-mix(in srgb, var(--color) 75%, transparent);
+    color: color-mix(in srgb, var(--color) 85%, transparent);
 }
 
 @media screen and (min-width: 768px) {
@@ -4158,7 +4158,7 @@ add:has(+ :is(div.ti-tr.cv, details.cv-lt)) {
     letter-spacing: 0.3em;
     text-transform: uppercase;
     text-align: left;
-    color: color-mix(in srgb, var(--color) 60%, transparent);
+    color: color-mix(in srgb, var(--color) 78%, transparent);
 }
 
 add:has(+ :is(div.ti-tr.cv, details.cv-lt)) small {
@@ -4167,7 +4167,7 @@ add:has(+ :is(div.ti-tr.cv, details.cv-lt)) small {
     font-size: 1em;
     letter-spacing: 0.12em;
     text-transform: none;
-    color: color-mix(in srgb, var(--color) 40%, transparent);
+    color: color-mix(in srgb, var(--color) 58%, transparent);
 }
 
 add + div.ti-tr.cv,
@@ -4190,7 +4190,7 @@ details.cv-lt:has(+ add) > :is(summary, .cv-tx) {
     font: 300 0.68em/1.6 var(--en-font);
     letter-spacing: 0.16em;
     text-align: right;
-    color: color-mix(in srgb, var(--color) 45%, transparent);
+    color: color-mix(in srgb, var(--color) 62%, transparent);
 }
 
 :is(div.ti-tr.cv, div.cv-tx, details.cv-lt) + add:last-child {
@@ -4202,7 +4202,7 @@ details.cv-lt:has(+ add) > :is(summary, .cv-tx) {
     padding: 0;
     font: 200 1.6em/1.6 "Playwrite DE LA", "Snell Roundhand", cursive !important;
     letter-spacing: 0.04em !important;
-    opacity: 0.7;
+    opacity: 0.85;
 }
 
 :is(div.ti-tr.cv, div.cv-tx, details.cv-lt) + add :is(go, na)::before {
