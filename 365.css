@@ -3559,6 +3559,7 @@ main:has(>.il.sg) {
 .sg .il-ds {
     margin-top: 0.7em;
     padding-left: 0;
+    text-align: left;
     text-wrap: pretty;
 }
 
@@ -3692,6 +3693,7 @@ main:has(>.il.sg) {
         margin-top: 0.6em;
         overflow: visible;
         scroll-snap-type: none;
+        counter-reset: sg;
     }
 
     .il.sg::before {
@@ -3704,16 +3706,15 @@ main:has(>.il.sg) {
         color: color-mix(in srgb, var(--color) 80%, transparent);
     }
 
-    .sg .il-ti {
-        gap: 0;
+    .sg .il-it {
+        counter-increment: sg;
     }
 
     .sg .il-ti::before {
-        content: none;
-    }
-
-    .sg .il-it {
-        padding-top: 1.3em;
+        content: "No." counter(sg, decimal-leading-zero);
+        font: 300 0.72em/1 var(--en-font);
+        letter-spacing: 0.12em;
+        text-transform: none;
     }
 
     .il.sg+.pg-qt {
