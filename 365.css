@@ -4037,10 +4037,10 @@ main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-sm {
     grid-template-columns: auto 1fr;
     column-gap: 1.1em;
     align-items: center;
-    margin-bottom: 0.4em;
+    margin-bottom: 1.1em;
     padding: 0 0 1em;
     border-bottom: 1px dotted color-mix(in srgb, var(--color) 50%, transparent);
-    font-size: 1.22em;
+    font-size: 1.1em;
     font-weight: 500;
 }
 
@@ -4063,28 +4063,27 @@ main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-sm::before {
     content: "\E792";
     grid-row: 2;
     grid-column: 1;
+    align-self: center;
     width: auto;
     margin: 0;
     font-family: "Phosphor-Light";
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 1;
     color: var(--color);
+    translate: 0 -0.05em;
     animation: none;
 }
 
 main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-tx {
     margin-left: 0;
-    padding: 10px 11px 10px 12px;
-    letter-spacing: 0.06em;
-}
-
-main.lib details.mv[class*=" ic-"] .cl-nnm[open]>.cl-tx {
-    font-size: 0.968em;
-    letter-spacing: 0.007em;
+    padding: 10px 6px 10px 7px;
+    font-size: 1em;
+    letter-spacing: 0.02em;
 }
 
 @media screen and (min-width: 481px) {
     main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-tx {
-        padding-inline: 19px;
+        padding-inline: 10px 9px;
     }
 
     main.lib details.mv[class*=" ic-"] .cl-nnm[open]>.cl-tx {
@@ -4232,6 +4231,10 @@ details.cv-lt > summary.ti-tr.cv::before {
     .ti-tr.cv::before {
         zoom: 1.5;
     }
+}
+
+div.ti-tr.cv:has(+ details) {
+    margin-bottom: 1.6em;
 }
 
 div.ti-tr.cv:has(+ .cv-tx),
@@ -8991,7 +8994,7 @@ body>a span[style*="color"] {
     }
 
     main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-tx {
-        padding-right: calc(11 * var(--nw));
-        padding-left: calc(12 * var(--nw));
+        padding-right: calc(6 * var(--nw));
+        padding-left: calc(7 * var(--nw));
     }
 }
