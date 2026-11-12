@@ -4197,6 +4197,10 @@ details.cv-lt:has(+ add) > :is(summary, .cv-tx) {
     margin-bottom: 0;
 }
 
+:is(.g_box, .n_box):not(:has(> h2[data-date])):has(> :is(div.ti-tr.cv, div.cv-tx, details.cv-lt, :is(div.ti-tr.cv, div.cv-tx, details.cv-lt) + add):last-child) {
+    padding-bottom: 3.5em !important;
+}
+
 :is(div.ti-tr.cv, div.cv-tx, details.cv-lt) + add :is(go, na) {
     order: 1;
     padding: 0;
