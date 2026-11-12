@@ -3440,12 +3440,34 @@ details[open]:has(> summary > mark)::details-content {
 
 .il.sg {
     display: grid;
-    counter-reset: sg;
-    margin: 0;
+    grid-auto-flow: column;
+    grid-auto-columns: 84%;
+    gap: 0.9em;
+    margin: 1.4em 0 0;
+    padding-bottom: 0.6em;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.il.sg::-webkit-scrollbar {
+    display: none;
 }
 
 .il.sg+.pg-qt {
-    margin-top: 2.6em;
+    margin-top: 0.4em;
+}
+
+.il.sg+.pg-qt::before {
+    content: "Swipe\2002\E06C";
+    display: block;
+    margin-bottom: 3em;
+    font: 300 0.72em/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
+    letter-spacing: 0.3em;
+    text-align: right;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color) 65%, transparent);
 }
 
 .il.sg+.pg-qt+.pg-now {
@@ -3458,12 +3480,12 @@ main:has(>.il.sg) {
 
 .sg .il-it {
     --c: var(--sky-moon);
-    counter-increment: sg;
     position: relative;
     overflow: hidden;
     margin: 0;
-    padding: 1.6em 4.5em 1.5em 0.5em;
-    border-bottom: 1px solid oklch(100% 0 0 / 0.1);
+    padding: 1.5em 1.2em 3.4em;
+    border: 1px solid oklch(100% 0 0 / 0.06);
+    scroll-snap-align: start;
     transition: background-color 0.3s ease;
 }
 
@@ -3475,67 +3497,42 @@ main:has(>.il.sg) {
     --c: var(--nanami);
 }
 
-.sg .il-it::before {
-    content: counter(sg, decimal-leading-zero);
+.sg .il-it[data-ch]::after {
     position: absolute;
-    right: 0.25em;
-    top: 50%;
-    width: 1.5em;
-    font-family: var(--hd-font);
-    font-size: 3em;
-    line-height: 1;
-    text-align: center;
-    color: oklch(100% 0 0 / 0.1);
-    transform: translateY(-50%);
-    pointer-events: none;
-    transition: color 0.4s ease;
+    right: 1.2em;
+    bottom: 1.3em;
+    font: 300 0.75em/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
+    letter-spacing: 0.1em;
+    color: var(--c);
 }
 
-.sg .il-it[data-ch]::after {
-    content: "\EBC6";
-    position: absolute;
-    left: 0.5em;
-    top: 2.1em;
-    font-family: "Phosphor-Light";
-    font-size: 0.9em;
-    line-height: 1;
-    color: var(--c);
+.sg .il-it[data-ch="gjo"]::after {
+    content: "\EBC6\00A0 Gojo Satoru";
+}
+
+.sg .il-it[data-ch="na"]::after {
+    content: "\EBC6\00A0 Nanami Kento";
 }
 
 @media (hover: hover) {
     .sg .il-it:hover {
         background: oklch(100% 0 0 / 0.03);
     }
-
-    .sg .il-it:hover::before {
-        color: oklch(100% 0 0 / 0.2);
-    }
 }
 
 .sg .il-ti {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.4em;
+    gap: 0.9em;
 }
 
 .sg .il-ti::before {
+    content: "\E6A4\00A0 Baton";
     margin: 0;
-    font-family: var(--hd-font);
-    font-size: 0.8em;
-    letter-spacing: 0.15em;
-    color: var(--c);
-}
-
-.sg [data-ch] .il-ti::before {
-    padding-left: 1.5em;
-}
-
-.sg [data-ch="gjo"] .il-ti::before {
-    content: "Gojo Satoru";
-}
-
-.sg [data-ch="na"] .il-ti::before {
-    content: "Nanami Kento";
+    font: 300 0.72em/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color) 75%, transparent);
 }
 
 .sg .il-lk,
@@ -3560,21 +3557,171 @@ main:has(>.il.sg) {
 }
 
 .sg .il-ds {
-    margin-top: 0.5em;
+    margin-top: 0.7em;
     padding-left: 0;
     text-wrap: pretty;
 }
 
-@media screen and (max-width: 480px) {
-    .sg .il-it {
-        padding-right: 3.2em;
+@media screen and (max-width: 767px) {
+    .sg .il-it:nth-last-child(1) {
+        order: 1;
     }
 
-    .sg .il-it::before {
-        top: 1.95em;
-        right: 0;
-        font-size: 2.1em;
-        transform: none;
+    .sg .il-it:nth-last-child(2) {
+        order: 2;
+    }
+
+    .sg .il-it:nth-last-child(3) {
+        order: 3;
+    }
+
+    .sg .il-it:nth-last-child(4) {
+        order: 4;
+    }
+
+    .sg .il-it:nth-last-child(5) {
+        order: 5;
+    }
+
+    .sg .il-it:nth-last-child(6) {
+        order: 6;
+    }
+
+    .sg .il-it:nth-last-child(7) {
+        order: 7;
+    }
+
+    .sg .il-it:nth-last-child(8) {
+        order: 8;
+    }
+
+    .sg .il-it:nth-last-child(9) {
+        order: 9;
+    }
+
+    .sg .il-it:nth-last-child(10) {
+        order: 10;
+    }
+
+    .sg .il-it:nth-last-child(11) {
+        order: 11;
+    }
+
+    .sg .il-it:nth-last-child(12) {
+        order: 12;
+    }
+
+    .sg .il-it:nth-last-child(13) {
+        order: 13;
+    }
+
+    .sg .il-it:nth-last-child(14) {
+        order: 14;
+    }
+
+    .sg .il-it:nth-last-child(15) {
+        order: 15;
+    }
+
+    .sg .il-it:nth-last-child(16) {
+        order: 16;
+    }
+
+    .sg .il-it:nth-last-child(17) {
+        order: 17;
+    }
+
+    .sg .il-it:nth-last-child(18) {
+        order: 18;
+    }
+
+    .sg .il-it:nth-last-child(19) {
+        order: 19;
+    }
+
+    .sg .il-it:nth-last-child(20) {
+        order: 20;
+    }
+
+    .sg .il-it:nth-last-child(21) {
+        order: 21;
+    }
+
+    .sg .il-it:nth-last-child(22) {
+        order: 22;
+    }
+
+    .sg .il-it:nth-last-child(23) {
+        order: 23;
+    }
+
+    .sg .il-it:nth-last-child(24) {
+        order: 24;
+    }
+
+    .sg .il-it:nth-last-child(25) {
+        order: 25;
+    }
+
+    .sg .il-it:nth-last-child(26) {
+        order: 26;
+    }
+
+    .sg .il-it:nth-last-child(27) {
+        order: 27;
+    }
+
+    .sg .il-it:nth-last-child(28) {
+        order: 28;
+    }
+
+    .sg .il-it:nth-last-child(29) {
+        order: 29;
+    }
+
+    .sg .il-it:nth-last-child(30) {
+        order: 30;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .il.sg {
+        grid-auto-flow: row;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1em;
+        margin-top: 0.6em;
+        overflow: visible;
+        scroll-snap-type: none;
+    }
+
+    .il.sg::before {
+        content: "\E6A4\00A0 Baton\2003—\2003Questions we passed to each other";
+        grid-column: 1 / -1;
+        margin: 1.8em 0 0.7em;
+        font: 300 0.76em/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: color-mix(in srgb, var(--color) 80%, transparent);
+    }
+
+    .sg .il-ti {
+        gap: 0;
+    }
+
+    .sg .il-ti::before {
+        content: none;
+    }
+
+    .sg .il-it {
+        padding-top: 1.3em;
+    }
+
+    .il.sg+.pg-qt {
+        margin-top: 2.6em;
+    }
+
+    .il.sg+.pg-qt::before {
+        content: none;
     }
 }
 
