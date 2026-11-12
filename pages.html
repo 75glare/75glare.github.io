@@ -178,7 +178,7 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
             </div>
             <div class="panel">
                 <h2>カード</h2>
-                <p class="hint">五条が作ったものは青、七海のものは黄色になるよ。題名の上に、ペンと名前（Gojo Satoru／Nanami Kento）が出る。右の番号は上から順に 01、02…と自動で付くから、並べ替えると番号も変わるよ。</p>
+                <p class="hint">1 つが 1 枚のカードになるよ。カードの右下に、ペンと名前（Gojo Satoru／Nanami Kento）が、五条は青、七海は黄色で出る。新しいバトンはいちばん下に足してね。スマホでは横にスワイプするカードになって、いちばん下に足したものが先頭に来る（30 個まで）。パソコンでは 3 列に、上から書いた順で並ぶよ。</p>
                 <div id="st-items"></div>
                 <div class="acts"><button type="button" class="btn small" data-add="st.items">カードを足す</button></div>
             </div>
@@ -217,18 +217,18 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
             <p class="count" id="count"></p>
             <div class="acts">
                 <button type="button" class="btn" id="copy">コピー</button>
-                <label class="check"><input type="checkbox" id="links" checked>CSS の読み込みも付ける</label>
+                <label class="check"><input type="checkbox" id="links">CSS の読み込みも付ける</label>
                 <button type="button" class="btn small warn" id="reset">このページを最初の状態に戻す</button>
             </div>
             <p class="hint">&lt;br&gt; は使っていないよ。改行は掲示板が自動で &lt;br /&gt; にするから、そのまま貼ってね。</p>
             <div class="acts">
                 <label class="check" for="board">掲示板</label>
                 <select id="board" style="width:auto">
-                    <option value="old">今の掲示板（5,000 文字まで）</option>
-                    <option value="new">新しい掲示板（20,000 文字まで）</option>
+                    <option value="new">今の掲示板（20,000 文字まで）</option>
+                    <option value="old">前の掲示板（5,000 文字まで）</option>
                 </select>
             </div>
-            <p class="hint">新しい掲示板は日記の CSS を入れる欄があるから、選ぶと「CSS の読み込みも付ける」が外れるよ。</p>
+            <p class="hint">今の掲示板は日記の CSS を入れる欄があるから、「CSS の読み込みも付ける」は外したままでいいよ。</p>
         </div>
         <div class="panel">
             <h2>下書きの保存</h2>
@@ -256,7 +256,7 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
 
 <script>
 (() => {
-    const DEFAULTS = {"at": {"title": "Attention", "icons": [{"cls": "ph-fill ph-books", "href": "https://2colorless.nieru.net/57/7"}, {"cls": "ph-fill ph-treasure-chest", "href": "https://2colorless.nieru.net/57/41"}, {"cls": "ph-light ph-code", "href": "https://2colorless.nieru.net/57/3"}, {"cls": "ph-fill ph-house-line", "href": "https://2colorless.nieru.net/57"}], "tags": ["2PL固定　半完混合　時系列混在　捏造　惚気", "同性愛表現　検索避け省略　背後透過"], "notes": "多方面に配慮しないため閲覧は自己責任で。\n有事の際は日記名もしくは日記番号で反応しまーす。", "warnS": "背後透過などについて", "warnB": "同時視聴した映画などの感想や一緒に遊んだゲームの詳細な内容は折りたたみにて、アダルトな話題などはモザイクで配慮してまーす。ワンタップで表示されるからご注意！", "thisis": "胃袋を掴み合ってるGTGと脱サラ呪術師の日常。\n去年の秋から新居でまったりと同棲中。ナチュラルに引っ越し作業を押し付けたら「<kt>喧嘩しますか？<\/kt>」って言われた。あの時の七海は恐かったな……。", "prevS": "前回までのあらすじ", "prevB": "目標だった73ページは書き切ったからそのまま終わりにするつもりだったけど、誰かさんが寂しそうだったので共同日記としてセカンドシーズンスタート！！\nタイトルは七海クンが考えてくれました〜！拍手〜！\n<gy>旧題：『たぶん』五条悟／『きっと』七海建人<\/gy>", "people": [{"ch": "gjo", "name": "五条悟", "roma": "Gojo Satoru", "tag": "na", "text": "無茶振りをして私を困らせるのが好き。(七海限定：五条談)たまに語彙が小学生。可愛いよりかっこいいと言われたい人。しかし可愛いが勝つ。スパダリ。"}, {"ch": "na", "name": "七海建人", "roma": "Nanami Kento", "tag": "go", "text": "口下手なのに直球しか投げない。心配性。すぐ噛む。生意気。手元の本を閉じるだけで僕を呼び寄せることが出来るのはたぶん七海だけだと思う。"}]}, "st": {"title": "Storage", "icons": [{"cls": "ph-fill ph-film-reel", "href": "https://2colorless.nieru.net/57/95,53,52"}, {"cls": "ph-fill ph-game-controller", "href": "https://2colorless.nieru.net/57/70"}, {"cls": "ph-fill ph-cake", "href": "https://2colorless.nieru.net/57/42"}, {"cls": "ph-fill ph-house-line", "href": "https://2colorless.nieru.net/57"}], "items": [{"ch": "gjo", "href": "https://2colorless.nieru.net/57/16", "title": "惚気バトン(仮)", "desc": "僕が七海のために作ってあげたバトン！"}, {"ch": "gjo", "href": "https://2colorless.nieru.net/57/47", "title": "好きを紡ぐ日常バトン", "desc": "僕が七海のために作ってあげたバトン第二弾！"}, {"ch": "na", "href": "https://2colorless.nieru.net/57/49", "title": "好きを紡ぐ日常バトン", "desc": "回答者：七海建人　おまけは後日掲載予定。"}], "quote": "Bound here, so our days never fade.", "date": "2026.10.02"}, "bs": {"books": [{"color": "oklch(78% 0.10 95)", "icon": "E9BA", "font": "Light", "href": "https://1colorless.nieru.net/20", "title": "Lemon"}, {"color": "oklch(63% 0.10 25)", "icon": "E9BA", "font": "Fill", "href": "https://2colorless.nieru.net/14", "title": "終のしとね"}, {"color": "oklch(64% 0.09 245)", "icon": "E6DE", "font": "Light", "href": "https://1colorless.nieru.net/19", "title": "まにまに"}, {"color": "oklch(60% 0.09 285)", "icon": "EC48", "font": "Fill", "href": "https://2colorless.nieru.net/113", "title": "憎"}, {"color": "oklch(58% 0.12 18)", "icon": "E8F4", "font": "Fill", "href": "https://2colorless.nieru.net/36", "title": "三途の川より"}, {"color": "oklch(68% 0.11 55)", "icon": "E8F4", "font": "Fill", "href": "https://2colorless.nieru.net/87", "title": "地獄巡り"}, {"color": "oklch(66% 0.08 155)", "icon": "E6A2", "font": "Fill", "href": "https://2colorless.nieru.net/156", "title": "星を綴じる夜"}, {"color": "oklch(64% 0.08 305)", "icon": "E31C", "font": "Light", "href": "https://1colorless.nieru.net/129", "title": "reversible"}, {"color": "oklch(66% 0.035 240)", "icon": "E652", "font": "Fill", "href": "https://2colorless.nieru.net/15", "title": "異星交友"}, {"color": "oklch(66% 0.050 75)", "icon": "E648", "font": "Light", "href": "https://1colorless.nieru.net/40", "title": "恩讐の彼方に"}, {"color": "oklch(72% 0.08 350)", "icon": "E74A", "font": "Light", "href": "https://1colorless.nieru.net/43", "title": "抱き枕の行方"}], "stored": [{"color": "", "icon": "E28A", "font": "Light", "href": "https://1colorless.nieru.net/26", "title": "SSRS"}, {"color": "", "icon": "E8C4", "font": "Light", "href": "https://1colorless.nieru.net/25", "title": "きみは守るが世界は壊す"}, {"color": "", "icon": "EDC8", "font": "Light", "href": "https://1colorless.nieru.net/55", "title": "僕にとっては君が、俺にとってはお前が…─"}, {"color": "", "icon": "E9C0", "font": "Fill", "href": "https://2colorless.nieru.net/44", "title": "烏有に帰す。"}, {"color": "", "icon": "E2B8", "font": "Light", "href": "https://1colorless.nieru.net/306", "title": "すこしずつ、ふたり"}]}};
+    const DEFAULTS = {"at": {"title": "Attention", "icons": [{"cls": "ph-fill ph-books", "href": "https://black.colorless.fyi/57/7"}, {"cls": "ph-fill ph-treasure-chest", "href": "https://black.colorless.fyi/57/41"}, {"cls": "ph-light ph-code", "href": "https://black.colorless.fyi/57/3"}, {"cls": "ph-fill ph-house-line", "href": "https://black.colorless.fyi/57"}], "tags": ["2PL固定　半完混合　時系列混在　捏造　惚気", "同性愛表現　検索避け省略　背後透過"], "notes": "多方面に配慮しないため閲覧は自己責任で。\n有事の際は日記名もしくは日記番号で反応しまーす。", "warnS": "背後透過などについて", "warnB": "同時視聴した映画などの感想や一緒に遊んだゲームの詳細な内容は折りたたみにて、アダルトな話題などはモザイクで配慮してまーす。ワンタップで表示されるからご注意！", "thisis": "胃袋を掴み合ってるGTGと脱サラ呪術師の日常。\n去年の秋から新居でまったりと同棲中。ナチュラルに引っ越し作業を押し付けたら「<kt>喧嘩しますか？<\/kt>」って言われた。あの時の七海は恐かったな……。", "prevS": "前回までのあらすじ", "prevB": "目標だった73ページは書き切ったからそのまま終わりにするつもりだったけど、誰かさんが寂しそうだったので共同日記としてセカンドシーズンスタート！！\nタイトルは七海クンが考えてくれました〜！拍手〜！\n<gy>旧題：『たぶん』五条悟／『きっと』七海建人<\/gy>", "people": [{"ch": "gjo", "name": "五条悟", "roma": "Gojo Satoru", "tag": "na", "text": "無茶振りをして私を困らせるのが好き。(七海限定：五条談)たまに語彙が小学生。可愛いよりかっこいいと言われたい人。しかし可愛いが勝つ。スパダリ。"}, {"ch": "na", "name": "七海建人", "roma": "Nanami Kento", "tag": "go", "text": "口下手なのに直球しか投げない。心配性。すぐ噛む。生意気。手元の本を閉じるだけで僕を呼び寄せることが出来るのはたぶん七海だけだと思う。"}]}, "st": {"title": "Storage", "icons": [{"cls": "ph-fill ph-film-reel", "href": "https://black.colorless.fyi/57/95,53,52"}, {"cls": "ph-fill ph-game-controller", "href": "https://black.colorless.fyi/57/70"}, {"cls": "ph-fill ph-cake", "href": "https://black.colorless.fyi/57/42"}, {"cls": "ph-fill ph-house-line", "href": "https://black.colorless.fyi/57"}], "items": [{"ch": "gjo", "href": "https://black.colorless.fyi/57/16", "title": "惚気バトン(仮)", "desc": "僕が七海のために作ってあげたバトン！"}, {"ch": "gjo", "href": "https://black.colorless.fyi/57/47", "title": "好きを紡ぐ日常バトン", "desc": "僕が七海のために作ってあげたバトン第二弾！"}, {"ch": "na", "href": "https://black.colorless.fyi/57/49", "title": "好きを紡ぐ日常バトン", "desc": "回答者：七海建人　おまけは後日掲載予定。"}], "quote": "Bound here, so our days never fade.", "date": "2026.10.02"}, "bs": {"books": [{"color": "oklch(78% 0.10 95)", "icon": "E9BA", "font": "Light", "href": "https://1colorless.nieru.net/20", "title": "Lemon"}, {"color": "oklch(63% 0.10 25)", "icon": "E9BA", "font": "Fill", "href": "https://black.colorless.fyi/14", "title": "終のしとね"}, {"color": "oklch(64% 0.09 245)", "icon": "E6DE", "font": "Light", "href": "https://1colorless.nieru.net/19", "title": "まにまに"}, {"color": "oklch(60% 0.09 285)", "icon": "EC48", "font": "Fill", "href": "https://black.colorless.fyi/113", "title": "憎"}, {"color": "oklch(58% 0.12 18)", "icon": "E8F4", "font": "Fill", "href": "https://black.colorless.fyi/36", "title": "三途の川より"}, {"color": "oklch(68% 0.11 55)", "icon": "E8F4", "font": "Fill", "href": "https://black.colorless.fyi/87", "title": "地獄巡り"}, {"color": "oklch(66% 0.08 155)", "icon": "E6A2", "font": "Fill", "href": "https://black.colorless.fyi/156", "title": "星を綴じる夜"}, {"color": "oklch(64% 0.08 305)", "icon": "E31C", "font": "Light", "href": "https://1colorless.nieru.net/129", "title": "reversible"}, {"color": "oklch(66% 0.035 240)", "icon": "E652", "font": "Fill", "href": "https://black.colorless.fyi/15", "title": "異星交友"}, {"color": "oklch(66% 0.050 75)", "icon": "E648", "font": "Light", "href": "https://1colorless.nieru.net/40", "title": "恩讐の彼方に"}, {"color": "oklch(72% 0.08 350)", "icon": "E74A", "font": "Light", "href": "https://1colorless.nieru.net/43", "title": "抱き枕の行方"}], "stored": [{"color": "", "icon": "E28A", "font": "Light", "href": "https://1colorless.nieru.net/26", "title": "SSRS"}, {"color": "", "icon": "E8C4", "font": "Light", "href": "https://1colorless.nieru.net/25", "title": "きみは守るが世界は壊す"}, {"color": "", "icon": "EDC8", "font": "Light", "href": "https://1colorless.nieru.net/55", "title": "僕にとっては君が、俺にとってはお前が…─"}, {"color": "", "icon": "E9C0", "font": "Fill", "href": "https://black.colorless.fyi/44", "title": "烏有に帰す。"}, {"color": "", "icon": "E2B8", "font": "Light", "href": "https://1colorless.nieru.net/306", "title": "すこしずつ、ふたり"}]}};
     const LIMIT = 5000;
     const LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500&family=Klee+One:wght@400;600&family=Open+Sans:wght@400;500&family=Scope+One&display=swap" rel="stylesheet"><link href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet"><link href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet"><link href="https://75glare.github.io/365.css" rel="stylesheet">';
     const COLORS = [
@@ -448,7 +448,7 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
     }
     function preview(body) {
         const links = LINKS.replace('365.css"', `365.css?v=${Date.now()}"`);
-        $('preview').srcdoc = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="https://2colorless.nieru.net/style.css"></head><body>${body}${links}<style>html,html::before,html::after,body::before,body::after{animation:none !important;}</style></body></html>`;
+        $('preview').srcdoc = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="https://black.colorless.fyi/style.css"></head><body>${body}${links}<style>html,html::before,html::after,body::before,body::after{animation:none !important;}</style></body></html>`;
     }
 
     // ---- 操作
@@ -596,8 +596,8 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
         if (!b) return;
         if (b.dataset.add) {
             const list = get(b.dataset.add);
-            if (b.dataset.add.endsWith('icons')) list.push({ cls: 'ph-fill ph-star', href: 'https://2colorless.nieru.net/57' });
-            if (b.dataset.add === 'st.items') list.push({ ch: 'gjo', href: 'https://2colorless.nieru.net/57/', title: '', desc: '' });
+            if (b.dataset.add.endsWith('icons')) list.push({ cls: 'ph-fill ph-star', href: 'https://black.colorless.fyi/57' });
+            if (b.dataset.add === 'st.items') list.push({ ch: 'gjo', href: 'https://black.colorless.fyi/57/', title: '', desc: '' });
             if (b.dataset.add === 'bs.books') list.push({ color: '', icon: 'E9BA', font: 'Light', href: 'https://', title: '' });
         } else if (b.dataset.mv) {
             const [path, i, d] = b.dataset.mv.split(':');
@@ -654,7 +654,7 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
                 if (!st || !st.at || !st.st || !st.bs) throw new Error('形が違う');
                 state = st;
                 stItemsAt = JSON.stringify(state.st.items);
-                $('board').value = state.board || 'old';
+                $('board').value = state.board || 'new';
                 $('links').checked = state.links !== undefined ? state.links : state.board !== 'new';
                 renderForms();
                 render();
@@ -715,7 +715,15 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
     addEventListener('resize', fitPreview);
     fitPreview();
 
-    $('board').value = state.board || 'old';
+    if (!state.blackBoard) {
+        state = JSON.parse(JSON.stringify(state).split('https://2colorless.nieru.net').join('https://black.colorless.fyi'));
+        state.board = 'new';
+        state.links = false;
+        state.blackBoard = true;
+        stItemsAt = JSON.stringify(state.st.items);
+        save();
+    }
+    $('board').value = state.board || 'new';
     $('links').checked = state.links !== undefined ? state.links : state.board !== 'new';
     renderForms();
     render();
