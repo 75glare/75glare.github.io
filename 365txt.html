@@ -1605,6 +1605,19 @@ iframe {
                     <p>アーティスト名（なくてもOK）</p>
                     <input id="bgm-artist" type="text" autocomplete="off" placeholder="例：キタニタツヤ">
                     <div class="tools"><button type="button" id="bgm-insert">このBGMを本文に入れる</button></div>
+                    <p class="np-gen-head">プレイヤー（1 曲を飾る）</p>
+                    <p class="hint">「二人のノート」でタイトルを空けて、本文にこれだけを入れると、カードだけが出るよ。曲名とアーティスト名は上の欄を使うよ。</p>
+                    <p>誰が選んだ曲？</p>
+                    <div class="tools" id="np-who"><button type="button" data-who="g" aria-pressed="true">五条</button><button type="button" data-who="n" aria-pressed="false">七海</button></div>
+                    <p>真ん中の印</p>
+                    <div class="tools" id="np-ic"></div>
+                    <p>曲の長さ（例：5:10）</p>
+                    <input id="np-len" type="text" autocomplete="off" inputmode="numeric" placeholder="例：5:10">
+                    <p>歌詞の一節（なくてもOK）</p>
+                    <textarea id="np-ly" class="short"></textarea>
+                    <p>一言（なくてもOK）</p>
+                    <textarea id="np-nt" class="short"></textarea>
+                    <div class="tools"><button type="button" id="np-insert">このプレイヤーを本文に入れる</button></div>
                 </div>
             </div>
             <div class="tool-panel" data-panel="dlog">
@@ -3298,6 +3311,35 @@ iframe {
         const song = [safe(songName.trim()), safe(artistName.trim())].filter(Boolean).join(' - ');
         return song ? `<div class="bgm"><div class="bgm-ti"><span>${song}</span></div><div class="bgm-br"></div><div class="bgm-ct"></div></div>` : '';
     }
+    // プレイヤー：曲名・アーティスト名は BGM の欄。印は日記の印の字（symbol-sub）
+    const NP_ICONS = [['#', '三日月'], ['O', '満ち欠け'], ['H', '月と本'], ['Y', '太陽と月'], ['6', '六芒星'], ['A', 'ひし形の星'], ['Q', '光る十字'], ['I', '宝石']];
+    const np = { who: 'g', ic: '#' };
+    $('np-ic').innerHTML = NP_ICONS.map(([v, l]) => `<button type="button" data-ic="${attr(v)}" aria-pressed="${v === np.ic}">${l}</button>`).join('');
+    $('np-ic').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        np.ic = b.dataset.ic;
+        $('np-ic').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+    });
+    $('np-who').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        np.who = b.dataset.who;
+        $('np-who').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+    });
+    function npHTML() {
+        const title = safe($('bgm-song').value.trim()) || '曲名';
+        const artist = safe($('bgm-artist').value.trim());
+        const m = $('np-len').value.trim().replace(/[：]/g, ':').replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xFEE0)).match(/^(\d{1,2}):(\d{1,2})$/);
+        const sec = m ? Number(m[1]) * 60 + Number(m[2]) : 240;
+        const len = `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
+        const lines = (id) => flat($(id).value).trim().split('\n').map((l) => safe(l.trim())).join('\n');
+        const ly = lines('np-ly');
+        const nt = lines('np-nt');
+        return `<div class="np" data-ch="${np.who === 'g' ? 'gjo' : 'na'}" data-ic="${attr(np.ic)}" style="--len: ${sec}"><div class="np-hd"><i></i><i></i><i></i><i></i></div><div class="np-dk"><i class="np-tk"></i><i class="np-vn"></i></div><div class="np-ti">${title}${artist ? `<small>${artist}</small>` : ''}</div><div class="np-tm" data-len="${len}"></div><div class="np-ct"></div>${ly ? `<p class="np-ly">${ly}</p>` : ''}<p class="np-nt">${nt}</p></div>`;
+    }
+    $('np-insert').addEventListener('click', () => insertAtCursor(npHTML(), true));
+
     $('bgm-insert').addEventListener('click', () => {
         const html = bgmHTML($('bgm-song').value, $('bgm-artist').value);
         if (!html) return;
