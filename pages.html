@@ -8,6 +8,10 @@
 <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
 <style>
+@font-face { font-family: 'SiteSymbol'; src: url('https://75glare.github.io/symbol-sub.woff2') format('woff2'); font-display: block; }
+.pl-ic { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+.pl-ic button.btn { padding: 4px 6px; border-radius: 999px; font: 1.9em/1 'SiteSymbol'; }
+.pl-ic button.btn[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in oklch, var(--accent) 25%, transparent); }
 :root {
     color-scheme: dark;
     --bg: oklch(18% 0.045 258);
@@ -284,7 +288,7 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
 <script>
 (() => {
     const DEFAULTS = {"at": {"title": "Attention", "icons": [{"cls": "ph-fill ph-books", "href": "https://black.colorless.fyi/57/7"}, {"cls": "ph-fill ph-treasure-chest", "href": "https://black.colorless.fyi/57/41"}, {"cls": "ph-light ph-code", "href": "https://black.colorless.fyi/57/3"}, {"cls": "ph-fill ph-house-line", "href": "https://black.colorless.fyi/57"}], "tags": ["2PL固定　半完混合　時系列混在　捏造　惚気", "同性愛表現　検索避け省略　背後透過"], "notes": "多方面に配慮しないため閲覧は自己責任で。\n有事の際は日記名もしくは日記番号で反応しまーす。", "warnS": "背後透過などについて", "warnB": "同時視聴した映画などの感想や一緒に遊んだゲームの詳細な内容は折りたたみにて、アダルトな話題などはモザイクで配慮してまーす。ワンタップで表示されるからご注意！", "thisis": "胃袋を掴み合ってるGTGと脱サラ呪術師の日常。\n去年の秋から新居でまったりと同棲中。ナチュラルに引っ越し作業を押し付けたら「<kt>喧嘩しますか？<\/kt>」って言われた。あの時の七海は恐かったな……。", "prevS": "前回までのあらすじ", "prevB": "目標だった73ページは書き切ったからそのまま終わりにするつもりだったけど、誰かさんが寂しそうだったので共同日記としてセカンドシーズンスタート！！\nタイトルは七海クンが考えてくれました〜！拍手〜！\n<gy>旧題：『たぶん』五条悟／『きっと』七海建人<\/gy>", "people": [{"ch": "gjo", "name": "五条悟", "roma": "Gojo Satoru", "tag": "na", "text": "無茶振りをして私を困らせるのが好き。(七海限定：五条談)たまに語彙が小学生。可愛いよりかっこいいと言われたい人。しかし可愛いが勝つ。スパダリ。"}, {"ch": "na", "name": "七海建人", "roma": "Nanami Kento", "tag": "go", "text": "口下手なのに直球しか投げない。心配性。すぐ噛む。生意気。手元の本を閉じるだけで僕を呼び寄せることが出来るのはたぶん七海だけだと思う。"}]}, "st": {"title": "Storage", "icons": [{"cls": "ph-fill ph-film-reel", "href": "https://black.colorless.fyi/57/95,53,52"}, {"cls": "ph-fill ph-game-controller", "href": "https://black.colorless.fyi/57/70"}, {"cls": "ph-fill ph-cake", "href": "https://black.colorless.fyi/57/42"}, {"cls": "ph-fill ph-house-line", "href": "https://black.colorless.fyi/57"}], "items": [{"ch": "gjo", "href": "https://black.colorless.fyi/57/16", "title": "惚気バトン(仮)", "desc": "僕が七海のために作ってあげたバトン！"}, {"ch": "gjo", "href": "https://black.colorless.fyi/57/47", "title": "好きを紡ぐ日常バトン", "desc": "僕が七海のために作ってあげたバトン第二弾！"}, {"ch": "na", "href": "https://black.colorless.fyi/57/49", "title": "好きを紡ぐ日常バトン", "desc": "回答者：七海建人　おまけは後日掲載予定。"}], "quote": "Bound here, so our days never fade.", "date": "2026.10.02"}, "bs": {"books": [{"color": "oklch(78% 0.10 95)", "icon": "E9BA", "font": "Light", "href": "https://1colorless.nieru.net/20", "title": "Lemon"}, {"color": "oklch(63% 0.10 25)", "icon": "E9BA", "font": "Fill", "href": "https://black.colorless.fyi/14", "title": "終のしとね"}, {"color": "oklch(64% 0.09 245)", "icon": "E6DE", "font": "Light", "href": "https://1colorless.nieru.net/19", "title": "まにまに"}, {"color": "oklch(60% 0.09 285)", "icon": "EC48", "font": "Fill", "href": "https://black.colorless.fyi/113", "title": "憎"}, {"color": "oklch(58% 0.12 18)", "icon": "E8F4", "font": "Fill", "href": "https://black.colorless.fyi/36", "title": "三途の川より"}, {"color": "oklch(68% 0.11 55)", "icon": "E8F4", "font": "Fill", "href": "https://black.colorless.fyi/87", "title": "地獄巡り"}, {"color": "oklch(66% 0.08 155)", "icon": "E6A2", "font": "Fill", "href": "https://black.colorless.fyi/156", "title": "星を綴じる夜"}, {"color": "oklch(64% 0.08 305)", "icon": "E31C", "font": "Light", "href": "https://1colorless.nieru.net/129", "title": "reversible"}, {"color": "oklch(66% 0.035 240)", "icon": "E652", "font": "Fill", "href": "https://black.colorless.fyi/15", "title": "異星交友"}, {"color": "oklch(66% 0.050 75)", "icon": "E648", "font": "Light", "href": "https://1colorless.nieru.net/40", "title": "恩讐の彼方に"}, {"color": "oklch(72% 0.08 350)", "icon": "E74A", "font": "Light", "href": "https://1colorless.nieru.net/43", "title": "抱き枕の行方"}], "stored": [{"color": "", "icon": "E28A", "font": "Light", "href": "https://1colorless.nieru.net/26", "title": "SSRS"}, {"color": "", "icon": "E8C4", "font": "Light", "href": "https://1colorless.nieru.net/25", "title": "きみは守るが世界は壊す"}, {"color": "", "icon": "EDC8", "font": "Light", "href": "https://1colorless.nieru.net/55", "title": "僕にとっては君が、俺にとってはお前が…─"}, {"color": "", "icon": "E9C0", "font": "Fill", "href": "https://black.colorless.fyi/44", "title": "烏有に帰す。"}, {"color": "", "icon": "E2B8", "font": "Light", "href": "https://1colorless.nieru.net/306", "title": "すこしずつ、ふたり"}]}, "pl": {"title": "One Earbud Each", "sub": "ふたりで聴いた曲", "qEn": "Some songs only make sense with you in the other ear.", "qJa": "", "qBy": "", "songs": [{"ch": "gjo", "ic": "Y", "href": "https://black.colorless.fyi/57/53", "title": "napori", "artist": "Vaundy", "len": "3:24"}, {"ch": "na", "ic": "H", "href": "https://black.colorless.fyi/57/64", "title": "あなた", "artist": "宇多田ヒカル", "len": "4:37"}]}};
-    const PL_ICONS = [['#', '三日月'], ['O', '満ち欠け'], ['H', '月と本'], ['Y', '太陽と月'], ['6', '六芒星'], ['A', 'ひし形の星'], ['Q', '光る十字'], ['I', '宝石']];
+    const PL_ICONS = [['#', '三日月'], ['O', '満ち欠け'], ['H', '月と本'], ['Y', '太陽と月'], ['6', '六芒星'], ['A', 'ひし形の星'], ['Q', '光る十字'], ['I', '宝石'], ['C', '光る目'], ['D', '三角の飾り'], ['F', '星をつかむ手'], ['G', '波の太陽'], ['K', '縞の太陽'], ['P', '星の円'], ['U', '結んだ手'], ['X', '月を持つ手'], ['Z', '水晶と手'], ['4', '月の天秤'], ['7', '星をこぼす手'], ['8', '祈る手と目'], ['9', '三角と月'], ['$', '光る三日月'], ['!', '月の輪'], ['?', '水晶玉'], ['>', '葉の枝']];
     const LIMIT = 5000;
     const LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500&family=Klee+One:wght@400;600&family=Open+Sans:wght@400;500&family=Scope+One&display=swap" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet"><link href="https://75glare.github.io/365.css" rel="stylesheet">';
     const COLORS = [
@@ -448,14 +452,15 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
                     <div><label>アーティスト名</label><input type="text" data-k="pl.songs.${i}.artist" value="${attr(x.artist)}"></div>
                     <div><label>長さ</label><input type="text" inputmode="numeric" placeholder="5:10" data-k="pl.songs.${i}.len" value="${attr(x.len)}"></div>
                 </div>
-                <div class="row" style="grid-template-columns: 9em 9em 1fr">
+                <div class="row" style="grid-template-columns: 9em 1fr">
                     <div><label>誰が選んだ曲</label><select data-k="pl.songs.${i}.ch" data-rerender>
                         <option value="gjo" ${x.ch === 'gjo' ? 'selected' : ''}>五条（青）</option>
                         <option value="na" ${x.ch === 'na' ? 'selected' : ''}>七海（黄）</option>
                     </select></div>
-                    <div><label>丸の印</label><select data-k="pl.songs.${i}.ic">${PL_ICONS.map(([v, n]) => `<option value="${attr(v)}" ${x.ic === v ? 'selected' : ''}>${n}</option>`).join('')}</select></div>
                     <div><label>リンク先</label><input type="text" data-k="pl.songs.${i}.href" value="${attr(x.href)}"></div>
                 </div>
+                <label>丸の印</label>
+                <div class="pl-ic">${PL_ICONS.map(([v, n]) => `<button type="button" class="btn small" data-plic="${i}" data-v="${attr(v)}" title="${n}" aria-label="${n}" aria-pressed="${x.ic === v}">${attr(v)}</button>`).join('')}</div>
             </div>`).join('');
     }
     function colorOptions(cur) {
@@ -714,6 +719,8 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
             const p = state.at.people[Number(b.dataset.toOld)];
             p.old = p.text;
             p.text = '';
+        } else if (b.dataset.plic !== undefined) {
+            state.pl.songs[Number(b.dataset.plic)].ic = b.dataset.v;
         } else if (b.id === 'st-today' || b.id === 'st-nudge-yes') {
             state.st.date = today();
         } else return;

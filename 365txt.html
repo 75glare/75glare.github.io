@@ -106,11 +106,17 @@ h1 {
     margin-top: 8px;
 }
 
+#np-ic button,
 #or-pick button {
     padding: 6px 10px;
     font-family: 'SiteSymbol';
     font-size: 1.7em;
     line-height: 1;
+}
+
+#np-ic button {
+    padding: 5px 7px;
+    font-size: 2.3em;
 }
 
 label {
@@ -3340,7 +3346,7 @@ iframe {
     // プレイヤー：1 曲を飾るカード。印は日記の印の字（symbol-sub）
     const NP_ICONS = [['#', '三日月'], ['O', '満ち欠け'], ['H', '月と本'], ['Y', '太陽と月'], ['6', '六芒星'], ['A', 'ひし形の星'], ['Q', '光る十字'], ['I', '宝石'], ['C', '光る目'], ['D', '三角の飾り'], ['F', '星をつかむ手'], ['G', '波の太陽'], ['K', '縞の太陽'], ['P', '星の円'], ['U', '結んだ手'], ['X', '月を持つ手'], ['Z', '水晶と手'], ['4', '月の天秤'], ['7', '星をこぼす手'], ['8', '祈る手と目'], ['9', '三角と月'], ['$', '光る三日月'], ['!', '月の輪'], ['?', '水晶玉'], ['>', '葉の枝']];
     const np = state.np;
-    $('np-ic').innerHTML = NP_ICONS.map(([v, l]) => `<button type="button" data-ic="${attr(v)}">${l}</button>`).join('');
+    $('np-ic').innerHTML = NP_ICONS.map(([v, l]) => `<button type="button" data-ic="${attr(v)}" title="${l}" aria-label="${l}">${safe(v)}</button>`).join('');
     function npSync() {
         $('np-who').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x.dataset.who === np.who));
         $('np-ic').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x.dataset.ic === np.ic));
