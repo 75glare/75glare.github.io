@@ -1875,13 +1875,13 @@ h3.pin::before {
 h3.pin small {
     font: 300 0.8em/1.4 var(--en-font);
     letter-spacing: 0.08em;
-    color: color-mix(in srgb, var(--color) 95%, transparent);
+    color: color-mix(in srgb, var(--black) 72%, transparent);
 }
 
 h3.pin + add {
     margin: 0 0 4.1em;
     padding: 0 1.125em 1.625em;
-    font: 300 0.8em/1.4 var(--en-font);
+    font: 400 0.82em/1.4 var(--en-font);
     letter-spacing: 0.08em;
     text-align: right;
     border-bottom: 1px solid color-mix(in srgb, var(--black) 10%, transparent);
@@ -1893,6 +1893,14 @@ h3.pin + add :is(na, go) {
     line-height: inherit !important;
     letter-spacing: inherit !important;
     -webkit-text-stroke: 0;
+}
+
+h3.pin + add na {
+    color: color-mix(in srgb, var(--nanami) 80%, white);
+}
+
+h3.pin + add go {
+    color: color-mix(in srgb, var(--gjo) 80%, white);
 }
 
 h3.pin + add :is(na, go)::before {
@@ -4333,11 +4341,11 @@ details.cv-lt[open] > .cv-tx {
 add:has(+ :is(div.ti-tr.cv, details.cv-lt)) {
     margin: 0.6em 0 0;
     padding: 0 0.2em 0.9em;
-    font: 300 0.68em/1.6 var(--en-font);
+    font: 300 0.72em/1.6 var(--en-font);
     letter-spacing: 0.3em;
     text-transform: uppercase;
     text-align: left;
-    color: color-mix(in srgb, var(--color) 78%, transparent);
+    color: color-mix(in srgb, var(--black) 72%, transparent);
 }
 
 add:has(+ :is(div.ti-tr.cv, details.cv-lt)) small {
@@ -4346,7 +4354,7 @@ add:has(+ :is(div.ti-tr.cv, details.cv-lt)) small {
     font-size: 1em;
     letter-spacing: 0.12em;
     text-transform: none;
-    color: color-mix(in srgb, var(--color) 58%, transparent);
+    color: color-mix(in srgb, var(--black) 55%, transparent);
 }
 
 add + div.ti-tr.cv,
@@ -4366,10 +4374,10 @@ details.cv-lt:has(+ add) > :is(summary, .cv-tx) {
     gap: 1.2em;
     margin: 0 0 3.2em;
     padding: 0.7em 0.2em 0;
-    font: 300 0.68em/1.6 var(--en-font);
+    font: 300 0.72em/1.6 var(--en-font);
     letter-spacing: 0.16em;
     text-align: right;
-    color: color-mix(in srgb, var(--color) 62%, transparent);
+    color: color-mix(in srgb, var(--black) 60%, transparent);
 }
 
 :is(div.ti-tr.cv, div.cv-tx, details.cv-lt) + add:last-child {
