@@ -1360,6 +1360,12 @@ iframe {
             <input id="title" type="text" autocomplete="off">
         </div>
 
+        <div data-for="review" id="rv-extra">
+            <label for="rv-one">一言<span class="tw-opt">（なくてもOK。感想を開いたとき、名前の下に出る）</span></label>
+            <input id="rv-one" type="text" autocomplete="off">
+            <label class="check" id="rv-drop-box" hidden><input type="checkbox" id="rv-drop" checked><span id="rv-drop-label"></span></label>
+        </div>
+
         <div class="row" data-for="n_box g_box main box">
             <div>
                 <label for="date">日付</label>
@@ -1686,12 +1692,12 @@ iframe {
 
 <script>
 (() => {
-    const LIMIT = 5000;
+    const LIMIT = 20000;
     const LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500&family=Klee+One:wght@400;600&family=Open+Sans:wght@400;500&family=Scope+One&display=swap" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet"><link href="https://75glare.github.io/365.css" rel="stylesheet">';
     const BLOCK = /^(?:<add>.*?<\/add>)?<(p|div|ul|ol|details|blockquote|h[1-6])[\s>]|^<span class="cl-(lb|dt)">/;
 
     const $ = (id) => document.getElementById(id);
-    const fields = ['dl-title', 'dl-code', 'vs-title', 'title', 'date', 'tag', 'time', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-date', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule'];
+    const fields = ['dl-title', 'dl-code', 'vs-title', 'title', 'date', 'tag', 'time', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-date', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'rv-one'];
     const checks = ['links', 'klee', 'scroll', 'sw-done', 'tl-wrap', 'aj-rain', 'aj-petal'];
     const PER_MODE = ['title', 'date', 'tag', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-date', 'sw-url'];
     const state = { dlog: { icon: 'E7F6', items: [{ who: 'n', text: '' }, { who: 'g', text: '' }] }, vs: [{ k: '', s: '', n: '', g: '' }], drafts: {}, mode: 'n_box', who: 'n', box: 'hs', wrap: '', orPos: {}, or: 'H', cwView: 'g', tweets: [], chat: [{ who: 'g', text: '' }, { who: 'n', text: '' }] };
@@ -2455,15 +2461,45 @@ iframe {
         const lists = rvLists();
         if (!Number.isInteger(state.rvCat) || state.rvCat >= lists.length) state.rvCat = 0;
         $('rv-cats').hidden = !lists.length;
-        $('rv-cats').innerHTML = lists.map((cl, i) => {
-            const sm = cl.closest('details') && cl.closest('details').querySelector(':scope > summary');
-            const name = sm ? sm.textContent.trim() : `一覧 ${i + 1}`;
-            return `<button type="button" data-cat="${i}" aria-pressed="${i === state.rvCat}">${attr(name)}</button>`;
-        }).join('');
+        $('rv-cats').innerHTML = lists.map((cl, i) => `<button type="button" data-cat="${i}" aria-pressed="${i === state.rvCat}">${attr(rvCatName(cl, i))}</button>`).join('');
         $('rv-hint').textContent = !src ? '編集画面の本文をまるごと貼ると、新しい感想をその中に入れたページが出てくるよ。'
-            : lists.length ? '入れる場所を選んでね。感想は最後の感想の下に、タイトルだけのものはタイトルの一覧の一番下に入るよ。'
+            : lists.length ? '入れる場所を選んでね。感想は最後の感想の下に、タイトルだけのもの（観たいもの）はタイトルの一覧の一番下に入るよ。'
             : '感想の一覧（class="cl"）が見つからなかったよ。編集画面の本文をそのまま全部貼ってね。';
+        rvDropShow();
     }
+    // 枠の名前：「Overseas（洋画・海外ドラマ）」。枠の中のたたみ（Queue の中など）は「Queue › 名前」
+    function rvCatName(cl, i) {
+        const label = (det) => {
+            const sm = det.querySelector(':scope > summary');
+            if (!sm) return '';
+            const small = sm.querySelector('small');
+            const main = [...sm.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent).join('').trim();
+            return small && main ? `${main}（${small.textContent.trim()}）` : sm.textContent.trim();
+        };
+        const det = cl.closest('details');
+        if (!det) return `一覧 ${i + 1}`;
+        const outer = det.parentElement && det.parentElement.closest('details');
+        return outer ? `${label(outer).replace(/（.*）$/, '')} › ${label(det)}` : label(det);
+    }
+    // 感想を書く作品が、観たいもの（タイトルだけの一覧）にあれば、そこから消せるようにする
+    const rvTitleKey = (t) => t.replace(/\s+/g, '').toLowerCase();
+    function rvQueued(root, title) {
+        if (!root || !title) return [];
+        const key = rvTitleKey(title);
+        return [...root.querySelectorAll('li.cl-li')].filter((li) => rvTitleKey(li.textContent) === key);
+    }
+    function rvDropShow() {
+        const title = $('title').value.trim();
+        const hit = state.mode === 'review' && $('body').value.trim() && rvQueued(rvRoot, title).length;
+        $('rv-drop-box').hidden = !hit;
+        if (hit) $('rv-drop-label').textContent = `「${title}」がタイトルだけの一覧（観たいものなど）にあるから、そこから消す`;
+    }
+    // 感想の本文：掲示板が改行を <br /> にするので、<br> は使わず改行のまま
+    const rvBody = (body) => paragraphs(body, false).replace(/<br>/g, '\n');
+    const rvSummary = (title) => {
+        const one = safe($('rv-one').value.trim());
+        return `<summary class="cl-sm">${title || 'タイトル'}${one ? `<small>${one}</small>` : ''}</summary>`;
+    };
     // 貼っていなければ null。貼っていれば、新しい感想を入れたページ全体（forPreview のときは、入れた場所を開いておく）
     function rvMerged(title, body, cls, forPreview) {
         const lists = rvLists();
@@ -2474,8 +2510,13 @@ iframe {
             const doc = copy.ownerDocument;
             const tmp = doc.createElement('div');
             if (body.trim()) {
-                tmp.innerHTML = `<details class="cl-it ${cls}"><summary class="cl-sm">${title || 'タイトル'}</summary><div class="cl-tx">${paragraphs(body)}</div></details>`;
+                tmp.innerHTML = `<details class="cl-it ${cls}">${rvSummary(title)}<div class="cl-tx">${rvBody(body)}</div></details>`;
                 const item = tmp.firstElementChild;
+                if ($('rv-drop').checked) rvQueued(copy, title).forEach((li) => {
+                    const ul = li.parentElement;
+                    li.remove();
+                    if (ul && ul.matches('ul.cl-ls') && !ul.querySelector('li')) ul.remove();
+                });
                 const its = cl.querySelectorAll(':scope > details.cl-it');
                 const ls = cl.querySelector(':scope > ul.cl-ls');
                 if (its.length) its[its.length - 1].after(item);
@@ -2501,6 +2542,7 @@ iframe {
     }
     const hasRvMerged = () => state.mode === 'review' && rvLists().length > 0;
     $('rv-src').addEventListener('input', () => { rvLoad(); show(); render(); });
+    $('rv-drop').addEventListener('change', () => render());
     $('rv-cats').addEventListener('click', (ev) => {
         const b = ev.target.closest('button');
         if (!b) return;
@@ -3315,7 +3357,7 @@ iframe {
                 if (merged !== null) return merged;
                 // 感想を書かないときは、タイトルだけのリストにする
                 if (!v.body.trim()) return `<ul class="cl-ls"><li class="cl-li">${title || 'タイトル'}</li></ul>`;
-                return `<details class="cl-it ${cls}"><summary class="cl-sm">${title || 'タイトル'}</summary><div class="cl-tx">${paragraphs(v.body)}</div></details>`;
+                return `<details class="cl-it ${cls}">${rvSummary(title)}<div class="cl-tx">${rvBody(v.body)}</div></details>`;
             }
             case 'gm':
                 return gmMerged(title, v.body, state.who === 'g' ? 'cl-gjo' : 'cl-nnm', false);
@@ -3387,7 +3429,8 @@ iframe {
         let body = html.replace(/\n/g, '<br />\n');
         if (state.mode === 'review') {
             const cls = state.who === 'g' ? 'cl-gjo' : 'cl-nnm';
-            body = hasRvMerged() ? rvMerged(safe($('title').value.trim()), $('body').value, cls, true) : `<main><div class="cl">${html.replace('<details class="cl-it', '<details open class="cl-it')}</div></main>`;
+            body = (hasRvMerged() ? rvMerged(safe($('title').value.trim()), $('body').value, cls, true) : `<main class="lib"><details open class="mv ic-film"><summary>Overseas<small>洋画・海外ドラマ</small></summary><div class="cl">${html.replace('<details class="cl-it', '<details open class="cl-it')}</div></details></main>`).replace(/\n/g, '<br />\n');
+            rvDropShow();
         }
         // 貼ったタイムラインが箱（.hs など）に入っていれば、日記と同じくそのまま。タイムラインだけなら本文の枠に入れる
         if (state.mode === 'tl' && hasMerged()) body = [...exRoot.children].every((c) => c.matches('.tl-sep, .tl')) ? `<main>${html}</main>` : html;
@@ -3805,7 +3848,7 @@ iframe {
         // 書きかけの描き直しが後から走って、消した内容を戻さないように止める
         clearTimeout(renderTimer);
         remember();
-        ['title', 'tag', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'dl-title', 'dl-code', 'vs-title', 'bgm-song', 'bgm-artist', 'line-free'].forEach((f) => { if ($(f)) $(f).value = ''; });
+        ['title', 'tag', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'rv-one', 'dl-title', 'dl-code', 'vs-title', 'bgm-song', 'bgm-artist', 'line-free'].forEach((f) => { if ($(f)) $(f).value = ''; });
         $('date').value = today;
         $('sw-date').value = today;
         $('time').value = stamp();
