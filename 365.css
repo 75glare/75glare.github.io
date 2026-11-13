@@ -4033,65 +4033,77 @@ main.lib details.mv[class*=" ic-"] .cl-it:not([open])>.cl-sm small {
 
 main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-sm {
     display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 1.1em;
-    align-items: center;
-    margin-bottom: 1.1em;
-    padding: 0 0 1em;
-    border-bottom: 1px dotted color-mix(in srgb, var(--color) 50%, transparent);
-    font-size: 1.1em;
+    grid-template-columns: 1fr;
+    margin-bottom: 0.45em;
+    padding: 0 0 1.3em;
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+    font-size: 1.11em;
     font-weight: 500;
+    line-height: 1.5;
 }
 
-main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-sm::after {
-    content: "\E138  Seen & To See";
-    grid-row: 1;
-    grid-column: 1 / -1;
-    margin: 0 0 1.4em;
-    padding: 0;
-    background: none;
-    font-family: var(--en-font), "Phosphor-Light";
-    font-size: 0.73em;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    white-space: pre;
-    color: color-mix(in srgb, var(--black) 78%, transparent);
+main.lib details.mv[class*=" ic-"] .cl-gjo[open]>.cl-sm {
+    border-bottom-color: oklch(from var(--gjo) calc(l + 0.2) calc(c * 0.6) h / 0.25);
+}
+
+main.lib details.mv[class*=" ic-"] .cl-nnm[open]>.cl-sm {
+    border-bottom-color: oklch(from var(--nanami) calc(l + 0.2) calc(c * 0.6) h / 0.25);
 }
 
 main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-sm::before {
-    content: "\E792";
-    grid-row: 2;
+    content: "\E138  Seen & To See";
+    grid-row: 1;
     grid-column: 1;
-    align-self: center;
+    align-self: start;
     width: auto;
-    margin: 0;
-    font-family: "Phosphor-Light";
-    font-size: 15px;
-    line-height: 1;
-    color: var(--color);
-    translate: 0 -0.05em;
+    margin: 0 0 1.4em;
+    font-family: var(--en-font), "Phosphor-Light";
+    font-size: 0.66em;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0.06em;
+    white-space: pre;
+    color: color-mix(in srgb, var(--black) 78%, transparent);
     animation: none;
 }
 
-main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-tx {
-    margin-left: 0;
-    padding: 10px 6px 10px 7px;
-    font-size: 1em;
-    letter-spacing: 0.02em;
+main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-sm::after {
+    grid-row: 4;
+    grid-column: 1;
+    justify-self: end;
+    margin: 0.4em 0 0;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    font-family: var(--en-font);
+    font-size: 0.735em;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    white-space: pre;
+    color: var(--color);
+    opacity: 0.6;
+    -webkit-text-stroke: 0;
 }
 
-@media screen and (min-width: 481px) {
-    main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-tx {
-        padding-inline: 10px 9px;
-    }
+main.lib details.mv[class*=" ic-"].ic-film .cl-gjo[open]>.cl-sm::after {
+    content: "Overseas  -  Gojo Satoru";
+}
 
-    main.lib details.mv[class*=" ic-"] .cl-nnm[open]>.cl-tx {
-        letter-spacing: 0.02em;
-    }
+main.lib details.mv[class*=" ic-"].ic-film .cl-nnm[open]>.cl-sm::after {
+    content: "Overseas  -  Nanami Kento";
+}
+
+main.lib details.mv[class*=" ic-"].ic-slate .cl-gjo[open]>.cl-sm::after {
+    content: "Home & Series  -  Gojo Satoru";
+}
+
+main.lib details.mv[class*=" ic-"].ic-slate .cl-nnm[open]>.cl-sm::after {
+    content: "Home & Series  -  Nanami Kento";
 }
 
 main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-sm small {
-    grid-column: 2;
+    grid-row: 3;
+    grid-column: 1;
     margin-top: 0.15em;
     font-family: var(--en-font);
     font-size: 0.74em;
@@ -4100,6 +4112,23 @@ main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-sm small {
     letter-spacing: 0.04em;
     color: color-mix(in srgb, var(--color) 90%, transparent);
     -webkit-text-stroke: 0;
+}
+
+main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-tx {
+    margin-left: 0;
+    padding: 10px 0;
+    border-left: 0;
+    border-radius: 0;
+    background: none;
+    font-size: 1em;
+    letter-spacing: 0.06em;
+    line-height: 2.2;
+}
+
+main.lib details.mv[class*=" ic-"] .cl-nnm[open]>.cl-tx {
+    font-size: 1.053em;
+    letter-spacing: 0.007em;
+    line-height: 1.94;
 }
 
 @media (min-width: 768px) {
@@ -8957,10 +8986,5 @@ body>a span[style*="color"] {
     .int na,
     .int go {
         padding-inline: calc(12 * var(--nw));
-    }
-
-    main.lib details.mv[class*=" ic-"] .cl-it[open]>.cl-tx {
-        padding-right: calc(6 * var(--nw));
-        padding-left: calc(7 * var(--nw));
     }
 }
