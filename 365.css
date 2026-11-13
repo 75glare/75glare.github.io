@@ -8095,6 +8095,10 @@ main:has(> .np:only-child) {
     animation: np-p var(--d) steps(var(--len, 240)) var(--o) infinite;
 }
 
+.np[data-ch="na"] .np-dk::before {
+    background: conic-gradient(transparent, color-mix(in srgb, var(--c) 35%, oklch(76% 0.012 80)) var(--np-p), oklch(100% 0 0 / 0.07) 0);
+}
+
 .np-dk::after {
     content: "";
     position: absolute;
@@ -8151,8 +8155,7 @@ main:has(> .np:only-child) {
     margin-top: 0.45em;
     font-size: 0.56em;
     letter-spacing: 0.2em;
-    color: color-mix(in srgb, var(--c) 80%, white);
-    opacity: 0.8;
+    color: color-mix(in srgb, var(--black) 62%, transparent);
 }
 
 .np-tm {
@@ -8169,6 +8172,13 @@ main:has(> .np:only-child) {
     letter-spacing: 0.06em;
     color: color-mix(in srgb, var(--black) 75%, transparent);
     animation: np-w var(--d) linear var(--o) infinite;
+}
+
+.np[data-ch="na"] .np-tm {
+    --a: color-mix(in srgb, var(--c) 35%, oklch(76% 0.012 80));
+    background:
+        linear-gradient(var(--a), var(--a)) 3.4em center / calc((100% - 6.8em) * var(--np-w)) 1.5px no-repeat,
+        linear-gradient(oklch(100% 0 0 / 0.1), oklch(100% 0 0 / 0.1)) center / calc(100% - 6.8em) 1.5px no-repeat;
 }
 
 .np-tm::before {
@@ -8337,8 +8347,19 @@ main.pl {
     padding-bottom: 3.15em !important;
 }
 
+main.pl > h3[data-sub] {
+    padding-left: calc(0.5em / 1.18);
+    padding-bottom: 2.05em;
+    font-size: 1.18em;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+}
+
 main.pl > h3[data-sub]::after {
-    left: calc(0.5em / 0.85);
+    left: calc(0.5em / 1.18 / 0.71);
+    bottom: 0.75em;
+    font-size: 0.71em;
+    letter-spacing: 0.12em;
 }
 
 main.pl a.pl-it {
@@ -8393,6 +8414,10 @@ main.pl a.pl-it small {
     font: 300 0.74em/1.4 var(--en-font);
     letter-spacing: 0.08em;
     color: color-mix(in srgb, var(--black) 58%, transparent);
+}
+
+main.pl .pl-sum::before {
+    content: none;
 }
 
 main.pl a.pl-it::after {
