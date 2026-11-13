@@ -7980,7 +7980,7 @@ main .aj>.aj-ct[class] {
 }
 
 main:has(> .np:only-child) {
-    padding: 2.4em 0 3em !important;
+    padding: 0 !important;
     background: none;
     box-shadow: none;
     -webkit-backdrop-filter: none;
@@ -8004,6 +8004,10 @@ main:has(> .np:only-child) {
 
 .np[data-ch="na"] {
     --c: var(--nanami);
+}
+
+:not(main) > .np {
+    margin: 2.85em auto;
 }
 
 .np[data-ic="#"] { --ic: "#"; --s: 1; --dy: 0.051; --dx: 0.022; }
@@ -8200,14 +8204,14 @@ main:has(> .np:only-child) {
 }
 
 @media screen and (max-width: 767px) {
-    main:has(> .np:only-child) {
-        padding: 1.2em 0 1.6em !important;
-    }
-
     .np {
         width: auto;
         max-width: none;
         margin: 0;
+    }
+
+    :not(main) > .np {
+        margin: 2.85em 10px;
         padding: 2.6em 30px 2.4em;
     }
 
@@ -8227,6 +8231,10 @@ main:has(> .np:only-child) {
         max-width: 420px;
         padding: 2.8em 2.6em 2.6em;
         font-size: 1.12em;
+    }
+
+    :not(main) > .np {
+        margin: calc(2.85em / 1.12) auto calc(3.8em / 1.12);
     }
 
     .np-dk {
