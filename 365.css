@@ -8178,24 +8178,26 @@ main:has(> .np:only-child) {
 
 .np-ly {
     margin: 2.6em 0 0;
-    font: 400 0.94em/2.3 var(--hd-font);
-    letter-spacing: 0.1em;
-    color: var(--black);
+    font: 300 0.94em/2.3 var(--en-font);
+    letter-spacing: 0.05em;
+    color: color-mix(in srgb, var(--black) 86%, transparent);
 }
 
 .np-nt {
-    margin: 1.8em 0 0;
-    font-size: 0.84em;
-    line-height: 2;
-    color: color-mix(in srgb, var(--black) 68%, transparent);
+    margin: 2em 0 0;
+    padding: 2.3em 0 0;
+    background: linear-gradient(oklch(100% 0 0 / 0.14), oklch(100% 0 0 / 0.14)) top center / 2.4em 1px no-repeat;
+    font-size: 0.8em;
+    line-height: 1.9;
+    color: color-mix(in srgb, var(--black) 60%, transparent);
 }
 
 .np-nt::after {
     content: "\EBC6\00A0 Gojo Satoru";
     display: block;
-    margin-top: 2.2em;
+    margin-top: 1.6em;
     text-align: right;
-    font: 300 0.82em/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
+    font: 300 0.92em/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
     letter-spacing: 0.12em;
     color: var(--c);
 }
@@ -8213,7 +8215,7 @@ main:has(> .np:only-child) {
 
     :not(main) > .np {
         margin: 2.85em 10px;
-        padding: 2.6em 30px 2.4em;
+        padding: 2.6em 30px 30px;
     }
 
     .np-dk {
