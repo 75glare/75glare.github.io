@@ -7111,14 +7111,13 @@ details.gm .cl-li::before {
     min-height: 20vh;
     padding-inline: 29px;
     background:
-        radial-gradient(ellipse 70% 60% at 4% 2%, oklch(50% 0.1 245 / 0.18), oklch(48% 0.1 245 / 0.117) 25%, oklch(46% 0.1 245 / 0.054) 50%, oklch(44% 0.1 245 / 0.014) 75%, transparent 95%),
-        radial-gradient(ellipse 72% 66% at 98% 100%, oklch(42% 0.055 292 / 0.13), oklch(40% 0.055 292 / 0.085) 25%, oklch(38% 0.055 290 / 0.04) 50%, oklch(36% 0.055 288 / 0.01) 75%, transparent 95%),
-        radial-gradient(ellipse 65% 55% at 46% 46%, oklch(18% 0.04 272 / 0.07), oklch(18% 0.04 272 / 0.035) 50%, transparent 90%),
-        linear-gradient(140deg in oklch,
-            oklch(31.5% 0.085 248),
-            oklch(29% 0.06 264) 45%,
-            oklch(28% 0.05 286));
-    border: 1px solid oklch(100% 0 0 / 0.16);
+        radial-gradient(ellipse 70% 60% at 4% 2%, oklch(48% 0.11 245 / 0.24), oklch(44% 0.1 245 / 0.12) 40%, transparent 85%),
+        radial-gradient(ellipse 72% 66% at 98% 100%, oklch(38% 0.07 282 / 0.17), oklch(36% 0.07 282 / 0.075) 45%, transparent 90%),
+        linear-gradient(150deg in oklch,
+            oklch(24% 0.075 245),
+            oklch(21% 0.07 252) 55%,
+            oklch(19.5% 0.062 266));
+    border: 1px solid oklch(82% 0.045 250 / 0.14);
     box-shadow: 0 4px 14px oklch(0% 0 0 / 0.18), 0 0 20px oklch(100% 0 0 / 0.04);
     color: oklch(95% 0.012 240);
 }
