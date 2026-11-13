@@ -8141,7 +8141,8 @@ main:has(> .np:only-child) {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 2.2em;
+    width: 86%;
+    margin: 2.2em auto 0;
     background:
         linear-gradient(color-mix(in srgb, var(--c) 85%, white), color-mix(in srgb, var(--c) 85%, white)) 3.4em center / calc((100% - 6.8em) * var(--np-w)) 1.5px no-repeat,
         linear-gradient(oklch(100% 0 0 / 0.1), oklch(100% 0 0 / 0.1)) center / calc(100% - 6.8em) 1.5px no-repeat;
@@ -8149,7 +8150,7 @@ main:has(> .np:only-child) {
     font-variant-numeric: tabular-nums;
     letter-spacing: 0.06em;
     color: color-mix(in srgb, var(--black) 75%, transparent);
-    animation: np-w var(--d) steps(var(--len, 240)) var(--o) infinite;
+    animation: np-w var(--d) linear var(--o) infinite;
 }
 
 .np-tm::before {
@@ -8235,6 +8236,10 @@ main:has(> .np:only-child) {
 
     :not(main) > .np {
         margin: calc(2.85em / 1.12) auto calc(3.8em / 1.12);
+    }
+
+    .np-tm {
+        width: 76%;
     }
 
     .np-dk {
