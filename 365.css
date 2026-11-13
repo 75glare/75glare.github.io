@@ -7980,7 +7980,7 @@ main .aj>.aj-ct[class] {
 }
 
 main:has(> .np:only-child) {
-    padding: 0 !important;
+    padding: 2.4em 0 3em !important;
     background: none;
     box-shadow: none;
     -webkit-backdrop-filter: none;
@@ -7994,7 +7994,7 @@ main:has(> .np:only-child) {
     contain: content;
     width: 86%;
     max-width: 340px;
-    margin: 0.6em auto 1em;
+    margin: 0 auto;
     padding: 2em 1.8em;
     border-radius: 20px;
     background: radial-gradient(80% 45% at 50% 28%, color-mix(in srgb, var(--c) 16%, transparent), transparent 75%), var(--glass-bg);
@@ -8109,17 +8109,17 @@ main:has(> .np:only-child) {
     place-items: center;
     font: calc(128px * var(--s, 1))/1 'SiteSymbol';
     color: transparent;
-    background: linear-gradient(160deg, oklch(98% 0.01 240 / 0.75), color-mix(in srgb, var(--c) 55%, oklch(90% 0.02 240 / 0.35)) 75%);
+    background: linear-gradient(160deg, oklch(90% 0.025 235 / 0.72), oklch(82% 0.05 230 / 0.68) 80%);
     -webkit-background-clip: text;
     background-clip: text;
-    filter: drop-shadow(0 0 8px color-mix(in srgb, var(--c) 40%, transparent));
+    filter: drop-shadow(0 0 7px oklch(80% 0.05 230 / 0.28));
     translate: calc(var(--dx, 0) * 128px * var(--s, 1)) calc(var(--dy, 0) * 128px * var(--s, 1));
     animation: np-glow 6s ease-in-out infinite;
 }
 
 .np-ti {
     margin-top: 1.7em;
-    font: 400 1.4em/1.5 var(--en-font);
+    font: 300 1.4em/1.5 var(--en-font);
     letter-spacing: 0.16em;
     color: var(--pure-white);
 }
@@ -8127,9 +8127,8 @@ main:has(> .np:only-child) {
 .np-ti small {
     display: block;
     margin-top: 0.45em;
-    font-size: 0.52em;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
+    font-size: 0.56em;
+    letter-spacing: 0.2em;
     color: color-mix(in srgb, var(--c) 80%, white);
     opacity: 0.8;
 }
@@ -8173,14 +8172,14 @@ main:has(> .np:only-child) {
 }
 
 .np-ly {
-    margin: 2.4em 0 0;
-    font: 400 0.98em/2.1 var(--hd-font);
+    margin: 2.6em 0 0;
+    font: 400 0.94em/2.3 var(--hd-font);
     letter-spacing: 0.1em;
     color: var(--black);
 }
 
 .np-nt {
-    margin: 1.2em 0 0;
+    margin: 1.8em 0 0;
     font-size: 0.84em;
     line-height: 2;
     color: color-mix(in srgb, var(--black) 68%, transparent);
@@ -8189,7 +8188,7 @@ main:has(> .np:only-child) {
 .np-nt::after {
     content: "\EBC6\00A0 Gojo Satoru";
     display: block;
-    margin-top: 1.6em;
+    margin-top: 2.2em;
     text-align: right;
     font: 300 0.82em/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
     letter-spacing: 0.12em;
@@ -8200,9 +8199,33 @@ main:has(> .np:only-child) {
     content: "\EBC6\00A0 Nanami Kento";
 }
 
+@media screen and (max-width: 767px) {
+    main:has(> .np:only-child) {
+        padding: 1.2em 0 1.6em !important;
+    }
+
+    .np {
+        width: auto;
+        max-width: none;
+        margin: 0;
+        padding: 2.6em 30px 2.4em;
+    }
+
+    .np-dk {
+        width: 190px;
+        height: 190px;
+    }
+
+    .np-vn::before {
+        font-size: calc(142px * var(--s, 1));
+        translate: calc(var(--dx, 0) * 142px * var(--s, 1)) calc(var(--dy, 0) * 142px * var(--s, 1));
+    }
+}
+
 @media screen and (min-width: 768px) {
     .np {
-        max-width: 400px;
+        max-width: 420px;
+        padding: 2.8em 2.6em 2.6em;
         font-size: 1.12em;
     }
 
