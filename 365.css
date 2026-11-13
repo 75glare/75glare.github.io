@@ -8195,7 +8195,7 @@ main:has(> .np:only-child) {
 .np-nt::after {
     content: "\EBC6\00A0 Gojo Satoru";
     display: block;
-    margin-top: 1.6em;
+    margin-top: 2.2em;
     text-align: right;
     font: 300 0.92em/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
     letter-spacing: 0.12em;
