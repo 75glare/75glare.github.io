@@ -7979,6 +7979,19 @@ main .aj>.aj-ct[class] {
     }
 }
 
+@media screen and (max-width: 767px) {
+    .bgm {
+        width: 88%;
+        max-width: 340px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .bgm {
+        max-width: 360px;
+    }
+}
+
 .bgm::before {
     content: '';
     position: absolute;
