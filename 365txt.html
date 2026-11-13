@@ -1545,6 +1545,25 @@ iframe {
                 <button type="button" data-or="O">O</button>
                 <button type="button" data-or="Q">Q</button>
                 <button type="button" data-or="Y">Y</button>
+                <button type="button" data-or="C">C</button>
+                <button type="button" data-or="D">D</button>
+                <button type="button" data-or="F">F</button>
+                <button type="button" data-or="G">G</button>
+                <button type="button" data-or="K">K</button>
+                <button type="button" data-or="P">P</button>
+                <button type="button" data-or="U">U</button>
+                <button type="button" data-or="X">X</button>
+                <button type="button" data-or="Z">Z</button>
+                <button type="button" data-or="4">4</button>
+                <button type="button" data-or="7">7</button>
+                <button type="button" data-or="8">8</button>
+                <button type="button" data-or="9">9</button>
+                <button type="button" data-or=":">:</button>
+                <button type="button" data-or="$">$</button>
+                <button type="button" data-or="!">!</button>
+                <button type="button" data-or="?">?</button>
+                <button type="button" data-or="=">=</button>
+                <button type="button" data-or="&gt;">&gt;</button>
             </div>
         </div>
 
@@ -3319,7 +3338,7 @@ iframe {
         return song ? `<div class="bgm"><div class="bgm-ti"><span>${song}</span></div><div class="bgm-br"></div><div class="bgm-ct"></div></div>` : '';
     }
     // プレイヤー：1 曲を飾るカード。印は日記の印の字（symbol-sub）
-    const NP_ICONS = [['#', '三日月'], ['O', '満ち欠け'], ['H', '月と本'], ['Y', '太陽と月'], ['6', '六芒星'], ['A', 'ひし形の星'], ['Q', '光る十字'], ['I', '宝石']];
+    const NP_ICONS = [['#', '三日月'], ['O', '満ち欠け'], ['H', '月と本'], ['Y', '太陽と月'], ['6', '六芒星'], ['A', 'ひし形の星'], ['Q', '光る十字'], ['I', '宝石'], ['C', '光る目'], ['D', '三角の飾り'], ['F', '星をつかむ手'], ['G', '波の太陽'], ['K', '縞の太陽'], ['P', '星の円'], ['U', '結んだ手'], ['X', '月を持つ手'], ['Z', '水晶と手'], ['4', '月の天秤'], ['7', '星をこぼす手'], ['8', '祈る手と目'], ['9', '三角と月'], ['$', '光る三日月'], ['!', '月の輪'], ['?', '水晶玉'], ['>', '葉の枝']];
     const np = state.np;
     $('np-ic').innerHTML = NP_ICONS.map(([v, l]) => `<button type="button" data-ic="${attr(v)}">${l}</button>`).join('');
     function npSync() {
@@ -3386,7 +3405,7 @@ iframe {
     });
 
     // 印（symbol-sub.woff2 の 8 つ）。data-o で印ごとの位置を 365.css が合わせる
-    const OR_CHARS = '#6AHIOQY';
+    const OR_CHARS = '#6AHIOQYCDFGKPUXZ4789:$!?=>';
     const orPos = () => state.orPos[state.mode] || '';
     const orTag = (ce = orPos() === 'ce') => orPos() ? `<i class="or or-bg${ce ? ' ce' : ''}" data-o="${state.or}">${state.or}</i>` : '';
 
