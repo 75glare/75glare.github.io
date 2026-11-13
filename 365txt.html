@@ -1590,6 +1590,7 @@ iframe {
             <div class="tool-tabs" id="tool-tabs">
                 <button type="button" data-for="n_box g_box main box" data-tab="talk">トーク履歴</button>
                 <button type="button" data-for="n_box g_box main" data-tab="bgm">BGM</button>
+                <button type="button" data-for="main" data-tab="np">プレイヤー</button>
                 <button type="button" data-for="n_box g_box main box" data-tab="dlog">会話ログ</button>
                 <button type="button" data-for="n_box g_box main box" data-tab="vs">表</button>
                 <button type="button" data-for="main box" data-tab="tweet">呟き</button>
@@ -1605,14 +1606,21 @@ iframe {
                     <p>アーティスト名（なくてもOK）</p>
                     <input id="bgm-artist" type="text" autocomplete="off" placeholder="例：キタニタツヤ">
                     <div class="tools"><button type="button" id="bgm-insert">このBGMを本文に入れる</button></div>
-                    <p class="np-gen-head">プレイヤー（1 曲を飾る）</p>
-                    <p class="hint">「二人のノート」でタイトルを空けて、本文にこれだけを入れると、カードだけが出るよ。曲名とアーティスト名は上の欄を使うよ。</p>
+                </div>
+            </div>
+            <div class="tool-panel" data-panel="np">
+                <div class="icons-body">
+                    <p class="hint">1 曲を飾るカード。「二人のノート」でタイトルを空けて、本文にこれだけを入れると、カードだけが出るよ。</p>
+                    <p>曲名</p>
+                    <input id="np-song" type="text" autocomplete="off" placeholder="例：紫陽花">
+                    <p>アーティスト名（なくてもOK）</p>
+                    <input id="np-artist" type="text" autocomplete="off" placeholder="例：PEOPLE 1">
+                    <p>曲の長さ（例：5:10）</p>
+                    <input id="np-len" type="text" autocomplete="off" inputmode="numeric" placeholder="例：5:10">
                     <p>誰が選んだ曲？</p>
                     <div class="tools" id="np-who"><button type="button" data-who="g" aria-pressed="true">五条</button><button type="button" data-who="n" aria-pressed="false">七海</button></div>
                     <p>真ん中の印</p>
                     <div class="tools" id="np-ic"></div>
-                    <p>曲の長さ（例：5:10）</p>
-                    <input id="np-len" type="text" autocomplete="off" inputmode="numeric" placeholder="例：5:10">
                     <p>歌詞の一節（なくてもOK）</p>
                     <textarea id="np-ly" class="short"></textarea>
                     <p>一言（なくてもOK）</p>
@@ -3311,7 +3319,7 @@ iframe {
         const song = [safe(songName.trim()), safe(artistName.trim())].filter(Boolean).join(' - ');
         return song ? `<div class="bgm"><div class="bgm-ti"><span>${song}</span></div><div class="bgm-br"></div><div class="bgm-ct"></div></div>` : '';
     }
-    // プレイヤー：曲名・アーティスト名は BGM の欄。印は日記の印の字（symbol-sub）
+    // プレイヤー：1 曲を飾るカード。印は日記の印の字（symbol-sub）
     const NP_ICONS = [['#', '三日月'], ['O', '満ち欠け'], ['H', '月と本'], ['Y', '太陽と月'], ['6', '六芒星'], ['A', 'ひし形の星'], ['Q', '光る十字'], ['I', '宝石']];
     const np = { who: 'g', ic: '#' };
     $('np-ic').innerHTML = NP_ICONS.map(([v, l]) => `<button type="button" data-ic="${attr(v)}" aria-pressed="${v === np.ic}">${l}</button>`).join('');
@@ -3328,8 +3336,8 @@ iframe {
         $('np-who').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b));
     });
     function npHTML() {
-        const title = safe($('bgm-song').value.trim()) || '曲名';
-        const artist = safe($('bgm-artist').value.trim());
+        const title = safe($('np-song').value.trim()) || '曲名';
+        const artist = safe($('np-artist').value.trim());
         const m = $('np-len').value.trim().replace(/[：]/g, ':').replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xFEE0)).match(/^(\d{1,2}):(\d{1,2})$/);
         const sec = m ? Number(m[1]) * 60 + Number(m[2]) : 240;
         const len = `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
