@@ -3898,7 +3898,7 @@ iframe {
         // 書きかけの描き直しが後から走って、消した内容を戻さないように止める
         clearTimeout(renderTimer);
         remember();
-        ['title', 'tag', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'rv-one', 'dl-title', 'dl-code', 'vs-title', 'bgm-song', 'bgm-artist', 'line-free'].forEach((f) => { if ($(f)) $(f).value = ''; });
+        ['title', 'tag', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'rv-one', 'dl-title', 'dl-code', 'vs-title', 'bgm-song', 'bgm-artist', 'line-free', 'np-song', 'np-artist', 'np-len', 'np-ly', 'np-nt', 'cv-title', 'cv-en', 'cv-text', 'cv-top', 'cv-top2', 'cv-sign', 'cv-date'].forEach((f) => { if ($(f)) $(f).value = ''; });
         $('date').value = today;
         $('sw-date').value = today;
         $('time').value = stamp();
