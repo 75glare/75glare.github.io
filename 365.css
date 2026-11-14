@@ -1001,7 +1001,6 @@ header h1 a {
     font-weight: 400 !important;
     line-height: 1.8 !important;
     letter-spacing: 0.12em;
-    text-transform: uppercase;
     text-shadow: 0 0 3px oklch(90% 0.05 245 / 0.6), 0 0 12px oklch(72% 0.13 255 / 0.75), 0 0 30px oklch(62% 0.15 260 / 0.55), 0 0 60px oklch(55% 0.16 265 / 0.35);
     color: oklch(88% 0.045 248) !important;
     transition: color 0.8s ease, text-shadow 0.8s ease, opacity 0.8s ease, scale 0.8s ease;
@@ -1015,6 +1014,10 @@ header h1 a span {
     color: inherit;
     animation: celestial-fade 1.5s ease-out backwards;
     animation-delay: calc(var(--i) * 0.06s);
+}
+
+header h1 a span:is(:nth-of-type(7), :nth-of-type(9), :nth-of-type(14), :nth-of-type(22)) {
+    text-transform: uppercase;
 }
 
 @media (hover: hover) {
