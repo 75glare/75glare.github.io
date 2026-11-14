@@ -1310,7 +1310,7 @@ iframe {
 <div class="wrap">
     <h1>僕らの秘密ノート</h1>
     <p class="lead">選んで、書いて、コピーして、日記に貼るだけ。ここに書いた内容は端末に自動保存されるよ。</p>
-    <p class="links"><a href="https://2colorless.nieru.net/57" target="_blank" rel="noopener">日記を開く</a></p>
+    <p class="links"><a href="https://black.colorless.fyi/57" target="_blank" rel="noopener">日記を開く</a></p>
 
     <section class="step">
         <h2>1. 何を書く？</h2>
@@ -1731,7 +1731,7 @@ iframe {
             <button type="button" class="copy" id="copy">コピー</button>
         </div>
         <div class="after-copy">
-            <a class="go-write" href="https://2colorless.nieru.net/57/write" target="_blank" rel="noopener">書き込みページを開く</a>
+            <a class="go-write" href="https://black.colorless.fyi/57/write" target="_blank" rel="noopener">書き込みページを開く</a>
             <button type="button" id="clear">全部消す</button>
         </div>
     </section>
@@ -3536,7 +3536,7 @@ iframe {
     let pendingBody = null;
     // プレビューは毎回いちばん新しい 365.css を読む（ブラウザが古い 365.css を覚えたままにならないように）
     const PREVIEW_LINKS = LINKS.replace('365.css"', `365.css?v=${Date.now()}"`);
-    $('preview').srcdoc = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="https://2colorless.nieru.net/style.css">${PREVIEW_LINKS}<style>${PREVIEW_EXTRA_CSS}body{margin-bottom:0 !important;min-height:0 !important;}html,html::before,html::after,body::before,body::after{animation:none !important;}</style></head><body><div style="height:16px"></div><p class="line-text"></p><div id="gen-root" style="display:contents"></div>`;
+    $('preview').srcdoc = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="https://black.colorless.fyi/style.css">${PREVIEW_LINKS}<style>${PREVIEW_EXTRA_CSS}body{margin-bottom:0 !important;min-height:0 !important;}html,html::before,html::after,body::before,body::after{animation:none !important;}</style></head><body><div style="height:16px"></div><p class="line-text"></p><div id="gen-root" style="display:contents"></div>`;
 
     function resizePreview() {
         const doc = $('preview').contentDocument;
