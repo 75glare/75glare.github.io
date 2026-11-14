@@ -8161,16 +8161,18 @@ main:has(> .np:only-child) {
 
 .np-ti {
     margin-top: 1.7em;
-    font: 300 1.4em/1.5 var(--en-font);
-    letter-spacing: 0.16em;
+    font: 300 1.12em/1.6 var(--en-font);
+    letter-spacing: 0.34em;
+    text-indent: 0.34em;
     color: var(--pure-white);
 }
 
 .np-ti small {
     display: block;
-    margin-top: 0.45em;
-    font-size: 0.56em;
-    letter-spacing: 0.2em;
+    margin-top: 0.75em;
+    font-size: 0.68em;
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
     color: color-mix(in srgb, var(--black) 62%, transparent);
 }
 
