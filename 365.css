@@ -8044,14 +8044,14 @@ main:has(> .np:only-child) {
 :is(.np, .pl-it)[data-ic="P"] { --ic: "P"; --s: 1; --dy: 0.0547; --dx: 0; }
 :is(.np, .pl-it)[data-ic="U"] { --ic: "U"; --s: 0.933; --dy: 0.0586; --dx: -0.0004; }
 :is(.np, .pl-it)[data-ic="X"] { --ic: "X"; --s: 0.891; --dy: 0.0898; --dx: -0.0037; }
-:is(.np, .pl-it)[data-ic="Z"] { --ic: "Z"; --s: 1; --dy: 0.082; --dx: 0; }
+:is(.np, .pl-it)[data-ic="Z"] { --ic: "Z"; --s: 0.898; --dy: 0.082; --dx: 0; }
 :is(.np, .pl-it)[data-ic="4"] { --ic: "4"; --s: 1; --dy: 0.0391; --dx: -0.0031; }
-:is(.np, .pl-it)[data-ic="7"] { --ic: "7"; --s: 0.989; --dy: -0.0469; --dx: 0; }
+:is(.np, .pl-it)[data-ic="7"] { --ic: "7"; --s: 0.895; --dy: -0.0469; --dx: 0; }
 :is(.np, .pl-it)[data-ic="8"] { --ic: "8"; --s: 0.798; --dy: 0.0313; --dx: 0; }
 :is(.np, .pl-it)[data-ic="9"] { --ic: "9"; --s: 1; --dy: 0.0313; --dx: 0; }
 :is(.np, .pl-it)[data-ic="!"] { --ic: "!"; --s: 1; --dy: 0.0938; --dx: 0.0009; }
-:is(.np, .pl-it)[data-ic="?"] { --ic: "?"; --s: 1; --dy: 0.0742; --dx: 0; }
-:is(.np, .pl-it)[data-ic=">"] { --ic: ">"; --s: 0.951; --dy: 0.0625; --dx: 0.001; }
+:is(.np, .pl-it)[data-ic="?"] { --ic: "?"; --s: 0.841; --dy: 0.0742; --dx: 0; }
+:is(.np, .pl-it)[data-ic=">"] { --ic: ">"; --s: 0.835; --dy: 0.0625; --dx: 0.001; }
 
 .np-hd {
     display: flex;
@@ -8443,6 +8443,22 @@ main.pl a.pl-it::after {
     font: 300 0.76em/1 var(--en-font);
     letter-spacing: 0.06em;
     color: color-mix(in srgb, var(--black) 55%, transparent);
+}
+
+@media (min-width: 768px) {
+    main.pl {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 2.4em;
+    }
+
+    main.pl > :not(a.pl-it) {
+        grid-column: 1 / -1;
+    }
+
+    main.pl a.pl-it:nth-last-of-type(2):nth-of-type(odd) {
+        border-bottom: 0;
+    }
 }
 
 /* =======================================
