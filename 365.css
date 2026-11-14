@@ -8049,7 +8049,6 @@ main:has(> .np:only-child) {
 :is(.np, .pl-it)[data-ic="7"] { --ic: "7"; --s: 0.989; --dy: -0.0469; --dx: 0; }
 :is(.np, .pl-it)[data-ic="8"] { --ic: "8"; --s: 0.798; --dy: 0.0313; --dx: 0; }
 :is(.np, .pl-it)[data-ic="9"] { --ic: "9"; --s: 1; --dy: 0.0313; --dx: 0; }
-:is(.np, .pl-it)[data-ic="$"] { --ic: "$"; --s: 1; --dy: 0.0742; --dx: -0.0165; }
 :is(.np, .pl-it)[data-ic="!"] { --ic: "!"; --s: 1; --dy: 0.0938; --dx: 0.0009; }
 :is(.np, .pl-it)[data-ic="?"] { --ic: "?"; --s: 1; --dy: 0.0742; --dx: 0; }
 :is(.np, .pl-it)[data-ic=">"] { --ic: ">"; --s: 0.951; --dy: 0.0625; --dx: 0.001; }
@@ -9413,11 +9412,6 @@ body>a span[style*="color"] {
 
 .or-bg[data-o=":"] {
     --d: 0.246;
-    --m: 0.074;
-}
-
-.or-bg[data-o="$"] {
-    --d: 0.238;
     --m: 0.074;
 }
 
