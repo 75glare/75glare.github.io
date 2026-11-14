@@ -5161,6 +5161,13 @@ main:has(.tl),
     grid-column: 1 / -1;
 }
 
+.tl .tl-cm>p.n>span {
+    font-family: var(--klee-font);
+    font-feature-settings: normal;
+    letter-spacing: 0;
+    -webkit-text-stroke: 0.065px currentColor;
+}
+
 .tl .tl-cm .dl-it {
     display: block;
     margin: 0;
