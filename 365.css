@@ -8028,14 +8028,14 @@ main:has(> .np:only-child) {
     margin: 2.85em auto;
 }
 
-:is(.np, .pl-it)[data-ic="#"] { --ic: "#"; --s: 1; --dy: 0.051; --dx: 0.022; }
-:is(.np, .pl-it)[data-ic="6"] { --ic: "6"; --s: 0.813; --dy: 0.0237; --dx: 0.001; }
-:is(.np, .pl-it)[data-ic="A"] { --ic: "A"; --s: 0.999; --dy: 0.0592; --dx: 0.0022; }
-:is(.np, .pl-it)[data-ic="H"] { --ic: "H"; --s: 1; --dy: 0.046; --dx: 0.014; }
-:is(.np, .pl-it)[data-ic="I"] { --ic: "I"; --s: 0.933; --dy: 0.0382; --dx: 0.0022; }
-:is(.np, .pl-it)[data-ic="O"] { --ic: "O"; --s: 1; --dy: 0.0467; --dx: 0.0022; }
-:is(.np, .pl-it)[data-ic="Q"] { --ic: "Q"; --s: 0.893; --dy: 0.0387; --dx: 0.0022; }
-:is(.np, .pl-it)[data-ic="Y"] { --ic: "Y"; --s: 0.858; --dy: 0.0752; --dx: 0.04; }
+:is(.np, .pl-it)[data-ic="#"] { --ic: "#"; --s: 1; --dy: 0.062; --dx: 0.022; }
+:is(.np, .pl-it)[data-ic="6"] { --ic: "6"; --s: 0.813; --dy: 0.0313; --dx: 0.0004; }
+:is(.np, .pl-it)[data-ic="A"] { --ic: "A"; --s: 0.999; --dy: 0.0703; --dx: 0; }
+:is(.np, .pl-it)[data-ic="H"] { --ic: "H"; --s: 1; --dy: 0.057; --dx: 0.014; }
+:is(.np, .pl-it)[data-ic="I"] { --ic: "I"; --s: 0.933; --dy: 0.0508; --dx: 0; }
+:is(.np, .pl-it)[data-ic="O"] { --ic: "O"; --s: 1; --dy: 0.0547; --dx: 0; }
+:is(.np, .pl-it)[data-ic="Q"] { --ic: "Q"; --s: 0.893; --dy: 0.0508; --dx: 0; }
+:is(.np, .pl-it)[data-ic="Y"] { --ic: "Y"; --s: 0.858; --dy: 0.0862; --dx: 0.04; }
 :is(.np, .pl-it)[data-ic="C"] { --ic: "C"; --s: 1; --dy: 0.1094; --dx: 0; }
 :is(.np, .pl-it)[data-ic="D"] { --ic: "D"; --s: 1; --dy: 0.0625; --dx: -0.0009; }
 :is(.np, .pl-it)[data-ic="F"] { --ic: "F"; --s: 0.951; --dy: 0.0469; --dx: 0.0001; }
