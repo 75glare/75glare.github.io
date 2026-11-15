@@ -4980,7 +4980,7 @@ main:has(.tl),
     max-width: 100%;
     margin-top: 8px;
     font-family: var(--en-font);
-    font-size: 0.78em;
+    font-size: 0.9em;
     line-height: 1.4;
     color: oklch(94% 0.005 240 / 0.6);
 }
@@ -4996,6 +4996,15 @@ main:has(.tl),
 
 .tl-it.n .tl-tx mu::before {
     color: oklch(from var(--nanami) l c h / 0.9);
+}
+
+.tl-tx a {
+    text-shadow: none;
+    color: color-mix(in oklch, var(--black), var(--gjo) 85%) !important;
+}
+
+.tl-it.n .tl-tx a {
+    color: color-mix(in oklch, var(--black), var(--nanami) 85%) !important;
 }
 
 .tl-tx>.dl-it {
