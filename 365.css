@@ -4998,12 +4998,12 @@ main:has(.tl),
     color: oklch(from var(--nanami) l c h / 0.9);
 }
 
-.tl-tx a {
+.tl .tl-tx a {
     text-shadow: none;
     color: color-mix(in oklch, var(--black), var(--gjo) 85%) !important;
 }
 
-.tl-it.n .tl-tx a {
+.tl .tl-it.n .tl-tx a {
     color: color-mix(in oklch, var(--black), var(--nanami) 85%) !important;
 }
 
