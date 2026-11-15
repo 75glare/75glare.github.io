@@ -1426,10 +1426,62 @@ main .tp-rx .rx {
     padding-block: 5px;
 }
 
+main .tp-c[data-h] {
+    margin-top: 2.6em;
+}
+
+main .tp-c[data-h]::before {
+    content: attr(data-h);
+    display: block;
+    margin-bottom: 1.1em;
+    font-family: var(--en-font);
+    font-size: 0.72em;
+    letter-spacing: 0.3em;
+    color: color-mix(in srgb, var(--black) 55%, transparent);
+}
+
+main .tp-c[data-h="COLOR"] > p {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 28em;
+}
+
+main .tp-c[data-h="COLOR"] bx {
+    box-sizing: border-box;
+    justify-content: center;
+    width: 6.8em;
+    padding: 7px 14px 6px;
+}
+
+main .tp-c[data-h="COLOR"] bx > :is(gy, rd, bl, lb, mt, pr, bg)::before {
+    content: "";
+    display: inline-block;
+    width: 0.38em;
+    height: 0.38em;
+    margin-right: 0.4em;
+    vertical-align: 0.12em;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+main .tp-c[data-h="ICON"] bx {
+    padding: 6.5px 10px 5.5px;
+}
+
 @media screen and (max-width: 480px) {
     main .tp-c bx {
         margin: 3px 1.5px;
         padding-inline: 5px;
+    }
+
+    main .tp-c[data-h="COLOR"] bx {
+        width: 5.9em;
+        padding: 6px 10px 5px;
+    }
+
+    main .tp-c[data-h="ICON"] bx {
+        padding: 5.5px 7px 4.5px;
     }
 }
 
@@ -4201,7 +4253,7 @@ main.lib details[open].mv[class*=" ic-"] details.fav>summary::before {
     flex-wrap: wrap;
     align-items: flex-end;
     justify-content: center;
-    column-gap: 3px;
+    column-gap: 6px;
     margin: 2em auto -1.2em;
     padding: 0 0.5em;
 }
@@ -4427,8 +4479,9 @@ details.cv-lt:has(+ add) > :is(summary, .cv-tx) {
 
 .bs .il-it {
     --bk: oklch(62% 0.070 250);
-    --h: 14em;
-    --w: 2.4em;
+    --h: 10em;
+    --w: 2.2em;
+    --pb: 4.2em;
     margin: 0 0 2.4em;
 }
 
@@ -4460,9 +4513,9 @@ details.cv-lt:has(+ add) > :is(summary, .cv-tx) {
     justify-content: flex-start;
     gap: 0.55em;
     box-sizing: border-box;
-    height: var(--h);
+    min-height: var(--h);
     min-width: var(--w);
-    padding: 0.85em 0.35em 0;
+    padding: 0.85em 0.35em var(--pb);
     background:
         linear-gradient(to bottom, transparent 0.42em, color-mix(in srgb, var(--bk) 55%, transparent) 0.42em calc(0.42em + 1px), transparent calc(0.42em + 1px)) no-repeat,
         linear-gradient(to top, transparent 1em, color-mix(in srgb, var(--bk) 45%, transparent) 1em calc(1em + 1px), transparent calc(1em + 1px)) no-repeat,
@@ -4491,14 +4544,13 @@ details.cv-lt:has(+ add) > :is(summary, .cv-tx) {
 .bs .il-lk,
 .bs .il-lk:visited {
     display: block;
-    height: calc(var(--h) - 4em);
     padding: 0;
     writing-mode: vertical-rl;
     font-family: var(--klee-font);
     font-feature-settings: normal;
     font-size: 0.78em;
     line-height: 1.5;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.44em;
     color: var(--sky-text) !important;
     border-bottom: 0 !important;
     transition: none;
@@ -4529,21 +4581,39 @@ details.cv-lt:has(+ add) > :is(summary, .cv-tx) {
 .bs .il-it:nth-child(8n+7) { --bk: oklch(58% 0.075 285); }
 .bs .il-it:nth-child(8n+8) { --bk: oklch(66% 0.050 75); }
 
-.bs .il-it:nth-child(5n+2) { --h: 15.4em; }
-.bs .il-it:nth-child(5n+3) { --h: 14.6em; }
-.bs .il-it:nth-child(5n+4) { --h: 16em; }
-.bs .il-it:nth-child(5n+5) { --h: 13.4em; }
+.bs .il-it:nth-child(5n+2) { --h: 10.6em; }
+.bs .il-it:nth-child(5n+3) { --h: 10.3em; }
+.bs .il-it:nth-child(5n+4) { --h: 10.9em; }
+.bs .il-it:nth-child(5n+5) { --h: 9.7em; }
 
-.bs .il-it:nth-child(3n+2) { --w: 2.7em; }
-.bs .il-it:nth-child(3n+3) { --w: 2.2em; }
+.bs .il-it:nth-child(3n+2) { --w: 2.45em; }
+.bs .il-it:nth-child(3n+3) { --w: 2.05em; }
+
+.bs .il-it:nth-child(4n+2) { --pb: 5em; }
+.bs .il-it:nth-child(4n+3) { --pb: 3.8em; }
+.bs .il-it:nth-child(4n+4) { --pb: 4.6em; }
 
 @media screen and (max-width: 480px) {
     .il.bs {
-        display: grid;
-        grid-template-columns: repeat(7, auto);
-        justify-content: center;
-        align-items: end;
+        --row: 18.4em;
+        --shelf: calc(var(--row) - 2.4em + 4px);
+        max-width: 18.2em;
+        padding: 0 0.6em;
         font-size: 1.1em;
+        background: repeating-linear-gradient(to bottom,
+                transparent 0 var(--shelf),
+                color-mix(in srgb, var(--sky-text) 55%, transparent) var(--shelf) calc(var(--shelf) + 1px),
+                transparent calc(var(--shelf) + 1px) var(--row));
+    }
+
+    .bs .il-it {
+        display: flex;
+        align-items: flex-end;
+        height: calc(var(--row) - 2.4em);
+    }
+
+    .bs .il-it::after {
+        content: none;
     }
 }
 
