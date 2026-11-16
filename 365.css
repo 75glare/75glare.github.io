@@ -4323,13 +4323,17 @@ details.cv-lt > summary.ti-tr.cv::before {
 }
 
 .ti-tr.cv span {
+    font-family: "ScopeOneHd", "Shippori Mincho", serif;
+    font-weight: 400;
     font-size: 1.15em;
     letter-spacing: 0.22em;
-    color: var(--pure-white);
+    color: color-mix(in srgb, var(--pure-white) 94%, transparent);
 }
 
 .ti-tr.cv small {
     margin-top: 0.9em;
+    font-family: var(--en-font);
+    font-weight: 300;
     font-size: 0.5em;
     letter-spacing: 0.24em;
     opacity: 1;
