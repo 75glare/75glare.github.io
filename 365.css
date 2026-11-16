@@ -4403,6 +4403,75 @@ details.cv-lt[open] > .cv-tx {
     animation: cv-unfold 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
+details.cv-lt.l {
+    --gold: oklch(from var(--gjo) 82% 0.07 h);
+}
+
+details.cv-lt.l.n {
+    --gold: oklch(from var(--nanami) 82% 0.08 h);
+}
+
+details.cv-lt.l > .cv-tx {
+    padding: 2em 1.4em 2.4em;
+    font-size: 1em;
+    text-align: left;
+    letter-spacing: 0.06em;
+    line-height: 2.2;
+    color: color-mix(in srgb, var(--black) 90%, transparent);
+}
+
+details.cv-lt.l > .cv-tx > p {
+    margin: 0 0 1.4em;
+}
+
+details.cv-lt.l > .cv-tx > p:last-child {
+    margin-bottom: 0;
+}
+
+details.cv-lt.l > .cv-tx > p.cv-to {
+    font: 200 1.35em/1.6 "Playwrite DE LA", "Snell Roundhand", cursive;
+    letter-spacing: 0.02em;
+    color: color-mix(in oklch, var(--gold) 85%, transparent);
+}
+
+details.cv-lt.l > .cv-tx > p.cv-fr {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 0.6em;
+    margin: 2.4em 0 0;
+}
+
+.cv-fr small {
+    font: 300 0.7em/1 var(--en-font);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--black) 55%, transparent);
+}
+
+.cv-fr b {
+    font: 200 1.35em/1.6 "Playwrite DE LA", "Snell Roundhand", cursive;
+    letter-spacing: 0.02em;
+    color: color-mix(in oklch, var(--gold) 85%, transparent);
+}
+
+.cv-fr b::before {
+    content: "\E3AC";
+    margin-right: 0.45em;
+    font: 0.75em/1 "Phosphor-Light";
+    vertical-align: 0.05em;
+    opacity: 0.7;
+}
+
+details.cv-lt.l.n > .cv-tx > p:not(.cv-to, .cv-fr) {
+    font-family: var(--klee-font);
+    font-size: 1.053em;
+    font-feature-settings: normal;
+    letter-spacing: 0.007em;
+    -webkit-text-stroke: 0.065px currentColor;
+    color: color-mix(in srgb, var(--black) 90%, transparent);
+}
+
 @keyframes cv-unfold {
     from {
         opacity: 0;
