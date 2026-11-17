@@ -1971,7 +1971,7 @@ iframe {
     showLine();
 
     // 表紙：北極星と二人の星座の絵に、タイトルと英文。カードは線の間に文章、手紙は表紙を押すと文章が開く
-    const COVER_TYPES = [['cover', '表紙だけ'], ['card', 'カード'], ['letter', '手紙']];
+    const COVER_TYPES = [['cover', '見出しだけ'], ['card', '短い文つき'], ['letter', '開く手紙']];
     const cover = { type: 'cover', align: 'c', who: 'go' };
 
     $('cards').insertAdjacentHTML('beforeend', `
@@ -2004,7 +2004,7 @@ iframe {
             <div><p id="cv-date-label"></p><input id="cv-date" type="text" autocomplete="off" placeholder="例：Nov. 12, 2026 · 2:14 a.m."></div>
         </div>
         <p class="hint">線の上・英文・署名・日付は、空けておけば出ないよ。</p>
-        <div class="tools"><button type="button" id="cv-insert">この表紙を入れる</button></div>
+        <div class="tools"><button type="button" id="cv-insert">このカードを入れる</button></div>
         </div>
     `);
 
@@ -2050,13 +2050,13 @@ iframe {
         $('cv-sign-label').textContent = left ? '署名（手紙の右下・手書きの字）' : '署名（いちばん下の右・手書きの字）';
         $('cv-date-label').textContent = left ? '線の下（日付など）' : '署名の横（日付など）';
         $('cv-to-box').hidden = !left;
+        $('cv-hint').textContent = {
+            cover: '星座とタイトルだけ。その下に本文をいつもどおり書いてね。',
+            card: '線と線の間に、短い文を真ん中で添えるよ。',
+            letter: '封筒の印を押すと、手紙が開くよ。'
+        }[cover.type];
         $('cv-align-hint').textContent = left ? '月の手紙と同じ形。左上に書き出し、右下に「from」と署名が入るよ（線の下は日付だけ）。空けた行で段落が分かれる。' : '短く改行して、詩のように書く手紙向き。';
         $('cv-text-label').textContent = cover.type === 'letter' ? '手紙の文章（表紙を押すと開く）' : '線の間に入れる文章（真ん中そろえ）';
-        $('cv-hint').textContent = {
-            cover: '表紙の下線の下に、本文をいつも通り書いてね。',
-            card: '上下の線の間に、文章が真ん中そろえで入るよ。',
-            letter: '表紙の下に封筒の印が出て、押すと手紙が開くよ。'
-        }[cover.type];
     }
 
     $('cv-types').addEventListener('click', (ev) => {
