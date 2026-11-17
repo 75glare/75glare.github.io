@@ -4116,6 +4116,102 @@ main.lib .gl-in .cl-nnm>.cl-sm {
     -webkit-text-stroke: 0.065px currentColor;
 }
 
+main.lib details.mv:where([class*=" ic-"]):not([open])>summary .tp-tg {
+    display: none;
+}
+
+main.lib details.mv:has(> details.dn-sw[open])>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) {
+    display: none;
+}
+
+main.lib details.mv>details.dn-sw {
+    margin: 12px 0 0;
+}
+
+main.lib details.mv[class]>details.dn-sw.dn-sw>summary {
+    display: flex;
+    justify-content: center;
+    gap: 1.6em;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    font-family: var(--en-font);
+    font-size: 0.78em;
+    letter-spacing: 0.14em;
+    cursor: pointer;
+}
+
+main.lib details.mv[class]>details.dn-sw.dn-sw>summary::-webkit-details-marker {
+    display: none;
+}
+
+main.lib details.mv[class]>details.dn-sw.dn-sw>summary:not(.cl-sm)::before,
+main.lib details.mv[class]>details.dn-sw.dn-sw>summary::after {
+    display: block;
+    width: auto;
+    margin: 0;
+    padding-bottom: 3px;
+    white-space: nowrap;
+    border-bottom: 1px solid transparent;
+    font-family: var(--en-font);
+    font-size: 1em;
+    transform: none;
+    animation: none;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+main.lib details.mv[class]>details.dn-sw.dn-sw>summary:not(.cl-sm)::before {
+    content: "Gojo";
+    color: var(--gjo);
+    border-color: color-mix(in srgb, var(--gjo) 70%, transparent);
+}
+
+main.lib details.mv[class]>details.dn-sw.dn-sw>summary::after {
+    content: "Nanami";
+    color: color-mix(in srgb, var(--black) 40%, transparent);
+}
+
+main.lib details.mv[class]>details[open].dn-sw.dn-sw>summary:not(.cl-sm)::before {
+    color: color-mix(in srgb, var(--black) 40%, transparent);
+    border-color: transparent;
+}
+
+main.lib details.mv[class]>details[open].dn-sw.dn-sw>summary::after {
+    color: var(--nanami);
+    border-color: color-mix(in srgb, var(--nanami) 70%, transparent);
+}
+
+main.lib details.mv>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz),
+main.lib details.dn-sw>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) {
+    margin-inline: 0;
+}
+
+main.lib details.dn-sw>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) {
+    margin-top: 6px;
+}
+
+main.lib:has(> .ti-tr.cv) details.mv:where([class*=" ic-"]):not([open])>summary {
+    border-radius: 0;
+    background: none;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--black) 16%, transparent);
+}
+
+@media (hover: hover) {
+    main.lib:has(> .ti-tr.cv) details.mv:where([class*=" ic-"]):not([open])>summary:hover {
+        background: none;
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--black) 34%, transparent);
+    }
+}
+
+main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary {
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    border-top: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+}
+
 /* =======================================
     Cinema Library (main.lib)
 ======================================= */
