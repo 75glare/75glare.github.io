@@ -6325,6 +6325,8 @@ details.gm .cl-li::before {
 }
 
 :is(.dt-nt, .gf-nt) .dl-it.n {
+    position: relative;
+    top: -0.12em;
     font-family: var(--klee-font);
     font-size: 1em;
     font-feature-settings: normal;
