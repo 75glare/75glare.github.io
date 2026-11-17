@@ -1879,6 +1879,19 @@ main h3,
     font-size: calc(0.746em / var(--h2-scale));
 }
 
+:is(.g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj) h2::before {
+    bottom: 0.5em;
+    font-size: 0.816em;
+}
+
+:is(.g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj) h2.klee::before {
+    font-size: 0.785em;
+}
+
+:is(.g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj) h2[data-tag]::before {
+    bottom: 1.5em;
+}
+
 h3:is(.film, .game, .icons, .food, .pin, .trip, .gift)::before {
     display: inline-block;
     font-family: "Phosphor-Light";
@@ -6316,6 +6329,10 @@ details.gm .cl-li::before {
     letter-spacing: var(--base-letter-spacing);
 }
 
+:is(.hs, .gx, .yu, .um, .aj)[class] {
+    background-clip: padding-box;
+}
+
 .hs,
 .gx {
     -webkit-backdrop-filter: blur(3px);
@@ -7357,15 +7374,29 @@ details.gm .cl-li::before {
     min-height: 20vh;
     padding-inline: 29px;
     background:
-        radial-gradient(ellipse 85% 55% at 100% 62%, oklch(60% 0.07 350 / 0.26), oklch(50% 0.065 315 / 0.14) 45%, transparent 85%),
-        radial-gradient(ellipse 70% 50% at 18% 4%, oklch(58% 0.065 248 / 0.2), transparent 80%),
+        radial-gradient(ellipse 90% 45% at 50% 108%, oklch(54% 0.075 304 / 0.45), transparent 75%),
         linear-gradient(180deg in oklch,
-            oklch(27% 0.058 268),
-            oklch(25% 0.056 274) 55%,
-            oklch(19% 0.035 274));
-    border: 1px solid oklch(84% 0.04 290 / 0.16);
+            oklch(22% 0.055 290),
+            oklch(25% 0.058 294) 30%,
+            oklch(32% 0.062 299) 60%,
+            oklch(40% 0.07 303) 85%,
+            oklch(44% 0.075 305));
+    border: 1px solid oklch(100% 0 0 / 0.16);
     box-shadow: 0 4px 14px oklch(0% 0 0 / 0.18), 0 0 20px oklch(100% 0 0 / 0.04);
-    color: oklch(95% 0.012 240);
+    color: oklch(97% 0.01 300);
+}
+
+:is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj) {
+    background:
+        radial-gradient(ellipse 85% 40% at 60% 110%, oklch(80% 0.07 132 / 0.42), oklch(70% 0.05 160 / 0.14) 55%, transparent 80%),
+        linear-gradient(180deg in oklch,
+            oklch(22% 0.05 280),
+            oklch(25% 0.045 258) 30%,
+            oklch(31% 0.045 222) 60%,
+            oklch(38% 0.048 188) 85%,
+            oklch(42% 0.05 170));
+    background-clip: padding-box;
+    color: oklch(97% 0.01 110);
 }
 
 .aj>*:not(.aj-f) {
@@ -7381,9 +7412,6 @@ details.gm .cl-li::before {
     pointer-events: none;
     -webkit-backdrop-filter: blur(1.2px);
     backdrop-filter: blur(1.2px);
-    background:
-        radial-gradient(ellipse 40% 34% at 12% 10%, oklch(92% 0.03 250 / 0.08), transparent 75%),
-        radial-gradient(ellipse 46% 40% at 88% 70%, oklch(92% 0.03 345 / 0.08), transparent 75%);
 }
 
 .aj::after {
@@ -7391,8 +7419,12 @@ details.gm .cl-li::before {
     position: absolute;
     inset: 6px;
     z-index: 0;
-    border: 1px solid oklch(100% 0 0 / 0.08);
+    border: 1px solid oklch(92% 0.04 300 / 0.1);
     pointer-events: none;
+}
+
+:is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj)::after {
+    border-color: oklch(93% 0.04 120 / 0.1);
 }
 
 .aj>.aj-f {
@@ -7479,7 +7511,7 @@ details.gm .cl-li::before {
     width: 28px;
     height: 48px;
     border-radius: 50%;
-    background: oklch(78% 0.07 315 / 0.11);
+    background: radial-gradient(ellipse 90% 100% at 50% 100%, oklch(90% 0.04 300 / 0.06), oklch(92% 0.04 300 / 0.14) 60%, oklch(92% 0.04 300 / 0.1));
     transform-origin: center bottom;
 }
 
@@ -7567,14 +7599,21 @@ details.gm .cl-li::before {
 .aj>.aj-f:nth-of-type(n+8)::after,
 .aj>.aj-f:nth-of-type(n+8)>div::before,
 .aj>.aj-f:nth-of-type(n+8)>div::after {
-    background: oklch(78% 0.065 285 / 0.11);
+    background: radial-gradient(ellipse 90% 100% at 50% 100%, oklch(88% 0.05 285 / 0.06), oklch(88% 0.05 285 / 0.15) 60%, oklch(88% 0.05 285 / 0.1));
 }
 
-.aj>.aj-f:nth-of-type(3n)::before,
-.aj>.aj-f:nth-of-type(3n)::after,
-.aj>.aj-f:nth-of-type(3n)>div::before,
-.aj>.aj-f:nth-of-type(3n)>div::after {
-    background: oklch(80% 0.07 345 / 0.11);
+:is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj)>.aj-f::before,
+:is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj)>.aj-f::after,
+:is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj)>.aj-f>div::before,
+:is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj)>.aj-f>div::after {
+    background: radial-gradient(ellipse 90% 100% at 50% 100%, oklch(92% 0.055 130 / 0.07), oklch(92% 0.055 130 / 0.15) 60%, oklch(92% 0.055 130 / 0.11));
+}
+
+:is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj)>.aj-f:nth-of-type(n+8)::before,
+:is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj)>.aj-f:nth-of-type(n+8)::after,
+:is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj)>.aj-f:nth-of-type(n+8)>div::before,
+:is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj)>.aj-f:nth-of-type(n+8)>div::after {
+    background: radial-gradient(ellipse 90% 100% at 50% 100%, oklch(92% 0.03 160 / 0.06), oklch(92% 0.03 160 / 0.14) 60%, oklch(92% 0.03 160 / 0.1));
 }
 
 .aj>.aj-p {
@@ -8145,18 +8184,18 @@ details.gm .cl-li::before {
     padding: 2.5em 1.9em 6em;
 }
 
-main :is(.hs, .gx, .rn, .yu, .um, .aj)[class] {
+:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj)[class] {
     display: flex;
     flex-direction: column;
     min-height: 290px;
 }
 
-main :is(.hs, .gx, .rn, .yu, .um, .aj, .aj-ct)>.bgm[class] {
+:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj, .aj-ct)>.bgm[class] {
     margin-top: auto;
     margin-bottom: 0;
 }
 
-main .aj>.aj-ct[class] {
+:is(main, .g_box, .n_box) .aj>.aj-ct[class] {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -8771,6 +8810,28 @@ details.plf > .pl {
 
 details.plf > .pg-qt {
     margin-top: 1.8em;
+}
+
+@media (max-width: 767px) {
+    .il.sg+details.plf {
+        margin-top: 3.4em;
+    }
+
+    .il.sg+details.plf > summary .ln {
+        display: block;
+        position: absolute;
+        right: 0;
+        bottom: calc(100% + 2.6em);
+        font: 300 0.8em/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: color-mix(in srgb, var(--color) 65%, transparent);
+        pointer-events: none;
+    }
+
+    .il.sg+details.plf > summary .ln::before {
+        content: "Swipe\2002\E06C";
+    }
 }
 
 @media (min-width: 768px) {

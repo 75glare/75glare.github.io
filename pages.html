@@ -10,7 +10,7 @@
 <style>
 @font-face { font-family: 'SiteSymbol'; src: url('https://75glare.github.io/symbol-sub.woff2') format('woff2'); font-display: block; }
 .pl-ic { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
-.pl-ic button.btn { padding: 4px 6px; border-radius: 999px; font: 1.9em/1 'SiteSymbol'; }
+.pl-ic button.btn { display: grid; place-items: center; width: 40px; height: 40px; padding: 0.12em 0 0; border-radius: 50%; font: 24px/1 'SiteSymbol'; }
 .pl-ic button.btn[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in oklch, var(--accent) 25%, transparent); }
 :root {
     color-scheme: dark;
@@ -188,9 +188,12 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
                 <div class="acts"><button type="button" class="btn small" data-add="st.items">カードを足す</button></div>
             </div>
             <div class="panel">
-                <h2>下の部分</h2>
-                <label for="st-quote">英文</label>
-                <input type="text" id="st-quote" data-k="st.quote">
+                <h2>プレイリスト（バトンの下）</h2>
+                <p class="hint">バトンの下の折りたたみの曲は、「Playlist」のところで書き換えてね。見出し・曲・英文がそのままここに入って、「6 songs」の数も自動で変わるよ。</p>
+                <div class="acts"><button type="button" class="btn small" data-goto="pl">Playlist で曲を書き換える</button></div>
+            </div>
+            <div class="panel">
+                <h2>いちばん下</h2>
                 <label for="st-date">Last Updated</label>
                 <div class="row" style="grid-template-columns: 1fr auto">
                     <input type="text" id="st-date" data-k="st.date">
@@ -225,6 +228,8 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
             <div class="panel">
                 <h2>曲</h2>
                 <p class="hint">1 つが 1 行になって、押すとその曲のプレイヤーの書き込みに移るよ。上から書いた順に並ぶ。丸の印と色は、その曲のプレイヤーと同じものを選んでね。</p>
+                <p class="hint">ここの曲は、Storage のバトンの下のプレイリストにも入るよ。曲を足したら「Storage」に切り替えて、Storage の書き込みを貼り替えてね。</p>
+                <div class="acts"><button type="button" class="btn small" data-goto="st">Storage に切り替える</button></div>
                 <div id="pl-songs"></div>
                 <div class="acts"><button type="button" class="btn small" data-add="pl.songs">曲を足す</button></div>
             </div>
@@ -287,10 +292,10 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
 
 <script>
 (() => {
-    const DEFAULTS = {"at": {"title": "Attention", "icons": [{"cls": "ph-fill ph-books", "href": "https://black.colorless.fyi/57/7"}, {"cls": "ph-fill ph-treasure-chest", "href": "https://black.colorless.fyi/57/41"}, {"cls": "ph-light ph-code", "href": "https://black.colorless.fyi/57/3"}, {"cls": "ph-fill ph-house-line", "href": "https://black.colorless.fyi/57"}], "tags": ["2PL固定　半完混合　時系列混在　捏造　惚気", "同性愛表現　検索避け省略　背後透過"], "notes": "多方面に配慮しないため閲覧は自己責任で。\n有事の際は日記名もしくは日記番号で反応しまーす。", "warnS": "背後透過などについて", "warnB": "同時視聴した映画などの感想や一緒に遊んだゲームの詳細な内容は折りたたみにて、アダルトな話題などはモザイクで配慮してまーす。ワンタップで表示されるからご注意！", "thisis": "胃袋を掴み合ってるGTGと脱サラ呪術師の日常。\n去年の秋から新居でまったりと同棲中。ナチュラルに引っ越し作業を押し付けたら「<kt>喧嘩しますか？<\/kt>」って言われた。あの時の七海は恐かったな……。", "prevS": "前回までのあらすじ", "prevB": "目標だった73ページは書き切ったからそのまま終わりにするつもりだったけど、誰かさんが寂しそうだったので共同日記としてセカンドシーズンスタート！！\nタイトルは七海クンが考えてくれました〜！拍手〜！\n<gy>旧題：『たぶん』五条悟／『きっと』七海建人<\/gy>", "people": [{"ch": "gjo", "name": "五条悟", "roma": "Gojo Satoru", "tag": "na", "text": "無茶振りをして私を困らせるのが好き。(七海限定：五条談)たまに語彙が小学生。可愛いよりかっこいいと言われたい人。しかし可愛いが勝つ。スパダリ。"}, {"ch": "na", "name": "七海建人", "roma": "Nanami Kento", "tag": "go", "text": "口下手なのに直球しか投げない。心配性。すぐ噛む。生意気。手元の本を閉じるだけで僕を呼び寄せることが出来るのはたぶん七海だけだと思う。"}]}, "st": {"title": "Storage", "icons": [{"cls": "ph-fill ph-film-reel", "href": "https://black.colorless.fyi/57/95,53,52"}, {"cls": "ph-fill ph-game-controller", "href": "https://black.colorless.fyi/57/70"}, {"cls": "ph-fill ph-cake", "href": "https://black.colorless.fyi/57/42"}, {"cls": "ph-fill ph-house-line", "href": "https://black.colorless.fyi/57"}], "items": [{"ch": "gjo", "href": "https://black.colorless.fyi/57/16", "title": "惚気バトン(仮)", "desc": "僕が七海のために作ってあげたバトン！"}, {"ch": "gjo", "href": "https://black.colorless.fyi/57/47", "title": "好きを紡ぐ日常バトン", "desc": "僕が七海のために作ってあげたバトン第二弾！"}, {"ch": "na", "href": "https://black.colorless.fyi/57/49", "title": "好きを紡ぐ日常バトン", "desc": "回答者：七海建人　おまけは後日掲載予定。"}], "quote": "Bound here, so our days never fade.", "date": "2026.10.02"}, "bs": {"books": [{"color": "oklch(78% 0.10 95)", "icon": "E9BA", "font": "Light", "href": "https://1colorless.nieru.net/20", "title": "Lemon"}, {"color": "oklch(63% 0.10 25)", "icon": "E9BA", "font": "Fill", "href": "https://black.colorless.fyi/14", "title": "終のしとね"}, {"color": "oklch(64% 0.09 245)", "icon": "E6DE", "font": "Light", "href": "https://1colorless.nieru.net/19", "title": "まにまに"}, {"color": "oklch(60% 0.09 285)", "icon": "EC48", "font": "Fill", "href": "https://black.colorless.fyi/113", "title": "憎"}, {"color": "oklch(58% 0.12 18)", "icon": "E8F4", "font": "Fill", "href": "https://black.colorless.fyi/36", "title": "三途の川より"}, {"color": "oklch(68% 0.11 55)", "icon": "E8F4", "font": "Fill", "href": "https://black.colorless.fyi/87", "title": "地獄巡り"}, {"color": "oklch(66% 0.08 155)", "icon": "E6A2", "font": "Fill", "href": "https://black.colorless.fyi/156", "title": "星を綴じる夜"}, {"color": "oklch(64% 0.08 305)", "icon": "E31C", "font": "Light", "href": "https://1colorless.nieru.net/129", "title": "reversible"}, {"color": "oklch(66% 0.035 240)", "icon": "E652", "font": "Fill", "href": "https://black.colorless.fyi/15", "title": "異星交友"}, {"color": "oklch(66% 0.050 75)", "icon": "E648", "font": "Light", "href": "https://1colorless.nieru.net/40", "title": "恩讐の彼方に"}, {"color": "oklch(72% 0.08 350)", "icon": "E74A", "font": "Light", "href": "https://1colorless.nieru.net/43", "title": "抱き枕の行方"}], "stored": [{"color": "", "icon": "E28A", "font": "Light", "href": "https://1colorless.nieru.net/26", "title": "SSRS"}, {"color": "", "icon": "E8C4", "font": "Light", "href": "https://1colorless.nieru.net/25", "title": "きみは守るが世界は壊す"}, {"color": "", "icon": "EDC8", "font": "Light", "href": "https://1colorless.nieru.net/55", "title": "僕にとっては君が、俺にとってはお前が…─"}, {"color": "", "icon": "E9C0", "font": "Fill", "href": "https://black.colorless.fyi/44", "title": "烏有に帰す。"}, {"color": "", "icon": "E2B8", "font": "Light", "href": "https://1colorless.nieru.net/306", "title": "すこしずつ、ふたり"}]}, "pl": {"title": "One Earbud Each", "sub": "ふたりで聴いた曲", "qEn": "Some songs only make sense with you in the other ear.", "qJa": "", "qBy": "", "songs": [{"ch": "gjo", "ic": "Y", "href": "https://black.colorless.fyi/57/53", "title": "napori", "artist": "Vaundy", "len": "3:24"}, {"ch": "na", "ic": "H", "href": "https://black.colorless.fyi/57/64", "title": "あなた", "artist": "宇多田ヒカル", "len": "4:37"}]}};
+    const DEFAULTS = {"at": {"title": "Attention", "icons": [{"cls": "ph-fill ph-books", "href": "https://black.colorless.fyi/57/7"}, {"cls": "ph-fill ph-treasure-chest", "href": "https://black.colorless.fyi/57/41,126"}, {"cls": "ph-light ph-code", "href": "https://black.colorless.fyi/57/3"}, {"cls": "ph-fill ph-heart", "href": "https://white.colorless.fyi/73"}], "tags": ["2PL固定　半完混合　時系列混在　捏造　惚気", "同性愛表現　検索避け省略　背後透過"], "notes": "多方面に配慮しないため閲覧は自己責任で。\n有事の際は日記名もしくは日記番号で反応しまーす。", "warnS": "背後透過などについて", "warnB": "同時視聴した映画などの感想や一緒に遊んだゲームの詳細な内容は折りたたみにて、アダルトな話題などはモザイクで配慮してまーす。ワンタップで表示されるからご注意！", "thisis": "胃袋を掴み合ってるGTGと脱サラ呪術師の日常。\n去年の秋から新居でまったりと同棲中。ナチュラルに引っ越し作業を押し付けたら「<kt>喧嘩しますか？<\/kt>」って言われた。あの時の七海は恐かったな……。", "prevS": "前回までのあらすじ", "prevB": "目標だった73ページは書き切ったからそのまま終わりにするつもりだったけど、誰かさんが寂しそうだったので共同日記としてセカンドシーズンスタート！！\nタイトルは七海クンが考えてくれました〜！拍手〜！\n<gy>旧題：『たぶん』五条悟／『きっと』七海建人<\/gy>", "people": [{"ch": "gjo", "name": "五条悟", "roma": "Gojo Satoru", "tag": "na", "text": "無茶振りをして私を困らせるのが好き。(七海限定：五条談)たまに語彙が小学生。可愛いよりかっこいいと言われたい人。しかし可愛いが勝つ。スパダリ。"}, {"ch": "na", "name": "七海建人", "roma": "Nanami Kento", "tag": "go", "text": "口下手なのに直球しか投げない。心配性。すぐ噛む。生意気。手元の本を閉じるだけで僕を呼び寄せることが出来るのはたぶん七海だけだと思う。"}]}, "st": {"title": "Storage", "icons": [{"cls": "ph-fill ph-film-reel", "href": "https://black.colorless.fyi/57/52"}, {"cls": "ph-fill ph-game-controller", "href": "https://black.colorless.fyi/57/70"}, {"cls": "ph-fill ph-fork-knife", "href": "https://black.colorless.fyi/57/42"}, {"cls": "ph-fill ph-ticket", "href": "https://black.colorless.fyi/57/23"}, {"cls": "ph-fill ph-gift", "href": "https://black.colorless.fyi/57/32"}], "items": [{"ch": "gjo", "href": "https://black.colorless.fyi/57/16", "title": "惚気バトン(仮)", "desc": "僕が七海のために作ってあげたバトン！"}, {"ch": "gjo", "href": "https://black.colorless.fyi/57/47", "title": "好きを紡ぐ日常バトン", "desc": "僕が七海のために作ってあげたバトン第二弾！"}, {"ch": "na", "href": "https://black.colorless.fyi/57/49", "title": "好きを紡ぐ日常バトン", "desc": "おまけは後日掲載予定。"}, {"ch": "gjo", "href": "https://black.colorless.fyi/57/132", "title": "糖度高めな記念日バトン", "desc": "僕が七海のために作ってあげたバトン第三弾！"}], "date": "2026.11.12"}, "bs": {"books": [{"color": "oklch(78% 0.10 95)", "icon": "E9BA", "font": "Light", "href": "https://1colorless.nieru.net/20", "title": "Lemon"}, {"color": "oklch(63% 0.10 25)", "icon": "E9BA", "font": "Fill", "href": "https://black.colorless.fyi/14", "title": "終のしとね"}, {"color": "oklch(64% 0.09 245)", "icon": "E6DE", "font": "Light", "href": "https://1colorless.nieru.net/19", "title": "まにまに"}, {"color": "oklch(60% 0.09 285)", "icon": "EC48", "font": "Fill", "href": "https://black.colorless.fyi/113", "title": "憎"}, {"color": "oklch(58% 0.12 18)", "icon": "E8F4", "font": "Fill", "href": "https://black.colorless.fyi/36", "title": "三途の川より"}, {"color": "oklch(68% 0.11 55)", "icon": "E8F4", "font": "Fill", "href": "https://black.colorless.fyi/87", "title": "地獄巡り"}, {"color": "oklch(66% 0.08 155)", "icon": "E6A2", "font": "Fill", "href": "https://black.colorless.fyi/156", "title": "星を綴じる夜"}, {"color": "oklch(64% 0.08 305)", "icon": "E31C", "font": "Light", "href": "https://1colorless.nieru.net/129", "title": "reversible"}, {"color": "oklch(66% 0.035 240)", "icon": "E652", "font": "Fill", "href": "https://black.colorless.fyi/15", "title": "異星交友"}, {"color": "oklch(66% 0.050 75)", "icon": "E648", "font": "Light", "href": "https://1colorless.nieru.net/40", "title": "恩讐の彼方に"}, {"color": "oklch(72% 0.08 350)", "icon": "E74A", "font": "Light", "href": "https://1colorless.nieru.net/43", "title": "抱き枕の行方"}], "stored": [{"color": "", "icon": "E28A", "font": "Light", "href": "https://1colorless.nieru.net/26", "title": "SSRS"}, {"color": "", "icon": "E8C4", "font": "Light", "href": "https://1colorless.nieru.net/25", "title": "きみは守るが世界は壊す"}, {"color": "", "icon": "EDC8", "font": "Light", "href": "https://1colorless.nieru.net/55", "title": "僕にとっては君が、俺にとってはお前が…─"}, {"color": "", "icon": "E9C0", "font": "Fill", "href": "https://black.colorless.fyi/44", "title": "烏有に帰す。"}, {"color": "", "icon": "E2B8", "font": "Light", "href": "https://1colorless.nieru.net/306", "title": "すこしずつ、ふたり"}]}, "pl": {"title": "One Earbud Each", "sub": "ふたりで聴いた音楽", "qEn": "Some songs only make sense with you in the other ear.", "qJa": "", "qBy": "", "songs": [{"ch": "gjo", "ic": "Y", "href": "https://black.colorless.fyi/57/53", "title": "napori", "artist": "Vaundy", "len": "3:24"}, {"ch": "na", "ic": "H", "href": "https://black.colorless.fyi/57/64", "title": "あなた", "artist": "宇多田ヒカル", "len": "4:37"}, {"ch": "gjo", "ic": "6", "href": "https://black.colorless.fyi/57/95", "title": "Wonderwall", "artist": "OASIS", "len": "4:19"}, {"ch": "gjo", "ic": "#", "href": "https://black.colorless.fyi/57/105", "title": "シャロン", "artist": "ROSSO", "len": "6:12"}, {"ch": "gjo", "ic": "?", "href": "https://black.colorless.fyi/57/115", "title": "Whistle for the Choir", "artist": "The Fratellis", "len": "3:37"}, {"ch": "gjo", "ic": "K", "href": "https://black.colorless.fyi/57/134", "title": "Wherever You Will Go", "artist": "The Calling", "len": "3:27"}]}};
     const PL_ICONS = [['#', '三日月'], ['O', '満ち欠け'], ['H', '月と本'], ['Y', '太陽と月'], ['6', '六芒星'], ['A', 'ひし形の星'], ['Q', '光る十字'], ['I', '宝石'], ['C', '光る目'], ['D', '三角の飾り'], ['F', '星をつかむ手'], ['G', '波の太陽'], ['K', '縞の太陽'], ['P', '星の円'], ['U', '結んだ手'], ['X', '月を持つ手'], ['Z', '水晶と手'], ['4', '月の天秤'], ['7', '星をこぼす手'], ['8', '祈る手と目'], ['9', '三角と月'], ['!', '月の輪'], ['?', '水晶玉'], ['>', '葉の枝']];
     const LIMIT = 5000;
-    const LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500&family=Klee+One:wght@400;600&family=Open+Sans:wght@400;500&family=Scope+One&display=swap" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet"><link href="https://75glare.github.io/365.css" rel="stylesheet">';
+    const LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500&family=Klee+One:wght@400;600&family=Shippori+Mincho:wght@400&family=Open+Sans:wght@300;400;500&family=Playwrite+DE+LA:wght@200&family=Scope+One&display=swap" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet"><link href="https://75glare.github.io/365.css" rel="stylesheet">';
     const COLORS = [
         ['', 'おまかせ（並び順の色）'],
         ['oklch(78% 0.10 95)', '黄'],
@@ -317,6 +322,10 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
     if (!state.pl) state.pl = clone(DEFAULTS.pl);
     if (state.pl.qEn === undefined && state.pl.title === 'Playlist') state.pl.title = DEFAULTS.pl.title;
     ['qEn', 'qJa', 'qBy'].forEach((k) => { if (state.pl[k] === undefined) state.pl[k] = DEFAULTS.pl[k]; });
+    if (state.st.quote !== undefined) {
+        delete state.st.quote;
+        state.st.icons = state.st.icons.filter((i) => !/ph-headphones/.test(i.cls));
+    }
     const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
 
     const get = (path) => path.split('.').reduce((o, k) => (o == null ? o : o[k]), state);
@@ -363,7 +372,7 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
     function buildSt(s) {
         const items = s.items.map((it) => `<div class="il-it" data-ch="${it.ch}" style="--icon: '\\E58E';--font: 'Phosphor-Light';"><dt class="il-ti"><a href="${attr(it.href)}" class="il-lk">${it.title}</a></dt><dd class="il-ds">${it.desc}</dd></div>`).join('');
         return `<main><div class="ti-tr">${s.title}<div class="ic-tr">${iconLinks(s.icons)}</div></div><dl class="il sg">${items}</dl>`
-            + `<p class="pg-qt"><span class="pg-en">${s.quote}</span></p><p class="pg-now up">Last Updated ―<b>${s.date}</b></p></main>`;
+            + plFold(state.pl) + `<p class="pg-now up">Last Updated ―<b>${s.date}</b></p></main>`;
     }
     const bookHTML = (b) => `<div class="il-it" style="${b.color ? `--bk: ${b.color};` : ''}--icon: '\\${b.icon}';--font: 'Phosphor-${b.font}';"><dt class="il-ti"><a href="${attr(b.href)}" class="il-lk">${b.title}</a></dt></div>`;
     const buildBs = (b) => `<main><div class="ti-tr"><span>Bookshelf<small>愛読書</small></span></div><dl class="il bs">${b.books.map(bookHTML).join('')}</dl></main>`;
@@ -387,9 +396,16 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
         const min = Math.round(sec / 60);
         return `<p class="pg-now pl-sum">${songs.length} ${songs.length === 1 ? 'song' : 'songs'}${min ? ` ―<b>${min} min</b>` : ''}</p>`;
     };
+    const plSongs = (p) => p.songs.filter((x) => x.title.trim()).map((x) => `<a href="${attr(x.href)}" class="pl-it" data-ch="${x.ch}" data-ic="${attr(x.ic)}"${songLen(x.len) ? ` data-len="${songLen(x.len)}"` : ''}>${x.title.trim()}${x.artist.trim() ? `<small>${x.artist.trim()}</small>` : ''}</a>`).join('');
     const buildPl = (p) => `<main class="pl"><h3${p.sub.trim() ? ` data-sub="${attr(p.sub.trim())}"` : ''}>${p.title}</h3>`
-        + p.songs.filter((x) => x.title.trim()).map((x) => `<a href="${attr(x.href)}" class="pl-it" data-ch="${x.ch}" data-ic="${attr(x.ic)}"${songLen(x.len) ? ` data-len="${songLen(x.len)}"` : ''}>${x.title.trim()}${x.artist.trim() ? `<small>${x.artist.trim()}</small>` : ''}</a>`).join('')
-        + plQuote(p) + plSum(p) + '</main>';
+        + plSongs(p) + plQuote(p) + plSum(p) + '</main>';
+    // Storage のバトンの下に入れる、折りたたみのプレイリスト
+    const plFold = (p) => {
+        const n = p.songs.filter((x) => x.title.trim()).length;
+        if (!n) return '';
+        return `<details class="plf"><summary data-n="${n} ${n === 1 ? 'song' : 'songs'}">${p.title}${p.sub.trim() ? `<small>${p.sub.trim()}</small>` : ''}<span class="ln"></span></summary>`
+            + `<div class="pl">${plSongs(p)}</div>${plQuote(p)}${plSum(p)}</details>`;
+    };
     const build = () => (state.tab === 'at' ? buildAt(state.at) : state.tab === 'st' ? buildSt(state.st) : state.tab === 'pl' ? buildPl(state.pl) : buildBs(state.bs));
 
     // ---- 一覧の入力欄
@@ -586,8 +602,8 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
             const a = it.querySelector('.il-lk');
             return { ch: it.dataset.ch || 'gjo', href: a ? a.getAttribute('href') || '' : '', title: inner(a), desc: inner(it.querySelector('.il-ds')) };
         });
-        const date = m.querySelector('.pg-now b');
-        return { title: ownText(m.querySelector('.ti-tr')), icons: readIcons(m), items, quote: inner(m.querySelector('.pg-qt .pg-en')), date: date ? date.textContent.trim() : '' };
+        const date = m.querySelector('.pg-now.up b');
+        return { title: ownText(m.querySelector('.ti-tr')), icons: readIcons(m), items, date: date ? date.textContent.trim() : '' };
     }
     function readBs(m) {
         const books = [...m.querySelectorAll('dl.il.bs .il-it')].map((it) => {
@@ -601,7 +617,7 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
         return { books, stored: clone(state.bs.stored || []) };
     }
     function readPl(m) {
-        const h = m.querySelector(':scope > h3');
+        const h = m.matches('details.plf') ? m.querySelector(':scope > summary') : m.querySelector(':scope > h3');
         const songs = [...m.querySelectorAll('a.pl-it')].map((a) => ({
             ch: a.dataset.ch === 'na' ? 'na' : 'gjo',
             ic: a.dataset.ic || '#',
@@ -614,7 +630,8 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
         const qEn = q ? ownText(q).replace(/^[“"]|[”"]$/g, '') : '';
         const qJa = q ? [...q.querySelectorAll('.pg-ja > span')].map((x) => x.textContent).join('') : '';
         const qBy = q && q.querySelector('cite') ? q.querySelector('cite').textContent.replace(/^[—–-]\s*/, '').trim() : '';
-        return { title: ownText(h), sub: h ? h.dataset.sub || '' : '', qEn, qJa, qBy, songs };
+        const sub = !h ? '' : h.matches('summary') ? (h.querySelector('small') ? h.querySelector('small').textContent.trim() : '') : h.dataset.sub || '';
+        return { title: ownText(h), sub, qEn, qJa, qBy, songs };
     }
     $('imp-go').addEventListener('click', () => {
         const msg = $('imp-msg');
@@ -633,6 +650,7 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
         const read = tab === 'at' ? readAt(m) : tab === 'st' ? readSt(m) : tab === 'pl' ? readPl(m) : readBs(m);
         state[tab] = read;
         state.tab = tab;
+        if (tab === 'st' && m.querySelector('details.plf')) state.pl = readPl(m.querySelector('details.plf'));
         if (tab === 'st') stItemsAt = JSON.stringify(read.items);
         renderForms();
         render();
@@ -641,6 +659,14 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
         msg.textContent = `${names[tab]} として読み取ったよ。` + (again ? '貼ったものと同じ HTML が出ているよ。' : '貼ったものと少し違う所があるから、下の入力欄とプレビューを確かめてね。');
     });
 
+    document.addEventListener('click', (ev) => {
+        const g = ev.target.closest('[data-goto]');
+        if (!g) return;
+        state.tab = g.dataset.goto;
+        renderForms();
+        render();
+        window.scrollTo(0, 0);
+    });
     $('tabs').addEventListener('click', (ev) => {
         const b = ev.target.closest('button');
         if (!b) return;
