@@ -108,24 +108,28 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
 .import { margin-bottom: 14px; }
 .nudge { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; color: var(--accent); }
 .import textarea { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
+textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
+.dn-box { margin-top: 8px; }
+.dn-box > summary { cursor: pointer; color: var(--sub); font-size: 13px; }
 [hidden] { display: none !important; }
 @media (max-width: 520px) { .row { grid-template-columns: 1fr !important; } }
 </style>
 </head>
 <body>
 <h1>ページの編集室</h1>
-<p class="lead">Attention・Storage・愛読書・Playlist のページを作るところ。書き換えると下に貼る用の HTML ができるから、コピーして書き込みの本文をまるごと貼り替えてね。</p>
+<p class="lead">Attention・Storage・愛読書・Playlist・デザインノートのページを作るところ。書き換えると下に貼る用の HTML ができるから、コピーして書き込みの本文をまるごと貼り替えてね。</p>
 
 <div class="tabs" id="tabs">
     <button type="button" data-tab="at">Attention（2）</button>
     <button type="button" data-tab="st">Storage（41）</button>
     <button type="button" data-tab="bs">愛読書（7）</button>
     <button type="button" data-tab="pl">Playlist</button>
+    <button type="button" data-tab="dn">デザインノート（10）</button>
 </div>
 
 <div class="panel import">
     <h2>今のページを読み取る</h2>
-    <p class="hint">掲示板の書き込みの編集画面から、本文をまるごとコピーして貼ってね。「読み取る」を押すと、Attention・Storage・愛読書・Playlist のどれかを見分けて、下の入力欄に今の内容を入れるよ。</p>
+    <p class="hint">掲示板の書き込みの編集画面から、本文をまるごとコピーして貼ってね。「読み取る」を押すと、Attention・Storage・愛読書・Playlist・デザインノートのどれかを見分けて、下の入力欄に今の内容を入れるよ。</p>
     <textarea id="imp-src" placeholder="ここに貼る"></textarea>
     <div class="acts">
         <button type="button" class="btn" id="imp-go">読み取る</button>
@@ -244,6 +248,42 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
                 <p class="hint">訳は最初の「、」のところで折り返すよ。映画のページの下の英文と同じ形になる。いちばん下の「2 songs ― 8 min」は、曲の数と長さから自動で出るよ。</p>
             </div>
         </section>
+
+        <section data-form="dn" hidden>
+            <div class="panel">
+                <h2>上の部分</h2>
+                <p class="hint">英文の見出しと北極星の表紙が入っているところ。HTML のまま書き換えられるよ。ふだんは触らなくていい。</p>
+                <textarea class="code" id="dn-top" data-k="dn.top"></textarea>
+            </div>
+            <div class="panel">
+                <h2>並んでいるデザインノート</h2>
+                <p class="hint">1 つが 1 つの折りたたみになって、上から書いた順に並ぶよ。見出しの横の札には曲名が入る。箱の中身は「箱の HTML」を開くと書き換えられる。</p>
+                <div id="dn-items"></div>
+            </div>
+            <div class="panel">
+                <h2>デザインノートを足す</h2>
+                <p class="hint">書いて「いちばん下に足す」を押すと、上の一覧の最後に入るよ。印は種類に合わせて選ばれるけど、足したあと一覧で変えられる。</p>
+                <div class="row" style="grid-template-columns: 1fr 1fr">
+                    <div><label for="dn-kind">種類</label><select id="dn-kind" data-k="dnNew.kind"></select></div>
+                    <div><label for="dn-who">誰が書く</label><select id="dn-who" data-k="dnNew.who">
+                        <option value="g">五条</option>
+                        <option value="n">七海</option>
+                    </select></div>
+                </div>
+                <div class="row" style="grid-template-columns: 1fr 10em">
+                    <div><label for="dn-title">見出し（折りたたみと箱の両方に出る）</label><input type="text" id="dn-title" data-k="dnNew.title"></div>
+                    <div><label for="dn-date">日付</label><input type="text" id="dn-date" inputmode="numeric" placeholder="20261118" data-k="dnNew.date"></div>
+                </div>
+                <label for="dn-body">本文</label>
+                <textarea id="dn-body" data-k="dnNew.body"></textarea>
+                <label class="check"><input type="checkbox" id="dn-klee">七海のフォントにする（見出しと本文）</label>
+                <div class="row" style="grid-template-columns: 1fr 1fr">
+                    <div><label for="dn-song">曲名（なくてもOK）</label><input type="text" id="dn-song" data-k="dnNew.song"></div>
+                    <div><label for="dn-artist">アーティスト名</label><input type="text" id="dn-artist" data-k="dnNew.artist"></div>
+                </div>
+                <div class="acts"><button type="button" class="btn" data-add="dn.items">いちばん下に足す</button><span class="hint" id="dn-msg" role="status"></span></div>
+            </div>
+        </section>
     </div>
 
     <div class="side">
@@ -295,6 +335,21 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
     const DEFAULTS = {"at": {"title": "Attention", "icons": [{"cls": "ph-fill ph-books", "href": "https://black.colorless.fyi/57/7"}, {"cls": "ph-fill ph-treasure-chest", "href": "https://black.colorless.fyi/57/41,126"}, {"cls": "ph-light ph-code", "href": "https://black.colorless.fyi/57/3"}, {"cls": "ph-fill ph-heart", "href": "https://white.colorless.fyi/73"}], "tags": ["2PL固定　半完混合　時系列混在　捏造　惚気", "同性愛表現　検索避け省略　背後透過"], "notes": "多方面に配慮しないため閲覧は自己責任で。\n有事の際は日記名もしくは日記番号で反応しまーす。", "warnS": "背後透過などについて", "warnB": "同時視聴した映画などの感想や一緒に遊んだゲームの詳細な内容は折りたたみにて、アダルトな話題などはモザイクで配慮してまーす。ワンタップで表示されるからご注意！", "thisis": "胃袋を掴み合ってるGTGと脱サラ呪術師の日常。\n去年の秋から新居でまったりと同棲中。ナチュラルに引っ越し作業を押し付けたら「<kt>喧嘩しますか？<\/kt>」って言われた。あの時の七海は恐かったな……。", "prevS": "前回までのあらすじ", "prevB": "目標だった73ページは書き切ったからそのまま終わりにするつもりだったけど、誰かさんが寂しそうだったので共同日記としてセカンドシーズンスタート！！\nタイトルは七海クンが考えてくれました〜！拍手〜！\n<gy>旧題：『たぶん』五条悟／『きっと』七海建人<\/gy>", "people": [{"ch": "gjo", "name": "五条悟", "roma": "Gojo Satoru", "tag": "na", "text": "無茶振りをして私を困らせるのが好き。(七海限定：五条談)たまに語彙が小学生。可愛いよりかっこいいと言われたい人。しかし可愛いが勝つ。スパダリ。"}, {"ch": "na", "name": "七海建人", "roma": "Nanami Kento", "tag": "go", "text": "口下手なのに直球しか投げない。心配性。すぐ噛む。生意気。手元の本を閉じるだけで僕を呼び寄せることが出来るのはたぶん七海だけだと思う。"}]}, "st": {"title": "Storage", "icons": [{"cls": "ph-fill ph-film-reel", "href": "https://black.colorless.fyi/57/52"}, {"cls": "ph-fill ph-game-controller", "href": "https://black.colorless.fyi/57/70"}, {"cls": "ph-fill ph-fork-knife", "href": "https://black.colorless.fyi/57/42"}, {"cls": "ph-fill ph-ticket", "href": "https://black.colorless.fyi/57/23"}, {"cls": "ph-fill ph-gift", "href": "https://black.colorless.fyi/57/32"}], "items": [{"ch": "gjo", "href": "https://black.colorless.fyi/57/16", "title": "惚気バトン(仮)", "desc": "僕が七海のために作ってあげたバトン！"}, {"ch": "gjo", "href": "https://black.colorless.fyi/57/47", "title": "好きを紡ぐ日常バトン", "desc": "僕が七海のために作ってあげたバトン第二弾！"}, {"ch": "na", "href": "https://black.colorless.fyi/57/49", "title": "好きを紡ぐ日常バトン", "desc": "おまけは後日掲載予定。"}, {"ch": "gjo", "href": "https://black.colorless.fyi/57/132", "title": "糖度高めな記念日バトン", "desc": "僕が七海のために作ってあげたバトン第三弾！"}], "date": "2026.11.12"}, "bs": {"books": [{"color": "oklch(78% 0.10 95)", "icon": "E9BA", "font": "Light", "href": "https://1colorless.nieru.net/20", "title": "Lemon"}, {"color": "oklch(63% 0.10 25)", "icon": "E9BA", "font": "Fill", "href": "https://black.colorless.fyi/14", "title": "終のしとね"}, {"color": "oklch(64% 0.09 245)", "icon": "E6DE", "font": "Light", "href": "https://1colorless.nieru.net/19", "title": "まにまに"}, {"color": "oklch(60% 0.09 285)", "icon": "EC48", "font": "Fill", "href": "https://black.colorless.fyi/113", "title": "憎"}, {"color": "oklch(58% 0.12 18)", "icon": "E8F4", "font": "Fill", "href": "https://black.colorless.fyi/36", "title": "三途の川より"}, {"color": "oklch(68% 0.11 55)", "icon": "E8F4", "font": "Fill", "href": "https://black.colorless.fyi/87", "title": "地獄巡り"}, {"color": "oklch(66% 0.08 155)", "icon": "E6A2", "font": "Fill", "href": "https://black.colorless.fyi/156", "title": "星を綴じる夜"}, {"color": "oklch(64% 0.08 305)", "icon": "E31C", "font": "Light", "href": "https://1colorless.nieru.net/129", "title": "reversible"}, {"color": "oklch(66% 0.035 240)", "icon": "E652", "font": "Fill", "href": "https://black.colorless.fyi/15", "title": "異星交友"}, {"color": "oklch(66% 0.050 75)", "icon": "E648", "font": "Light", "href": "https://1colorless.nieru.net/40", "title": "恩讐の彼方に"}, {"color": "oklch(72% 0.08 350)", "icon": "E74A", "font": "Light", "href": "https://1colorless.nieru.net/43", "title": "抱き枕の行方"}], "stored": [{"color": "", "icon": "E28A", "font": "Light", "href": "https://1colorless.nieru.net/26", "title": "SSRS"}, {"color": "", "icon": "E8C4", "font": "Light", "href": "https://1colorless.nieru.net/25", "title": "きみは守るが世界は壊す"}, {"color": "", "icon": "EDC8", "font": "Light", "href": "https://1colorless.nieru.net/55", "title": "僕にとっては君が、俺にとってはお前が…─"}, {"color": "", "icon": "E9C0", "font": "Fill", "href": "https://black.colorless.fyi/44", "title": "烏有に帰す。"}, {"color": "", "icon": "E2B8", "font": "Light", "href": "https://1colorless.nieru.net/306", "title": "すこしずつ、ふたり"}]}, "pl": {"title": "One Earbud Each", "sub": "ふたりで聴いた音楽", "qEn": "Some songs only make sense with you in the other ear.", "qJa": "", "qBy": "", "songs": [{"ch": "gjo", "ic": "Y", "href": "https://black.colorless.fyi/57/53", "title": "napori", "artist": "Vaundy", "len": "3:24"}, {"ch": "na", "ic": "H", "href": "https://black.colorless.fyi/57/64", "title": "あなた", "artist": "宇多田ヒカル", "len": "4:37"}, {"ch": "gjo", "ic": "6", "href": "https://black.colorless.fyi/57/95", "title": "Wonderwall", "artist": "OASIS", "len": "4:19"}, {"ch": "gjo", "ic": "#", "href": "https://black.colorless.fyi/57/105", "title": "シャロン", "artist": "ROSSO", "len": "6:12"}, {"ch": "gjo", "ic": "?", "href": "https://black.colorless.fyi/57/115", "title": "Whistle for the Choir", "artist": "The Fratellis", "len": "3:37"}, {"ch": "gjo", "ic": "K", "href": "https://black.colorless.fyi/57/134", "title": "Wherever You Will Go", "artist": "The Calling", "len": "3:27"}]}};
     const PL_ICONS = [['#', '三日月'], ['O', '満ち欠け'], ['H', '月と本'], ['Y', '太陽と月'], ['6', '六芒星'], ['A', 'ひし形の星'], ['Q', '光る十字'], ['I', '宝石'], ['C', '光る目'], ['D', '三角の飾り'], ['F', '星をつかむ手'], ['G', '波の太陽'], ['K', '縞の太陽'], ['P', '星の円'], ['U', '結んだ手'], ['X', '月を持つ手'], ['Z', '水晶と手'], ['4', '月の天秤'], ['7', '星をこぼす手'], ['8', '祈る手と目'], ['9', '三角と月'], ['!', '月の輪'], ['?', '水晶玉'], ['>', '葉の枝']];
     const LIMIT = 5000;
+    // デザインノート（57/10）の初期値は、公開中の書き込みをそのまま読み取って作る
+    const DN_SRC = "<main><add>Starlit Notes — for Nanami<small>I have loved the stars too fondly to be fearful of the night.</small></add><div class=\"ti-tr cv\"><span>Polaris<small>We turn around the same light.</small></span></div><add>This sky, and every star in it, belongs to 365×N.</add><details class=\"mv ic-star\"><summary>星明かりの夜<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;Don't Go Away - OASIS</bx></span></summary><div class=\"hs\"><span class=\"hs-sh\"></span><span class=\"hs-sh\"></span><h2 class=\"klee\" data-date=\"20260327\" data-name=\"Nanami Kento\">星明かりの夜</h2><p class=\"klee\">流星は2つ（20s/26s・11s delay）</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>Don't Go Away - OASIS</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-moon-stars\"><summary>宵の星明かり<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;PINK - TMGE</bx></span></summary><div class=\"hs yoi\"><span class=\"hs-sh\"></span><span class=\"hs-sh\"></span><h2 data-date=\"20261111\" data-name=\"Gojo Satoru\">宵の星明かり</h2><p>流星は2つ（20s/26s・11s delay）</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>PINK - THEE MICHELLE GUN ELEPHANT</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-sparkle\"><summary>星の絨毯<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;六等星 - ざらめ</bx></span></summary><div class=\"gx\"><div class=\"gx-sh\"></div><div class=\"gx-sh\"></div><h2 data-date=\"20260327\" data-name=\"Gojo Satoru\">星の絨毯</h2><p>流星は2つ（22s/28s・13s delay）</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>六等星 - ざらめ</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-rain\"><summary>雨の夜<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;雨 - ペトロールズ</bx></span></summary><div class=\"rn\"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><h2 data-date=\"20260327\" data-name=\"Gojo Satoru\">雨の夜</h2><p>1種類＋25要素。2.1〜3.8sで雨が降る。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>雨 - ペトロールズ</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-snow\"><summary>雪の夜<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;Esja - Hania Rani</bx></span></summary><div class=\"yu\"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><h2 data-date=\"20260327\" data-name=\"Gojo Satoru\">雪の夜</h2><p>1種×25要素。10〜15.5sで軸違いの雪が降る。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>Esja - Hania Rani</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-wave\"><summary>凪いだ海の水平線<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;渚 - スピッツ</bx></span></summary><div class=\"um\"><div></div><div></div><div></div><h2 data-date=\"20260327\" data-name=\"Gojo Satoru\">凪いだ海の水平線</h2><p> 波打ち際は2枚、9sで寄せては返す。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>渚 - スピッツ</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-flower\"><summary>紫陽花<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;紫陽花 - PEOPLE 1</bx></span></summary><div class=\"aj\"><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-p\"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class=\"aj-ct\"><h2 class=\"klee\" data-date=\"20260327\" data-name=\"noname\">紫陽花</h2><p class=\"klee\">花びら8枚、左右で合計12輪配置。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>紫陽花 - PEOPLE 1</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></div></details></main>";
+    const DN_KINDS = [['hs', '星明かりの夜', 'ic-star'], ['hs yoi', '宵の星明かり', 'ic-moon-stars'], ['gx', '星の絨毯', 'ic-sparkle'], ['rn', '雨林', 'ic-rain'], ['yu', '夜雪', 'ic-snow'], ['um', '凪いだ海', 'ic-wave'], ['aj', '紫陽花', 'ic-flower'], ['mz', '蒼の水底', 'ic-drop']];
+    const DN_ICONS = [['ic-star', '流れ星', 'ECFA'], ['ic-moon-stars', '月と星', 'E58E'], ['ic-sparkle', 'きらめき', 'E6A2'], ['ic-rain', '雨', 'E1B4'], ['ic-snow', '雪', 'E5AA'], ['ic-wave', '波', 'E6DE'], ['ic-flower', '花', 'E75E'], ['ic-drop', 'しずく', 'E210']];
+    const rep = (str, n) => Array(n).fill(str).join('');
+    const DN_PARTS = {
+        hs: '<span class="hs-sh"></span><span class="hs-sh"></span>',
+        'hs yoi': '<span class="hs-sh"></span><span class="hs-sh"></span>',
+        gx: '<div class="gx-sh"></div><div class="gx-sh"></div>',
+        rn: rep('<div></div>', 25),
+        yu: rep('<div></div>', 25),
+        um: rep('<div></div>', 3),
+        aj: rep('<div class="aj-f"><div></div><div></div><div></div></div>', 12) + `<div class="aj-p">${rep('<i></i>', 8)}</div>`,
+        mz: rep('<b></b>', 4) + '<u></u>' + rep('<i></i>', 23),
+    };
     const LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500&family=Klee+One:wght@400;600&family=Shippori+Mincho:wght@400&family=Open+Sans:wght@300;400;500&family=Playwrite+DE+LA:wght@200&family=Scope+One&display=swap" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet"><link href="https://75glare.github.io/365.css" rel="stylesheet">';
     const COLORS = [
         ['', 'おまかせ（並び順の色）'],
@@ -406,7 +461,41 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
         return `<details class="plf"><summary data-n="${n} ${n === 1 ? 'song' : 'songs'}">${p.title}${p.sub.trim() ? `<small>${p.sub.trim()}</small>` : ''}<span class="ln"></span></summary>`
             + `<div class="pl">${plSongs(p)}</div>${plQuote(p)}${plSum(p)}</details>`;
     };
-    const build = () => (state.tab === 'at' ? buildAt(state.at) : state.tab === 'st' ? buildSt(state.st) : state.tab === 'pl' ? buildPl(state.pl) : buildBs(state.bs));
+    const dnSong = (s) => (String(s || '').trim() ? `<span class="cn gy tp-tg" style="margin-left:10px"><bx><i class="ph-light ph-music-note"></i>&nbsp;${String(s).trim()}</bx></span>` : '');
+    const buildDn = (d) => `<main>${d.top}${d.items.map((it) => `<details class="mv ${it.ic}"><summary>${it.title}${dnSong(it.song)}</summary>${it.box}</details>${it.after || ''}`).join('')}</main>`;
+    // 「足す」の欄から、新しい折りたたみ 1 つ分を作る
+    function dnFromNew(n) {
+        const kind = DN_KINDS.find(([v]) => v === n.kind) || DN_KINDS[DN_KINDS.length - 1];
+        const k = n.klee ? ' class="klee"' : '';
+        const title = String(n.title || '').trim() || kind[1];
+        const date = String(n.date || '').replace(/\D/g, '');
+        const song = String(n.song || '').trim();
+        const artist = String(n.artist || '').trim();
+        const label = song ? `${song}${artist ? ` - ${artist}` : ''}` : '';
+        const body = text(n.body || '');
+        const bgm = label ? `<div class="bgm"><div class="bgm-ti"><span>${label}</span></div><div class="bgm-br"></div><div class="bgm-ct"></div></div>` : '';
+        const box = `<div class="${kind[0]}">${DN_PARTS[kind[0]]}<h2${k}${date ? ` data-date="${date}"` : ''} data-name="${n.who === 'n' ? 'Nanami Kento' : 'Gojo Satoru'}">${title}</h2>${body ? `<p${k}>${body}</p>` : ''}${bgm}</div>`;
+        return { ic: kind[2], title, song: label, box, after: '' };
+    }
+    // 箱を写して、七海の名前と七海のフォントにする（雨・紫陽花などは名前で七海の色になる）
+    function dnNanami(html) {
+        const t = document.createElement('template');
+        t.innerHTML = html;
+        const box = t.content.firstElementChild;
+        if (!box) return '';
+        const c = box.cloneNode(true);
+        c.querySelectorAll('h2').forEach((h) => {
+            h.dataset.name = 'Nanami Kento';
+            h.classList.add('klee');
+            // ほかの投稿と同じく class を先頭にする
+            const rest = [...h.attributes].filter((x) => x.name !== 'class').map((x) => [x.name, x.value]);
+            rest.forEach(([n]) => h.removeAttribute(n));
+            rest.forEach(([n, v]) => h.setAttribute(n, v));
+        });
+        c.querySelectorAll('p').forEach((p) => p.classList.add('klee'));
+        return c.outerHTML;
+    }
+    const build = () => (state.tab === 'at' ? buildAt(state.at) : state.tab === 'st' ? buildSt(state.st) : state.tab === 'pl' ? buildPl(state.pl) : state.tab === 'dn' ? buildDn(state.dn) : buildBs(state.bs));
 
     // ---- 一覧の入力欄
     const moveBtns = (list, i, n) => `<button type="button" class="btn small" data-mv="${list}:${i}:-1" ${i === 0 ? 'disabled' : ''} aria-label="上へ">↑</button><button type="button" class="btn small" data-mv="${list}:${i}:1" ${i === n - 1 ? 'disabled' : ''} aria-label="下へ">↓</button>`;
@@ -479,6 +568,30 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
                 <div class="pl-ic">${PL_ICONS.map(([v, n]) => `<button type="button" class="btn small" data-plic="${i}" data-v="${attr(v)}" title="${n}" aria-label="${n}" aria-pressed="${x.ic === v}">${attr(v)}</button>`).join('')}</div>
             </div>`).join('');
     }
+    function renderDn() {
+        const list = state.dn.items;
+        $('dn-items').innerHTML = list.map((it, i) => {
+            const icon = DN_ICONS.find(([v]) => v === it.ic);
+            return `
+            <div class="item">
+                <div class="item-head">
+                    <span class="ic-prev">${glyph(icon ? icon[2] : '', 'Light')}</span>
+                    <span class="name">${i + 1}. ${attr(it.title) || '（題名なし）'}</span>
+                    ${moveBtns('dn.items', i, list.length)}
+                    <button type="button" class="btn small warn" data-del="dn.items:${i}">消す</button>
+                </div>
+                <div class="row" style="grid-template-columns: 1fr 9em">
+                    <div><label>見出し</label><input type="text" data-k="dn.items.${i}.title" value="${attr(it.title)}"></div>
+                    <div><label>印</label><select data-k="dn.items.${i}.ic" data-rerender>${DN_ICONS.map(([v, n]) => `<option value="${v}" ${v === it.ic ? 'selected' : ''}>${n}</option>`).join('')}${icon ? '' : `<option value="${attr(it.ic)}" selected>${attr(it.ic)}</option>`}</select></div>
+                </div>
+                <label>見出しの横の札（曲名）</label><input type="text" data-k="dn.items.${i}.song" value="${attr(it.song)}">
+                <div class="acts">${/data-name="Nanami Kento"/.test(it.box) ? '<span class="hint">七海の箱も並んでいるよ。</span>' : `<button type="button" class="btn small" data-dn-na="${i}">七海の箱も並べる</button>`}</div>
+                <details class="dn-box"><summary>箱の HTML</summary><textarea class="code" data-k="dn.items.${i}.box">${attr(it.box)}</textarea></details>
+            </div>`;
+        }).join('');
+        $('dn-kind').innerHTML = DN_KINDS.map(([v, n]) => `<option value="${v}" ${v === state.dnNew.kind ? 'selected' : ''}>${n}</option>`).join('');
+        $('dn-klee').checked = !!state.dnNew.klee;
+    }
     function colorOptions(cur) {
         const known = COLORS.some(([v]) => v === cur);
         return COLORS.map(([v, n]) => `<option value="${v}" ${v === cur ? 'selected' : ''}>${n}</option>`).join('')
@@ -528,6 +641,7 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
         renderSt();
         renderBs();
         renderPl();
+        renderDn();
     }
 
     // ---- 出力とプレビュー
@@ -633,6 +747,31 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
         const sub = !h ? '' : h.matches('summary') ? (h.querySelector('small') ? h.querySelector('small').textContent.trim() : '') : h.dataset.sub || '';
         return { title: ownText(h), sub, qEn, qJa, qBy, songs };
     }
+    // 折りたたみの前は「上の部分」、折りたたみのあとに続くものはその折りたたみの after にそのまま残す
+    function readDn(m) {
+        const d = { top: '', items: [] };
+        kids(m).forEach((e) => {
+            if (e.matches('details.mv')) {
+                const sm = e.querySelector(':scope > summary');
+                const t = sm ? sm.cloneNode(true) : null;
+                const tag = t ? t.querySelector('.tp-tg, bx') : null;
+                if (tag) tag.remove();
+                const bx = sm ? sm.querySelector('bx') : null;
+                d.items.push({
+                    ic: [...e.classList].find((c) => c.startsWith('ic-')) || 'ic-star',
+                    title: t ? t.innerHTML.trim() : '',
+                    song: bx ? bx.textContent.replace(/^\s+/, '').trim() : '',
+                    box: kids(e).filter((x) => x !== sm).map((x) => x.outerHTML).join(''),
+                    after: '',
+                });
+            } else if (d.items.length) d.items[d.items.length - 1].after += e.outerHTML;
+            else d.top += e.outerHTML;
+        });
+        return d;
+    }
+    DEFAULTS.dn = readDn(new DOMParser().parseFromString(DN_SRC, 'text/html').querySelector('main'));
+    if (!state.dn) state.dn = clone(DEFAULTS.dn);
+    if (!state.dnNew) state.dnNew = { kind: 'mz', who: 'g', title: '', date: '', body: '', klee: false, song: '', artist: '' };
     $('imp-go').addEventListener('click', () => {
         const msg = $('imp-msg');
         const src = $('imp-src').value.replace(/<link[^>]*>/gi, '');
@@ -643,18 +782,19 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
         else if (m && m.querySelector('dl.il.sg')) tab = 'st';
         else if (m && m.querySelector('dl.il.bs')) tab = 'bs';
         else if (m && m.matches('.pl')) tab = 'pl';
+        else if (m && m.querySelector(':scope > details.mv')) tab = 'dn';
         if (!tab) {
-            msg.textContent = 'Attention・Storage・愛読書・Playlist のどれか分からなかったよ。<main> から </main> までまるごと貼ってね。';
+            msg.textContent = 'Attention・Storage・愛読書・Playlist・デザインノートのどれか分からなかったよ。<main> から </main> までまるごと貼ってね。';
             return;
         }
-        const read = tab === 'at' ? readAt(m) : tab === 'st' ? readSt(m) : tab === 'pl' ? readPl(m) : readBs(m);
+        const read = tab === 'at' ? readAt(m) : tab === 'st' ? readSt(m) : tab === 'pl' ? readPl(m) : tab === 'dn' ? readDn(m) : readBs(m);
         state[tab] = read;
         state.tab = tab;
         if (tab === 'st' && m.querySelector('details.plf')) state.pl = readPl(m.querySelector('details.plf'));
         if (tab === 'st') stItemsAt = JSON.stringify(read.items);
         renderForms();
         render();
-        const names = { at: 'Attention', st: 'Storage', bs: '愛読書', pl: 'Playlist' };
+        const names = { at: 'Attention', st: 'Storage', bs: '愛読書', pl: 'Playlist', dn: 'デザインノート' };
         const again = build().replace(/\n/g, '') === $('imp-src').value.replace(/<link[^>]*>/gi, '').replace(/<br\s*\/?>/gi, '').replace(/\n/g, '').trim();
         msg.textContent = `${names[tab]} として読み取ったよ。` + (again ? '貼ったものと同じ HTML が出ているよ。' : '貼ったものと少し違う所があるから、下の入力欄とプレビューを確かめてね。');
     });
@@ -727,6 +867,11 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
             if (b.dataset.add === 'st.items') list.push({ ch: 'gjo', href: 'https://black.colorless.fyi/57/', title: '', desc: '' });
             if (b.dataset.add === 'bs.books') list.push({ color: '', icon: 'E9BA', font: 'Light', href: 'https://', title: '' });
             if (b.dataset.add === 'pl.songs') list.push({ ch: 'gjo', ic: '#', href: 'https://black.colorless.fyi/57/', title: '', artist: '', len: '' });
+            if (b.dataset.add === 'dn.items') {
+                list.push(dnFromNew(state.dnNew));
+                state.dnNew = { kind: state.dnNew.kind, who: state.dnNew.who, title: '', date: '', body: '', klee: state.dnNew.klee, song: '', artist: '' };
+                $('dn-msg').textContent = `${list.length}. ${list[list.length - 1].title} を足したよ。`;
+            }
         } else if (b.dataset.mv) {
             const [path, i, d] = b.dataset.mv.split(':');
             const list = get(path);
@@ -745,6 +890,9 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
             const p = state.at.people[Number(b.dataset.toOld)];
             p.old = p.text;
             p.text = '';
+        } else if (b.dataset.dnNa !== undefined) {
+            const it = state.dn.items[Number(b.dataset.dnNa)];
+            it.box += dnNanami(it.box);
         } else if (b.dataset.plic !== undefined) {
             state.pl.songs[Number(b.dataset.plic)].ic = b.dataset.v;
         } else if (b.id === 'st-today' || b.id === 'st-nudge-yes') {
@@ -753,6 +901,7 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
         renderForms();
         render();
     });
+    $('dn-klee').addEventListener('change', () => { state.dnNew.klee = $('dn-klee').checked; });
     $('links').addEventListener('change', () => { state.links = $('links').checked; render(); });
     $('board').addEventListener('change', () => {
         state.board = $('board').value;
@@ -784,6 +933,8 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
                 if (!st || !st.at || !st.st || !st.bs) throw new Error('形が違う');
                 state = st;
                 if (!state.pl) state.pl = clone(DEFAULTS.pl);
+                if (!state.dn) state.dn = clone(DEFAULTS.dn);
+                if (!state.dnNew) state.dnNew = { kind: 'mz', who: 'g', title: '', date: '', body: '', klee: false, song: '', artist: '' };
                 stItemsAt = JSON.stringify(state.st.items);
                 $('board').value = state.board || 'new';
                 $('links').checked = state.links !== undefined ? state.links : state.board !== 'new';
@@ -808,7 +959,7 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
         setTimeout(() => { $('copy').textContent = 'コピー'; }, 1800);
     });
     $('reset').addEventListener('click', () => {
-        const names = { at: 'Attention', st: 'Storage', bs: '愛読書', pl: 'Playlist' };
+        const names = { at: 'Attention', st: 'Storage', bs: '愛読書', pl: 'Playlist', dn: 'デザインノート' };
         if (!$('reset').dataset.armed) {
             $('reset').dataset.armed = '1';
             $('reset').textContent = `もう一度押すと ${names[state.tab]} を最初に戻すよ`;

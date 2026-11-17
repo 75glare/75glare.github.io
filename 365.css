@@ -3314,6 +3314,7 @@ details.ic-rain { --sm-icon: "\E1B4"; }
 details.ic-snow { --sm-icon: "\E5AA"; }
 details.ic-wave { --sm-icon: "\E6DE"; }
 details.ic-flower { --sm-icon: "\E75E"; }
+details.ic-drop { --sm-icon: "\E210"; }
 details.ic-lightning { --sm-icon: "\E2DE"; }
 details.ic-signpost { --sm-icon: "\E89C"; }
 details.ic-film { --sm-icon: "\E792"; }
@@ -3325,7 +3326,7 @@ details.ic-pop { --sm-icon: "\EB4E"; }
     content: var(--sm-icon);
 }
 
-main details.mv[class*=" ic-"]:is(.ic-sparkle, .ic-moon-stars, .ic-star, .ic-rain, .ic-snow, .ic-wave, .ic-flower) summary:not(.cl-sm)::before {
+main details.mv[class*=" ic-"]:is(.ic-sparkle, .ic-moon-stars, .ic-star, .ic-rain, .ic-snow, .ic-wave, .ic-flower, .ic-drop) summary:not(.cl-sm)::before {
     font-family: "Phosphor-Light";
 }
 
