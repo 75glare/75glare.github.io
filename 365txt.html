@@ -2085,7 +2085,7 @@ iframe {
     showCover();
 
     // 月の手紙：三日月ときらめきの表紙に、タイトルと英文。封筒の印を押すと手紙が開く。色は書いた人の色
-    const moon = { who: 'g' };
+    const moon = { who: 'g', ln: false };
     const MOON_HINT = {
         g: { nt: '例：FOR NANAMI ／ 11.16', to: '例：Dear Nanami,', fr: '例：Satoru' },
         n: { nt: '例：FOR SATORU ／ 11.16', to: '例：Dear Satoru,', fr: '例：Kento' }
@@ -2098,6 +2098,8 @@ iframe {
         <div class="tools" id="tc-who"><button type="button" data-who="g">五条</button><button type="button" data-who="n">七海</button></div>
         </div>
         <p class="hint">三日月の表紙の下に封筒の印が出て、押すと手紙が開くよ。月と字の色は書いた人の色。</p>
+        <p>上と下の線</p>
+        <div class="tools" id="tc-ln"><button type="button" data-ln="0">なし</button><button type="button" data-ln="1">あり</button></div>
         <div class="row">
             <div><p>タイトル</p><input id="tc-title" type="text" autocomplete="off"></div>
             <div><p>英文</p><input id="tc-en" type="text" autocomplete="off"></div>
@@ -2128,11 +2130,12 @@ iframe {
         const art = '<span class="tc-art"><i class="tc-moon"></i><i class="tc-sp"></i><i class="tc-sp"></i><i class="tc-sp"></i></span>';
         const head = `${art}${title ? `<span class="tc-ti">${title}</span>` : ''}${en ? `<span class="tc-sub">${en}</span>` : ''}${nt ? `<span class="tc-nt">${nt}</span>` : ''}`;
         const body = `${to ? `<p class="tc-to">${to}</p>` : ''}${paras.map((b) => `<p>${b}</p>`).join('')}${fr ? `<p class="tc-fr"><small>from</small><b>${fr}</b></p>` : ''}`;
-        return `<details class="tc ${moonWho()}"><summary>${head}</summary><div class="tc-tx">${body}</div></details>`;
+        return `<details class="tc ${moonWho()}${moon.ln ? ' ln' : ''}"><summary>${head}</summary><div class="tc-tx">${body}</div></details>`;
     }
 
     function showMoon() {
         document.querySelectorAll('#tc-who button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.who === moon.who));
+        document.querySelectorAll('#tc-ln button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.ln === (moon.ln ? '1' : '0')));
         $('tc-nt').placeholder = MOON_HINT[moonWho()].nt;
         $('tc-to').placeholder = MOON_HINT[moonWho()].to;
         $('tc-fr').placeholder = MOON_HINT[moonWho()].fr;
@@ -2142,6 +2145,12 @@ iframe {
         const b = ev.target.closest('button');
         if (!b) return;
         moon.who = b.dataset.who;
+        showMoon();
+    });
+    $('tc-ln').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        moon.ln = b.dataset.ln === '1';
         showMoon();
     });
     $('tc-insert').addEventListener('click', () => insertAtCursor(moonHTML(), true));

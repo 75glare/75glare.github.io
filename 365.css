@@ -3367,25 +3367,25 @@ main>:is(.hs, .gx, .rn, .yu, .um, .aj):has(+ details.mv) {
     animation: none;
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name]) details:not(.mv, .gm) summary:not(.cl-sm)::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name]) details:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
     font-family: "Phosphor-Fill";
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name="Nanami Kento"]) details:not(.mv, .gm) summary:not(.cl-sm)::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name="Nanami Kento"]) details:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
     content: "\E0E4";
     color: color-mix(in srgb, var(--nanami) 60%, transparent);
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name="Nanami Kento"]) details[open]:not(.mv, .gm) summary:not(.cl-sm)::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name="Nanami Kento"]) details[open]:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
     content: "\E8F2";
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name="Gojo Satoru"]) details:not(.mv, .gm) summary:not(.cl-sm)::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name="Gojo Satoru"]) details:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
     content: "\E2FE";
     color: color-mix(in srgb, var(--gjo) 60%, transparent);
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name="Gojo Satoru"]) details[open]:not(.mv, .gm) summary:not(.cl-sm)::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name="Gojo Satoru"]) details[open]:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
     content: "\E300";
 }
 
@@ -9023,8 +9023,8 @@ details.tc > summary {
     text-align: center;
 }
 
-main details.tc > summary:not(.cl-sm)::before,
-main details.tc[open] > summary:not(.cl-sm)::before {
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) details.tc > summary:not(.cl-sm)::before,
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) details.tc[open] > summary:not(.cl-sm)::before {
     content: none;
 }
 
@@ -9121,6 +9121,19 @@ details.tc > .tc-tx {
 
 details.tc[open] > .tc-tx {
     animation: cv-unfold 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+details.tc.ln > summary {
+    border-top: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+}
+
+details.tc.ln[open] > summary {
+    border-bottom: none;
+}
+
+details.tc.ln > .tc-tx {
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
 }
 
 .tc-tx > p {
