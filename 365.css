@@ -5995,7 +5995,7 @@ details.gm .cl-li::before {
 }
 
 .dt-it.done {
-    order: 2;
+    order: -2;
 }
 
 .dt-it time,
@@ -6067,7 +6067,7 @@ details.gm .cl-li::before {
 }
 
 .dt-it[data-ch="na"] .dt-nm {
-    font-size: 1.11em;
+    font-size: 1.06em;
 }
 
 .dt-it[data-ch="na"] .dt-nt {
@@ -6089,9 +6089,9 @@ details.gm .cl-li::before {
 .dt::before,
 .dt::after {
     content: "Been";
-    order: 1;
+    order: -3;
     display: block;
-    margin: 1.6em 0 -0.1em;
+    margin: 0.4em 0 -0.1em;
     background: linear-gradient(color-mix(in srgb, var(--black) 16%, transparent), color-mix(in srgb, var(--black) 16%, transparent)) right center / calc(100% - 5.4em) 1px no-repeat;
     font-family: var(--hd-font);
     font-size: 0.78em;
@@ -6104,7 +6104,7 @@ details.gm .cl-li::before {
 .dt::after {
     content: "Someday";
     order: -1;
-    margin: 0.4em 0 -0.1em;
+    margin: 1.6em 0 -0.1em;
     background-size: calc(100% - 7.6em) 1px;
 }
 
@@ -7357,13 +7357,13 @@ details.gm .cl-li::before {
     min-height: 20vh;
     padding-inline: 29px;
     background:
-        radial-gradient(ellipse 70% 60% at 4% 2%, oklch(48% 0.11 245 / 0.24), oklch(44% 0.1 245 / 0.12) 40%, transparent 85%),
-        radial-gradient(ellipse 72% 66% at 98% 100%, oklch(38% 0.07 282 / 0.17), oklch(36% 0.07 282 / 0.075) 45%, transparent 90%),
-        linear-gradient(150deg in oklch,
-            oklch(24% 0.075 245),
-            oklch(21% 0.07 252) 55%,
-            oklch(19.5% 0.062 266));
-    border: 1px solid oklch(82% 0.045 250 / 0.14);
+        radial-gradient(ellipse 85% 55% at 100% 62%, oklch(60% 0.07 350 / 0.26), oklch(50% 0.065 315 / 0.14) 45%, transparent 85%),
+        radial-gradient(ellipse 70% 50% at 18% 4%, oklch(58% 0.065 248 / 0.2), transparent 80%),
+        linear-gradient(180deg in oklch,
+            oklch(27% 0.058 268),
+            oklch(25% 0.056 274) 55%,
+            oklch(19% 0.035 274));
+    border: 1px solid oklch(84% 0.04 290 / 0.16);
     box-shadow: 0 4px 14px oklch(0% 0 0 / 0.18), 0 0 20px oklch(100% 0 0 / 0.04);
     color: oklch(95% 0.012 240);
 }
@@ -7382,9 +7382,8 @@ details.gm .cl-li::before {
     -webkit-backdrop-filter: blur(1.2px);
     backdrop-filter: blur(1.2px);
     background:
-        radial-gradient(ellipse 40% 34% at 12% 10%, oklch(92% 0.02 240 / 0.10), transparent 75%),
-        radial-gradient(ellipse 46% 40% at 88% 88%, oklch(92% 0.02 280 / 0.10), transparent 75%),
-        radial-gradient(ellipse 70% 50% at 50% 50%, oklch(85% 0.02 245 / 0.04), transparent 80%);
+        radial-gradient(ellipse 40% 34% at 12% 10%, oklch(92% 0.03 250 / 0.08), transparent 75%),
+        radial-gradient(ellipse 46% 40% at 88% 70%, oklch(92% 0.03 345 / 0.08), transparent 75%);
 }
 
 .aj::after {
@@ -7480,7 +7479,7 @@ details.gm .cl-li::before {
     width: 28px;
     height: 48px;
     border-radius: 50%;
-    background: oklch(78% 0.065 280 / 0.09);
+    background: oklch(78% 0.07 315 / 0.11);
     transform-origin: center bottom;
 }
 
@@ -7568,7 +7567,14 @@ details.gm .cl-li::before {
 .aj>.aj-f:nth-of-type(n+8)::after,
 .aj>.aj-f:nth-of-type(n+8)>div::before,
 .aj>.aj-f:nth-of-type(n+8)>div::after {
-    background: oklch(80% 0.075 243 / 0.1);
+    background: oklch(78% 0.065 285 / 0.11);
+}
+
+.aj>.aj-f:nth-of-type(3n)::before,
+.aj>.aj-f:nth-of-type(3n)::after,
+.aj>.aj-f:nth-of-type(3n)>div::before,
+.aj>.aj-f:nth-of-type(3n)>div::after {
+    background: oklch(80% 0.07 345 / 0.11);
 }
 
 .aj>.aj-p {
@@ -8182,8 +8188,8 @@ main .aj>.aj-ct[class] {
 }
 
 :is(main, .g_box, .n_box) :is(.hs, .gx, .yu, .um, .aj) .bgm {
-    width: 58%;
-    max-width: 240px;
+    width: 88%;
+    max-width: 300px;
     padding: 9px 11px 11px;
 }
 
