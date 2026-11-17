@@ -7498,13 +7498,13 @@ details.gm .cl-li::before {
     min-height: 20vh;
     padding-inline: 29px;
     background:
-        radial-gradient(ellipse 90% 45% at 50% 108%, oklch(54% 0.075 304 / 0.45), transparent 75%),
+        radial-gradient(ellipse 90% 45% at 50% 108%, oklch(50% 0.072 304 / 0.4), transparent 75%),
         linear-gradient(180deg in oklch,
-            oklch(22% 0.055 290),
-            oklch(25% 0.058 294) 30%,
-            oklch(32% 0.062 299) 60%,
-            oklch(40% 0.07 303) 85%,
-            oklch(44% 0.075 305));
+            oklch(21% 0.053 290),
+            oklch(23.5% 0.056 294) 30%,
+            oklch(29.5% 0.06 299) 60%,
+            oklch(36% 0.067 303) 85%,
+            oklch(39.5% 0.072 305));
     border: 1px solid oklch(100% 0 0 / 0.16);
     box-shadow: 0 4px 14px oklch(0% 0 0 / 0.18), 0 0 20px oklch(100% 0 0 / 0.04);
     color: oklch(97% 0.01 300);
@@ -8032,6 +8032,18 @@ details.gm .cl-li::before {
 .mz>i:nth-of-type(21) { left: 22%; --z: 13px; --d: 21.8s; --dl: -4.0s; --w: 12px; --sw: 4.3s; }
 .mz>i:nth-of-type(22) { left: 54%; --z: 11px; --d: 25.3s; --dl: -13.0s; --w: 11px; --sw: 5.1s; }
 .mz>i:nth-of-type(23) { left: 86%; --z: 14px; --d: 23.0s; --dl: -8.5s; --w: 13px; --sw: 5.9s; }
+
+@media screen and (max-width: 767px) {
+    .mz>i:nth-of-type(1) { --z: 6px; }
+    .mz>i:nth-of-type(3) { --z: 7.5px; }
+    .mz>i:nth-of-type(5) { --z: 6.5px; }
+    .mz>i:nth-of-type(7) { --z: 8px; }
+    .mz>i:nth-of-type(9) { --z: 6px; }
+    .mz>i:nth-of-type(11) { --z: 7px; }
+    .mz>i:nth-of-type(21) { --z: 8.5px; }
+    .mz>i:nth-of-type(22) { --z: 7.5px; }
+    .mz>i:nth-of-type(23) { --z: 9px; }
+}
 
 @media screen and (min-width: 768px) {
     .mz {
