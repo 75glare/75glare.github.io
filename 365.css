@@ -6142,7 +6142,6 @@ details.gm .cl-li::before {
 .dt-nt {
     grid-column: 2;
     padding: 0.45em 1.35em 1.25em;
-    text-wrap: pretty;
     font-size: 0.88em;
     line-height: 1.8;
     color: color-mix(in srgb, var(--color) 90%, transparent);
