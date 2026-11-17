@@ -5819,7 +5819,7 @@ details.gm .cl-li::before {
     Sweets Menu Component (.sw)
 ======================================= */
 .sw {
-    counter-reset: todo;
+    counter-reset: todo kept all;
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -5827,35 +5827,45 @@ details.gm .cl-li::before {
     padding: 0;
 }
 
-.sw::before {
+.sw::before,
+.sw::after {
     content: "Kept";
-    order: 1;
+    order: -3;
     display: block;
-    margin: 2em 0 0.9em;
-    padding-top: 1.6em;
+    margin: 0 0 0.9em;
     font-family: var(--hd-font);
     font-size: 0.82em;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     text-align: center;
-    border-top: 1px solid color-mix(in srgb, var(--beige) 22%, transparent);
     color: color-mix(in srgb, var(--beige) 80%, transparent);
 }
 
-.sw:not(:has(.done))::before {
+.sw::after {
+    content: "Promised";
+    order: -1;
+    margin-top: 2em;
+    padding-top: 1.6em;
+    border-top: 1px solid color-mix(in srgb, var(--black) 14%, transparent);
+    color: color-mix(in srgb, var(--black) 60%, transparent);
+}
+
+.sw:not(:has(.done))::before,
+.sw:not(:has(.done))::after,
+.sw:not(:has(.sw-it:not(.done)))::after {
     display: none;
 }
 
 .sw-it {
-    counter-increment: todo;
+    counter-increment: todo all;
     position: relative;
     padding: 0.85em 0 0.8em calc(1.232em + 14px);
     border-bottom: 1px dotted oklch(100% 0 0 / 0.09);
 }
 
 .sw-it.done {
-    counter-increment: none;
-    order: 2;
+    counter-increment: kept all;
+    order: -2;
 }
 
 .sw-it:not(.done):not(:has(~ .sw-it:not(.done))),
@@ -5863,21 +5873,6 @@ details.gm .cl-li::before {
     border-bottom: 0;
 }
 
-.sw-it::before {
-    content: counter(todo, decimal-leading-zero);
-    position: absolute;
-    left: 0;
-    top: calc(0.85em + 3px);
-    font-family: var(--hd-font);
-    font-size: 0.78em;
-    line-height: 14px;
-    letter-spacing: 0.04em;
-    color: color-mix(in srgb, var(--black) 40%, transparent);
-}
-
-.sw-it.done::before {
-    display: none;
-}
 
 .sw-nm {
     display: block;
@@ -5889,6 +5884,17 @@ details.gm .cl-li::before {
     text-decoration: none !important;
     color: var(--black) !important;
     -webkit-text-stroke: 0.065px currentColor;
+}
+
+.sw-it .sw-nm::before {
+    content: "\E18A";
+    position: absolute;
+    left: 0;
+    font-family: "Phosphor-Light";
+    font-size: 1.05em;
+    vertical-align: -2px;
+    color: color-mix(in srgb, var(--black) 45%, transparent);
+    -webkit-text-stroke: 0;
 }
 
 .sw-it.done .sw-nm::before {
@@ -5939,6 +5945,16 @@ details.gm .cl-li::before {
     -webkit-text-stroke: 0.065px currentColor;
 }
 
+.sw+.pg-qt::after {
+    content: counter(all) " promises ―\2002" counter(kept) " kept";
+    display: block;
+    margin-top: 1.8em;
+    font-family: var(--hd-font);
+    font-size: 0.92em;
+    letter-spacing: 0.12em;
+    color: var(--color);
+}
+
 .sw-ad {
     display: block;
     margin-top: 0.4em;
@@ -5968,6 +5984,65 @@ details.gm .cl-li::before {
     line-height: 1.84;
     -webkit-font-smoothing: antialiased;
     -webkit-text-stroke: 0;
+}
+
+.sw-it:has(> details) {
+    padding-top: 0.6em;
+    padding-bottom: 0.55em;
+}
+
+.sw-it>details>summary {
+    align-items: baseline;
+    padding: 0;
+    line-height: 14px;
+}
+
+.sw .sw-it>details>summary:not(.cl-sm)::before {
+    content: none;
+    display: none;
+}
+
+.sw-it>details>summary::after {
+    content: "\E136";
+    order: 3;
+    margin-left: 0.5em;
+    font-family: "Phosphor-Light";
+    font-size: 0.85em;
+    line-height: 14px;
+    color: color-mix(in srgb, var(--black) 45%, transparent);
+    transition: transform 0.3s ease;
+}
+
+.sw-it>details[open]>summary::after {
+    transform: rotate(180deg);
+}
+
+.sw-it>details>:is(.sw-nt, .sw-ad) {
+    display: block;
+}
+
+.sw-lk {
+    order: 2;
+    display: inline-block;
+    margin-left: 6px;
+    line-height: 14px;
+    text-decoration: none !important;
+    text-shadow: none !important;
+}
+
+.sw-lk::after {
+    content: "\EBDC";
+    font-family: "Phosphor-Light";
+    font-size: 14px;
+    line-height: 14px;
+    color: var(--beige);
+    -webkit-font-smoothing: antialiased;
+}
+
+@media (hover: hover) {
+    .sw-lk:hover {
+        opacity: 0.7;
+    }
 }
 
 /* =======================================
@@ -6034,8 +6109,8 @@ details.gm .cl-li::before {
 .dt-it::after {
     content: "";
     position: absolute;
-    top: 1.05em;
-    right: 1em;
+    top: 1.15em;
+    right: 1.2em;
     width: 30px;
     height: 9px;
     background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--c) 45%, transparent) 0 1px, transparent 1px 3px, color-mix(in srgb, var(--c) 45%, transparent) 3px 5px, transparent 5px 6px, color-mix(in srgb, var(--c) 45%, transparent) 6px 7px, transparent 7px 9px);
@@ -6043,7 +6118,7 @@ details.gm .cl-li::before {
 
 .dt-nm {
     grid-column: 2;
-    padding: 0.4em 1.1em 0;
+    padding: 0.5em 1.35em 0;
     font-size: 1.04em;
     line-height: 1.6;
     letter-spacing: 0.08em;
@@ -6066,7 +6141,8 @@ details.gm .cl-li::before {
 
 .dt-nt {
     grid-column: 2;
-    padding: 0.4em 1.1em 1em;
+    padding: 0.45em 1.35em 1.25em;
+    text-wrap: pretty;
     font-size: 0.88em;
     line-height: 1.8;
     color: color-mix(in srgb, var(--color) 90%, transparent);
@@ -6084,7 +6160,6 @@ details.gm .cl-li::before {
 }
 
 .dt-it[data-ch="na"] .dt-nt {
-    padding-right: 0.7em;
     font-size: 0.94em;
     letter-spacing: 0.007em;
 }
@@ -6263,6 +6338,20 @@ details.gm .cl-li::before {
     font-feature-settings: "palt";
     letter-spacing: var(--base-letter-spacing);
     -webkit-text-stroke: 0;
+}
+
+:is(.dt-nt, .gf-nt) .dl-it {
+    display: block;
+    padding: 0.1em 0;
+    line-height: 1.6;
+}
+
+:is(.dt-nt, .gf-nt) .dl-it:not(.dl-it + .dl-it) {
+    margin-top: 0.4em;
+}
+
+:is(.dt-nt, .gf-nt):has(.dl-it) {
+    padding-bottom: 1.15em;
 }
 
 @media screen and (max-width: 767px) {

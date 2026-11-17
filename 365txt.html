@@ -1483,7 +1483,7 @@ iframe {
         <div data-for="dt">
             <p class="tw-step">① 日記のおでかけ切符のページを貼る<span class="tw-opt">（なくてもOK）</span></p>
             <textarea id="dt-src" class="short no-grow src-paste" spellcheck="false" placeholder="&lt;main&gt;&lt;ul class=&quot;dt&quot;&gt; …"></textarea>
-            <p class="hint">編集画面の本文をまるごと貼ると、新しい切符を足したページが出てくるよ。前の切符を「行った！」にもできる。貼らないときは、新しいページがまるごと出てくるよ。</p>
+            <p class="hint">編集画面の本文をまるごと貼ると、新しい切符を足したページが出てくるよ。前の切符は「書き換える」で中身を直せるし、「行った！」にもできる。貼らないときは、新しいページがまるごと出てくるよ。</p>
             <div id="dt-ex"></div>
             <p class="tw-step">② 新しい切符を足す<span class="tw-opt">（＋で何枚でも。場所が空の切符は入らないよ）</span></p>
             <div id="dt-list"></div>
@@ -1493,7 +1493,8 @@ iframe {
         <div data-for="gf">
             <p class="tw-step">① 日記のプレゼントのページを貼る<span class="tw-opt">（なくてもOK）</span></p>
             <textarea id="gf-src" class="short no-grow src-paste" spellcheck="false" placeholder="&lt;main&gt;&lt;ul class=&quot;gf&quot;&gt; …"></textarea>
-            <p class="hint" id="gf-hint">編集画面の本文をまるごと貼ると、新しい札を一番下に足したページが出てくるよ。貼らないときは、新しいページがまるごと出てくるよ。</p>
+            <p class="hint" id="gf-hint">編集画面の本文をまるごと貼ると、新しい札を一番下に足したページが出てくるよ。前の札は「書き換える」で中身を直せる。貼らないときは、新しいページがまるごと出てくるよ。</p>
+            <div id="gf-ex"></div>
             <p class="tw-step">② 新しい札を足す<span class="tw-opt">（＋で何枚でも。名前が空の札は入らないよ）</span></p>
             <div id="gf-list"></div>
             <div class="tools" id="gf-add"><button type="button">＋ 札を足す</button></div>
@@ -2971,7 +2972,7 @@ iframe {
     const swList = () => (swRoot ? swRoot.querySelector('ul.sw') : null);
     function swItemHTML(name, note, done, after, date, url) {
         url = (url || '').trim();
-        const nm = done && url ? `<a href="${attr(url)}" class="sw-nm">${name}</a>` : `<span class="sw-nm">${name}</span>`;
+        const lk = done && url ? `<a href="${attr(url)}" class="sw-lk"></a>` : '';
         const nt = `<span class="sw-nt">${note}</span>`;
         let ad = '';
         if (done && (after || '').trim()) {
@@ -2979,7 +2980,7 @@ iframe {
             const day = y ? `(<i class="ph">&#xED8E;</i>${y}.${m}.${d})` : '';
             ad = `<span class="sw-ad">${paragraphs(after, false)}${day}</span>`;
         }
-        return `<li class="sw-it${done ? ' done' : ''}">${nm}${nt}${ad}</li>`;
+        return `<li class="sw-it${done ? ' done' : ''}"><details><summary><span class="sw-nm">${name}</span>${lk}</summary>${nt}${ad}</details></li>`;
     }
     function swMerged(item) {
         const ul = swList();
@@ -2992,6 +2993,7 @@ iframe {
     // 貼ったメニュー 1 つ分を読み取る
     function swRead(li) {
         const nm = li.querySelector('.sw-nm');
+        const lk = li.querySelector('a.sw-nm, a.sw-lk');
         const ad = li.querySelector('.sw-ad');
         let after = '';
         let date = '';
@@ -3008,7 +3010,7 @@ iframe {
             name: nm ? nm.innerHTML : '',
             note: (li.querySelector('.sw-nt') || {}).innerHTML || '',
             done: li.classList.contains('done'),
-            url: nm && nm.tagName === 'A' ? nm.getAttribute('href') || '' : '',
+            url: lk ? lk.getAttribute('href') || '' : '',
             after,
             date,
         };
@@ -3180,71 +3182,137 @@ iframe {
     function listLoad(k) {
         const src = $(`${k}-src`).value.trim();
         roots[k] = src ? new DOMParser().parseFromString(`<div id="ls-root">${src}</div>`, 'text/html').getElementById('ls-root') : null;
-        if (k === 'dt') dtDraw();
-        else $('gf-hint').textContent = !src ? '編集画面の本文をまるごと貼ると、新しい札を一番下に足したページが出てくるよ。貼らないときは、新しいページがまるごと出てくるよ。'
-            : listOf('gf') ? `札が ${listOf('gf').querySelectorAll(':scope > li.gf-it').length} 枚あるよ。新しい札は一番下に足すね。` : '札の一覧（class="gf"）が見つからなかったよ。編集画面の本文をそのまま全部貼ってね。';
+        if (k === 'dt') lsDraw('dt');
+        else {
+            $('gf-hint').textContent = !src ? '編集画面の本文をまるごと貼ると、新しい札を一番下に足したページが出てくるよ。前の札は「書き換える」で中身を直せる。貼らないときは、新しいページがまるごと出てくるよ。'
+                : listOf('gf') ? `札が ${listOf('gf').querySelectorAll(':scope > li.gf-it').length} 枚あるよ。前の札は「書き換える」で直せる。新しい札は一番下に足すね。` : '札の一覧（class="gf"）が見つからなかったよ。編集画面の本文をそのまま全部貼ってね。';
+            lsDraw('gf');
+        }
     }
-    // 貼った切符 1 枚分を読み取る
-    function dtRead(li) {
+    // 貼った切符・札 1 枚分を読み取る
+    function lsRead(k, li) {
         const tm = li.querySelector('time');
         return {
-            name: (li.querySelector('.dt-nm') || {}).innerHTML || '',
-            note: (li.querySelector('.dt-nt') || {}).innerHTML || '',
+            name: (li.querySelector(`.${k}-nm`) || {}).innerHTML || '',
+            note: (li.querySelector(`.${k}-nt`) || {}).innerHTML || '',
             done: li.classList.contains('done'),
             date: tm ? tm.textContent.trim().replace(/\./g, '-') : '',
             ch: li.dataset.ch || 'na',
         };
     }
-    const dtItems = () => listOf('dt').querySelectorAll(':scope > li.dt-it');
-    function dtWrite(k, d) {
-        const li = dtItems()[k];
+    const lsItems = (k) => listOf(k).querySelectorAll(`:scope > li.${k}-it`);
+    const lsOpen = { dt: -1, gf: -1 };
+    function lsWrite(k, i, d) {
+        const li = lsItems(k)[i];
         const tmp = li.ownerDocument.createElement('ul');
-        tmp.innerHTML = dtItemHTML(d.name, d.note, d.done, d.date, d.ch);
+        tmp.innerHTML = k === 'dt' ? dtItemHTML(d.name, d.note, d.done, d.date, d.ch) : gfItemHTML(d.name, d.note, d.date, d.ch);
         li.replaceWith(tmp.firstElementChild);
-        $('dt-src').value = roots.dt.innerHTML;
+        $(`${k}-src`).value = roots[k].innerHTML;
         render();
     }
-    function dtDraw() {
-        const ul = listOf('dt');
+    // ひとことの HTML を、入力欄の書き方（発言は 1 行ずつの <p>）に戻す
+    const noteText = (html) => html
+        .replace(/<p class="dl-it ([gn])">([\s\S]*?)<\/p>/g, '\n<p class="dl-it $1">$2</p>\n')
+        .replace(/<br\s*\/?>/g, '\n').replace(/\n{2,}/g, '\n').trim()
+        .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
+    const plain = (html) => html.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
+    function lsDraw(k) {
+        const box = $(`${k}-ex`);
+        const ul = listOf(k);
         if (!ul) {
-            $('dt-ex').innerHTML = $('dt-src').value.trim() ? '<p class="hint">切符の一覧（class="dt"）が見つからなかったよ。編集画面の本文をそのまま全部貼ってね。</p>' : '';
+            box.innerHTML = k === 'dt' && $('dt-src').value.trim() ? '<p class="hint">切符の一覧（class="dt"）が見つからなかったよ。編集画面の本文をそのまま全部貼ってね。</p>' : '';
             return;
         }
-        $('dt-ex').innerHTML = [...dtItems()].map((li, k) => {
-            const d = dtRead(li);
-            const nameTx = (li.querySelector('.dt-nm') || {}).textContent || '';
-            const nt = ((li.querySelector('.dt-nt') || {}).textContent || '').trim().replace(/\s+/g, ' ');
-            return `<div class="ex-it sw-ex-it" data-k="${k}">
+        box.innerHTML = [...lsItems(k)].map((li, i) => {
+            const d = lsRead(k, li);
+            const nameTx = (li.querySelector(`.${k}-nm`) || {}).textContent || '';
+            const nt = ((li.querySelector(`.${k}-nt`) || {}).textContent || '').trim().replace(/\s+/g, ' ');
+            const open = lsOpen[k] === i;
+            const who = d.ch === 'gjo' ? 'g' : 'n';
+            const showDate = k === 'gf' || d.done;
+            return `<div class="ex-it sw-ex-it ls-ex-it" data-k="${i}">
                 <div class="ex-head"><span>${attr(nameTx.trim() || '（名前なし）')}</span></div>
-                ${nt ? `<div class="ex-tx">${attr(nt.length > 40 ? nt.slice(0, 40) + '…' : nt)}</div>` : ''}
+                ${nt && !open ? `<div class="ex-tx">${attr(nt.length > 40 ? nt.slice(0, 40) + '…' : nt)}</div>` : ''}
                 <div class="tw-acts">
-                    <button type="button" class="dt-ex-done tw-like${d.done ? ' on' : ''}"><i class="ph-${d.done ? 'fill' : 'light'} ph-check-circle"></i>行った！</button>
+                    <button type="button" class="ls-ex-edit tw-like${open ? ' on' : ''}"><i class="ph-light ph-pencil-simple"></i>書き換える</button>
+                    ${k === 'dt' ? `<button type="button" class="dt-ex-done tw-like${d.done ? ' on' : ''}"><i class="ph-${d.done ? 'fill' : 'light'} ph-check-circle"></i>行った！</button>` : ''}
                 </div>
-                ${d.done ? `<div class="sw-ex-fields"><label>行った日</label><input type="date" class="dt-ex-date" value="${attr(d.date || today)}"></div>` : ''}
+                ${open ? `<div class="sw-ex-fields">
+                    <div class="who"><span class="hint">${k === 'dt' ? '誰の記録？' : 'もらった人（感想を書く人）'}</span><button type="button" class="ls-ex-who" data-w="n" aria-pressed="${who === 'n'}">七海</button><button type="button" class="ls-ex-who" data-w="g" aria-pressed="${who === 'g'}">五条</button></div>
+                    <label>${k === 'dt' ? '場所' : 'もらったもの'}</label>
+                    <input type="text" autocomplete="off" class="ls-ex-name" value="${attr(plain(d.name))}">
+                    <label>ひとこと</label>
+                    <textarea class="ls-ex-note">${noteText(d.note).replace(/&/g, '&amp;').replace(/</g, '&lt;')}</textarea>
+                    <div class="tw-acts"><button type="button" class="ls-ex-talk" data-w="n"><i class="ph-light ph-chat-circle"></i>七海の発言</button><button type="button" class="ls-ex-talk" data-w="g"><i class="ph-light ph-chat-circle"></i>五条の発言</button></div>
+                    ${showDate ? `<label>${k === 'dt' ? '行った日' : 'もらった日'}</label><input type="date" class="ls-ex-date" value="${attr(d.date || today)}">` : ''}
+                </div>` : ''}
             </div>`;
         }).join('');
+        box.querySelectorAll('textarea').forEach((t) => grow(t));
     }
-    $('dt-src').addEventListener('input', () => { listLoad('dt'); show(); render(); });
-    $('gf-src').addEventListener('input', () => { listLoad('gf'); show(); render(); });
-    $('dt-ex').addEventListener('click', (ev) => {
-        const b = ev.target.closest('.dt-ex-done');
-        const box = ev.target.closest('.sw-ex-it');
-        if (!b || !box) return;
-        remember();
-        const k = Number(box.dataset.k);
-        const d = dtRead(dtItems()[k]);
-        d.done = !d.done;
-        if (d.done && !d.date) d.date = today;
-        dtWrite(k, d);
-        dtDraw();
-    });
-    $('dt-ex').addEventListener('input', (ev) => {
-        const box = ev.target.closest('.sw-ex-it');
-        if (!box || !ev.target.matches('.dt-ex-date')) return;
-        const k = Number(box.dataset.k);
-        const d = dtRead(dtItems()[k]);
-        d.date = ev.target.value;
-        dtWrite(k, d);
+    // 開いている札の入力欄から読み直す（名前とひとことは書き換えたときだけ HTML を作り直す）
+    function lsFromFields(k, i, box) {
+        const d = lsRead(k, lsItems(k)[i]);
+        const nm = box.querySelector('.ls-ex-name');
+        const nt = box.querySelector('.ls-ex-note');
+        const dt = box.querySelector('.ls-ex-date');
+        if (nm && nm.dataset.dirty) d.name = safe(nm.value.trim());
+        if (nt && nt.dataset.dirty) d.note = paragraphs(nt.value, false);
+        if (dt) d.date = dt.value;
+        return d;
+    }
+    $('dt-src').addEventListener('input', () => { lsOpen.dt = -1; listLoad('dt'); show(); render(); });
+    $('gf-src').addEventListener('input', () => { lsOpen.gf = -1; listLoad('gf'); show(); render(); });
+    ['dt', 'gf'].forEach((k) => {
+        $(`${k}-ex`).addEventListener('click', (ev) => {
+            const b = ev.target.closest('button');
+            const box = ev.target.closest('.ls-ex-it');
+            if (!b || !box) return;
+            const i = Number(box.dataset.k);
+            if (b.classList.contains('ls-ex-edit')) {
+                lsOpen[k] = lsOpen[k] === i ? -1 : i;
+                lsDraw(k);
+                return;
+            }
+            if (b.classList.contains('ls-ex-talk')) {
+                const t = box.querySelector('.ls-ex-note');
+                // 欄をまだ触っていないときは、いちばん下に足す
+                const at = t.dataset.touched ? t.selectionEnd : t.value.length;
+                const before = t.value.slice(0, at).replace(/\n*$/, '');
+                const after = t.value.slice(at).replace(/^\n*/, '');
+                const open = `<p class="dl-it ${b.dataset.w}">`;
+                t.value = `${before}${before ? '\n' : ''}${open}</p>${after ? '\n' : ''}${after}`;
+                const pos = before.length + (before ? 1 : 0) + open.length;
+                t.focus();
+                t.setSelectionRange(pos, pos);
+                t.dataset.dirty = '1';
+                t.dataset.touched = '1';
+                grow(t);
+                remember();
+                lsWrite(k, i, lsFromFields(k, i, box));
+                return;
+            }
+            remember();
+            const d = lsFromFields(k, i, box);
+            if (b.classList.contains('ls-ex-who')) d.ch = b.dataset.w === 'g' ? 'gjo' : 'na';
+            else if (b.classList.contains('dt-ex-done')) {
+                d.done = !d.done;
+                if (d.done && !d.date) d.date = today;
+            } else return;
+            lsWrite(k, i, d);
+            lsDraw(k);
+        });
+        $(`${k}-ex`).addEventListener('focusin', (ev) => {
+            if (ev.target.matches('.ls-ex-note')) ev.target.dataset.touched = '1';
+        });
+        $(`${k}-ex`).addEventListener('input', (ev) => {
+            const box = ev.target.closest('.ls-ex-it');
+            if (!box) return;
+            const i = Number(box.dataset.k);
+            if (ev.target.matches('.ls-ex-name, .ls-ex-note')) ev.target.dataset.dirty = '1';
+            if (ev.target.tagName === 'TEXTAREA') grow(ev.target);
+            lsWrite(k, i, lsFromFields(k, i, box));
+        });
     });
 
     $('tw-ex').addEventListener('click', (ev) => {
