@@ -3099,7 +3099,7 @@ iframe {
     state.gfNew = [newGift()];
     function drawNew(k, focusIndex) {
         const rows = k === 'dt' ? state.dtNew : state.gfNew;
-        const whoLabel = k === 'dt' ? '誰の記録？' : '誰から？';
+        const whoLabel = k === 'dt' ? '誰の記録？' : 'もらった人（感想を書く人）';
         $(`${k}-list`).innerHTML = rows.map((r, i) => `
             <div class="ex-it ls-row" data-i="${i}">
                 <div class="ls-head">
@@ -3160,7 +3160,7 @@ iframe {
             renderSoon();
         });
     });
-    const DT_PAGE = (items) => `<main><h3 class="trip" data-sub="ふたりで出かけた場所と、いつか行きたい場所">Our Places</h3><ul class="dt">${items}</ul><p class="pg-qt"><span class="pg-en">Anywhere is fine, as long as it is with you.</span></p></main>`;
+    const DT_PAGE = (items) => `<main><h3 class="trip" data-sub="ふたりで出かけた場所と、いつか行きたい場所">Our Places</h3><ul class="dt">${items}</ul><p class="pg-qt"><span class="pg-en">Anywhere, as long as it&#39;s with you.</span></p></main>`;
     const GF_PAGE = (items) => `<main><h3 class="gift" data-sub="もらったもの、あげたもの">Gifts</h3><ul class="gf">${items}</ul><p class="pg-qt"><span class="pg-en">Small things, kept close.</span></p></main>`;
     function dtItemHTML(name, note, done, date, ch) {
         const tm = done ? `<time>${dotDate(date || today)}</time>` : '';
@@ -3750,7 +3750,7 @@ iframe {
         if (state.mode === 'box') $('who-box').hidden = !$('title').value.trim();
         // デザインボックスのタグは、単体（外側の枠なし）で見出しがあるときだけ使う
         if (state.mode === 'box') $('tag-box').hidden = state.wrap !== '' || !$('title').value.trim();
-        $('who-label').textContent = { box: '見出しに出す名前', dt: '誰の記録？', gf: '誰から？', gm: '誰の思い出？' }[state.mode] || '誰が書く？';
+        $('who-label').textContent = { box: '見出しに出す名前', dt: '誰の記録？', gf: 'もらった人（感想を書く人）', gm: '誰の思い出？' }[state.mode] || '誰が書く？';
         const inTl = state.mode === 'tl';
         $(inTl ? 'tl-home' : 'tw-slot').appendChild($('tw-block'));
         $('tw-src-box').hidden = !inTl;

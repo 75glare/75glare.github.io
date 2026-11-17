@@ -6062,6 +6062,7 @@ details.gm .cl-li::before {
 .dt-it[data-ch="na"] :is(.dt-nm, .dt-nt),
 .gf-it[data-ch="na"] :is(.gf-nm, .gf-nt) {
     font-family: var(--klee-font);
+    font-feature-settings: normal;
     -webkit-text-stroke: 0.065px currentColor;
 }
 
@@ -6070,15 +6071,19 @@ details.gm .cl-li::before {
 }
 
 .dt-it[data-ch="na"] .dt-nt {
+    padding-right: 0.7em;
     font-size: 0.94em;
+    letter-spacing: 0.007em;
 }
 
 .gf-it[data-ch="na"] .gf-nm {
     font-size: 1.03em;
+    letter-spacing: 0.04em;
 }
 
 .gf-it[data-ch="na"] .gf-nt {
     font-size: 0.92em;
+    letter-spacing: 0.007em;
 }
 
 .dt::before,
@@ -6205,17 +6210,21 @@ details.gm .cl-li::before {
     font-family: var(--hd-font);
     font-size: 0.72em;
     line-height: 1.5;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.07em;
     text-align: right;
-    color: var(--c);
+    color: var(--nanami);
+}
+
+.gf-it[data-ch="na"] time {
+    color: var(--gjo);
 }
 
 .gf-it time::before {
-    content: "from Gojo · ";
+    content: "from Nanami · ";
 }
 
 .gf-it[data-ch="na"] time::before {
-    content: "from Nanami · ";
+    content: "from Gojo · ";
 }
 
 .gf-nt {
@@ -6226,6 +6235,32 @@ details.gm .cl-li::before {
     font-size: 0.86em;
     line-height: 1.8;
     color: color-mix(in srgb, var(--color) 90%, transparent);
+}
+
+:is(.dt-nt, .gf-nt) .dl-it.n {
+    font-family: var(--klee-font);
+    font-size: 1em;
+    font-feature-settings: normal;
+    letter-spacing: 0.007em;
+    -webkit-text-stroke: 0.15px currentColor;
+}
+
+:is(.dt-nt, .gf-nt) .dl-it.g {
+    font-family: var(--en-font);
+    font-feature-settings: "palt";
+    letter-spacing: var(--base-letter-spacing);
+    -webkit-text-stroke: 0;
+}
+
+@media screen and (max-width: 767px) {
+    .gf-it {
+        background:
+            linear-gradient(to right, color-mix(in srgb, var(--c) 20%, transparent) 0 2.9em, transparent 2.9em),
+            radial-gradient(circle, color-mix(in srgb, var(--c) 45%, transparent) 0.8px, transparent 1.2px) 2.9em 0 / 3px 6px repeat-y,
+            linear-gradient(160deg, oklch(100% 0 0 / 0.06), transparent 50%),
+            linear-gradient(color-mix(in srgb, var(--c) 10%, transparent), color-mix(in srgb, var(--c) 10%, transparent)),
+            oklch(30% 0.05 254 / 0.55);
+    }
 }
 
 /* =======================================
