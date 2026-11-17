@@ -111,6 +111,8 @@ iframe.preview { position: absolute; top: 0; left: 0; border: 0; background: var
 textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
 .dn-box { margin-top: 8px; }
 .dn-box > summary { cursor: pointer; color: var(--sub); font-size: 13px; }
+.dn-in { margin-top: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; }
+.dn-in .who { color: var(--sub); font-size: 13px; margin: 0 0 4px; }
 [hidden] { display: none !important; }
 @media (max-width: 520px) { .row { grid-template-columns: 1fr !important; } }
 </style>
@@ -257,7 +259,7 @@ textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
             </div>
             <div class="panel">
                 <h2>並んでいるデザインノート</h2>
-                <p class="hint">1 つが 1 つの折りたたみになって、上から書いた順に並ぶよ。見出しの横の札には曲名が入る。箱の中身は「箱の HTML」を開くと書き換えられる。</p>
+                <p class="hint">1 つが 1 つの折りたたみになって、上から書いた順に並ぶよ。見出しの横の札には曲名が入る。箱の中身は「箱の HTML」を開くと書き換えられる。「七海の箱も並べる」を押すと、同じ箱が七海の名前と七海のフォントで下に並ぶよ（紫陽花は花びらの代わりに雨が降る）。</p>
                 <div id="dn-items"></div>
             </div>
             <div class="panel">
@@ -478,6 +480,69 @@ textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
         return { ic: kind[2], title, song: label, box, after: '' };
     }
     // 箱を写して、七海の名前と七海のフォントにする（雨・紫陽花などは名前で七海の色になる）
+    // 折りたたみの中の箱を 1 つずつ取り出して、見出し・日付・本文・BGM を書き換える
+    const DN_BOX = '.hs, .gx, .rn, .yu, .um, .aj, .mz';
+    function dnParse(html) {
+        const t = document.createElement('template');
+        t.innerHTML = html;
+        return t;
+    }
+    const dnBoxes = (html) => [...dnParse(html).content.children].filter((e) => e.matches(DN_BOX));
+    function dnFields(b, i, j) {
+        const h = b.querySelector('h2');
+        const p = b.querySelector('p');
+        const sp = b.querySelector('.bgm-ti span');
+        const name = h ? h.dataset.name : '';
+        const who = name === 'Nanami Kento' ? '七海の箱' : name === 'Gojo Satoru' ? '五条の箱' : '箱';
+        const f = (k) => `data-dnb="${i}:${j}:${k}"`;
+        return `
+            <div class="dn-in">
+                <p class="who">${who}</p>
+                <div class="row" style="grid-template-columns: 1fr 10em">
+                    <div><label>見出し</label><input type="text" ${f('h2')} value="${attr(h ? h.innerHTML : '')}"></div>
+                    <div><label>日付</label><input type="text" inputmode="numeric" placeholder="20261118" ${f('date')} value="${attr(h && h.dataset.date ? h.dataset.date : '')}"></div>
+                </div>
+                <label>本文</label><textarea ${f('p')}>${attr(p ? p.innerHTML : '')}</textarea>
+                <label>BGM（曲名 - アーティスト名。空にすると音楽プレイヤーが消えるよ）</label><input type="text" ${f('bgm')} value="${attr(sp ? sp.textContent : '')}">
+            </div>`;
+    }
+    function dnEdit(html, j, key, v) {
+        const t = dnParse(html);
+        const b = [...t.content.children].filter((e) => e.matches(DN_BOX))[j];
+        if (!b) return html;
+        const inner = b.querySelector(':scope > .aj-ct') || b;
+        const h = b.querySelector('h2');
+        if (key === 'h2' && h) h.innerHTML = v;
+        if (key === 'date' && h) {
+            const d = v.replace(/\D/g, '');
+            if (d) h.dataset.date = d;
+            else h.removeAttribute('data-date');
+        }
+        if (key === 'p') {
+            let p = b.querySelector('p');
+            if (!p && v.trim()) {
+                p = document.createElement('p');
+                if (h && h.classList.contains('klee')) p.className = 'klee';
+                if (h) h.after(p);
+                else inner.append(p);
+            }
+            if (p && v.trim()) p.innerHTML = text(v);
+            else if (p) p.remove();
+        }
+        if (key === 'bgm') {
+            let g = b.querySelector('.bgm');
+            const label = v.trim();
+            if (!label) { if (g) g.remove(); }
+            else {
+                if (!g) {
+                    inner.insertAdjacentHTML('beforeend', '<div class="bgm"><div class="bgm-ti"><span></span></div><div class="bgm-br"></div><div class="bgm-ct"></div></div>');
+                    g = inner.querySelector(':scope > .bgm');
+                }
+                g.querySelector('.bgm-ti span').textContent = label;
+            }
+        }
+        return t.innerHTML;
+    }
     function dnNanami(html) {
         const t = document.createElement('template');
         t.innerHTML = html;
@@ -493,6 +558,9 @@ textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
             rest.forEach(([n, v]) => h.setAttribute(n, v));
         });
         c.querySelectorAll('p').forEach((p) => p.classList.add('klee'));
+        // 七海の紫陽花は、花びらの代わりに雨を降らせる
+        const petals = c.querySelector(':scope > .aj-p');
+        if (petals) petals.outerHTML = rep('<i class="rn-d"></i>', 25);
         return c.outerHTML;
     }
     const build = () => (state.tab === 'at' ? buildAt(state.at) : state.tab === 'st' ? buildSt(state.st) : state.tab === 'pl' ? buildPl(state.pl) : state.tab === 'dn' ? buildDn(state.dn) : buildBs(state.bs));
@@ -586,7 +654,8 @@ textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
                 </div>
                 <label>見出しの横の札（曲名）</label><input type="text" data-k="dn.items.${i}.song" value="${attr(it.song)}">
                 <div class="acts">${/data-name="Nanami Kento"/.test(it.box) ? '<span class="hint">七海の箱も並んでいるよ。</span>' : `<button type="button" class="btn small" data-dn-na="${i}">七海の箱も並べる</button>`}</div>
-                <details class="dn-box"><summary>箱の HTML</summary><textarea class="code" data-k="dn.items.${i}.box">${attr(it.box)}</textarea></details>
+                ${dnBoxes(it.box).map((b, j) => dnFields(b, i, j)).join('')}
+                <details class="dn-box"><summary>箱の HTML</summary><textarea class="code" data-k="dn.items.${i}.box" data-rerender-blur>${attr(it.box)}</textarea></details>
             </div>`;
         }).join('');
         $('dn-kind').innerHTML = DN_KINDS.map(([v, n]) => `<option value="${v}" ${v === state.dnNew.kind ? 'selected' : ''}>${n}</option>`).join('');
@@ -816,6 +885,15 @@ textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
     });
     $('forms').addEventListener('input', (ev) => {
         const el = ev.target;
+        if (el.dataset.dnb) {
+            const [i, j, key] = el.dataset.dnb.split(':');
+            const it = state.dn.items[Number(i)];
+            it.box = dnEdit(it.box, Number(j), key, el.value);
+            const raw = document.querySelector(`[data-k="dn.items.${i}.box"]`);
+            if (raw) raw.value = it.box;
+            render();
+            return;
+        }
         if (el.dataset.k) {
             const ks = el.dataset.k.split('.');
             if (ks[0] === 'at' && ks[1] === 'tags') state.at.tags[Number(ks[2])] = el.value;
