@@ -1425,6 +1425,7 @@ iframe {
                 <button type="button" data-box="yu">夜雪</button>
                 <button type="button" data-box="um">凪いだ海</button>
                 <button type="button" data-box="aj">紫陽花</button>
+                <button type="button" data-box="mz">蒼の水底</button>
             </div>
             <label class="check"><input id="klee" type="checkbox">七海のフォントにする（見出しと本文）</label>
             <label class="check"><input id="scroll" type="checkbox">本文をスクロールボックスにする</label>
@@ -1859,6 +1860,7 @@ iframe {
         yu: repeat('<div></div>', 25),
         um: repeat('<div></div>', 3),
         aj: repeat('<div class="aj-f"><div></div><div></div><div></div></div>', 12),
+        mz: repeat('<b></b>', 4) + '<u></u>' + repeat('<i></i>', 23),
     };
     const NO_SCROLL = [];
 

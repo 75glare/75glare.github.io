@@ -1128,32 +1128,32 @@ main,
 
 main>*:first-child,
 :is(.g_box, .n_box)>*:first-child,
-:is(.hs, .gx, .yu, .um, .aj)>*:first-child {
+:is(.hs, .gx, .yu, .um, .aj, .mz)>*:first-child {
     margin-top: 0;
 }
 
 main>*:last-child,
 :is(.g_box, .n_box)>*:last-child,
-:is(.hs, .gx, .yu, .um, .aj)>*:last-child {
+:is(.hs, .gx, .yu, .um, .aj, .mz)>*:last-child {
     margin-bottom: 0;
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj) {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) {
     timeline-scope: --box-scroll;
 }
 
 @supports (animation-timeline: view()) {
-    :is(header, .hs, .gx, .rn, .yu, .um, .aj, .bgm, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm))):not(:is(.hs, .gx, .rn, .yu, .um, .aj, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm))) *) {
+    :is(header, .hs, .gx, .rn, .yu, .um, .aj, .mz, .bgm, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm, .mz))):not(:is(.hs, .gx, .rn, .yu, .um, .aj, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm, .mz))) *) {
         --box-ps: paused;
         animation: box-on linear;
         animation-timeline: view();
     }
 
-    :is(header, .hs, .gx, .rn, .yu, .um, .aj, .bgm, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm))):not(:is(.hs, .gx, .rn, .yu, .um, .aj, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm))) *)::before,
-    :is(header, .hs, .gx, .rn, .yu, .um, .aj, .bgm, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm))):not(:is(.hs, .gx, .rn, .yu, .um, .aj, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm))) *)::after,
-    :is(header, .hs, .gx, .rn, .yu, .um, .aj, .bgm, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm))):not(:is(.hs, .gx, .rn, .yu, .um, .aj, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm))) *) *,
-    :is(header, .hs, .gx, .rn, .yu, .um, .aj, .bgm, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm))):not(:is(.hs, .gx, .rn, .yu, .um, .aj, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm))) *) *::before,
-    :is(header, .hs, .gx, .rn, .yu, .um, .aj, .bgm, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm))):not(:is(.hs, .gx, .rn, .yu, .um, .aj, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm))) *) *::after {
+    :is(header, .hs, .gx, .rn, .yu, .um, .aj, .mz, .bgm, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm, .mz))):not(:is(.hs, .gx, .rn, .yu, .um, .aj, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm, .mz))) *)::before,
+    :is(header, .hs, .gx, .rn, .yu, .um, .aj, .mz, .bgm, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm, .mz))):not(:is(.hs, .gx, .rn, .yu, .um, .aj, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm, .mz))) *)::after,
+    :is(header, .hs, .gx, .rn, .yu, .um, .aj, .mz, .bgm, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm, .mz))):not(:is(.hs, .gx, .rn, .yu, .um, .aj, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm, .mz))) *) *,
+    :is(header, .hs, .gx, .rn, .yu, .um, .aj, .mz, .bgm, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm, .mz))):not(:is(.hs, .gx, .rn, .yu, .um, .aj, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm, .mz))) *) *::before,
+    :is(header, .hs, .gx, .rn, .yu, .um, .aj, .mz, .bgm, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm, .mz))):not(:is(.hs, .gx, .rn, .yu, .um, .aj, details:has(> :is(.hs, .gx, .rn, .yu, .um, .aj, .bgm, .mz))) *) *::after {
         animation-play-state: var(--box-ps) !important;
     }
 }
@@ -1178,7 +1178,7 @@ main>*:last-child,
         animation-range: entry 0 cover 30vh;
     }
 
-    :is(.hs, .gx, .rn, .yu, .um, .aj)[class]:not(:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, details) *) {
+    :is(.hs, .gx, .rn, .yu, .um, .aj, .mz)[class]:not(:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, details, .mz) *) {
         animation: box-on linear, box-in linear backwards;
         animation-timeline: view(), view();
         animation-range: normal, entry 0 cover 30vh;
@@ -1244,7 +1244,7 @@ main>*:last-child,
 }
 
 @supports (animation-timeline: scroll()) {
-    :is(.hs, .gx, .rn, .yu, .aj)>.ct {
+    :is(.hs, .gx, .rn, .yu, .aj, .mz)>.ct {
         -webkit-mask-image: linear-gradient(to bottom, black calc(100% - var(--ct-f)), transparent);
         mask-image: linear-gradient(to bottom, black calc(100% - var(--ct-f)), transparent);
         animation: ct-fade linear both;
@@ -1273,7 +1273,7 @@ main>*:last-child,
 }
 
 @supports (animation-timeline: scroll()) {
-    :is(.hs, .gx, .rn, .yu, .aj)>.ct:has(> details[open]) {
+    :is(.hs, .gx, .rn, .yu, .aj, .mz)>.ct:has(> details[open]) {
         animation: ct-fade linear both, ct-snap 0.6s forwards;
         animation-timeline: scroll(self), auto;
     }
@@ -1295,7 +1295,7 @@ main {
     overflow: clip;
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2) {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2) {
     padding-top: 3.8em;
 }
 
@@ -1543,7 +1543,7 @@ p.klee,
 li.klee,
 .klee p,
 .klee li,
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2.klee, p.klee) details :is(summary, p) {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2.klee, p.klee) details :is(summary, p) {
     font-size: 1em;
     font-family: var(--klee-font);
     line-height: 1.94 !important;
@@ -1647,12 +1647,12 @@ h3.klee {
     font-size: 1.12em;
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj) p.klee,
-:is(.hs, .gx, .rn, .yu, .um, .aj) li.klee,
-:is(.hs, .gx, .rn, .yu, .um, .aj) .klee p,
-:is(.hs, .gx, .rn, .yu, .um, .aj) .klee li,
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2.klee, p.klee) details p,
-:is(.hs, .gx, .rn, .yu, .um, .aj) na {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) p.klee,
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) li.klee,
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) .klee p,
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) .klee li,
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2.klee, p.klee) details p,
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) na {
     font-size: 11px;
 }
 
@@ -1665,7 +1665,7 @@ main h3,
     margin-top: 1.2em;
 }
 
-:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) h2 {
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) h2 {
     position: relative;
     display: block;
     padding: 0.2em 0 0.5em;
@@ -1694,11 +1694,11 @@ main h3,
     padding-bottom: 2.784em;
 }
 
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) h2 {
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) h2 {
     margin-top: 1.2em;
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2) h2:first-of-type {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2) h2:first-of-type {
     margin-top: 0;
 }
 
@@ -1709,7 +1709,7 @@ main h3,
 }
 
 @supports (animation-timeline: scroll()) {
-    :is(.hs, .gx, .rn, .yu, .um, .aj):has(.ct) h2 {
+    :is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(.ct) h2 {
         background: linear-gradient(color-mix(in srgb, var(--black) 38%, transparent), color-mix(in srgb, var(--black) 38%, transparent)) left bottom / 0% 1px no-repeat border-box;
         animation: box-scroll-progress linear both;
         animation-timeline: --box-scroll;
@@ -1736,15 +1736,15 @@ main h3,
     border-bottom-color: color-mix(in srgb, var(--black) 28%, transparent);
 }
 
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) h2[data-date] {
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) h2[data-date] {
     padding-bottom: 2.392em;
 }
 
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) h2.klee[data-date] {
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) h2.klee[data-date] {
     padding-bottom: 2.303em;
 }
 
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) h2::before {
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) h2::before {
     position: absolute;
     left: 0;
     bottom: 0.5em;
@@ -1762,35 +1762,35 @@ main h3,
     color: var(--black) !important;
 }
 
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) h2[data-date]::before {
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) h2[data-date]::before {
     content: attr(data-date);
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj) h2[data-date][data-name]::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) h2[data-date][data-name]::before {
     content: attr(data-date) "  -  " attr(data-name);
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj) h2[data-name="Gojo Satoru"] {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) h2[data-name="Gojo Satoru"] {
     --h2-color: var(--gjo);
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj) h2[data-name="Nanami Kento"] {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) h2[data-name="Nanami Kento"] {
     --h2-color: var(--nanami);
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj) h2[data-tag] {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) h2[data-tag] {
     padding-bottom: 3.045em;
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj) h2.klee[data-tag] {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) h2.klee[data-tag] {
     padding-bottom: 2.931em;
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj) h2[data-tag]::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) h2[data-tag]::before {
     bottom: 1.5em;
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj) h2[data-tag]::after {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) h2[data-tag]::after {
     content: "# " attr(data-tag);
     position: absolute;
     right: 0;
@@ -1807,8 +1807,8 @@ main h3,
     -webkit-text-stroke: 0;
 }
 
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) h2.klee::before,
-:is(.hs, .gx, .rn, .yu, .um, .aj) h2.klee[data-tag]::after {
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) h2.klee::before,
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) h2.klee[data-tag]::after {
     font-size: 0.785em;
 }
 
@@ -1820,12 +1820,12 @@ main h3,
     --h2-color: var(--nanami);
 }
 
-:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) h2.klee {
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) h2.klee {
     font-size: 1.07em;
     letter-spacing: 0.1em;
 }
 
-:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) h3.klee {
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) h3.klee {
     font-size: 1.1em;
     letter-spacing: inherit;
 }
@@ -1911,16 +1911,16 @@ main h3,
     font-size: calc(0.746em / var(--h2-scale));
 }
 
-:is(.g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj) h2::before {
+:is(.g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj, .mz) h2::before {
     bottom: 0.5em;
     font-size: 0.816em;
 }
 
-:is(.g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj) h2.klee::before {
+:is(.g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj, .mz) h2.klee::before {
     font-size: 0.785em;
 }
 
-:is(.g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj) h2[data-tag]::before {
+:is(.g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj, .mz) h2[data-tag]::before {
     bottom: 1.5em;
 }
 
@@ -3289,20 +3289,20 @@ main details[open] summary:not(.cl-sm)::before {
     content: "\E32A";
 }
 
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) details:is(.mv, .gm) summary:not(.cl-sm)::before,
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) details[open]:is(.mv, .gm) summary:not(.cl-sm)::before {
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details:is(.mv, .gm) summary:not(.cl-sm)::before,
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details[open]:is(.mv, .gm) summary:not(.cl-sm)::before {
     content: "\E8C2";
     font-family: "Phosphor-Fill";
     color: oklch(from var(--pure-white) calc(l - 0.30) c h);
 }
 
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) details.gm summary:not(.cl-sm)::before,
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) details[open].gm summary:not(.cl-sm)::before {
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details.gm summary:not(.cl-sm)::before,
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details[open].gm summary:not(.cl-sm)::before {
     content: "\E5BA";
 }
 
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) details.fav summary:not(.cl-sm)::before,
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) details[open].fav summary:not(.cl-sm)::before {
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details.fav summary:not(.cl-sm)::before,
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details[open].fav summary:not(.cl-sm)::before {
     content: "\E2A8";
 }
 
@@ -3320,8 +3320,8 @@ details.ic-film { --sm-icon: "\E792"; }
 details.ic-slate { --sm-icon: "\E8C2"; }
 details.ic-pop { --sm-icon: "\EB4E"; }
 
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) details:is(.mv, .gm)[class*=" ic-"] summary:not(.cl-sm)::before,
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) details[open]:is(.mv, .gm)[class*=" ic-"] summary:not(.cl-sm)::before {
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details:is(.mv, .gm)[class*=" ic-"] summary:not(.cl-sm)::before,
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details[open]:is(.mv, .gm)[class*=" ic-"] summary:not(.cl-sm)::before {
     content: var(--sm-icon);
 }
 
@@ -3329,24 +3329,24 @@ main details.mv[class*=" ic-"]:is(.ic-sparkle, .ic-moon-stars, .ic-star, .ic-rai
     font-family: "Phosphor-Light";
 }
 
-main details.mv>:is(.hs, .gx, .rn, .yu, .um, .aj) {
+main details.mv>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) {
     margin-top: 6px;
 }
 
-main>:is(.hs, .gx, .rn, .yu, .um, .aj):has(+ details.mv) {
+main>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(+ details.mv) {
     margin-bottom: 14px;
 }
 
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) details:is(.mv, .gm) summary:not(.cl-sm)::before {
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details:is(.mv, .gm) summary:not(.cl-sm)::before {
     transition: transform 0.3s ease;
 }
 
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) details[open]:is(.mv, .gm) summary:not(.cl-sm)::before {
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details[open]:is(.mv, .gm) summary:not(.cl-sm)::before {
     transform: rotate(-15deg);
     animation: none;
 }
 
-:is(main, .hs, .gx, .rn, .yu, .um, .aj) details[open].gm summary:not(.cl-sm)::before {
+:is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details[open].gm summary:not(.cl-sm)::before {
     transform: rotate(15deg);
 }
 
@@ -3387,37 +3387,37 @@ main>:is(.hs, .gx, .rn, .yu, .um, .aj):has(+ details.mv) {
     animation: icon-swap 0.4s ease forwards;
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj) details summary:not(.cl-sm)::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) details summary:not(.cl-sm)::before {
     content: "\E3D4";
     font-family: "Phosphor-Light";
     color: inherit;
     transition: none;
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj) details[open] summary:not(.cl-sm)::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) details[open] summary:not(.cl-sm)::before {
     content: "\E32A";
     animation: none;
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name]) details:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2[data-name]) details:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
     font-family: "Phosphor-Fill";
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name="Nanami Kento"]) details:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2[data-name="Nanami Kento"]) details:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
     content: "\E0E4";
     color: color-mix(in srgb, var(--nanami) 60%, transparent);
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name="Nanami Kento"]) details[open]:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2[data-name="Nanami Kento"]) details[open]:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
     content: "\E8F2";
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name="Gojo Satoru"]) details:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2[data-name="Gojo Satoru"]) details:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
     content: "\E2FE";
     color: color-mix(in srgb, var(--gjo) 60%, transparent);
 }
 
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(h2[data-name="Gojo Satoru"]) details[open]:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2[data-name="Gojo Satoru"]) details[open]:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
     content: "\E300";
 }
 
@@ -3568,7 +3568,7 @@ details[open]:has(> summary > mark)::details-content {
 }
 
 .il.sg+.pg-qt::before {
-    content: "Swipe\2002\E06C";
+    content: "Swipe\2002\E12A";
     display: block;
     margin-bottom: 3em;
     font: 300 0.72em/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
@@ -5032,7 +5032,7 @@ details[open]>.vs {
     Timeline
 ======================================= */
 main:has(.tl),
-:is(.hs, .gx, .rn, .yu, .um, .aj):has(.tl) {
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(.tl) {
     timeline-scope: --tl-scroll;
 }
 
@@ -6438,7 +6438,8 @@ details.gm .cl-li::before {
 .rn,
 .yu,
 .um,
-.aj {
+.aj,
+.mz {
     position: relative;
     overflow: hidden;
     margin: 3em 10px;
@@ -6451,7 +6452,7 @@ details.gm .cl-li::before {
     letter-spacing: var(--base-letter-spacing);
 }
 
-:is(.hs, .gx, .yu, .um, .aj)[class] {
+:is(.hs, .gx, .yu, .um, .aj, .mz)[class] {
     background-clip: padding-box;
 }
 
@@ -7903,6 +7904,183 @@ details.gm .cl-li::before {
 }
 
 /* =======================================
+    Mizusoko Box (.mz)
+======================================= */
+.mz {
+    min-height: 20vh;
+    padding-inline: 29px;
+    background:
+        radial-gradient(ellipse 70% 45% at 50% -12%, oklch(62% 0.1 225 / 0.32), oklch(45% 0.08 230 / 0.12) 45%, transparent 75%),
+        linear-gradient(180deg, oklch(30% 0.06 235) 0%, oklch(23% 0.05 240) 50%, oklch(15% 0.035 250) 100%);
+    border: 1px solid oklch(100% 0 0 / 0.16);
+    box-shadow: inset 0 2px 24px oklch(85% 0.08 210 / 0.14), inset 0 -24px 40px oklch(8% 0.03 250 / 0.7), 0 4px 14px oklch(0% 0 0 / 0.25);
+    color: oklch(97% 0.01 300);
+}
+
+.mz>*:not(b, i, u) {
+    position: relative;
+    z-index: 1;
+}
+
+.mz::before {
+    content: "";
+    position: absolute;
+    inset: -55% -20% auto;
+    z-index: 0;
+    height: 80%;
+    background:
+        radial-gradient(ellipse at 35% 70%, oklch(80% 0.09 212 / 0.2), transparent 55%),
+        radial-gradient(ellipse at 68% 75%, oklch(76% 0.1 218 / 0.16), transparent 50%);
+    border-radius: 42% 58% 63% 37% / 45% 52% 48% 55%;
+    filter: blur(18px);
+    pointer-events: none;
+    animation: mz-surface 20s ease-in-out infinite alternate;
+}
+
+.mz::after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    z-index: 0;
+    border: 1px solid oklch(92% 0.04 300 / 0.1);
+    pointer-events: none;
+}
+
+.mz>:is(b, i, u) {
+    position: absolute;
+    z-index: 0;
+    display: block;
+    pointer-events: none;
+}
+
+.mz>b {
+    top: -25%;
+    height: 125%;
+    transform-origin: 50% 0;
+    filter: blur(6px);
+    mix-blend-mode: screen;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.5) 55%, transparent 92%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.5) 55%, transparent 92%);
+    mask-composite: intersect;
+}
+
+.mz>b:nth-of-type(1) { left: -12%; width: 56%; rotate: 14deg; background: linear-gradient(180deg, oklch(82% 0.08 212 / 0.4), oklch(76% 0.09 218 / 0.22) 45%, transparent); animation: mz-ray1 17s ease-in-out infinite alternate; }
+.mz>b:nth-of-type(2) { left: 14%; width: 62%; rotate: 3deg; background: linear-gradient(180deg, oklch(82% 0.08 220 / 0.44), oklch(70% 0.1 230 / 0.15) 55%, transparent); animation: mz-ray0 21s ease-in-out infinite alternate; }
+.mz>b:nth-of-type(3) { left: 40%; width: 56%; rotate: -8deg; background: linear-gradient(180deg, oklch(80% 0.09 215 / 0.3), oklch(74% 0.09 226 / 0.11) 50%, transparent); animation: mz-ray1 19s ease-in-out infinite alternate-reverse; }
+.mz>b:nth-of-type(4) { right: -22%; width: 50%; rotate: -17deg; background: linear-gradient(180deg, oklch(84% 0.08 212 / 0.32), transparent 85%); animation: mz-ray2 16s ease-in-out infinite alternate-reverse; }
+
+.mz>u {
+    inset: auto 10% -30% 10%;
+    height: 45%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, oklch(70% 0.1 225 / 0.14), transparent 70%);
+    filter: blur(20px);
+}
+
+.mz>i {
+    top: 0;
+    bottom: 0;
+    width: var(--z, 8px);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: mz-rise var(--d, 10s) linear var(--dl, 0s) infinite;
+}
+
+.mz>i::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: var(--z, 8px);
+    height: var(--z, 8px);
+    border-radius: 50%;
+    background:
+        radial-gradient(ellipse 34% 22% at 42% 20%, oklch(97% 0.03 205 / 0.55), transparent 70%),
+        radial-gradient(ellipse 30% 14% at 55% 84%, oklch(80% 0.07 210 / 0.22), transparent 75%),
+        radial-gradient(circle at 50% 50%, transparent 0 66%, oklch(78% 0.07 215 / 0.12) 80%, oklch(86% 0.06 210 / 0.3) 94%, transparent 100%);
+    box-shadow: inset 0 1px 1px oklch(96% 0.03 205 / 0.4), inset 0 -1px 2px oklch(25% 0.06 235 / 0.45), 0 0 4px oklch(70% 0.08 215 / 0.12);
+    animation: mz-sway var(--sw, 4s) ease-in-out var(--dl, 0s) infinite alternate;
+}
+
+.mz>i:nth-of-type(1) { left: 7%; --z: 8px; --d: 13.1s; --dl: -1.2s; --w: 10px; --sw: 4.3s; }
+.mz>i:nth-of-type(2) { left: 15%; --z: 5px; --d: 11.0s; --dl: -6.4s; --w: 8px; --sw: 5.1s; }
+.mz>i:nth-of-type(3) { left: 23%; --z: 11px; --d: 16.3s; --dl: -9.7s; --w: 11px; --sw: 5.9s; }
+.mz>i:nth-of-type(4) { left: 31%; --z: 6px; --d: 11.7s; --dl: -3.3s; --w: 9px; --sw: 3.5s; }
+.mz>i:nth-of-type(5) { left: 40%; --z: 9px; --d: 14.5s; --dl: -7.9s; --w: 10px; --sw: 4.3s; }
+.mz>i:nth-of-type(6) { left: 49%; --z: 5px; --d: 10.5s; --dl: -0.6s; --w: 8px; --sw: 5.1s; }
+.mz>i:nth-of-type(7) { left: 58%; --z: 12px; --d: 17.4s; --dl: -5.2s; --w: 12px; --sw: 5.9s; }
+.mz>i:nth-of-type(8) { left: 66%; --z: 6px; --d: 12.4s; --dl: -10.4s; --w: 9px; --sw: 3.5s; }
+.mz>i:nth-of-type(9) { left: 74%; --z: 8px; --d: 14.0s; --dl: -2.7s; --w: 10px; --sw: 4.3s; }
+.mz>i:nth-of-type(10) { left: 82%; --z: 5px; --d: 10.8s; --dl: -8.6s; --w: 8px; --sw: 5.1s; }
+.mz>i:nth-of-type(11) { left: 89%; --z: 10px; --d: 15.8s; --dl: -4.4s; --w: 11px; --sw: 5.9s; }
+.mz>i:nth-of-type(12) { left: 95%; --z: 6px; --d: 12.6s; --dl: -12.1s; --w: 9px; --sw: 3.5s; }
+.mz>i:nth-of-type(13) { left: 70%; --z: 4px; --d: 7.4s; --dl: -0.0s; --w: 3px; --sw: 3.1s; --o: 0.75; }
+.mz>i:nth-of-type(14) { left: 70%; --z: 3px; --d: 6.4s; --dl: -0.6s; --w: 4px; --sw: 3.6s; --o: 0.75; }
+.mz>i:nth-of-type(15) { left: 70%; --z: 5px; --d: 8.0s; --dl: -1.7s; --w: 6px; --sw: 2.6s; --o: 0.75; }
+.mz>i:nth-of-type(16) { left: 70%; --z: 3px; --d: 6.9s; --dl: -2.1s; --w: 2px; --sw: 3.1s; --o: 0.75; }
+.mz>i:nth-of-type(17) { left: 70%; --z: 4px; --d: 6.0s; --dl: -3.0s; --w: 5px; --sw: 3.6s; --o: 0.75; }
+.mz>i:nth-of-type(18) { left: 70%; --z: 3px; --d: 7.8s; --dl: -3.9s; --w: 7px; --sw: 2.6s; --o: 0.75; }
+.mz>i:nth-of-type(19) { left: 70%; --z: 5px; --d: 6.7s; --dl: -4.3s; --w: 4px; --sw: 3.1s; --o: 0.75; }
+.mz>i:nth-of-type(20) { left: 70%; --z: 4px; --d: 7.1s; --dl: -5.2s; --w: 6px; --sw: 3.6s; --o: 0.75; }
+.mz>i:nth-of-type(21) { left: 22%; --z: 13px; --d: 21.8s; --dl: -4.0s; --w: 12px; --sw: 4.3s; }
+.mz>i:nth-of-type(22) { left: 54%; --z: 11px; --d: 25.3s; --dl: -13.0s; --w: 11px; --sw: 5.1s; }
+.mz>i:nth-of-type(23) { left: 86%; --z: 14px; --d: 23.0s; --dl: -8.5s; --w: 13px; --sw: 5.9s; }
+
+@media screen and (min-width: 768px) {
+    .mz {
+        background: linear-gradient(180deg, oklch(30% 0.06 235) 0%, oklch(23% 0.05 240) 50%, oklch(15% 0.035 250) 100%);
+    }
+
+    .mz::before {
+        content: none;
+    }
+
+    .mz>b {
+        -webkit-mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 55%, transparent 92%);
+        mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 55%, transparent 92%);
+    }
+
+    .mz>b:nth-of-type(1) { left: 0%; width: 40%; rotate: 18deg; background: linear-gradient(180deg, oklch(82% 0.08 212 / 0.48), oklch(76% 0.09 218 / 0.26) 45%, transparent); }
+    .mz>b:nth-of-type(2) { left: 24%; width: 48%; rotate: 5deg; background: linear-gradient(180deg, oklch(82% 0.08 220 / 0.53), oklch(70% 0.1 230 / 0.18) 55%, transparent); }
+    .mz>b:nth-of-type(3) { left: 50%; width: 40%; rotate: -9deg; background: linear-gradient(180deg, oklch(80% 0.09 215 / 0.36), oklch(74% 0.09 226 / 0.13) 50%, transparent); }
+    .mz>b:nth-of-type(4) { right: -8%; width: 36%; rotate: -20deg; background: linear-gradient(180deg, oklch(84% 0.08 212 / 0.38), transparent 85%); }
+}
+
+@keyframes mz-surface {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    50% { transform: translate(3%, 4%) rotate(2deg) scale(1.04); }
+    100% { transform: translate(-3%, 2%) rotate(-2deg) scale(0.98); }
+}
+
+@keyframes mz-ray0 {
+    from { transform: rotate(3deg); opacity: 1; }
+    to { transform: rotate(-1deg); opacity: 0.65; }
+}
+
+@keyframes mz-ray1 {
+    from { transform: rotate(-3deg); opacity: 0.3; }
+    to { transform: rotate(1deg); opacity: 1; }
+}
+
+@keyframes mz-ray2 {
+    from { transform: rotate(3deg); opacity: 1; }
+    to { transform: rotate(-1deg); opacity: 0.25; }
+}
+
+@keyframes mz-rise {
+    0% { transform: translateY(0); opacity: 0; }
+    12% { opacity: var(--o, 0.8); }
+    85% { opacity: var(--o, 0.8); }
+    100% { transform: translateY(calc(-100% - var(--z, 8px) - 4px)); opacity: 0; }
+}
+
+@keyframes mz-sway {
+    from { translate: calc(var(--w, 8px) * -1) 0; }
+    to { translate: var(--w, 8px) 0; }
+}
+
+/* =======================================
     Rain in .aj (.rn-d)
 ======================================= */
 .aj>.rn-d {
@@ -8282,13 +8460,13 @@ details.gm .cl-li::before {
 /* =======================================
     Inside main / g_box / n_box overrides
 ======================================= */
-:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj) {
+:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj, .mz) {
     margin-inline: -8px;
     max-height: none;
     overflow: clip;
 }
 
-:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .aj) {
+:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .aj, .mz) {
     font-size: 9.5px;
     padding: 2.5em 1.9em;
 }
@@ -8297,7 +8475,7 @@ details.gm .cl-li::before {
     padding-bottom: 5em;
 }
 
-:is(main, .g_box, .n_box) :is(.hs, .gx, .aj) {
+:is(main, .g_box, .n_box) :is(.hs, .gx, .aj, .mz) {
     padding-inline: calc(1.9em + 1px);
 }
 
@@ -8306,13 +8484,13 @@ details.gm .cl-li::before {
     padding: 2.5em 1.9em 6em;
 }
 
-:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj)[class] {
+:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj, .mz)[class] {
     display: flex;
     flex-direction: column;
     min-height: 290px;
 }
 
-:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj, .aj-ct)>.bgm[class] {
+:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj, .aj-ct, .mz)>.bgm[class] {
     margin-top: auto;
     margin-bottom: 0;
 }
@@ -8331,34 +8509,34 @@ details.gm .cl-li::before {
     padding-bottom: 13em;
 }
 
-:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .aj):has(> .bgm, > .ct>.bgm:last-child, > .aj-ct>.bgm:last-child) {
+:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .aj, .mz):has(> .bgm, > .ct>.bgm:last-child, > .aj-ct>.bgm:last-child) {
     padding-bottom: 29px;
 }
 
-:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .aj)>.bgm[class],
-:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .aj)>.ct>.bgm[class]:last-child,
+:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .aj, .mz)>.bgm[class],
+:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .aj, .mz)>.ct>.bgm[class]:last-child,
 :is(main, .g_box, .n_box) .aj>.aj-ct>.bgm[class]:last-child {
     margin-bottom: 0;
 }
 
-:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj) p.klee,
-:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj) li.klee,
-:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj) .klee p,
-:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj) .klee li {
+:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj, .mz) p.klee,
+:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj, .mz) li.klee,
+:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj, .mz) .klee p,
+:is(main, .g_box, .n_box) :is(.hs, .gx, .rn, .yu, .um, .aj, .mz) .klee li {
     font-size: 10px;
 }
 
-:is(main, .g_box, .n_box) :is(.hs, .gx, .yu, .um, .aj) .bgm {
+:is(main, .g_box, .n_box) :is(.hs, .gx, .yu, .um, .aj, .mz) .bgm {
     width: 88%;
     max-width: 300px;
     padding: 9px 11px 11px;
 }
 
-:is(main, .g_box, .n_box) :is(.hs, .gx, .yu, .um, .aj) .bgm-ti {
+:is(main, .g_box, .n_box) :is(.hs, .gx, .yu, .um, .aj, .mz) .bgm-ti {
     font-size: 9.5px;
 }
 
-:is(main, .g_box, .n_box) :is(.hs, .gx, .yu, .um, .aj) .bgm-ct {
+:is(main, .g_box, .n_box) :is(.hs, .gx, .yu, .um, .aj, .mz) .bgm-ct {
     font-size: 14px;
     margin-top: 8px;
 }
@@ -8943,8 +9121,8 @@ details.plf > .pg-qt {
         display: block;
         position: absolute;
         right: 0;
-        bottom: calc(100% + 2.6em);
-        font: 300 0.8em/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
+        bottom: calc(100% + 2.83em);
+        font: 300 0.736em/1 'EllipsisFix', "Open Sans", "Phosphor-Light", sans-serif;
         letter-spacing: 0.3em;
         text-transform: uppercase;
         color: color-mix(in srgb, var(--color) 65%, transparent);
@@ -8952,7 +9130,7 @@ details.plf > .pg-qt {
     }
 
     .il.sg+details.plf > summary .ln::before {
-        content: "Swipe\2002\E06C";
+        content: "Swipe\2002\E12A";
     }
 }
 
@@ -9056,8 +9234,8 @@ details.tc > summary {
     text-align: center;
 }
 
-:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) details.tc > summary:not(.cl-sm)::before,
-:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) details.tc[open] > summary:not(.cl-sm)::before {
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) details.tc > summary:not(.cl-sm)::before,
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) details.tc[open] > summary:not(.cl-sm)::before {
     content: none;
 }
 
@@ -9598,7 +9776,7 @@ body>a span[style*="color"] {
     color: color-mix(in srgb, var(--nanami) 70%, transparent);
 }
 
-:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) .post-lock {
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) .post-lock {
     margin: 18px 0 0 !important;
     padding: 22px 20px 40px;
     border-left: 2px solid color-mix(in srgb, var(--lk-tone) 40%, transparent);
@@ -9609,26 +9787,26 @@ body>a span[style*="color"] {
     box-shadow: none;
 }
 
-:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) .post-lock::before {
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) .post-lock::before {
     padding-left: 0;
 }
 
-:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) .post-lock::after {
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) .post-lock::after {
     margin-left: 0;
 }
 
-:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) .post-lock:not(:has(.post-lock-msg)) {
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) .post-lock:not(:has(.post-lock-msg)) {
     padding-top: 50px;
 }
 
-:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) .post-lock:not(:has(.post-lock-msg)) .unlock-msg:empty {
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) .post-lock:not(:has(.post-lock-msg)) .unlock-msg:empty {
     display: block;
     position: absolute;
     top: calc(100% + 6px);
     left: 0;
 }
 
-:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) .post-lock:not(:has(.post-lock-msg)) .unlock-msg::before {
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) .post-lock:not(:has(.post-lock-msg)) .unlock-msg::before {
     content: "sealed \2014  for your eyes only";
     position: absolute;
     top: -105px;
@@ -9840,7 +10018,7 @@ body>a span[style*="color"] {
     padding-bottom: 46px;
 }
 
-:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj) .post-lock:has(.unlock-msg:not(:empty)) {
+:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) .post-lock:has(.unlock-msg:not(:empty)) {
     padding-bottom: 40px;
 }
 
@@ -10230,7 +10408,8 @@ body>a span[style*="color"] {
         min-height: 225px;
     }
 
-    .aj {
+    .aj,
+    .mz {
         min-height: 150px;
     }
 
@@ -10305,7 +10484,7 @@ body>a span[style*="color"] {
         padding-inline: 3em;
     }
 
-    :is(.hs, .gx, .rn, .yu, .um, .aj) {
+    :is(.hs, .gx, .rn, .yu, .um, .aj, .mz) {
         margin: 3em 8px;
     }
 
@@ -10316,7 +10495,8 @@ body>a span[style*="color"] {
 
     .hs,
     .gx,
-    .aj {
+    .aj,
+    .mz {
         padding-inline: calc(3em - 1px);
     }
 
