@@ -1642,6 +1642,7 @@ iframe {
                 <button type="button" data-for="n_box g_box main box" data-tab="vs">表</button>
                 <button type="button" data-for="main box" data-tab="tweet">呟き</button>
                 <button type="button" data-for="n_box g_box main box" data-tab="icon">アイコン・線</button>
+                <button type="button" data-for="n_box g_box main box" data-tab="card">カード</button>
             </div>
             <div class="tool-panel" data-panel="talk">
                 <div class="icons-body" id="cw-slot"></div>
@@ -1709,6 +1710,11 @@ iframe {
             <div class="tool-panel" data-panel="icon">
                 <div class="icons-body" id="icons"></div>
             </div>
+            <div class="tool-panel" data-panel="card">
+                <div class="icons-body" id="cards">
+                    <div class="tools" id="card-kinds" style="margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line);"><button type="button" data-kind="cv">星座</button><button type="button" data-kind="tc">月</button></div>
+                </div>
+            </div>
         </div>
         </div>
     </section>
@@ -1741,7 +1747,7 @@ iframe {
 <script>
 (() => {
     const LIMIT = 20000;
-    const LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500&family=Klee+One:wght@400;600&family=Open+Sans:wght@400;500&family=Scope+One&display=swap" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet"><link href="https://75glare.github.io/365.css" rel="stylesheet">';
+    const LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500&family=Klee+One:wght@400;600&family=Shippori+Mincho:wght@400&family=Open+Sans:wght@300;400;500&family=Playwrite+DE+LA:wght@200&family=Scope+One&display=swap" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet"><link href="https://75glare.github.io/365.css" rel="stylesheet">';
     const BLOCK = /^(?:<add>.*?<\/add>)?<(p|div|ul|ol|details|blockquote|h[1-6])[\s>]|^<span class="cl-(lb|dt)">/;
 
     const $ = (id) => document.getElementById(id);
@@ -1966,16 +1972,22 @@ iframe {
 
     // 表紙：北極星と二人の星座の絵に、タイトルと英文。カードは線の間に文章、手紙は表紙を押すと文章が開く
     const COVER_TYPES = [['cover', '表紙だけ'], ['card', 'カード'], ['letter', '手紙']];
-    const cover = { type: 'cover' };
+    const cover = { type: 'cover', align: 'c' };
 
-    $('line-section').insertAdjacentHTML('afterend', `
+    $('cards').insertAdjacentHTML('beforeend', `
         <div id="cv-section">
-        <p>表紙</p>
+        <p>形</p>
         <div class="tools" id="cv-types">${COVER_TYPES.map(([v, l]) => `<button type="button" data-type="${v}">${l}</button>`).join('')}</div>
         <p class="hint" id="cv-hint"></p>
         <div class="row">
-            <div><p>タイトル</p><input id="cv-title" type="text" autocomplete="off" placeholder="例：Polaris"></div>
+            <div><p>タイトル</p><input id="cv-title" type="text" autocomplete="off"></div>
             <div><p>英文</p><input id="cv-en" type="text" autocomplete="off" placeholder="例：We turn around the same light."></div>
+        </div>
+        <div id="cv-align-box">
+            <p>文章の寄せ</p>
+            <div class="tools" id="cv-align"><button type="button" data-align="c">真ん中</button><button type="button" data-align="l">左</button></div>
+            <p class="hint" id="cv-align-hint"></p>
+            <div id="cv-to-box"><p>書き出し（手書きの字）</p><input id="cv-to" type="text" autocomplete="off" placeholder="例：Dear Nanami,"></div>
         </div>
         <div id="cv-text-box"><p id="cv-text-label"></p><textarea id="cv-text" class="short"></textarea></div>
         <p class="hint">線の上と線の下は、空けておけば出ません。</p>
@@ -1993,7 +2005,7 @@ iframe {
     `);
 
     function coverHTML() {
-        const title = safe($('cv-title').value.trim()) || 'Polaris';
+        const title = safe($('cv-title').value.trim());
         const en = safe($('cv-en').value.trim());
         const head = `<span>${title}${en ? `<small>${en}</small>` : ''}</span>`;
         const text = flat($('cv-text').value).trim().split('\n').map((l) => safe(l.trim())).join('\n');
@@ -2006,6 +2018,13 @@ iframe {
         const below = sign || date ? `<add>${sign ? `<${who}>${sign}</${who}>` : ''}${date}</add>` : '';
         let body = `<div class="ti-tr cv">${head}</div>`;
         if (cover.type === 'card') body = `<div class="ti-tr cv">${head}</div><div class="cv-tx">${text}</div>`;
+        if (cover.type === 'letter' && cover.align === 'l') {
+            const to = safe($('cv-to').value.trim());
+            const paras = flat($('cv-text').value).trim().split(/\n\s*\n/).map((b) => b.split('\n').map((l) => safe(l.trim())).join('\n')).filter((b) => b);
+            const inner = `${to ? `<p class="cv-to">${to}</p>` : ''}${paras.map((b) => `<p>${b}</p>`).join('')}${sign ? `<p class="cv-fr"><small>from</small><b>${sign}</b></p>` : ''}`;
+            body = `<details class="cv-lt l ${who === 'na' ? 'n' : 'g'}"><summary class="ti-tr cv">${head}</summary><div class="cv-tx">${inner}</div></details>`;
+            return above + body + (date ? `<add>${date}</add>` : '');
+        }
         if (cover.type === 'letter') body = `<details class="cv-lt"><summary class="ti-tr cv">${head}</summary><div class="cv-tx">${text}</div></details>`;
         return above + body + below;
     }
@@ -2013,6 +2032,11 @@ iframe {
     function showCover() {
         document.querySelectorAll('#cv-types button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.type === cover.type));
         $('cv-text-box').hidden = cover.type === 'cover';
+        const left = cover.type === 'letter' && cover.align === 'l';
+        $('cv-align-box').hidden = cover.type !== 'letter';
+        document.querySelectorAll('#cv-align button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.align === cover.align));
+        $('cv-to-box').hidden = !left;
+        $('cv-align-hint').textContent = left ? '月の手紙と同じ形。左上に書き出し、右下に「from」と署名が入るよ（線の下は日付だけ）。空けた行で段落が分かれる。' : '短く改行して、詩のように書く手紙向き。';
         $('cv-text-label').textContent = cover.type === 'letter' ? '手紙の文章（表紙を押すと開く）' : '線の間に入れる文章（真ん中そろえ）';
         $('cv-hint').textContent = {
             cover: '表紙の下線の下に、本文をいつも通り書いてね。',
@@ -2028,8 +2052,89 @@ iframe {
         showCover();
     });
 
+    $('cv-align').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        cover.align = b.dataset.align;
+        showCover();
+    });
+
     $('cv-insert').addEventListener('click', () => insertAtCursor(coverHTML(), true));
     showCover();
+
+    // 月の手紙：三日月ときらめきの表紙に、タイトルと英文。封筒の印を押すと手紙が開く。色は書いた人の色
+    const moon = { who: 'g' };
+    const MOON_HINT = {
+        g: { nt: '例：FOR NANAMI ／ 11.16', to: '例：Dear Nanami,', fr: '例：Satoru' },
+        n: { nt: '例：FOR SATORU ／ 11.16', to: '例：Dear Satoru,', fr: '例：Kento' }
+    };
+
+    $('cv-section').insertAdjacentHTML('afterend', `
+        <div id="tc-section">
+        <p>書いた人</p>
+        <div class="tools" id="tc-who"><button type="button" data-who="g">五条</button><button type="button" data-who="n">七海</button></div>
+        <p class="hint">三日月の表紙の下に封筒の印が出て、押すと手紙が開くよ。月と字の色は書いた人の色。</p>
+        <div class="row">
+            <div><p>タイトル</p><input id="tc-title" type="text" autocomplete="off"></div>
+            <div><p>英文</p><input id="tc-en" type="text" autocomplete="off"></div>
+        </div>
+        <div class="row">
+            <div><p>宛名と日付</p><input id="tc-nt" type="text" autocomplete="off"></div>
+            <div><p>書き出し（手書きの字）</p><input id="tc-to" type="text" autocomplete="off"></div>
+        </div>
+        <div><p>手紙の文章（空けた行で段落が分かれる）</p><textarea id="tc-text" class="short"></textarea></div>
+        <div class="row">
+            <div><p>署名（手書きの字）</p><input id="tc-fr" type="text" autocomplete="off"></div>
+        </div>
+        <p class="hint">英文・宛名と日付・書き出し・署名は、空けておけば出ません。</p>
+        <div class="tools"><button type="button" id="tc-insert">この手紙を入れる</button></div>
+        </div>
+    `);
+
+    function moonHTML() {
+        const v = (id) => safe($(id).value.trim());
+        const title = v('tc-title');
+        const en = v('tc-en');
+        const nt = v('tc-nt');
+        const to = v('tc-to');
+        const fr = v('tc-fr');
+        const paras = flat($('tc-text').value).trim().split(/\n\s*\n/).map((b) => b.split('\n').map((l) => safe(l.trim())).join('\n')).filter((b) => b);
+        const art = '<span class="tc-art"><i class="tc-moon"></i><i class="tc-sp"></i><i class="tc-sp"></i><i class="tc-sp"></i></span>';
+        const head = `${art}${title ? `<span class="tc-ti">${title}</span>` : ''}${en ? `<span class="tc-sub">${en}</span>` : ''}${nt ? `<span class="tc-nt">${nt}</span>` : ''}`;
+        const body = `${to ? `<p class="tc-to">${to}</p>` : ''}${paras.map((b) => `<p>${b}</p>`).join('')}${fr ? `<p class="tc-fr"><small>from</small><b>${fr}</b></p>` : ''}`;
+        return `<details class="tc ${moon.who}"><summary>${head}</summary><div class="tc-tx">${body}</div></details>`;
+    }
+
+    function showMoon() {
+        document.querySelectorAll('#tc-who button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.who === moon.who));
+        $('tc-nt').placeholder = MOON_HINT[moon.who].nt;
+        $('tc-to').placeholder = MOON_HINT[moon.who].to;
+        $('tc-fr').placeholder = MOON_HINT[moon.who].fr;
+    }
+
+    $('tc-who').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        moon.who = b.dataset.who;
+        showMoon();
+    });
+    $('tc-insert').addEventListener('click', () => insertAtCursor(moonHTML(), true));
+    showMoon();
+
+    // カードのタブ：星座と月を切り替える
+    let cardKind = 'cv';
+    function showCard() {
+        document.querySelectorAll('#card-kinds button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.kind === cardKind));
+        $('cv-section').hidden = cardKind !== 'cv';
+        $('tc-section').hidden = cardKind !== 'tc';
+    }
+    $('card-kinds').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        cardKind = b.dataset.kind;
+        showCard();
+    });
+    showCard();
 
     // 装飾ボタンは、最後にタップした欄（本文か、呟きの欄）に効く
     let activeTA = null;
@@ -3933,7 +4038,7 @@ iframe {
         // 書きかけの描き直しが後から走って、消した内容を戻さないように止める
         clearTimeout(renderTimer);
         remember();
-        ['title', 'tag', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'rv-one', 'dl-title', 'dl-code', 'vs-title', 'bgm-song', 'bgm-artist', 'line-free', 'np-song', 'np-artist', 'np-len', 'np-ly', 'np-nt', 'cv-title', 'cv-en', 'cv-text', 'cv-top', 'cv-top2', 'cv-sign', 'cv-date'].forEach((f) => { if ($(f)) $(f).value = ''; });
+        ['title', 'tag', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'rv-one', 'dl-title', 'dl-code', 'vs-title', 'bgm-song', 'bgm-artist', 'line-free', 'np-song', 'np-artist', 'np-len', 'np-ly', 'np-nt', 'cv-title', 'cv-en', 'cv-text', 'cv-top', 'cv-top2', 'cv-sign', 'cv-date', 'cv-to', 'tc-title', 'tc-en', 'tc-nt', 'tc-to', 'tc-text', 'tc-fr'].forEach((f) => { if ($(f)) $(f).value = ''; });
         $('date').value = today;
         $('sw-date').value = today;
         $('time').value = stamp();
