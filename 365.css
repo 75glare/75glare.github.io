@@ -1167,9 +1167,21 @@ main>*:last-child,
 
 @supports (animation-timeline: view()) {
     :is(main, .g_box, .n_box) {
-        animation: box-in linear both;
+        animation: box-in linear backwards;
         animation-timeline: view();
         animation-range: entry 0 cover 30vh;
+    }
+
+    .np:not(:is(main, .g_box, .n_box) *) {
+        animation: box-in linear backwards;
+        animation-timeline: view();
+        animation-range: entry 0 cover 30vh;
+    }
+
+    :is(.hs, .gx, .rn, .yu, .um, .aj)[class]:not(:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, details) *) {
+        animation: box-on linear, box-in linear backwards;
+        animation-timeline: view(), view();
+        animation-range: normal, entry 0 cover 30vh;
     }
 }
 
