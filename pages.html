@@ -259,7 +259,7 @@ textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
             </div>
             <div class="panel">
                 <h2>並んでいるデザインノート</h2>
-                <p class="hint">1 つが 1 つの折りたたみになって、上から書いた順に並ぶよ。見出しの横の札には曲名が入る。箱の中身は「箱の HTML」を開くと書き換えられる。「七海の箱も並べる」を押すと、同じ箱が七海の名前と七海のフォントで下に並ぶよ（紫陽花は花びらの代わりに雨が降る）。</p>
+                <p class="hint">1 つが 1 つの四角い枠になって、上から書いた順に並ぶよ（スマホは 3 つ、パソコンは 4 つずつ）。押すと箱が開くよ。見出しの横の札には曲名が入る。「七海の箱も並べる」を押すと、同じ箱の七海版（七海の名前と七海のフォント。紫陽花は花びらの代わりに雨）が足されて、開いたときに Gojo / Nanami で切り替えられるよ。七海の箱だけのときは「五条の箱も並べる」になって、五条版（紫陽花は雨の代わりに花びら）が足される。</p>
                 <div id="dn-items"></div>
             </div>
             <div class="panel">
@@ -338,7 +338,7 @@ textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
     const PL_ICONS = [['#', '三日月'], ['O', '満ち欠け'], ['H', '月と本'], ['Y', '太陽と月'], ['6', '六芒星'], ['A', 'ひし形の星'], ['Q', '光る十字'], ['I', '宝石'], ['C', '光る目'], ['D', '三角の飾り'], ['F', '星をつかむ手'], ['G', '波の太陽'], ['K', '縞の太陽'], ['P', '星の円'], ['U', '結んだ手'], ['X', '月を持つ手'], ['Z', '水晶と手'], ['4', '月の天秤'], ['7', '星をこぼす手'], ['8', '祈る手と目'], ['9', '三角と月'], ['!', '月の輪'], ['?', '水晶玉'], ['>', '葉の枝']];
     const LIMIT = 5000;
     // デザインノート（57/10）の初期値は、公開中の書き込みをそのまま読み取って作る
-    const DN_SRC = "<main><add>Starlit Notes — for Nanami<small>I have loved the stars too fondly to be fearful of the night.</small></add><div class=\"ti-tr cv\"><span>Polaris<small>We turn around the same light.</small></span></div><add>This sky, and every star in it, belongs to 365×N.</add><details class=\"mv ic-star\"><summary>星明かりの夜<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;Don't Go Away - OASIS</bx></span></summary><div class=\"hs\"><span class=\"hs-sh\"></span><span class=\"hs-sh\"></span><h2 class=\"klee\" data-date=\"20260327\" data-name=\"Nanami Kento\">星明かりの夜</h2><p class=\"klee\">流星は2つ（20s/26s・11s delay）</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>Don't Go Away - OASIS</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-moon-stars\"><summary>宵の星明かり<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;PINK - TMGE</bx></span></summary><div class=\"hs yoi\"><span class=\"hs-sh\"></span><span class=\"hs-sh\"></span><h2 data-date=\"20261111\" data-name=\"Gojo Satoru\">宵の星明かり</h2><p>流星は2つ（20s/26s・11s delay）</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>PINK - THEE MICHELLE GUN ELEPHANT</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-sparkle\"><summary>星の絨毯<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;六等星 - ざらめ</bx></span></summary><div class=\"gx\"><div class=\"gx-sh\"></div><div class=\"gx-sh\"></div><h2 data-date=\"20260327\" data-name=\"Gojo Satoru\">星の絨毯</h2><p>流星は2つ（22s/28s・13s delay）</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>六等星 - ざらめ</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-rain\"><summary>雨の夜<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;雨 - ペトロールズ</bx></span></summary><div class=\"rn\"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><h2 data-date=\"20260327\" data-name=\"Gojo Satoru\">雨の夜</h2><p>1種類＋25要素。2.1〜3.8sで雨が降る。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>雨 - ペトロールズ</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-snow\"><summary>雪の夜<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;Esja - Hania Rani</bx></span></summary><div class=\"yu\"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><h2 data-date=\"20260327\" data-name=\"Gojo Satoru\">雪の夜</h2><p>1種×25要素。10〜15.5sで軸違いの雪が降る。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>Esja - Hania Rani</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-wave\"><summary>凪いだ海の水平線<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;渚 - スピッツ</bx></span></summary><div class=\"um\"><div></div><div></div><div></div><h2 data-date=\"20260327\" data-name=\"Gojo Satoru\">凪いだ海の水平線</h2><p> 波打ち際は2枚、9sで寄せては返す。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>渚 - スピッツ</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-flower\"><summary>紫陽花<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;紫陽花 - PEOPLE 1</bx></span></summary><div class=\"aj\"><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-p\"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class=\"aj-ct\"><h2 class=\"klee\" data-date=\"20260327\" data-name=\"noname\">紫陽花</h2><p class=\"klee\">花びら8枚、左右で合計12輪配置。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>紫陽花 - PEOPLE 1</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></div></details></main>";
+    const DN_SRC = "<main class=\"lib\"><add>Starlit Notes — for Nanami<small>I have loved the stars too fondly to be fearful of the night.</small></add><div class=\"ti-tr cv\"><span>Polaris<small>We turn around the same light.</small></span></div><add>This sky, and every star in it, belongs to 365×N.</add><details class=\"mv ic-star\"><summary>星明かりの夜<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;Don't Go Away - OASIS</bx></span></summary><div class=\"hs\"><span class=\"hs-sh\"></span><span class=\"hs-sh\"></span><h2 class=\"klee\" data-date=\"20260327\" data-name=\"Nanami Kento\">星明かりの夜</h2><p class=\"klee\">流星は2つ（20s/26s・11s delay）</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>Don't Go Away - OASIS</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-moon-stars\"><summary>宵の星明かり<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;PINK - TMGE</bx></span></summary><div class=\"hs yoi\"><span class=\"hs-sh\"></span><span class=\"hs-sh\"></span><h2 data-date=\"20261111\" data-name=\"Gojo Satoru\">宵の星明かり</h2><p>流星は2つ（20s/26s・11s delay）</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>PINK - THEE MICHELLE GUN ELEPHANT</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-sparkle\"><summary>星の絨毯<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;六等星 - ざらめ</bx></span></summary><div class=\"gx\"><div class=\"gx-sh\"></div><div class=\"gx-sh\"></div><h2 data-date=\"20260327\" data-name=\"Gojo Satoru\">星の絨毯</h2><p>流星は2つ（22s/28s・13s delay）</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>六等星 - ざらめ</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-rain\"><summary>雨の夜<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;雨 - ペトロールズ</bx></span></summary><details class=\"dn-sw\"><summary></summary><div class=\"rn\"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><h2 class=\"klee\" data-date=\"20260327\" data-name=\"Nanami Kento\">雨の夜</h2><p class=\"klee\">1種類＋25要素。2.1〜3.8sで雨が降る。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>雨 - ペトロールズ</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><div class=\"rn\"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><h2 data-date=\"20260327\" data-name=\"Gojo Satoru\">雨の夜</h2><p>1種類＋25要素。2.1〜3.8sで雨が降る。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>雨 - ペトロールズ</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-snow\"><summary>雪の夜<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;Esja - Hania Rani</bx></span></summary><div class=\"yu\"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><h2 data-date=\"20260327\" data-name=\"Gojo Satoru\">雪の夜</h2><p>1種×25要素。10〜15.5sで軸違いの雪が降る。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>Esja - Hania Rani</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-wave\"><summary>凪いだ海の水平線<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;渚 - スピッツ</bx></span></summary><div class=\"um\"><div></div><div></div><div></div><h2 data-date=\"20260327\" data-name=\"Gojo Satoru\">凪いだ海の水平線</h2><p> 波打ち際は2枚、9sで寄せては返す。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>渚 - スピッツ</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></details><details class=\"mv ic-drop\"><summary>蒼の水底</summary><div class=\"mz\"><b></b><b></b><b></b><b></b><u></u><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><h2 data-date=\"20261118\" data-name=\"Gojo Satoru\">蒼の水底</h2><p>泡は23個、光の筋は4本。</p></div></details><details class=\"mv ic-flower\"><summary>紫陽花<span class=\"cn gy tp-tg\" style=\"margin-left:10px\"><bx><i class=\"ph-light ph-music-note\"></i>&nbsp;紫陽花 - PEOPLE 1</bx></span></summary><details class=\"dn-sw\"><summary></summary><div class=\"aj\"><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><i class=\"rn-d\"></i><div class=\"aj-ct\"><h2 class=\"klee\" data-date=\"20260327\" data-name=\"Nanami Kento\">紫陽花</h2><p class=\"klee\">花びら8枚、左右で合計12輪配置。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>紫陽花 - PEOPLE 1</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></div></details><div class=\"aj\"><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-f\"><div></div><div></div><div></div></div><div class=\"aj-p\"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class=\"aj-ct\"><h2 class=\"klee\" data-date=\"20260327\" data-name=\"noname\">紫陽花</h2><p class=\"klee\">花びら8枚、左右で合計12輪配置。</p><div class=\"bgm\"><div class=\"bgm-ti\"><span>紫陽花 - PEOPLE 1</span></div><div class=\"bgm-br\"></div><div class=\"bgm-ct\"></div></div></div></div></details></main>";
     const DN_KINDS = [['hs', '星明かりの夜', 'ic-star'], ['hs yoi', '宵の星明かり', 'ic-moon-stars'], ['gx', '星の絨毯', 'ic-sparkle'], ['rn', '雨林', 'ic-rain'], ['yu', '夜雪', 'ic-snow'], ['um', '凪いだ海', 'ic-wave'], ['aj', '紫陽花', 'ic-flower'], ['mz', '蒼の水底', 'ic-drop']];
     const DN_ICONS = [['ic-star', '流れ星', 'ECFA'], ['ic-moon-stars', '月と星', 'E58E'], ['ic-sparkle', 'きらめき', 'E6A2'], ['ic-rain', '雨', 'E1B4'], ['ic-snow', '雪', 'E5AA'], ['ic-wave', '波', 'E6DE'], ['ic-flower', '花', 'E75E'], ['ic-drop', 'しずく', 'E210']];
     const rep = (str, n) => Array(n).fill(str).join('');
@@ -464,7 +464,7 @@ textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
             + `<div class="pl">${plSongs(p)}</div>${plQuote(p)}${plSum(p)}</details>`;
     };
     const dnSong = (s) => (String(s || '').trim() ? `<span class="cn gy tp-tg" style="margin-left:10px"><bx><i class="ph-light ph-music-note"></i>&nbsp;${String(s).trim()}</bx></span>` : '');
-    const buildDn = (d) => `<main>${d.top}${d.items.map((it) => `<details class="mv ${it.ic}"><summary>${it.title}${dnSong(it.song)}</summary>${it.box}</details>${it.after || ''}`).join('')}</main>`;
+    const buildDn = (d) => `<main class="lib">${d.top}${d.items.map((it) => `<details class="mv ${it.ic}"><summary>${it.title}${dnSong(it.song)}</summary>${it.box}</details>${it.after || ''}`).join('')}</main>`;
     // 「足す」の欄から、新しい折りたたみ 1 つ分を作る
     function dnFromNew(n) {
         const kind = DN_KINDS.find(([v]) => v === n.kind) || DN_KINDS[DN_KINDS.length - 1];
@@ -487,7 +487,12 @@ textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
         t.innerHTML = html;
         return t;
     }
-    const dnBoxes = (html) => [...dnParse(html).content.children].filter((e) => e.matches(DN_BOX));
+    // 折りたたみのすぐ下の箱と、七海の切り替え（details.dn-sw）の中の箱
+    const dnList = (root) => {
+        const ch = [...root.children];
+        return [...ch.filter((e) => e.matches(DN_BOX)), ...ch.filter((e) => e.matches('details.dn-sw')).flatMap((e) => [...e.children].filter((x) => x.matches(DN_BOX)))];
+    };
+    const dnBoxes = (html) => dnList(dnParse(html).content);
     function dnFields(b, i, j) {
         const h = b.querySelector('h2');
         const p = b.querySelector('p');
@@ -508,7 +513,7 @@ textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
     }
     function dnEdit(html, j, key, v) {
         const t = dnParse(html);
-        const b = [...t.content.children].filter((e) => e.matches(DN_BOX))[j];
+        const b = dnList(t.content)[j];
         if (!b) return html;
         const inner = b.querySelector(':scope > .aj-ct') || b;
         const h = b.querySelector('h2');
@@ -563,6 +568,30 @@ textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
         if (petals) petals.outerHTML = rep('<i class="rn-d"></i>', 25);
         return c.outerHTML;
     }
+    // 七海だけの箱から、五条の箱を作る（五条の紫陽花は雨の代わりに花びらを降らせる）
+    function dnGojo(html) {
+        const t = document.createElement('template');
+        t.innerHTML = html;
+        const box = t.content.firstElementChild;
+        if (!box) return '';
+        const c = box.cloneNode(true);
+        c.querySelectorAll('h2, p').forEach((e) => {
+            if (e.tagName === 'H2') e.dataset.name = 'Gojo Satoru';
+            e.classList.remove('klee');
+            if (!e.classList.length) e.removeAttribute('class');
+        });
+        const rain = c.querySelectorAll(':scope > i.rn-d');
+        if (c.matches('.aj') && rain.length) {
+            rain[0].insertAdjacentHTML('beforebegin', `<div class="aj-p">${rep('<i></i>', 8)}</div>`);
+            rain.forEach((x) => x.remove());
+        }
+        return c.outerHTML;
+    }
+    const dnWho = (html) => {
+        const b = dnBoxes(html)[0];
+        const h = b && b.querySelector('h2');
+        return h && h.dataset.name === 'Nanami Kento' ? 'n' : 'g';
+    };
     const build = () => (state.tab === 'at' ? buildAt(state.at) : state.tab === 'st' ? buildSt(state.st) : state.tab === 'pl' ? buildPl(state.pl) : state.tab === 'dn' ? buildDn(state.dn) : buildBs(state.bs));
 
     // ---- 一覧の入力欄
@@ -653,7 +682,7 @@ textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
                     <div><label>印</label><select data-k="dn.items.${i}.ic" data-rerender>${DN_ICONS.map(([v, n]) => `<option value="${v}" ${v === it.ic ? 'selected' : ''}>${n}</option>`).join('')}${icon ? '' : `<option value="${attr(it.ic)}" selected>${attr(it.ic)}</option>`}</select></div>
                 </div>
                 <label>見出しの横の札（曲名）</label><input type="text" data-k="dn.items.${i}.song" value="${attr(it.song)}">
-                <div class="acts">${/data-name="Nanami Kento"/.test(it.box) ? '<span class="hint">七海の箱も並んでいるよ。</span>' : `<button type="button" class="btn small" data-dn-na="${i}">七海の箱も並べる</button>`}</div>
+                <div class="acts">${/class="dn-sw"/.test(it.box) ? '<span class="hint">五条と七海の箱が並んでいるよ（開くと Gojo / Nanami で切り替え）。</span>' : `<button type="button" class="btn small" data-dn-na="${i}">${dnWho(it.box) === 'n' ? '五条' : '七海'}の箱も並べる</button>`}</div>
                 ${dnBoxes(it.box).map((b, j) => dnFields(b, i, j)).join('')}
                 <details class="dn-box"><summary>箱の HTML</summary><textarea class="code" data-k="dn.items.${i}.box" data-rerender-blur>${attr(it.box)}</textarea></details>
             </div>`;
@@ -970,7 +999,9 @@ textarea.code { min-height: 90px; font: 12px/1.6 ui-monospace, monospace; }
             p.text = '';
         } else if (b.dataset.dnNa !== undefined) {
             const it = state.dn.items[Number(b.dataset.dnNa)];
-            it.box += dnNanami(it.box);
+            it.box = dnWho(it.box) === 'n'
+                ? `<details class="dn-sw"><summary></summary>${it.box}</details>${dnGojo(it.box)}`
+                : `<details class="dn-sw"><summary></summary>${dnNanami(it.box)}</details>${it.box}`;
         } else if (b.dataset.plic !== undefined) {
             state.pl.songs[Number(b.dataset.plic)].ic = b.dataset.v;
         } else if (b.id === 'st-today' || b.id === 'st-nudge-yes') {

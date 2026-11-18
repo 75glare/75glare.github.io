@@ -4212,6 +4212,23 @@ main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary {
     border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
 }
 
+main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary>.tp-tg {
+    display: flex;
+    min-width: 0;
+}
+
+main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary>.tp-tg bx {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* =======================================
     Cinema Library (main.lib)
 ======================================= */
