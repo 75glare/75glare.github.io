@@ -1538,7 +1538,21 @@ iframe {
             <div id="tl-deco"></div>
             <input id="time" type="hidden">
             <div id="tl-wrap-box"><label class="check"><input id="tl-wrap" type="checkbox">タイムラインの枠ごと作る</label>
-            <p class="hint">※書き足すときはオフのまま使ってね。</p></div>
+            <p class="hint">※書き足すときはオフのまま使ってね。</p>
+            <div id="tl-frame-box" hidden>
+                <label>枠の種類</label>
+                <div class="modes" id="tl-frame">
+                    <button type="button" data-tl-frame="">日記の枠</button>
+                    <button type="button" data-tl-frame="hs">星明かりの夜</button>
+                    <button type="button" data-tl-frame="hs yoi">宵の星明かり</button>
+                    <button type="button" data-tl-frame="gx">星の絨毯</button>
+                    <button type="button" data-tl-frame="rn">雨林</button>
+                    <button type="button" data-tl-frame="yu">夜雪</button>
+                    <button type="button" data-tl-frame="um">凪いだ海</button>
+                    <button type="button" data-tl-frame="aj">紫陽花</button>
+                    <button type="button" data-tl-frame="mz">蒼の水底</button>
+                </div>
+            </div></div>
         </div>
 
         <div data-for="n_box g_box main tl" id="or-box">
@@ -3699,6 +3713,8 @@ iframe {
                 const merged = mergedTimeline(items);
                 if (merged) return merged;
                 if (!$('tl-wrap').checked) return items;
+                // デザインノートの箱を枠にするときは、箱の部品のあとにタイムラインを入れる（印は付けない）
+                if (state.tlFrame && BOX_PARTS[state.tlFrame] !== undefined) return `<div class="${state.tlFrame}">${BOX_PARTS[state.tlFrame]}<div class="tl-sep"></div><div class="tl">${items}</div></div>`;
                 return orPos() ? `<main><div class="dlc">${orTag(false)}<div class="tl-sep"></div><div class="tl">${items}</div></div></main>` : `<main><div class="tl-sep"></div><div class="tl">${items}</div></main>`;
             }
         }
@@ -3842,7 +3858,9 @@ iframe {
         document.querySelectorAll('#boxes button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.box === state.box));
         document.querySelectorAll('#wraps button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.wrapBox === state.wrap));
         // 呟きの印は、タイムラインの枠ごと作るときだけ（枠の後ろに置く）
-        if (inTl) $('or-box').hidden = !$('tl-wrap').checked || hasMerged();
+        if (inTl) $('or-box').hidden = !$('tl-wrap').checked || hasMerged() || !!state.tlFrame;
+        $('tl-frame-box').hidden = !inTl || !$('tl-wrap').checked || hasMerged();
+        document.querySelectorAll('#tl-frame button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.tlFrame === (state.tlFrame || '')));
         $('or-ce').textContent = inTl ? '背景' : '真ん中';
         document.querySelectorAll('#or-pos button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.orPos === orPos()));
         document.querySelectorAll('#or-pick button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.or === state.or));
@@ -3868,6 +3886,7 @@ iframe {
             if (d.box) state.box = d.box;
             if (typeof d.wrap === 'string') state.wrap = d.wrap;
             if (d.orPos && typeof d.orPos === 'object') state.orPos = d.orPos;
+            if (typeof d.tlFrame === 'string') state.tlFrame = d.tlFrame;
             if (typeof d.or === 'string' && OR_CHARS.includes(d.or)) state.or = d.or;
             if (Array.isArray(d.chat) && d.chat.length) state.chat = d.chat;
             if (d.cwView) state.cwView = d.cwView;
@@ -4055,6 +4074,14 @@ iframe {
         const b = ev.target.closest('button');
         if (!b) return;
         state.wrap = b.dataset.wrapBox;
+        show();
+        render();
+    });
+
+    $('tl-frame').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        state.tlFrame = b.dataset.tlFrame;
         show();
         render();
     });
