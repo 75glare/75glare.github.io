@@ -447,22 +447,22 @@ html::after {
     height: 100lvh;
     pointer-events: none;
     background-image:
-        radial-gradient(circle at 41px 57px, color-mix(in oklch, var(--dust) 21%, transparent) 0.6px, transparent 1.3px),
-        radial-gradient(circle at 188px 23px, color-mix(in oklch, var(--dust) 12%, transparent) 0.5px, transparent 1.2px),
-        radial-gradient(circle at 263px 151px, color-mix(in oklch, var(--dust) 18%, transparent) 0.6px, transparent 1.3px),
-        radial-gradient(circle at 97px 214px, color-mix(in oklch, var(--dust) 11%, transparent) 0.5px, transparent 1.2px),
-        radial-gradient(circle at 219px 262px, color-mix(in oklch, var(--dust) 17%, transparent) 0.55px, transparent 1.25px),
-        radial-gradient(circle at 73px 311px, color-mix(in oklch, var(--dust) 18%, transparent) 0.6px, transparent 1.3px),
-        radial-gradient(circle at 351px 88px, color-mix(in oklch, var(--dust) 13%, transparent) 0.5px, transparent 1.2px),
-        radial-gradient(circle at 142px 146px, color-mix(in oklch, var(--dust) 21%, transparent) 0.65px, transparent 1.35px),
-        radial-gradient(circle at 298px 249px, color-mix(in oklch, var(--dust) 11%, transparent) 0.5px, transparent 1.2px),
-        radial-gradient(circle at 21px 19px, color-mix(in oklch, var(--dust) 15%, transparent) 0.55px, transparent 1.25px),
-        radial-gradient(circle at 466px 402px, color-mix(in oklch, var(--dust) 21%, transparent) 0.65px, transparent 1.35px),
-        radial-gradient(circle at 203px 487px, color-mix(in oklch, var(--dust) 13%, transparent) 0.5px, transparent 1.2px),
-        radial-gradient(circle at 531px 171px, color-mix(in oklch, var(--dust) 17%, transparent) 0.6px, transparent 1.3px),
-        radial-gradient(circle at 117px 352px, color-mix(in oklch, var(--dust) 12%, transparent) 0.5px, transparent 1.2px),
-        radial-gradient(circle at 379px 29px, color-mix(in oklch, var(--dust) 18%, transparent) 0.6px, transparent 1.3px),
-        radial-gradient(circle at 268px 238px, color-mix(in oklch, var(--dust) 11%, transparent) 0.5px, transparent 1.2px);
+        radial-gradient(circle at 41px 57px, color-mix(in oklch, var(--dust) 42%, transparent) 0.6px, transparent 1.3px),
+        radial-gradient(circle at 188px 23px, color-mix(in oklch, var(--dust) 24%, transparent) 0.5px, transparent 1.2px),
+        radial-gradient(circle at 263px 151px, color-mix(in oklch, var(--dust) 36%, transparent) 0.6px, transparent 1.3px),
+        radial-gradient(circle at 97px 214px, color-mix(in oklch, var(--dust) 22%, transparent) 0.5px, transparent 1.2px),
+        radial-gradient(circle at 219px 262px, color-mix(in oklch, var(--dust) 34%, transparent) 0.55px, transparent 1.25px),
+        radial-gradient(circle at 73px 311px, color-mix(in oklch, var(--dust) 36%, transparent) 0.6px, transparent 1.3px),
+        radial-gradient(circle at 351px 88px, color-mix(in oklch, var(--dust) 26%, transparent) 0.5px, transparent 1.2px),
+        radial-gradient(circle at 142px 146px, color-mix(in oklch, var(--dust) 42%, transparent) 0.65px, transparent 1.35px),
+        radial-gradient(circle at 298px 249px, color-mix(in oklch, var(--dust) 22%, transparent) 0.5px, transparent 1.2px),
+        radial-gradient(circle at 21px 19px, color-mix(in oklch, var(--dust) 30%, transparent) 0.55px, transparent 1.25px),
+        radial-gradient(circle at 466px 402px, color-mix(in oklch, var(--dust) 42%, transparent) 0.65px, transparent 1.35px),
+        radial-gradient(circle at 203px 487px, color-mix(in oklch, var(--dust) 26%, transparent) 0.5px, transparent 1.2px),
+        radial-gradient(circle at 531px 171px, color-mix(in oklch, var(--dust) 34%, transparent) 0.6px, transparent 1.3px),
+        radial-gradient(circle at 117px 352px, color-mix(in oklch, var(--dust) 24%, transparent) 0.5px, transparent 1.2px),
+        radial-gradient(circle at 379px 29px, color-mix(in oklch, var(--dust) 36%, transparent) 0.6px, transparent 1.3px),
+        radial-gradient(circle at 268px 238px, color-mix(in oklch, var(--dust) 22%, transparent) 0.5px, transparent 1.2px);
     background-size:
         307px 283px, 307px 283px, 307px 283px, 307px 283px, 307px 283px, 419px 397px, 419px 397px, 419px 397px, 419px 397px, 419px 397px, 587px 541px, 587px 541px, 587px 541px, 587px 541px, 587px 541px, 307px 283px;
     background-repeat:
@@ -623,7 +623,7 @@ body::after {
 }
 
 body::before {
-    font-size: 13.5px;
+    font-size: 18px;
     color: transparent;
     will-change: transform, opacity;
     text-shadow:
@@ -708,7 +708,7 @@ body::before {
 }
 
 body::after {
-    font-size: 9.35px;
+    font-size: 12.5px;
     color: transparent;
     will-change: transform, opacity;
     text-shadow:
