@@ -8035,7 +8035,7 @@ details.gm .cl-li::before {
     min-height: 20vh;
     padding-inline: 29px;
     background:
-        radial-gradient(ellipse 70% 45% at 50% -12%, oklch(62% 0.1 225 / 0.32), oklch(45% 0.08 230 / 0.12) 45%, transparent 75%),
+        radial-gradient(ellipse 60% 45% at 74% -12%, oklch(62% 0.1 225 / 0.32), oklch(45% 0.08 230 / 0.12) 45%, transparent 75%),
         linear-gradient(180deg, oklch(30% 0.06 235) 0%, oklch(24% 0.05 240) 50%, oklch(19% 0.042 248) 100%);
     border: 1px solid oklch(100% 0 0 / 0.16);
     box-shadow: inset 0 2px 24px oklch(85% 0.08 210 / 0.14), inset 0 -20px 36px oklch(10% 0.03 250 / 0.42), 0 4px 14px oklch(0% 0 0 / 0.25);
@@ -8054,8 +8054,8 @@ details.gm .cl-li::before {
     z-index: 0;
     height: 80%;
     background:
-        radial-gradient(ellipse at 35% 70%, oklch(80% 0.09 212 / 0.2), transparent 55%),
-        radial-gradient(ellipse at 68% 75%, oklch(76% 0.1 218 / 0.16), transparent 50%);
+        radial-gradient(ellipse at 62% 70%, oklch(80% 0.09 212 / 0.2), transparent 55%),
+        radial-gradient(ellipse at 84% 75%, oklch(76% 0.1 218 / 0.16), transparent 50%);
     border-radius: 42% 58% 63% 37% / 45% 52% 48% 55%;
     filter: blur(18px);
     pointer-events: none;
@@ -8084,16 +8084,21 @@ details.gm .cl-li::before {
     transform-origin: 50% 0;
     filter: blur(6px);
     mix-blend-mode: screen;
-    -webkit-mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.5) 55%, transparent 92%);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 22%, oklch(0% 0 0 / 0.32) 50%, transparent 88%);
     -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.5) 55%, transparent 92%);
+    mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 22%, oklch(0% 0 0 / 0.32) 50%, transparent 88%);
     mask-composite: intersect;
 }
 
-.mz>b:nth-of-type(1) { left: -12%; width: 56%; rotate: 14deg; background: linear-gradient(180deg, oklch(82% 0.08 212 / 0.62), oklch(76% 0.09 218 / 0.32) 45%, transparent); animation: mz-ray1 17s ease-in-out infinite alternate; }
-.mz>b:nth-of-type(2) { left: 14%; width: 62%; rotate: 3deg; background: linear-gradient(180deg, oklch(82% 0.08 220 / 0.6), oklch(70% 0.1 230 / 0.2) 55%, transparent); animation: mz-ray0 21s ease-in-out infinite alternate; }
+.mz>b:nth-of-type(1) { left: -12%; width: 56%; rotate: 14deg; background: linear-gradient(180deg, oklch(76% 0.09 218 / 0.56), oklch(70% 0.09 222 / 0.28) 45%, transparent); animation: mz-ray1 17s ease-in-out infinite alternate; }
+.mz>b:nth-of-type(2) { left: 14%; width: 62%; rotate: 3deg; background: linear-gradient(180deg, oklch(76% 0.09 222 / 0.54), oklch(66% 0.1 230 / 0.18) 55%, transparent); animation: mz-ray0 21s ease-in-out infinite alternate; }
 .mz>b:nth-of-type(3) { left: 40%; width: 56%; rotate: -8deg; background: linear-gradient(180deg, oklch(80% 0.09 215 / 0.48), oklch(74% 0.09 226 / 0.18) 50%, transparent); animation: mz-ray1 19s ease-in-out infinite alternate-reverse; }
 .mz>b:nth-of-type(4) { right: -22%; width: 50%; rotate: -17deg; background: linear-gradient(180deg, oklch(84% 0.08 212 / 0.5), transparent 85%); animation: mz-ray2 16s ease-in-out infinite alternate-reverse; }
+
+.mz>b:is(:nth-of-type(3), :nth-of-type(4)) {
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 55%, transparent 92%);
+    mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 55%, transparent 92%);
+}
 
 .mz>u {
     inset: auto 10% -30% 10%;
@@ -8140,29 +8145,29 @@ details.gm .cl-li::before {
 .mz>i:nth-of-type(10) { left: 82%; --z: 5px; --d: 14.0s; --dl: -8.6s; --w: 8px; --sw: 5.1s; --o: 0.62; }
 .mz>i:nth-of-type(11) { left: 89%; --z: 10px; --d: 11.5s; --dl: -4.4s; --w: 11px; --sw: 5.9s; --o: 0.95; }
 .mz>i:nth-of-type(12) { left: 95%; --z: 6px; --d: 16.4s; --dl: -12.1s; --w: 9px; --sw: 3.5s; --o: 0.62; }
-.mz>i:nth-of-type(13) { left: 13%; bottom: 60%; --z: 5px; --d: 4.2s; --dl: -0.4s; --w: 3px; --sw: 3.1s; --o: 0.9; }
-.mz>i:nth-of-type(14) { left: 16%; bottom: 60%; --z: 8px; --d: 5.4s; --dl: -2.1s; --w: 4px; --sw: 3.6s; --o: 0.9; }
-.mz>i:nth-of-type(15) { left: 3%; bottom: 60%; --z: 4px; --d: 3.8s; --dl: -1.3s; --w: 6px; --sw: 2.6s; --o: 0.7; }
-.mz>i:nth-of-type(16) { left: 26%; bottom: 60%; --z: 6px; --d: 4.8s; --dl: -3.6s; --w: 2px; --sw: 3.1s; --o: 0.9; }
-.mz>i:nth-of-type(17) { left: 30%; bottom: 60%; --z: 5px; --d: 4.5s; --dl: -2.8s; --w: 5px; --sw: 3.6s; --o: 0.9; }
-.mz>i:nth-of-type(18) { left: 11%; bottom: 60%; --z: 4px; --d: 3.6s; --dl: -0.9s; --w: 7px; --sw: 2.6s; --o: 0.7; }
-.mz>i:nth-of-type(19) { left: 22%; bottom: 60%; --z: 7px; --d: 5.7s; --dl: -4.4s; --w: 4px; --sw: 3.1s; --o: 0.9; }
-.mz>i:nth-of-type(20) { left: 5%; bottom: 60%; --z: 4px; --d: 4.1s; --dl: -3.1s; --w: 6px; --sw: 3.6s; --o: 0.7; }
+.mz>i:nth-of-type(13) { left: 83%; bottom: 60%; --z: 5px; --d: 4.2s; --dl: -0.4s; --w: 3px; --sw: 3.1s; --o: 0.9; }
+.mz>i:nth-of-type(14) { left: 95%; bottom: 60%; --z: 8px; --d: 5.4s; --dl: -2.1s; --w: 4px; --sw: 3.6s; --o: 0.9; }
+.mz>i:nth-of-type(15) { left: 85%; bottom: 60%; --z: 4px; --d: 3.8s; --dl: -1.3s; --w: 6px; --sw: 2.6s; --o: 0.7; }
+.mz>i:nth-of-type(16) { left: 73%; bottom: 60%; --z: 6px; --d: 4.8s; --dl: -3.6s; --w: 2px; --sw: 3.1s; --o: 0.9; }
+.mz>i:nth-of-type(17) { left: 68%; bottom: 60%; --z: 5px; --d: 4.5s; --dl: -2.8s; --w: 5px; --sw: 3.6s; --o: 0.9; }
+.mz>i:nth-of-type(18) { left: 78%; bottom: 60%; --z: 4px; --d: 3.6s; --dl: -0.9s; --w: 7px; --sw: 2.6s; --o: 0.7; }
+.mz>i:nth-of-type(19) { left: 92%; bottom: 60%; --z: 7px; --d: 5.7s; --dl: -4.4s; --w: 4px; --sw: 3.1s; --o: 0.9; }
+.mz>i:nth-of-type(20) { left: 87%; bottom: 60%; --z: 4px; --d: 4.1s; --dl: -3.1s; --w: 6px; --sw: 3.6s; --o: 0.7; }
 .mz>i:nth-of-type(21) { left: 52%; --z: 13px; --d: 13.0s; --dl: -4.0s; --w: 12px; --sw: 4.3s; --o: 0.95; }
-.mz>i:nth-of-type(22) { left: 77%; --z: 11px; --d: 14.0s; --dl: -13.0s; --w: 11px; --sw: 5.1s; --o: 0.95; }
-.mz>i:nth-of-type(23) { left: 15%; --z: 14px; --d: 13.5s; --dl: -8.5s; --w: 13px; --sw: 5.9s; --o: 0.95; }
+.mz>i:nth-of-type(22) { left: 10%; --z: 11px; --d: 14.0s; --dl: -13.0s; --w: 11px; --sw: 5.1s; --o: 0.95; }
+.mz>i:nth-of-type(23) { left: 16%; --z: 14px; --d: 13.5s; --dl: -8.5s; --w: 13px; --sw: 5.9s; --o: 0.95; }
 
-.mz>i:nth-of-type(24) { left: 72%; --z: 4px; --d: 15.5s; --dl: -2.0s; --w: 8px; --sw: 4.7s; --o: 0.62; }
+.mz>i:nth-of-type(24) { left: 34%; --z: 4px; --d: 15.5s; --dl: -2.0s; --w: 8px; --sw: 4.7s; --o: 0.62; }
 .mz>i:nth-of-type(25) { left: 45%; --z: 7px; --d: 13.2s; --dl: -6.8s; --w: 9px; --sw: 4.1s; }
-.mz>i:nth-of-type(26) { left: 76%; --z: 3px; --d: 16.8s; --dl: -11.2s; --w: 7px; --sw: 5.3s; --o: 0.62; }
-.mz>i:nth-of-type(27) { left: 89%; --z: 9px; --d: 12.4s; --dl: -3.9s; --w: 10px; --sw: 4.9s; --o: 0.95; }
-.mz>i:nth-of-type(28) { left: 84%; --z: 4px; --d: 15.9s; --dl: -9.1s; --w: 8px; --sw: 3.9s; --o: 0.62; }
+.mz>i:nth-of-type(26) { left: 25%; --z: 3px; --d: 16.8s; --dl: -11.2s; --w: 7px; --sw: 5.3s; --o: 0.62; }
+.mz>i:nth-of-type(27) { left: 59%; --z: 9px; --d: 12.4s; --dl: -3.9s; --w: 10px; --sw: 4.9s; --o: 0.95; }
+.mz>i:nth-of-type(28) { left: 29%; --z: 4px; --d: 15.9s; --dl: -9.1s; --w: 8px; --sw: 3.9s; --o: 0.62; }
 .mz>i:nth-of-type(29) { left: 97%; --z: 6px; --d: 13.6s; --dl: -1.6s; --w: 9px; --sw: 5.5s; }
-.mz>i:nth-of-type(30) { left: 6%; --z: 3px; --d: 17.1s; --dl: -13.4s; --w: 7px; --sw: 4.5s; --o: 0.62; }
+.mz>i:nth-of-type(30) { left: 3%; --z: 3px; --d: 17.1s; --dl: -13.4s; --w: 7px; --sw: 4.5s; --o: 0.62; }
 .mz>i:nth-of-type(31) { left: 65%; --z: 7px; --d: 12.9s; --dl: -7.5s; --w: 9px; --sw: 3.8s; }
 .mz>i:nth-of-type(32) { left: 38%; --z: 5px; --d: 14.6s; --dl: -10.2s; --w: 8px; --sw: 5.0s; }
-.mz>i:nth-of-type(33) { left: 58%; --z: 10px; --d: 11.8s; --dl: -12.6s; --w: 11px; --sw: 5.6s; --o: 0.95; }
-.mz>i:nth-of-type(34) { left: 96%; --z: 4px; --d: 16.3s; --dl: -4.8s; --w: 8px; --sw: 4.4s; --o: 0.62; }
+.mz>i:nth-of-type(33) { left: 91%; --z: 10px; --d: 11.8s; --dl: -12.6s; --w: 11px; --sw: 5.6s; --o: 0.95; }
+.mz>i:nth-of-type(34) { left: 19%; --z: 4px; --d: 16.3s; --dl: -4.8s; --w: 8px; --sw: 4.4s; --o: 0.62; }
 .mz>i:nth-of-type(35) { left: 47%; --z: 8px; --d: 13.0s; --dl: -0.9s; --w: 10px; --sw: 4.2s; }
 .mz>i:nth-of-type(n+36) { display: none; }
 
@@ -8188,6 +8193,11 @@ details.gm .cl-li::before {
     .mz>i:nth-of-type(n+30) { display: none; }
 
     .mz>b {
+        -webkit-mask-image: linear-gradient(90deg, transparent, black 40%, black 60%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 22%, oklch(0% 0 0 / 0.32) 50%, transparent 88%);
+        mask-image: linear-gradient(90deg, transparent, black 40%, black 60%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 22%, oklch(0% 0 0 / 0.32) 50%, transparent 88%);
+    }
+
+    .mz>b:is(:nth-of-type(3), :nth-of-type(4)) {
         -webkit-mask-image: linear-gradient(90deg, transparent, black 40%, black 60%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 55%, transparent 92%);
         mask-image: linear-gradient(90deg, transparent, black 40%, black 60%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 55%, transparent 92%);
     }
@@ -8208,6 +8218,11 @@ details.gm .cl-li::before {
     }
 
     .mz>b {
+        -webkit-mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 22%, oklch(0% 0 0 / 0.32) 50%, transparent 88%);
+        mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 22%, oklch(0% 0 0 / 0.32) 50%, transparent 88%);
+    }
+
+    .mz>b:is(:nth-of-type(3), :nth-of-type(4)) {
         -webkit-mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 55%, transparent 92%);
         mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 55%, transparent 92%);
     }
