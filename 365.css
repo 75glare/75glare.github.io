@@ -7594,13 +7594,13 @@ details.gm .cl-li::before {
     min-height: 20vh;
     padding-inline: 29px;
     background:
-        radial-gradient(ellipse 90% 45% at 50% 108%, oklch(50% 0.072 304 / 0.4), transparent 75%),
+        radial-gradient(ellipse 95% 55% at 50% 108%, oklch(57% 0.085 232 / 0.55), transparent 75%),
         linear-gradient(180deg in oklch,
-            oklch(21% 0.053 290),
-            oklch(23.5% 0.056 294) 30%,
-            oklch(29.5% 0.06 299) 60%,
-            oklch(36% 0.067 303) 85%,
-            oklch(39.5% 0.072 305));
+            oklch(21% 0.053 280),
+            oklch(23.5% 0.056 284) 30%,
+            oklch(29.5% 0.06 289) 60%,
+            oklch(36% 0.067 293) 85%,
+            oklch(39.5% 0.072 295));
     border: 1px solid oklch(100% 0 0 / 0.16);
     box-shadow: 0 4px 14px oklch(0% 0 0 / 0.18), 0 0 20px oklch(100% 0 0 / 0.04);
     color: oklch(97% 0.01 300);
@@ -7608,7 +7608,7 @@ details.gm .cl-li::before {
 
 :is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj) {
     background:
-        radial-gradient(ellipse 85% 40% at 60% 110%, oklch(80% 0.07 132 / 0.42), oklch(70% 0.05 160 / 0.14) 55%, transparent 80%),
+        radial-gradient(ellipse 130% 55% at 55% 112%, oklch(79% 0.09 90 / 0.55), oklch(76% 0.08 95 / 0.38) 25%, oklch(72% 0.065 105 / 0.2) 50%, oklch(68% 0.05 115 / 0.08) 72%, oklch(68% 0.05 115 / 0) 100%),
         linear-gradient(180deg in oklch,
             oklch(22% 0.05 280),
             oklch(25% 0.045 258) 30%,
@@ -7833,7 +7833,7 @@ details.gm .cl-li::before {
 :is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj)>.aj-f:nth-of-type(n+8)::after,
 :is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj)>.aj-f:nth-of-type(n+8)>div::before,
 :is(.aj:has(h2[data-name="Nanami Kento"]), .n_box .aj)>.aj-f:nth-of-type(n+8)>div::after {
-    background: radial-gradient(ellipse 90% 100% at 50% 100%, oklch(70% 0.06 248 / 0.06), oklch(74% 0.06 248 / 0.12) 60%, oklch(74% 0.06 248 / 0.09));
+    background: radial-gradient(ellipse 90% 100% at 50% 100%, oklch(54% 0.08 245 / 0.1), oklch(60% 0.08 245 / 0.18) 60%, oklch(60% 0.08 245 / 0.13));
 }
 
 .aj>.aj-p {
@@ -8067,10 +8067,10 @@ details.gm .cl-li::before {
     mask-composite: intersect;
 }
 
-.mz>b:nth-of-type(1) { left: -12%; width: 56%; rotate: 14deg; background: linear-gradient(180deg, oklch(82% 0.08 212 / 0.4), oklch(76% 0.09 218 / 0.22) 45%, transparent); animation: mz-ray1 17s ease-in-out infinite alternate; }
-.mz>b:nth-of-type(2) { left: 14%; width: 62%; rotate: 3deg; background: linear-gradient(180deg, oklch(82% 0.08 220 / 0.44), oklch(70% 0.1 230 / 0.15) 55%, transparent); animation: mz-ray0 21s ease-in-out infinite alternate; }
-.mz>b:nth-of-type(3) { left: 40%; width: 56%; rotate: -8deg; background: linear-gradient(180deg, oklch(80% 0.09 215 / 0.3), oklch(74% 0.09 226 / 0.11) 50%, transparent); animation: mz-ray1 19s ease-in-out infinite alternate-reverse; }
-.mz>b:nth-of-type(4) { right: -22%; width: 50%; rotate: -17deg; background: linear-gradient(180deg, oklch(84% 0.08 212 / 0.32), transparent 85%); animation: mz-ray2 16s ease-in-out infinite alternate-reverse; }
+.mz>b:nth-of-type(1) { left: -12%; width: 56%; rotate: 14deg; background: linear-gradient(180deg, oklch(82% 0.08 212 / 0.62), oklch(76% 0.09 218 / 0.32) 45%, transparent); animation: mz-ray1 17s ease-in-out infinite alternate; }
+.mz>b:nth-of-type(2) { left: 14%; width: 62%; rotate: 3deg; background: linear-gradient(180deg, oklch(82% 0.08 220 / 0.6), oklch(70% 0.1 230 / 0.2) 55%, transparent); animation: mz-ray0 21s ease-in-out infinite alternate; }
+.mz>b:nth-of-type(3) { left: 40%; width: 56%; rotate: -8deg; background: linear-gradient(180deg, oklch(80% 0.09 215 / 0.48), oklch(74% 0.09 226 / 0.18) 50%, transparent); animation: mz-ray1 19s ease-in-out infinite alternate-reverse; }
+.mz>b:nth-of-type(4) { right: -22%; width: 50%; rotate: -17deg; background: linear-gradient(180deg, oklch(84% 0.08 212 / 0.5), transparent 85%); animation: mz-ray2 16s ease-in-out infinite alternate-reverse; }
 
 .mz>u {
     inset: auto 10% -30% 10%;
@@ -8117,14 +8117,14 @@ details.gm .cl-li::before {
 .mz>i:nth-of-type(10) { left: 82%; --z: 5px; --d: 10.8s; --dl: -8.6s; --w: 8px; --sw: 5.1s; }
 .mz>i:nth-of-type(11) { left: 89%; --z: 10px; --d: 15.8s; --dl: -4.4s; --w: 11px; --sw: 5.9s; }
 .mz>i:nth-of-type(12) { left: 95%; --z: 6px; --d: 12.6s; --dl: -12.1s; --w: 9px; --sw: 3.5s; }
-.mz>i:nth-of-type(13) { left: 70%; --z: 4px; --d: 7.4s; --dl: -0.0s; --w: 3px; --sw: 3.1s; --o: 0.75; }
-.mz>i:nth-of-type(14) { left: 70%; --z: 3px; --d: 6.4s; --dl: -0.6s; --w: 4px; --sw: 3.6s; --o: 0.75; }
-.mz>i:nth-of-type(15) { left: 70%; --z: 5px; --d: 8.0s; --dl: -1.7s; --w: 6px; --sw: 2.6s; --o: 0.75; }
-.mz>i:nth-of-type(16) { left: 70%; --z: 3px; --d: 6.9s; --dl: -2.1s; --w: 2px; --sw: 3.1s; --o: 0.75; }
-.mz>i:nth-of-type(17) { left: 70%; --z: 4px; --d: 6.0s; --dl: -3.0s; --w: 5px; --sw: 3.6s; --o: 0.75; }
-.mz>i:nth-of-type(18) { left: 70%; --z: 3px; --d: 7.8s; --dl: -3.9s; --w: 7px; --sw: 2.6s; --o: 0.75; }
-.mz>i:nth-of-type(19) { left: 70%; --z: 5px; --d: 6.7s; --dl: -4.3s; --w: 4px; --sw: 3.1s; --o: 0.75; }
-.mz>i:nth-of-type(20) { left: 70%; --z: 4px; --d: 7.1s; --dl: -5.2s; --w: 6px; --sw: 3.6s; --o: 0.75; }
+.mz>i:nth-of-type(13) { left: 7%; bottom: 60%; --z: 5px; --d: 4.2s; --dl: -0.4s; --w: 3px; --sw: 3.1s; --o: 0.9; }
+.mz>i:nth-of-type(14) { left: 12%; bottom: 60%; --z: 8px; --d: 5.4s; --dl: -2.1s; --w: 4px; --sw: 3.6s; --o: 0.9; }
+.mz>i:nth-of-type(15) { left: 17%; bottom: 60%; --z: 4px; --d: 3.8s; --dl: -1.3s; --w: 6px; --sw: 2.6s; --o: 0.9; }
+.mz>i:nth-of-type(16) { left: 9%; bottom: 60%; --z: 6px; --d: 4.8s; --dl: -3.6s; --w: 2px; --sw: 3.1s; --o: 0.9; }
+.mz>i:nth-of-type(17) { left: 21%; bottom: 60%; --z: 5px; --d: 4.5s; --dl: -2.8s; --w: 5px; --sw: 3.6s; --o: 0.9; }
+.mz>i:nth-of-type(18) { left: 14%; bottom: 60%; --z: 4px; --d: 3.6s; --dl: -0.9s; --w: 7px; --sw: 2.6s; --o: 0.9; }
+.mz>i:nth-of-type(19) { left: 25%; bottom: 60%; --z: 7px; --d: 5.7s; --dl: -4.4s; --w: 4px; --sw: 3.1s; --o: 0.9; }
+.mz>i:nth-of-type(20) { left: 4%; bottom: 60%; --z: 4px; --d: 4.1s; --dl: -3.1s; --w: 6px; --sw: 3.6s; --o: 0.9; }
 .mz>i:nth-of-type(21) { left: 22%; --z: 13px; --d: 21.8s; --dl: -4.0s; --w: 12px; --sw: 4.3s; }
 .mz>i:nth-of-type(22) { left: 54%; --z: 11px; --d: 25.3s; --dl: -13.0s; --w: 11px; --sw: 5.1s; }
 .mz>i:nth-of-type(23) { left: 86%; --z: 14px; --d: 23.0s; --dl: -8.5s; --w: 13px; --sw: 5.9s; }
@@ -8139,6 +8139,16 @@ details.gm .cl-li::before {
     .mz>i:nth-of-type(21) { --z: 8.5px; }
     .mz>i:nth-of-type(22) { --z: 7.5px; }
     .mz>i:nth-of-type(23) { --z: 9px; }
+
+    .mz>b {
+        -webkit-mask-image: linear-gradient(90deg, transparent, black 40%, black 60%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 55%, transparent 92%);
+        mask-image: linear-gradient(90deg, transparent, black 40%, black 60%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 55%, transparent 92%);
+    }
+
+    .mz>b:nth-of-type(1) { left: -8%; width: 44%; }
+    .mz>b:nth-of-type(2) { left: 20%; width: 46%; }
+    .mz>b:nth-of-type(3) { left: 48%; width: 42%; }
+    .mz>b:nth-of-type(4) { left: auto; right: -12%; width: 38%; }
 }
 
 @media screen and (min-width: 768px) {
@@ -8155,10 +8165,10 @@ details.gm .cl-li::before {
         mask-image: linear-gradient(90deg, transparent, black 50%, transparent), linear-gradient(180deg, black, oklch(0% 0 0 / 0.55) 55%, transparent 92%);
     }
 
-    .mz>b:nth-of-type(1) { left: 0%; width: 40%; rotate: 18deg; background: linear-gradient(180deg, oklch(82% 0.08 212 / 0.48), oklch(76% 0.09 218 / 0.26) 45%, transparent); }
-    .mz>b:nth-of-type(2) { left: 24%; width: 48%; rotate: 5deg; background: linear-gradient(180deg, oklch(82% 0.08 220 / 0.53), oklch(70% 0.1 230 / 0.18) 55%, transparent); }
-    .mz>b:nth-of-type(3) { left: 50%; width: 40%; rotate: -9deg; background: linear-gradient(180deg, oklch(80% 0.09 215 / 0.36), oklch(74% 0.09 226 / 0.13) 50%, transparent); }
-    .mz>b:nth-of-type(4) { right: -8%; width: 36%; rotate: -20deg; background: linear-gradient(180deg, oklch(84% 0.08 212 / 0.38), transparent 85%); }
+    .mz>b:nth-of-type(1) { left: 0%; width: 40%; rotate: 18deg; }
+    .mz>b:nth-of-type(2) { left: 24%; width: 48%; rotate: 5deg; }
+    .mz>b:nth-of-type(3) { left: 50%; width: 40%; rotate: -9deg; }
+    .mz>b:nth-of-type(4) { right: -8%; width: 36%; rotate: -20deg; }
 }
 
 @keyframes mz-surface {
@@ -8168,18 +8178,18 @@ details.gm .cl-li::before {
 }
 
 @keyframes mz-ray0 {
-    from { transform: rotate(3deg); opacity: 1; }
-    to { transform: rotate(-1deg); opacity: 0.65; }
+    from { transform: rotate(4deg); opacity: 1; }
+    to { transform: rotate(-3deg); opacity: 0.6; }
 }
 
 @keyframes mz-ray1 {
-    from { transform: rotate(-3deg); opacity: 0.3; }
-    to { transform: rotate(1deg); opacity: 1; }
+    from { transform: rotate(-4deg); opacity: 0.3; }
+    to { transform: rotate(3deg); opacity: 1; }
 }
 
 @keyframes mz-ray2 {
-    from { transform: rotate(3deg); opacity: 1; }
-    to { transform: rotate(-1deg); opacity: 0.25; }
+    from { transform: rotate(4deg); opacity: 1; }
+    to { transform: rotate(-3deg); opacity: 0.25; }
 }
 
 @keyframes mz-rise {
