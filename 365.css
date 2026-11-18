@@ -788,6 +788,48 @@ body::after {
         floatUpStars 70s cubic-bezier(0.3, 0, 0.7, 1) -35s infinite;
 }
 
+body::before {
+    animation:
+        floatUpStars 90s cubic-bezier(0.4, 0, 0.6, 1) -45s infinite,
+        twA 4.3s steps(3) infinite,
+        twB 5.9s steps(3) -2.1s infinite,
+        twC 3.7s steps(3) -1.3s infinite;
+}
+
+body::after {
+    animation:
+        floatUpStars 70s cubic-bezier(0.3, 0, 0.7, 1) -35s infinite,
+        twA 5.1s steps(3) -3.2s infinite,
+        twB 3.9s steps(3) -0.7s infinite,
+        twC 6.3s steps(3) -4.4s infinite;
+}
+
+@keyframes twA {
+    0%, 100% { --tw-a: 0.95; }
+    18% { --tw-a: 0.5; }
+    30% { --tw-a: 1; }
+    62% { --tw-a: 0.8; }
+    76% { --tw-a: 0.35; }
+    86% { --tw-a: 0.95; }
+}
+
+@keyframes twB {
+    0%, 100% { --tw-b: 1; }
+    25% { --tw-b: 0.7; }
+    40% { --tw-b: 0.3; }
+    52% { --tw-b: 0.95; }
+    80% { --tw-b: 0.55; }
+}
+
+@keyframes twC {
+    0%, 100% { --tw-c: 0.9; }
+    15% { --tw-c: 0.4; }
+    28% { --tw-c: 1; }
+    55% { --tw-c: 0.6; }
+    70% { --tw-c: 1; }
+    90% { --tw-c: 0.45; }
+}
+
 @property --tw-a {
     syntax: '<number>';
     inherits: false;
