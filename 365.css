@@ -8194,42 +8194,42 @@ details.gm .cl-li::before {
     animation: mz-sway var(--sw, 4s) ease-in-out var(--dl, 0s) infinite alternate;
 }
 
-.mz>i:nth-of-type(1) { left: 7%; --z: 8px; --d: 13.1s; --dl: -1.2s; --w: 10px; --sw: 4.3s; }
-.mz>i:nth-of-type(2) { left: 15%; --z: 5px; --d: 14.3s; --dl: -6.4s; --w: 8px; --sw: 5.1s; --o: 0.62; }
-.mz>i:nth-of-type(3) { left: 23%; --z: 11px; --d: 11.0s; --dl: -9.7s; --w: 11px; --sw: 5.9s; --o: 0.95; }
-.mz>i:nth-of-type(4) { left: 31%; --z: 6px; --d: 15.2s; --dl: -3.3s; --w: 9px; --sw: 3.5s; --o: 0.62; }
-.mz>i:nth-of-type(5) { left: 40%; --z: 9px; --d: 14.5s; --dl: -7.9s; --w: 10px; --sw: 4.3s; }
-.mz>i:nth-of-type(6) { left: 49%; --z: 5px; --d: 13.6s; --dl: -0.6s; --w: 8px; --sw: 5.1s; --o: 0.62; }
+.mz>i:nth-of-type(1) { left: 7%; --z: 5.5px; --d: 13.1s; --dl: -1.2s; --w: 10px; --sw: 4.3s; }
+.mz>i:nth-of-type(2) { left: 15%; --z: 3.5px; --d: 14.3s; --dl: -6.4s; --w: 8px; --sw: 5.1s; --o: 0.62; }
+.mz>i:nth-of-type(3) { left: 23%; --z: 7.5px; --d: 11.0s; --dl: -9.7s; --w: 11px; --sw: 5.9s; --o: 0.95; }
+.mz>i:nth-of-type(4) { left: 31%; --z: 4px; --d: 15.2s; --dl: -3.3s; --w: 9px; --sw: 3.5s; --o: 0.62; }
+.mz>i:nth-of-type(5) { left: 40%; --z: 6.5px; --d: 14.5s; --dl: -7.9s; --w: 10px; --sw: 4.3s; }
+.mz>i:nth-of-type(6) { left: 49%; --z: 3.5px; --d: 13.6s; --dl: -0.6s; --w: 8px; --sw: 5.1s; --o: 0.62; }
 .mz>i:nth-of-type(7) { left: 58%; --z: 12px; --d: 12.0s; --dl: -5.2s; --w: 12px; --sw: 5.9s; --o: 0.95; }
-.mz>i:nth-of-type(8) { left: 66%; --z: 6px; --d: 16.1s; --dl: -10.4s; --w: 9px; --sw: 3.5s; --o: 0.62; }
-.mz>i:nth-of-type(9) { left: 74%; --z: 8px; --d: 14.0s; --dl: -2.7s; --w: 10px; --sw: 4.3s; }
-.mz>i:nth-of-type(10) { left: 82%; --z: 5px; --d: 14.0s; --dl: -8.6s; --w: 8px; --sw: 5.1s; --o: 0.62; }
+.mz>i:nth-of-type(8) { left: 66%; --z: 4px; --d: 16.1s; --dl: -10.4s; --w: 9px; --sw: 3.5s; --o: 0.62; }
+.mz>i:nth-of-type(9) { left: 74%; --z: 5.5px; --d: 14.0s; --dl: -2.7s; --w: 10px; --sw: 4.3s; }
+.mz>i:nth-of-type(10) { left: 82%; --z: 3.5px; --d: 14.0s; --dl: -8.6s; --w: 8px; --sw: 5.1s; --o: 0.62; }
 .mz>i:nth-of-type(11) { left: 89%; --z: 10px; --d: 11.5s; --dl: -4.4s; --w: 11px; --sw: 5.9s; --o: 0.95; }
-.mz>i:nth-of-type(12) { left: 95%; --z: 6px; --d: 16.4s; --dl: -12.1s; --w: 9px; --sw: 3.5s; --o: 0.62; }
-.mz>i:nth-of-type(13) { left: 83%; bottom: 60%; --z: 5px; --d: 4.2s; --dl: -0.4s; --w: 3px; --sw: 3.1s; --o: 0.9; }
-.mz>i:nth-of-type(14) { left: 95%; bottom: 60%; --z: 8px; --d: 5.4s; --dl: -2.1s; --w: 4px; --sw: 3.6s; --o: 0.9; }
-.mz>i:nth-of-type(15) { left: 85%; bottom: 60%; --z: 4px; --d: 3.8s; --dl: -1.3s; --w: 6px; --sw: 2.6s; --o: 0.7; }
-.mz>i:nth-of-type(16) { left: 73%; bottom: 60%; --z: 6px; --d: 4.8s; --dl: -3.6s; --w: 2px; --sw: 3.1s; --o: 0.9; }
-.mz>i:nth-of-type(17) { left: 68%; bottom: 60%; --z: 5px; --d: 4.5s; --dl: -2.8s; --w: 5px; --sw: 3.6s; --o: 0.9; }
-.mz>i:nth-of-type(18) { left: 78%; bottom: 60%; --z: 4px; --d: 3.6s; --dl: -0.9s; --w: 7px; --sw: 2.6s; --o: 0.7; }
-.mz>i:nth-of-type(19) { left: 92%; bottom: 60%; --z: 7px; --d: 5.7s; --dl: -4.4s; --w: 4px; --sw: 3.1s; --o: 0.9; }
-.mz>i:nth-of-type(20) { left: 87%; bottom: 60%; --z: 4px; --d: 4.1s; --dl: -3.1s; --w: 6px; --sw: 3.6s; --o: 0.7; }
-.mz>i:nth-of-type(21) { left: 52%; --z: 13px; --d: 13.0s; --dl: -4.0s; --w: 12px; --sw: 4.3s; --o: 0.95; }
-.mz>i:nth-of-type(22) { left: 10%; --z: 11px; --d: 14.0s; --dl: -13.0s; --w: 11px; --sw: 5.1s; --o: 0.95; }
+.mz>i:nth-of-type(12) { left: 95%; --z: 4px; --d: 16.4s; --dl: -12.1s; --w: 9px; --sw: 3.5s; --o: 0.62; }
+.mz>i:nth-of-type(13) { left: 83%; bottom: 60%; --z: 3.5px; --d: 4.2s; --dl: -0.4s; --w: 3px; --sw: 3.1s; --o: 0.9; }
+.mz>i:nth-of-type(14) { left: 95%; bottom: 60%; --z: 5.5px; --d: 5.4s; --dl: -2.1s; --w: 4px; --sw: 3.6s; --o: 0.9; }
+.mz>i:nth-of-type(15) { left: 85%; bottom: 60%; --z: 3px; --d: 3.8s; --dl: -1.3s; --w: 6px; --sw: 2.6s; --o: 0.7; }
+.mz>i:nth-of-type(16) { left: 73%; bottom: 60%; --z: 4px; --d: 4.8s; --dl: -3.6s; --w: 2px; --sw: 3.1s; --o: 0.9; }
+.mz>i:nth-of-type(17) { left: 68%; bottom: 60%; --z: 3.5px; --d: 4.5s; --dl: -2.8s; --w: 5px; --sw: 3.6s; --o: 0.9; }
+.mz>i:nth-of-type(18) { left: 78%; bottom: 60%; --z: 3px; --d: 3.6s; --dl: -0.9s; --w: 7px; --sw: 2.6s; --o: 0.7; }
+.mz>i:nth-of-type(19) { left: 92%; bottom: 60%; --z: 5px; --d: 5.7s; --dl: -4.4s; --w: 4px; --sw: 3.1s; --o: 0.9; }
+.mz>i:nth-of-type(20) { left: 87%; bottom: 60%; --z: 3px; --d: 4.1s; --dl: -3.1s; --w: 6px; --sw: 3.6s; --o: 0.7; }
+.mz>i:nth-of-type(21) { left: 52%; --z: 9px; --d: 13.0s; --dl: -4.0s; --w: 12px; --sw: 4.3s; --o: 0.95; }
+.mz>i:nth-of-type(22) { left: 10%; --z: 7.5px; --d: 14.0s; --dl: -13.0s; --w: 11px; --sw: 5.1s; --o: 0.95; }
 .mz>i:nth-of-type(23) { left: 16%; --z: 14px; --d: 13.5s; --dl: -8.5s; --w: 13px; --sw: 5.9s; --o: 0.95; }
 
-.mz>i:nth-of-type(24) { left: 34%; --z: 4px; --d: 15.5s; --dl: -2.0s; --w: 8px; --sw: 4.7s; --o: 0.62; }
-.mz>i:nth-of-type(25) { left: 45%; --z: 7px; --d: 13.2s; --dl: -6.8s; --w: 9px; --sw: 4.1s; }
+.mz>i:nth-of-type(24) { left: 34%; --z: 3px; --d: 15.5s; --dl: -2.0s; --w: 8px; --sw: 4.7s; --o: 0.62; }
+.mz>i:nth-of-type(25) { left: 45%; --z: 5px; --d: 13.2s; --dl: -6.8s; --w: 9px; --sw: 4.1s; }
 .mz>i:nth-of-type(26) { left: 25%; --z: 3px; --d: 16.8s; --dl: -11.2s; --w: 7px; --sw: 5.3s; --o: 0.62; }
-.mz>i:nth-of-type(27) { left: 59%; --z: 9px; --d: 12.4s; --dl: -3.9s; --w: 10px; --sw: 4.9s; --o: 0.95; }
-.mz>i:nth-of-type(28) { left: 29%; --z: 4px; --d: 15.9s; --dl: -9.1s; --w: 8px; --sw: 3.9s; --o: 0.62; }
-.mz>i:nth-of-type(29) { left: 97%; --z: 6px; --d: 13.6s; --dl: -1.6s; --w: 9px; --sw: 5.5s; }
+.mz>i:nth-of-type(27) { left: 59%; --z: 6.5px; --d: 12.4s; --dl: -3.9s; --w: 10px; --sw: 4.9s; --o: 0.95; }
+.mz>i:nth-of-type(28) { left: 29%; --z: 3px; --d: 15.9s; --dl: -9.1s; --w: 8px; --sw: 3.9s; --o: 0.62; }
+.mz>i:nth-of-type(29) { left: 97%; --z: 4px; --d: 13.6s; --dl: -1.6s; --w: 9px; --sw: 5.5s; }
 .mz>i:nth-of-type(30) { left: 3%; --z: 3px; --d: 17.1s; --dl: -13.4s; --w: 7px; --sw: 4.5s; --o: 0.62; }
-.mz>i:nth-of-type(31) { left: 65%; --z: 7px; --d: 12.9s; --dl: -7.5s; --w: 9px; --sw: 3.8s; }
-.mz>i:nth-of-type(32) { left: 38%; --z: 5px; --d: 14.6s; --dl: -10.2s; --w: 8px; --sw: 5.0s; }
-.mz>i:nth-of-type(33) { left: 91%; --z: 10px; --d: 11.8s; --dl: -12.6s; --w: 11px; --sw: 5.6s; --o: 0.95; }
-.mz>i:nth-of-type(34) { left: 19%; --z: 4px; --d: 16.3s; --dl: -4.8s; --w: 8px; --sw: 4.4s; --o: 0.62; }
-.mz>i:nth-of-type(35) { left: 47%; --z: 8px; --d: 13.0s; --dl: -0.9s; --w: 10px; --sw: 4.2s; }
+.mz>i:nth-of-type(31) { left: 65%; --z: 5px; --d: 12.9s; --dl: -7.5s; --w: 9px; --sw: 3.8s; }
+.mz>i:nth-of-type(32) { left: 38%; --z: 3.5px; --d: 14.6s; --dl: -10.2s; --w: 8px; --sw: 5.0s; }
+.mz>i:nth-of-type(33) { left: 91%; --z: 7px; --d: 11.8s; --dl: -12.6s; --w: 11px; --sw: 5.6s; --o: 0.95; }
+.mz>i:nth-of-type(34) { left: 19%; --z: 3px; --d: 16.3s; --dl: -4.8s; --w: 8px; --sw: 4.4s; --o: 0.62; }
+.mz>i:nth-of-type(35) { left: 47%; --z: 5.5px; --d: 13.0s; --dl: -0.9s; --w: 10px; --sw: 4.2s; }
 .mz>i:nth-of-type(n+36) { display: none; }
 
 .mz>i:is(:nth-of-type(2), :nth-of-type(4), :nth-of-type(6), :nth-of-type(8), :nth-of-type(10), :nth-of-type(12), :nth-of-type(24), :nth-of-type(26), :nth-of-type(28), :nth-of-type(30), :nth-of-type(34))::before {
@@ -8241,16 +8241,16 @@ details.gm .cl-li::before {
 }
 
 @media screen and (max-width: 767px) {
-    .mz>i:nth-of-type(1) { --z: 6px; }
-    .mz>i:nth-of-type(3) { --z: 7.5px; }
-    .mz>i:nth-of-type(5) { --z: 6.5px; }
+    .mz>i:nth-of-type(1) { --z: 4px; }
+    .mz>i:nth-of-type(3) { --z: 5px; }
+    .mz>i:nth-of-type(5) { --z: 4.5px; }
     .mz>i:nth-of-type(7) { --z: 8px; }
-    .mz>i:nth-of-type(9) { --z: 6px; }
+    .mz>i:nth-of-type(9) { --z: 4px; }
     .mz>i:nth-of-type(11) { --z: 7px; }
-    .mz>i:nth-of-type(21) { --z: 8.5px; }
-    .mz>i:nth-of-type(22) { --z: 7.5px; }
+    .mz>i:nth-of-type(21) { --z: 6px; }
+    .mz>i:nth-of-type(22) { --z: 5px; }
     .mz>i:nth-of-type(23) { --z: 9px; }
-    .mz>i:nth-of-type(27) { --z: 7px; }
+    .mz>i:nth-of-type(27) { --z: 5px; }
     .mz>i:nth-of-type(n+30) { display: none; }
 
     .mz>b {
