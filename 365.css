@@ -2463,13 +2463,19 @@ mark {
 
 kt {
     display: inline;
-    background: linear-gradient(transparent 70%, color-mix(in srgb, var(--nanami) 35%, transparent) 0%);
+    background: linear-gradient(transparent 70%,
+            color-mix(in srgb, var(--nanami) 35%, transparent) 70%,
+            color-mix(in srgb, var(--nanami) 35%, transparent) 90%,
+            transparent 90%);
     line-height: 1.2;
 }
 
 st {
     display: inline;
-    background: linear-gradient(transparent 78%, color-mix(in srgb, var(--gjo) 22%, transparent) 0%);
+    background: linear-gradient(transparent 70%,
+            color-mix(in srgb, var(--gjo) 22%, transparent) 70%,
+            color-mix(in srgb, var(--gjo) 22%, transparent) 90%,
+            transparent 90%);
     line-height: 1.2;
 }
 
