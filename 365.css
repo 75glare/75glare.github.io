@@ -6538,7 +6538,7 @@ details.gm .cl-li::before {
 .dt-it[data-ch="na"] {
     background:
         linear-gradient(105deg, oklch(100% 0 0 / 0.06), transparent 45%),
-        color-mix(in srgb, oklch(76% 0.13 88) 18%, oklch(27% 0.03 250 / 0.55));
+        color-mix(in srgb, oklch(76% 0.13 88) 14%, oklch(27% 0.035 250 / 0.55));
 }
 
 .gf-it[data-ch="na"] {
@@ -6546,7 +6546,7 @@ details.gm .cl-li::before {
         linear-gradient(to right, color-mix(in srgb, oklch(76% 0.13 88) 12%, transparent) 0 2.9em, transparent 2.9em),
         radial-gradient(circle, color-mix(in srgb, var(--c) 45%, transparent) 0.8px, transparent 1.2px) 2.9em 0 / 3px 6px repeat-y,
         linear-gradient(160deg, oklch(100% 0 0 / 0.06), transparent 50%),
-        linear-gradient(color-mix(in srgb, oklch(76% 0.13 88) 15%, transparent), color-mix(in srgb, oklch(76% 0.13 88) 15%, transparent)),
+        linear-gradient(color-mix(in srgb, oklch(76% 0.13 88) 11%, transparent), color-mix(in srgb, oklch(76% 0.13 88) 11%, transparent)),
         oklch(27% 0.035 250 / 0.55);
 }
 
