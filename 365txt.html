@@ -2442,7 +2442,7 @@ iframe {
                 <div class="tw-rp" data-j="${j}">
                     <div class="chat-main">
                         <button type="button" class="chat-who tw-rp-who ${r.who}">${r.who === 'g' ? '五条' : '七海'}</button>
-                        <input type="text" class="tw-rp-time" autocomplete="off" value="${attr(r.time)}" placeholder="00:00">
+                        <input type="text" class="tw-rp-time" autocomplete="off" value="${attr(r.time)}" placeholder="00/00 00:00">
                         <button type="button" class="chat-del tw-rp-like${r.lk ? ' on' : ''}" aria-label="この返信にいいね"><i class="ph-${r.lk ? 'fill' : 'light'} ph-heart"></i></button>
                         <button type="button" class="chat-del tw-rp-del" aria-label="この返信を消す">×</button>
                     </div>
@@ -2506,7 +2506,7 @@ iframe {
         if (ev.target.closest('.tw-rp-add')) {
             if (!t.replies) t.replies = [];
             const last = t.replies[t.replies.length - 1];
-            t.replies.push({ who: last ? (last.who === 'g' ? 'n' : 'g') : (t.who === 'g' ? 'n' : 'g'), time: stamp().slice(-5), text: '', lk: false });
+            t.replies.push({ who: last ? (last.who === 'g' ? 'n' : 'g') : (t.who === 'g' ? 'n' : 'g'), time: stamp(), text: '', lk: false });
             drawTweets();
             const inputs = $('tw-list').querySelectorAll(`.tw-row[data-i="${i}"] .tw-rp-text`);
             if (inputs.length) inputs[inputs.length - 1].focus();
@@ -2611,7 +2611,7 @@ iframe {
                 <div class="tw-rp" data-j="${j}">
                     <div class="chat-main">
                         <button type="button" class="chat-who ex-rp-who ${r.who}">${r.who === 'g' ? '五条' : '七海'}</button>
-                        <input type="text" class="ex-rp-time" autocomplete="off" value="${attr(r.time)}" placeholder="00:00">
+                        <input type="text" class="ex-rp-time" autocomplete="off" value="${attr(r.time)}" placeholder="00/00 00:00">
                         <button type="button" class="chat-del ex-rp-like${r.lk ? ' on' : ''}" aria-label="この返信にいいね"><i class="ph-${r.lk ? 'fill' : 'light'} ph-heart"></i></button>
                         <button type="button" class="chat-del ex-rp-del" aria-label="この返信を消す">×</button>
                     </div>
@@ -3351,7 +3351,7 @@ iframe {
             exWrite(el, replies);
         } else if (ev.target.closest('.ex-rp-add')) {
             const last = replies[replies.length - 1];
-            replies.push({ who: last ? (last.who === 'g' ? 'n' : 'g') : ev.target.closest('.ex-rp-add').dataset.who, time: stamp().slice(-5), text: '' });
+            replies.push({ who: last ? (last.who === 'g' ? 'n' : 'g') : ev.target.closest('.ex-rp-add').dataset.who, time: stamp(), text: '' });
             exOpen = k;
             // 空の返信は HTML には入れないので、書き戻さずに欄だけ増やす
             exDrawReplies(k, replies);
