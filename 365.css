@@ -6659,7 +6659,18 @@ details.gm .cl-li::before {
 ======================================= */
 .hs {
     padding-inline: 29px;
-    background: linear-gradient(0deg, oklch(41% 0.074 240), oklch(17% 0.030 262));
+    background:
+        radial-gradient(circle at 23px 41px, oklch(96% 0.01 240 / 0.55) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 97px 118px, oklch(96% 0.01 240 / 0.45) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 168px 27px, oklch(96% 0.01 240 / 0.6) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 241px 92px, oklch(96% 0.01 240 / 0.5) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 62px 203px, oklch(96% 0.01 240 / 0.5) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 139px 262px, oklch(96% 0.01 240 / 0.55) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 214px 181px, oklch(96% 0.01 240 / 0.45) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 278px 307px, oklch(96% 0.01 240 / 0.6) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 31px 331px, oklch(96% 0.01 240 / 0.45) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 187px 349px, oklch(96% 0.01 240 / 0.5) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        linear-gradient(0deg, oklch(41% 0.074 240), oklch(20.5% 0.036 258));
 }
 
 .hs::before,
@@ -6821,6 +6832,16 @@ details.gm .cl-li::before {
 
 .hs.yoi {
     background:
+        radial-gradient(circle at 23px 41px, oklch(96% 0.01 240 / 0.55) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 97px 118px, oklch(96% 0.01 240 / 0.45) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 168px 27px, oklch(96% 0.01 240 / 0.6) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 241px 92px, oklch(96% 0.01 240 / 0.5) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 62px 203px, oklch(96% 0.01 240 / 0.5) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 139px 262px, oklch(96% 0.01 240 / 0.55) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 214px 181px, oklch(96% 0.01 240 / 0.45) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 278px 307px, oklch(96% 0.01 240 / 0.6) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 31px 331px, oklch(96% 0.01 240 / 0.45) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 187px 349px, oklch(96% 0.01 240 / 0.5) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
         radial-gradient(ellipse 85% 38% at 50% 104%, oklch(74% 0.11 70 / 0.30), oklch(60% 0.10 45 / 0.12) 45%, transparent 75%),
         linear-gradient(0deg, oklch(36% 0.075 288), oklch(17% 0.030 262));
 }
@@ -6831,6 +6852,16 @@ details.gm .cl-li::before {
 .gx {
     padding-inline: 29px;
     background:
+        radial-gradient(circle at 23px 41px, oklch(95% 0.02 280 / 0.55) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 97px 118px, oklch(95% 0.02 280 / 0.45) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 168px 27px, oklch(95% 0.02 280 / 0.6) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 241px 92px, oklch(95% 0.02 280 / 0.5) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 62px 203px, oklch(95% 0.02 280 / 0.5) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 139px 262px, oklch(95% 0.02 280 / 0.55) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 214px 181px, oklch(95% 0.02 280 / 0.45) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 278px 307px, oklch(95% 0.02 280 / 0.6) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 31px 331px, oklch(95% 0.02 280 / 0.45) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
+        radial-gradient(circle at 187px 349px, oklch(95% 0.02 280 / 0.5) 0.7px, transparent 1.3px) 0 0 / 300px 370px,
         radial-gradient(ellipse 55% 45% at 25% 78%, oklch(48% 0.045 318 / 0.13), oklch(48% 0.045 318 / 0.07) 35%, oklch(48% 0.045 318 / 0.023) 65%, transparent 90%),
         radial-gradient(ellipse 45% 35% at 55% 45%, oklch(50% 0.05 300 / 0.10), oklch(50% 0.05 300 / 0.055) 35%, oklch(50% 0.05 300 / 0.018) 65%, transparent 90%),
         radial-gradient(ellipse 35% 30% at 88% 22%, oklch(48% 0.07 255 / 0.18), oklch(48% 0.07 255 / 0.099) 35%, oklch(48% 0.07 255 / 0.032) 65%, transparent 90%),
