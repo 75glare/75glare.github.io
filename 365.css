@@ -7775,6 +7775,17 @@ details.gm .cl-li::before {
         linear-gradient(to bottom, oklch(38% 0.07 295) 0%, oklch(35% 0.075 278) 28%, oklch(38% 0.075 275) 40%, oklch(45% 0.07 295) 60%, oklch(52% 0.06 315) 100%);
 }
 
+@media screen and (min-width: 768px) {
+    .um.yk>div:not([class]):first-child {
+        background:
+            radial-gradient(ellipse 28% 1.8em at 0% 0%, oklch(30% 0.07 275 / 0.45), transparent 100%),
+            radial-gradient(ellipse 28% 1.8em at 100% 0%, oklch(30% 0.07 275 / 0.45), transparent 100%),
+            radial-gradient(ellipse 16% 90% at 50% 0%, oklch(76% 0.09 350 / 0.6), oklch(64% 0.07 330 / 0.22) 55%, transparent 100%),
+            radial-gradient(ellipse 45% 60% at 50% 0%, oklch(55% 0.07 320 / 0.35), transparent 100%),
+            linear-gradient(to bottom, oklch(38% 0.07 295) 0%, oklch(35% 0.075 278) 28%, oklch(38% 0.075 275) 40%, oklch(45% 0.07 295) 60%, oklch(52% 0.06 315) 100%);
+    }
+}
+
 .um.yk>div:not([class]):nth-child(2) {
     background: linear-gradient(to bottom, transparent, oklch(68% 0.05 320 / 0.22));
 }
