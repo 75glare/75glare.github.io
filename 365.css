@@ -703,7 +703,10 @@ body::before {
         67vw calc(75 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(33% * var(--tw-a)), transparent),
         67vw calc(75 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(18% * var(--tw-a)), transparent);
     animation:
-        floatUpStars 90s cubic-bezier(0.4, 0, 0.6, 1) -45s infinite;
+        floatUpStars 90s cubic-bezier(0.4, 0, 0.6, 1) -45s infinite,
+        twA 4.3s steps(3) infinite,
+        twB 5.9s steps(3) -2.1s infinite,
+        twC 3.7s steps(3) -1.3s infinite;
 }
 
 body::after {
@@ -782,19 +785,6 @@ body::after {
         42vw calc(15 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(35% * var(--tw-a)), transparent),
         42vw calc(15 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(19.2% * var(--tw-a)), transparent),
         42vw calc(15 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(10.5% * var(--tw-a)), transparent);
-    animation:
-        floatUpStars 70s cubic-bezier(0.3, 0, 0.7, 1) -35s infinite;
-}
-
-body::before {
-    animation:
-        floatUpStars 90s cubic-bezier(0.4, 0, 0.6, 1) -45s infinite,
-        twA 4.3s steps(3) infinite,
-        twB 5.9s steps(3) -2.1s infinite,
-        twC 3.7s steps(3) -1.3s infinite;
-}
-
-body::after {
     animation:
         floatUpStars 70s cubic-bezier(0.3, 0, 0.7, 1) -35s infinite,
         twA 5.1s steps(3) -3.2s infinite,
@@ -1206,11 +1196,9 @@ main>*:last-child,
 
 @supports (animation-timeline: view()) {
     :is(main, .g_box, .n_box) {
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-        animation: box-in linear backwards, glass-on linear;
-        animation-timeline: view(), view();
-        animation-range: entry 0 cover 30vh, normal;
+        animation: box-in linear backwards;
+        animation-timeline: view();
+        animation-range: entry 0 cover 30vh;
     }
 
     .np:not(:is(main, .g_box, .n_box) *) {
@@ -1223,38 +1211,6 @@ main>*:last-child,
         animation: box-on linear, box-in linear backwards;
         animation-timeline: view(), view();
         animation-range: normal, entry 0 cover 30vh;
-    }
-
-    .hs[class]:not(:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, details, .mz) *),
-    .gx[class]:not(:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, details, .mz) *) {
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-        animation: box-on linear, box-in linear backwards, glass-on-sm linear;
-        animation-timeline: view(), view(), view();
-        animation-range: normal, entry 0 cover 30vh, normal;
-    }
-
-    :is(main, .g_box, .n_box, details) :is(.hs, .gx) {
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-        animation: glass-on-sm linear;
-        animation-timeline: view();
-    }
-}
-
-@keyframes glass-on {
-    from,
-    to {
-        -webkit-backdrop-filter: var(--glass-blur, blur(5px));
-        backdrop-filter: var(--glass-blur, blur(5px));
-    }
-}
-
-@keyframes glass-on-sm {
-    from,
-    to {
-        -webkit-backdrop-filter: blur(3px);
-        backdrop-filter: blur(3px);
     }
 }
 
@@ -4309,9 +4265,6 @@ main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary {
     box-shadow: none;
     border-top: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
     border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
-}
-
-main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary {
     flex-wrap: nowrap;
     white-space: nowrap;
 }
@@ -5360,7 +5313,7 @@ main:has(.tl),
 .tl-it.pin>.tl-tm::before {
     content: "\E3E2";
     margin-left: 0.9em;
-    padding: 1px 9px 1px 3px;
+    padding: 1px 9px 1px 0;
     border-left: none;
     border-radius: 0 999px 999px 0;
     font-family: "Phosphor-Fill";
@@ -5369,7 +5322,7 @@ main:has(.tl),
 
 .tl-it.pin>.tl-tm::after {
     content: "Pinned";
-    padding: 1px 8px 1px 2px;
+    padding: 2px 8px 0 1.5px;
     border-left: none;
     border-radius: 0 999px 999px 0;
     letter-spacing: 0.06em;
@@ -6349,8 +6302,8 @@ details.gm .cl-li::before {
     grid-template-columns: var(--x) 1fr;
     border-radius: 5px;
     background:
-        linear-gradient(105deg, oklch(100% 0 0 / 0.05), transparent 45%),
-        color-mix(in srgb, var(--c) 10%, oklch(24% 0.05 254 / 0.6));
+        linear-gradient(105deg, oklch(100% 0 0 / 0.06), transparent 45%),
+        color-mix(in srgb, var(--c) 12%, oklch(27% 0.05 254 / 0.55));
     -webkit-mask:
         radial-gradient(circle at var(--x) 0, transparent 7px, black 7.5px) top / 100% 51% no-repeat,
         radial-gradient(circle at var(--x) 100%, transparent 7px, black 7.5px) bottom / 100% 51% no-repeat;
@@ -6542,11 +6495,11 @@ details.gm .cl-li::before {
     column-gap: 1em;
     padding: 1.15em 1.4em 1.25em 3.9em;
     background:
-        linear-gradient(to right, color-mix(in srgb, var(--c) 20%, transparent) 0 2.9em, transparent 2.9em),
+        linear-gradient(to right, color-mix(in srgb, var(--c) 10%, transparent) 0 2.9em, transparent 2.9em),
         radial-gradient(circle, color-mix(in srgb, var(--c) 45%, transparent) 0.8px, transparent 1.2px) 2.9em 0 / 3px 6px repeat-y,
-        linear-gradient(160deg, oklch(100% 0 0 / 0.05), transparent 50%),
-        linear-gradient(color-mix(in srgb, var(--c) 8%, transparent), color-mix(in srgb, var(--c) 8%, transparent)),
-        oklch(24% 0.05 254 / 0.55);
+        linear-gradient(160deg, oklch(100% 0 0 / 0.06), transparent 50%),
+        linear-gradient(color-mix(in srgb, var(--c) 10%, transparent), color-mix(in srgb, var(--c) 10%, transparent)),
+        oklch(27% 0.05 254 / 0.55);
     clip-path: polygon(16px 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
     -webkit-mask: radial-gradient(circle at 1.45em 50%, transparent 2.6px, black 3.1px);
     mask: radial-gradient(circle at 1.45em 50%, transparent 2.6px, black 3.1px);
@@ -6645,21 +6598,6 @@ details.gm .cl-li::before {
 .dt-it time,
 .dt-it:not(.done)::before {
     color: color-mix(in srgb, var(--c) 90%, white);
-}
-
-.dt-it {
-    background:
-        linear-gradient(105deg, oklch(100% 0 0 / 0.06), transparent 45%),
-        color-mix(in srgb, var(--c) 12%, oklch(27% 0.05 254 / 0.55));
-}
-
-.gf-it {
-    background:
-        linear-gradient(to right, color-mix(in srgb, var(--c) 10%, transparent) 0 2.9em, transparent 2.9em),
-        radial-gradient(circle, color-mix(in srgb, var(--c) 45%, transparent) 0.8px, transparent 1.2px) 2.9em 0 / 3px 6px repeat-y,
-        linear-gradient(160deg, oklch(100% 0 0 / 0.06), transparent 50%),
-        linear-gradient(color-mix(in srgb, var(--c) 10%, transparent), color-mix(in srgb, var(--c) 10%, transparent)),
-        oklch(27% 0.05 254 / 0.55);
 }
 
 .dt-it[data-ch="na"] {
@@ -7817,14 +7755,15 @@ details.gm .cl-li::before {
         radial-gradient(ellipse 4.0% 0.45em at 87.0% calc(100% - 7.75em), oklch(95% 0.045 350 / 0.3), oklch(90% 0.06 345 / 0.12) 45%, transparent 75%),
         radial-gradient(ellipse 3.2% 0.90em at 93.0% calc(100% - 5.60em), oklch(95% 0.045 350 / 0.5), oklch(90% 0.06 345 / 0.20) 45%, transparent 75%),
         radial-gradient(ellipse 1.8% 0.80em at 94.5% calc(100% - 5.95em), oklch(95% 0.045 350 / 0.4), oklch(90% 0.06 345 / 0.16) 45%, transparent 75%),
-        linear-gradient(to bottom in oklch, oklch(38% 0.11 260) 0%, oklch(47% 0.085 275) 35%, oklch(56% 0.07 300) 65%, oklch(68% 0.075 350) calc(100% - 5em));
+        linear-gradient(to bottom in oklch, oklch(38% 0.11 260) 0%, oklch(47% 0.085 275) 35%, oklch(56% 0.07 300) 65%, oklch(67% 0.075 348) calc(100% - 5.8em), oklch(63% 0.07 340) calc(100% - 5em));
     background-origin: border-box;
 }
 
 .um.yk>div:not([class]):first-child {
     background:
-        linear-gradient(to bottom, oklch(84% 0.07 350 / 0.35), oklch(80% 0.06 350 / 0) 0.2em) 0 0 / 100% 100% no-repeat,
-        radial-gradient(ellipse 50% 1.1em at 50% 1.1em, transparent 62%, oklch(38% 0.07 285 / 0.3) 85%, oklch(38% 0.07 285 / 0.55) 100%) 0 0 / 100% 1.1em no-repeat,
+        linear-gradient(to bottom, oklch(54% 0.07 325 / 0.6), oklch(48% 0.07 305 / 0.25) 0.7em, transparent 1.4em),
+        radial-gradient(ellipse 28% 1.8em at 0% 0%, oklch(30% 0.07 275 / 0.45), transparent 100%),
+        radial-gradient(ellipse 28% 1.8em at 100% 0%, oklch(30% 0.07 275 / 0.45), transparent 100%),
         radial-gradient(ellipse 16% 90% at 50% 0%, oklch(76% 0.09 350 / 0.6), oklch(64% 0.07 330 / 0.22) 55%, transparent 100%),
         radial-gradient(ellipse 45% 60% at 50% 0%, oklch(55% 0.07 320 / 0.35), transparent 100%),
         linear-gradient(to bottom, oklch(38% 0.07 295) 0%, oklch(35% 0.075 278) 28%, oklch(38% 0.075 275) 40%, oklch(45% 0.07 295) 60%, oklch(52% 0.06 315) 100%);
@@ -9007,7 +8946,6 @@ details.gm .cl-li::before {
 }
 
 main:has(> .np:only-child) {
-    --glass-blur: none;
     padding: 0 !important;
     background: none;
     box-shadow: none;
