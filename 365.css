@@ -7757,6 +7757,7 @@ details.gm .cl-li::before {
         radial-gradient(ellipse 3.2% 0.90em at 93.0% calc(100% - 5.60em), oklch(95% 0.045 350 / 0.5), oklch(90% 0.06 345 / 0.20) 45%, transparent 75%),
         radial-gradient(ellipse 1.8% 0.80em at 94.5% calc(100% - 5.95em), oklch(95% 0.045 350 / 0.4), oklch(90% 0.06 345 / 0.16) 45%, transparent 75%),
         linear-gradient(to bottom in oklch, oklch(38% 0.11 260) 0%, oklch(47% 0.085 275) 35%, oklch(56% 0.07 300) 65%, oklch(68% 0.075 350) calc(100% - 5em));
+    background-origin: border-box;
 }
 
 .um.yk>div:not([class]):first-child {
