@@ -1719,8 +1719,12 @@ iframe {
                         </div>
                         <p class="hint">書いた順に下へ並べてね。日記には新しい呟きが上になるように入るよ。名前のボタンで入れ替えられる。空の呟きは入らない。</p>
                         <div class="tools" id="tw-insert-box"><button type="button" id="tw-insert">このタイムラインを本文に入れる</button></div>
+                        <div id="tw-pin-box" hidden>
+                            <label for="tw-pin-sel">固定する呟き（貼った呟きから選ぶ）</label>
+                            <select id="tw-pin-sel"></select>
+                        </div>
                         <div id="tw-ex-box">
-                            <button type="button" class="tw-fold" id="tw-ex-fold" aria-expanded="false"><span class="tw-fold-t">③ 貼った呟きにいいね・返信する</span><span class="tw-fold-c" id="tw-ex-count"></span><i class="ph-light ph-caret-down"></i></button>
+                            <button type="button" class="tw-fold" id="tw-ex-fold" aria-expanded="false"><span class="tw-fold-t">③ 貼った呟きにいいね・返信・固定する</span><span class="tw-fold-c" id="tw-ex-count"></span><i class="ph-light ph-caret-down"></i></button>
                             <div id="tw-ex" hidden></div>
                         </div>
                     </div>
@@ -2438,7 +2442,7 @@ iframe {
         return `<details class="tl-ac"><summary><span class="tl-rb">${list.length}</span></summary><div class="tl-cm">${ps}</div></details>`;
     };
     const tweetItem = (t) =>
-        `<div class="tl-it ${t.who}${t.lk ? ' lk' : ''}"><span class="tl-nm">${NAME[t.who]}</span><span class="tl-tm">${safe(t.time.trim())}</span><div class="tl-tx">${paragraphs(t.text, false)}${t.song && t.song.trim() ? `<mu>${safe(t.song.trim())}</mu>` : ''}</div>${tweetReplies(t)}</div>`;
+        `<div class="tl-it ${t.who}${t.lk ? ' lk' : ''}${t.pin ? ' pin' : ''}"><span class="tl-nm">${NAME[t.who]}</span><span class="tl-tm">${safe(t.time.trim())}</span><div class="tl-tx">${paragraphs(t.text, false)}${t.song && t.song.trim() ? `<mu>${safe(t.song.trim())}</mu>` : ''}</div>${tweetReplies(t)}</div>`;
 
     const newTweet = (who) => ({ who, time: stamp(), text: '', song: '', lk: false, replies: [] });
     const twRpRow = (r, j) => `
@@ -2465,6 +2469,7 @@ iframe {
                 <input type="text" class="tw-song" autocomplete="off" value="${attr(t.song || '')}" placeholder="#nowplaying 曲名 - アーティスト（なくてもOK）">
                 <div class="tw-acts">
                     <button type="button" class="tw-like tw-lk${t.lk ? ' on' : ''}"><i class="ph-${t.lk ? 'fill' : 'light'} ph-heart"></i>いいね</button>
+                    <button type="button" class="tw-like tw-pin${t.pin ? ' on' : ''}"><i class="ph-${t.pin ? 'fill' : 'light'} ph-push-pin"></i>固定</button>
                     <button type="button" class="tw-rp-add"><i class="ph-light ph-chat-circle"></i>返信${twRpCount(t) ? ` ${twRpCount(t)}` : ''}</button>
                 </div>
                 ${(t.replies || []).map(twRpRow).join('')}
@@ -2502,6 +2507,20 @@ iframe {
         }
         if (ev.target.closest('.tw-lk')) {
             t.lk = !t.lk;
+            drawTweets();
+            render();
+            return;
+        }
+        if (ev.target.closest('.tw-pin')) {
+            const on = !t.pin;
+            state.tweets.forEach((x) => { x.pin = false; });
+            t.pin = on;
+            // 新しい呟きを固定したら、貼った呟きの固定は外す
+            if (on && exRoot) {
+                exItems().filter((e) => e.classList.contains('pin')).forEach((e) => { e.classList.remove('pin'); tlPlace(e.parentElement, e); });
+                $('tw-src').value = exRoot.innerHTML;
+                exDraw();
+            }
             drawTweets();
             render();
             return;
@@ -2563,10 +2582,17 @@ iframe {
         }));
     }
     // 貼ったタイムラインの一番上（最初の .tl の頭）に、新しい呟きを入れたものを返す。貼っていなければ空
-    function mergedTimeline(items) {
+    function mergedTimeline(items, newPin) {
         if (!exRoot || !exRoot.querySelector('.tl')) return '';
         const copy = exRoot.cloneNode(true);
-        if (items) copy.querySelector('.tl').insertAdjacentHTML('afterbegin', items);
+        const tl = copy.querySelector('.tl');
+        // 固定は 1 つだけ。新しい呟きを固定したら、前の固定は外す
+        if (newPin) tl.querySelectorAll(':scope > .tl-it.pin').forEach((e) => { e.classList.remove('pin'); tlPlace(tl, e); });
+        const top = tl.querySelector(':scope > .tl-it.pin');
+        if (items) {
+            if (top) top.insertAdjacentHTML('afterend', items);
+            else tl.insertAdjacentHTML('afterbegin', items);
+        }
         return copy.innerHTML;
     }
     const hasMerged = () => state.mode === 'tl' && !!(exRoot && exRoot.querySelector('.tl'));
@@ -2623,6 +2649,7 @@ iframe {
     const exState = [];
     function exDraw() {
         const items = exItems();
+        exPinSelect(items);
         if (!items.length) {
             $('tw-ex-count').textContent = '';
             $('tw-ex').innerHTML = $('tw-src').value.trim() ? '<p class="hint">呟きが見つからなかったよ。タイムラインの行をそのまま全部貼ってね。</p>' : '<p class="hint">① に日記のタイムラインを貼ると、ここに呟きが並ぶよ。</p>';
@@ -2643,6 +2670,7 @@ iframe {
                 <div class="ex-tx">${attr(tx.length > 40 ? tx.slice(0, 40) + '…' : tx)}</div>
                 <div class="tw-acts">
                     <button type="button" class="ex-like${liked ? ' on' : ''}"><i class="ph-${liked ? 'fill' : 'light'} ph-heart"></i>いいね</button>
+                    <button type="button" class="ex-like ex-pin${el.classList.contains('pin') ? ' on' : ''}"><i class="ph-${el.classList.contains('pin') ? 'fill' : 'light'} ph-push-pin"></i>固定</button>
                     <button type="button" class="ex-rp-add" data-who="${who === 'g' ? 'n' : 'g'}"><i class="ph-light ph-chat-circle"></i>返信${replies.length ? ` ${replies.length}` : ''}</button>
                 </div>
                 ${open ? replies.map(exRpRow).join('') : ''}
@@ -3349,7 +3377,9 @@ iframe {
         const k = Number(box.dataset.k);
         const el = exItems()[k];
         const replies = exState[k];
-        if (ev.target.closest('.ex-like')) {
+        if (ev.target.closest('.ex-pin')) {
+            exPin(el);
+        } else if (ev.target.closest('.ex-like')) {
             el.classList.toggle('lk');
             exWrite(el, replies);
         } else if (ev.target.closest('.ex-rp-add')) {
@@ -3374,6 +3404,53 @@ iframe {
         }
         exDraw();
     });
+    // 貼った呟きから固定するものを選ぶ欄（③ を開かなくても選べる）
+    function exPinSelect(items) {
+        $('tw-pin-box').hidden = !items.length;
+        const label = (el) => {
+            const tx = ((el.querySelector('.tl-tx') || {}).textContent || '').trim().replace(/\s+/g, ' ');
+            const tm = ((el.querySelector('.tl-tm') || {}).textContent || '').trim();
+            return `${exWho(el) === 'g' ? '五条' : '七海'} ${tm} ${tx.length > 24 ? tx.slice(0, 24) + '…' : tx}`;
+        };
+        $('tw-pin-sel').innerHTML = '<option value="">固定しない</option>' + items.map((el, k) => `<option value="${k}" ${el.classList.contains('pin') ? 'selected' : ''}>${attr(label(el))}</option>`).join('');
+    }
+    $('tw-pin-sel').addEventListener('change', () => {
+        const v = $('tw-pin-sel').value;
+        const items = exItems();
+        const cur = items.find((e) => e.classList.contains('pin'));
+        if (v === '') {
+            if (cur) exPin(cur);
+        } else if (items[Number(v)] !== cur) {
+            exPin(items[Number(v)]);
+            state.tweets.forEach((x) => { x.pin = false; });
+            drawTweets();
+            render();
+        }
+        exDraw();
+    });
+    // 呟きを日時（00/00 00:00）の新しい順の場所へ置き直す
+    function tlPlace(tl, el) {
+        const tm = (x) => ((x.querySelector('.tl-tm') || {}).textContent || '').trim();
+        const mine = tm(el);
+        el.remove();
+        const after = [...tl.querySelectorAll(':scope > .tl-it:not(.pin)')].find((x) => tm(x) < mine);
+        if (after) tl.insertBefore(el, after);
+        else tl.appendChild(el);
+    }
+    // 固定は 1 つだけ。固定した呟きはいちばん上へ、外したら日時の順の場所へ戻す
+    function exPin(el) {
+        const tl = el.parentElement;
+        const on = !el.classList.contains('pin');
+        tl.querySelectorAll(':scope > .tl-it.pin').forEach((e) => e.classList.remove('pin'));
+        if (on) {
+            el.classList.add('pin');
+            tl.prepend(el);
+        } else {
+            tlPlace(tl, el);
+        }
+        $('tw-src').value = exRoot.innerHTML;
+        render();
+    }
     // 1 つの呟きの返信の欄だけを描き直す（入力中のほかの欄を崩さないように）
     function exDrawReplies(k, replies) {
         const box = $('tw-ex').querySelector(`.ex-it[data-k="${k}"]`);
@@ -3712,8 +3789,10 @@ iframe {
             case 'cw':
                 return chatHTML();
             case 'tl': {
-                const items = state.tweets.filter((t) => t.text.trim()).reverse().map(tweetItem).join('');
-                const merged = mergedTimeline(items);
+                const list = state.tweets.filter((t) => t.text.trim()).reverse();
+                const pinned = list.filter((t) => t.pin);
+                const items = [...pinned, ...list.filter((t) => !t.pin)].map(tweetItem).join('');
+                const merged = mergedTimeline(items, pinned.length > 0);
                 if (merged) return merged;
                 if (!$('tl-wrap').checked) return items;
                 // デザインノートの箱を枠にするときは、箱の部品のあとにタイムラインを入れる（印は付けない）
