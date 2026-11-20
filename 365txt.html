@@ -1433,6 +1433,9 @@ iframe {
                 <label class="check"><input id="aj-rain" type="checkbox">雨を降らせる</label>
                 <label class="check"><input id="aj-petal" type="checkbox" checked>花びらを降らせる</label>
             </div>
+            <div id="um-opts" hidden>
+                <label class="check"><input id="um-yk" type="checkbox">夕焼けにする</label>
+            </div>
             <p class="hint" id="scroll-note" hidden></p>
             <div class="row">
                 <div>
@@ -1768,7 +1771,7 @@ iframe {
 
     const $ = (id) => document.getElementById(id);
     const fields = ['dl-title', 'dl-code', 'vs-title', 'title', 'date', 'tag', 'time', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-date', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'rv-one', 'np-song', 'np-artist', 'np-len', 'np-ly', 'np-nt'];
-    const checks = ['links', 'klee', 'scroll', 'sw-done', 'tl-wrap', 'aj-rain', 'aj-petal'];
+    const checks = ['links', 'klee', 'scroll', 'sw-done', 'tl-wrap', 'aj-rain', 'aj-petal', 'um-yk'];
     const PER_MODE = ['title', 'date', 'tag', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-date', 'sw-url'];
     const state = { dlog: { icon: 'E7F6', items: [{ who: 'n', text: '' }, { who: 'g', text: '' }] }, vs: [{ k: '', s: '', n: '', g: '' }], drafts: {}, np: { who: 'g', ic: '#' }, mode: 'n_box', who: 'n', box: 'hs', wrap: '', orPos: {}, or: 'H', cwView: 'g', tweets: [], chat: [{ who: 'g', text: '' }, { who: 'n', text: '' }] };
 
@@ -3681,7 +3684,7 @@ iframe {
                     if ($('aj-rain').checked) parts += repeat('<i class="rn-d"></i>', 25);
                     if ($('aj-petal').checked) parts += `<div class="aj-p">${repeat('<i></i>', 8)}</div>`;
                 }
-                const box = `<div class="${state.box}">${parts}${inner}</div>`;
+                const box = `<div class="${state.box}${state.box === 'um' && $('um-yk').checked ? ' yk' : ''}">${parts}${inner}</div>`;
                 if (state.wrap === 'main') return `<main>${box}</main>`;
                 if (state.wrap) return `<div class="${state.wrap}">${box}</div>`;
                 return box;
@@ -3869,6 +3872,7 @@ iframe {
         $('scroll').disabled = noScroll;
         $('scroll-note').hidden = !noScroll;
         $('aj-opts').hidden = state.box !== 'aj';
+        $('um-opts').hidden = state.box !== 'um';
     }
 
     // 下書きの保存（この端末のブラウザだけ）

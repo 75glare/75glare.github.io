@@ -4230,6 +4230,26 @@ main.lib details.mv[class]>details[open].dn-sw.dn-sw>summary::after {
     border-color: color-mix(in srgb, var(--nanami) 70%, transparent);
 }
 
+main.lib details.mv[class]>details.dn-sw.dn-yk>summary:not(.cl-sm)::before {
+    content: "Blue Noon";
+    color: oklch(80% 0.07 235);
+    border-color: oklch(80% 0.07 235 / 0.7);
+}
+
+main.lib details.mv[class]>details.dn-sw.dn-yk>summary::after {
+    content: "Rose Dusk";
+}
+
+main.lib details.mv[class]>details[open].dn-sw.dn-yk>summary:not(.cl-sm)::before {
+    color: color-mix(in srgb, var(--black) 40%, transparent);
+    border-color: transparent;
+}
+
+main.lib details.mv[class]>details[open].dn-sw.dn-yk>summary::after {
+    color: oklch(80% 0.08 350);
+    border-color: oklch(80% 0.08 350 / 0.7);
+}
+
 main.lib details.mv>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz),
 main.lib details.dn-sw>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) {
     margin-inline: 0;
@@ -7717,6 +7737,55 @@ details.gm .cl-li::before {
     75% {
         opacity: 1;
     }
+}
+
+.um.yk {
+    background:
+        radial-gradient(ellipse 75% 55% at 50% 58%, transparent 0%, transparent 35%, oklch(0% 0 0 / 0.20) 100%),
+        radial-gradient(ellipse 45% 30% at 50% 60%, oklch(85% 0.07 350 / 0.14) 0%, transparent 70%),
+        radial-gradient(ellipse 11.0% 1.30em at 14.0% calc(100% - 5.65em), oklch(95% 0.045 350 / 0.7), oklch(90% 0.06 345 / 0.28) 45%, transparent 75%),
+        radial-gradient(ellipse 4.5% 1.50em at 17.5% calc(100% - 6.25em), oklch(95% 0.045 350 / 0.6), oklch(90% 0.06 345 / 0.24) 45%, transparent 75%),
+        radial-gradient(ellipse 3.6% 1.30em at 21.0% calc(100% - 6.00em), oklch(95% 0.045 350 / 0.55), oklch(90% 0.06 345 / 0.22) 45%, transparent 75%),
+        radial-gradient(ellipse 3.2% 1.00em at 11.0% calc(100% - 5.95em), oklch(95% 0.045 350 / 0.45), oklch(90% 0.06 345 / 0.18) 45%, transparent 75%),
+        radial-gradient(ellipse 3.2% 0.80em at 29.0% calc(100% - 5.75em), oklch(95% 0.045 350 / 0.45), oklch(90% 0.06 345 / 0.18) 45%, transparent 75%),
+        radial-gradient(ellipse 8.5% 0.90em at 58.0% calc(100% - 5.60em), oklch(95% 0.045 350 / 0.6), oklch(90% 0.06 345 / 0.24) 45%, transparent 75%),
+        radial-gradient(ellipse 3.2% 0.95em at 55.5% calc(100% - 6.00em), oklch(95% 0.045 350 / 0.5), oklch(90% 0.06 345 / 0.20) 45%, transparent 75%),
+        radial-gradient(ellipse 2.8% 1.00em at 59.5% calc(100% - 6.15em), oklch(95% 0.045 350 / 0.48), oklch(90% 0.06 345 / 0.19) 45%, transparent 75%),
+        radial-gradient(ellipse 2.6% 0.80em at 62.5% calc(100% - 5.85em), oklch(95% 0.045 350 / 0.4), oklch(90% 0.06 345 / 0.16) 45%, transparent 75%),
+        radial-gradient(ellipse 7.0% 0.55em at 83.0% calc(100% - 7.60em), oklch(95% 0.045 350 / 0.35), oklch(90% 0.06 345 / 0.14) 45%, transparent 75%),
+        radial-gradient(ellipse 4.0% 0.45em at 87.0% calc(100% - 7.75em), oklch(95% 0.045 350 / 0.3), oklch(90% 0.06 345 / 0.12) 45%, transparent 75%),
+        radial-gradient(ellipse 3.2% 0.90em at 93.0% calc(100% - 5.60em), oklch(95% 0.045 350 / 0.5), oklch(90% 0.06 345 / 0.20) 45%, transparent 75%),
+        radial-gradient(ellipse 1.8% 0.80em at 94.5% calc(100% - 5.95em), oklch(95% 0.045 350 / 0.4), oklch(90% 0.06 345 / 0.16) 45%, transparent 75%),
+        linear-gradient(to bottom in oklch, oklch(38% 0.11 260) 0%, oklch(47% 0.085 275) 35%, oklch(56% 0.07 300) 65%, oklch(68% 0.075 350) calc(100% - 5em));
+}
+
+.um.yk>div:not([class]):first-child {
+    background:
+        linear-gradient(to bottom, oklch(80% 0.06 350 / 0.55), oklch(80% 0.06 350 / 0) 0.25em) 0 0 / 100% 100% no-repeat,
+        radial-gradient(ellipse 16% 90% at 50% 0%, oklch(76% 0.09 350 / 0.6), oklch(64% 0.07 330 / 0.22) 55%, transparent 100%),
+        radial-gradient(ellipse 45% 60% at 50% 0%, oklch(55% 0.07 320 / 0.35), transparent 100%),
+        linear-gradient(to bottom, oklch(38% 0.07 295) 0%, oklch(32% 0.075 275) 28%, oklch(36% 0.075 270) 40%, oklch(48% 0.07 300) 60%, oklch(60% 0.06 325) 100%);
+}
+
+.um.yk>div:not([class]):nth-child(2) {
+    background: linear-gradient(to bottom, transparent, oklch(82% 0.04 330 / 0.4));
+}
+
+.um.yk>div:not([class]):first-child::before,
+.um.yk>div:not([class]):first-child::after {
+    filter: hue-rotate(150deg);
+}
+
+.um.yk>div:not([class]):nth-child(3) {
+    background:
+        radial-gradient(ellipse 22px 3px at 40% 30%, oklch(96% 0.02 340 / 0.55), transparent 75%) 0 0 / 97px 100% repeat-x,
+        radial-gradient(ellipse 34px 4px at 60% 45%, oklch(96% 0.02 340 / 0.45), transparent 75%) 0 0 / 151px 100% repeat-x,
+        radial-gradient(ellipse 14px 2.5px at 30% 60%, oklch(96% 0.02 340 / 0.5), transparent 75%) 0 0 / 63px 100% repeat-x,
+        linear-gradient(to bottom, oklch(94% 0.025 340 / 0), oklch(94% 0.025 340 / 0.35) 55%, oklch(94% 0.025 340 / 0));
+}
+
+.um.yk::before {
+    background: linear-gradient(to bottom, transparent, oklch(76% 0.035 40 / 0.9) 40%, oklch(72% 0.04 35));
 }
 
 /* =======================================
