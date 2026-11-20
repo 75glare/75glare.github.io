@@ -625,7 +625,6 @@ body::after {
 body::before {
     font-size: 18px;
     color: transparent;
-    will-change: transform, opacity;
     text-shadow:
         8vw calc(8 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(90% * var(--tw-a)), transparent),
         8vw calc(8 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(90% * var(--tw-a)), transparent),
@@ -710,7 +709,6 @@ body::before {
 body::after {
     font-size: 12.5px;
     color: transparent;
-    will-change: transform, opacity;
     text-shadow:
         18vw calc(4 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(60% * var(--tw-b)), transparent),
         18vw calc(4 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(60% * var(--tw-b)), transparent),
@@ -976,7 +974,6 @@ header::after {
         -12px 9px 5px -2px oklch(85% 0.08 215 / 0.08);
     transform-origin: 0px 115px;
     pointer-events: none;
-    will-change: transform, opacity;
     animation: orbit 22s linear infinite, orbitPulse 3s ease-in-out infinite;
 }
 
@@ -1209,9 +1206,11 @@ main>*:last-child,
 
 @supports (animation-timeline: view()) {
     :is(main, .g_box, .n_box) {
-        animation: box-in linear backwards;
-        animation-timeline: view();
-        animation-range: entry 0 cover 30vh;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        animation: box-in linear backwards, glass-on linear;
+        animation-timeline: view(), view();
+        animation-range: entry 0 cover 30vh, normal;
     }
 
     .np:not(:is(main, .g_box, .n_box) *) {
@@ -1224,6 +1223,38 @@ main>*:last-child,
         animation: box-on linear, box-in linear backwards;
         animation-timeline: view(), view();
         animation-range: normal, entry 0 cover 30vh;
+    }
+
+    .hs[class]:not(:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, details, .mz) *),
+    .gx[class]:not(:is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, details, .mz) *) {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        animation: box-on linear, box-in linear backwards, glass-on-sm linear;
+        animation-timeline: view(), view(), view();
+        animation-range: normal, entry 0 cover 30vh, normal;
+    }
+
+    :is(main, .g_box, .n_box, details) :is(.hs, .gx) {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        animation: glass-on-sm linear;
+        animation-timeline: view();
+    }
+}
+
+@keyframes glass-on {
+    from,
+    to {
+        -webkit-backdrop-filter: var(--glass-blur, blur(5px));
+        backdrop-filter: var(--glass-blur, blur(5px));
+    }
+}
+
+@keyframes glass-on-sm {
+    from,
+    to {
+        -webkit-backdrop-filter: blur(3px);
+        backdrop-filter: blur(3px);
     }
 }
 
@@ -6734,7 +6765,6 @@ details.gm .cl-li::before {
     border-radius: 50%;
     pointer-events: none;
     z-index: 0;
-    will-change: opacity;
 }
 
 .hs::before {
@@ -6941,7 +6971,6 @@ details.gm .cl-li::before {
     border-radius: 50%;
     pointer-events: none;
     z-index: 0;
-    will-change: opacity;
 }
 
 .gx::before {
@@ -7794,7 +7823,7 @@ details.gm .cl-li::before {
 
 .um.yk>div:not([class]):first-child {
     background:
-        linear-gradient(to bottom, oklch(84% 0.07 350 / 0.7), oklch(80% 0.06 350 / 0) 0.3em) 0 0 / 100% 100% no-repeat,
+        linear-gradient(to bottom, oklch(84% 0.07 350 / 0.35), oklch(80% 0.06 350 / 0) 0.2em) 0 0 / 100% 100% no-repeat,
         radial-gradient(ellipse 50% 1.1em at 50% 1.1em, transparent 62%, oklch(38% 0.07 285 / 0.3) 85%, oklch(38% 0.07 285 / 0.55) 100%) 0 0 / 100% 1.1em no-repeat,
         radial-gradient(ellipse 16% 90% at 50% 0%, oklch(76% 0.09 350 / 0.6), oklch(64% 0.07 330 / 0.22) 55%, transparent 100%),
         radial-gradient(ellipse 45% 60% at 50% 0%, oklch(55% 0.07 320 / 0.35), transparent 100%),
@@ -8325,7 +8354,6 @@ details.gm .cl-li::before {
     bottom: 0;
     width: var(--z, 8px);
     opacity: 0;
-    will-change: transform, opacity;
     animation: mz-rise var(--d, 10s) linear var(--dl, 0s) infinite;
 }
 
@@ -8620,7 +8648,6 @@ details.gm .cl-li::before {
     bottom: 0;
     width: var(--s);
     pointer-events: none;
-    will-change: transform;
     animation: yu-fall var(--t) var(--dl) linear infinite;
 }
 
@@ -8980,6 +9007,7 @@ details.gm .cl-li::before {
 }
 
 main:has(> .np:only-child) {
+    --glass-blur: none;
     padding: 0 !important;
     background: none;
     box-shadow: none;
