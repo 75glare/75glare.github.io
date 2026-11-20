@@ -5298,34 +5298,40 @@ main:has(.tl),
 
 .tl-it.pin>.tl-tm {
     display: inline-flex;
-    align-items: center;
+    align-items: baseline;
 }
 
 .tl-it.pin>.tl-tm::before,
 .tl-it.pin>.tl-tm::after {
-    order: 1;
-    border: 1px solid oklch(100% 0 0 / 0.14);
     font-size: 0.9em;
-    line-height: 1.5;
     color: oklch(94% 0.005 240 / 0.75);
 }
 
 .tl-it.pin>.tl-tm::before {
-    content: "\E3E2";
-    margin-left: 0.9em;
-    padding: 1px 9px 1px 0;
-    border-left: none;
-    border-radius: 0 999px 999px 0;
-    font-family: "Phosphor-Fill";
-    transform: scaleX(-1);
+    content: "Pinned";
+    order: 2;
+    padding: 1px 8px 1px calc(1em + 10px);
+    border: 1px solid oklch(100% 0 0 / 0.14);
+    border-radius: 999px;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+}
+
+@supports (text-box: trim-both cap alphabetic) {
+    .tl-it.pin>.tl-tm::before {
+        padding-block: 4px;
+        text-box: trim-both cap alphabetic;
+    }
 }
 
 .tl-it.pin>.tl-tm::after {
-    content: "Pinned";
-    padding: 2px 8px 0 1.5px;
-    border-left: none;
-    border-radius: 0 999px 999px 0;
-    letter-spacing: 0.06em;
+    content: "\E3E2";
+    order: 1;
+    width: 1em;
+    margin: 0 calc(-1em - 9px) 0 calc(1em + 9px);
+    font-family: "Phosphor-Fill";
+    line-height: 1;
+    transform: scaleX(-1) translateY(0.1em);
 }
 
 .tl-nm {
