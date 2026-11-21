@@ -6286,6 +6286,33 @@ details.gm .cl-li::before {
     }
 }
 
+@media screen and (min-width: 768px) {
+    .sw {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 2.5em;
+    }
+
+    .sw::before,
+    .sw::after {
+        grid-column: 1 / -1;
+        margin-bottom: 1.4em;
+    }
+
+    .sw::before {
+        margin-top: 0.5em;
+    }
+
+    .sw::after {
+        padding-top: 2.1em;
+    }
+
+    .sw-it:not(.done):nth-child(odd of .sw-it:not(.done)):not(:has(~ .sw-it:not(.done) ~ .sw-it:not(.done))),
+    .sw-it.done:nth-child(odd of .sw-it.done):not(:has(~ .sw-it.done ~ .sw-it.done)) {
+        border-bottom: 0;
+    }
+}
+
 /* =======================================
     Places & Gifts (.dt / .gf)
 ======================================= */
