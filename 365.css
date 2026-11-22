@@ -8630,8 +8630,9 @@ details.gm .cl-li::before {
     top: 0;
     bottom: 0;
     width: var(--s);
+    opacity: var(--o);
     pointer-events: none;
-    animation: yu-fall var(--t) var(--dl) linear infinite;
+    animation: yu-fall var(--t) var(--dl) linear infinite, yu-sway var(--swt) var(--dl) ease-in-out infinite alternate;
 }
 
 .yu>div:not([class])::before {
@@ -8664,20 +8665,32 @@ details.gm .cl-li::before {
     --s: 4.0px;
     --t: 11.2s;
     --dl: -9.7s;
+    --o: 0.85;
+    --sw: 8px;
+    --swt: 4.0s;
+    --dx: 35px;
 }
 
 .yu>div:not([class]):nth-child(2) {
     left: 23.0%;
-    --s: 4.5px;
-    --t: 11.8s;
+    --s: 6.5px;
+    --t: 7.8s;
     --dl: -0.6s;
+    --o: 0.95;
+    --sw: 12px;
+    --swt: 4.8s;
+    --dx: 55px;
 }
 
 .yu>div:not([class]):nth-child(3) {
     left: 73.0%;
-    --s: 3.0px;
-    --t: 12.9s;
+    --s: 2.0px;
+    --t: 17.9s;
     --dl: -3.6s;
+    --o: 0.55;
+    --sw: 4px;
+    --swt: 5.6s;
+    --dx: 18px;
 }
 
 .yu>div:not([class]):nth-child(4) {
@@ -8685,13 +8698,21 @@ details.gm .cl-li::before {
     --s: 3.5px;
     --t: 15.4s;
     --dl: -1.9s;
+    --o: 0.85;
+    --sw: 8px;
+    --swt: 3.5s;
+    --dx: 35px;
 }
 
 .yu>div:not([class]):nth-child(5) {
     left: 62.8%;
-    --s: 2.5px;
-    --t: 10.0s;
+    --s: 1.5px;
+    --t: 15.0s;
     --dl: -5.4s;
+    --o: 0.55;
+    --sw: 4px;
+    --swt: 4.3s;
+    --dx: 18px;
 }
 
 .yu>div:not([class]):nth-child(6) {
@@ -8699,6 +8720,10 @@ details.gm .cl-li::before {
     --s: 4.5px;
     --t: 14.2s;
     --dl: -7.3s;
+    --o: 0.85;
+    --sw: 8px;
+    --swt: 5.1s;
+    --dx: 35px;
 }
 
 .yu>div:not([class]):nth-child(7) {
@@ -8706,20 +8731,32 @@ details.gm .cl-li::before {
     --s: 3.0px;
     --t: 15.2s;
     --dl: -2.6s;
+    --o: 0.85;
+    --sw: 8px;
+    --swt: 5.9s;
+    --dx: 35px;
 }
 
 .yu>div:not([class]):nth-child(8) {
     left: 53.7%;
-    --s: 2.0px;
-    --t: 12.5s;
+    --s: 1.5px;
+    --t: 17.5s;
     --dl: -6.0s;
+    --o: 0.55;
+    --sw: 4px;
+    --swt: 3.8s;
+    --dx: 18px;
 }
 
 .yu>div:not([class]):nth-child(9) {
     left: 45.0%;
-    --s: 2.5px;
-    --t: 15.1s;
+    --s: 1.5px;
+    --t: 20.1s;
     --dl: -5.9s;
+    --o: 0.55;
+    --sw: 4px;
+    --swt: 4.6s;
+    --dx: 18px;
 }
 
 .yu>div:not([class]):nth-child(10) {
@@ -8727,20 +8764,32 @@ details.gm .cl-li::before {
     --s: 4.5px;
     --t: 14.2s;
     --dl: -6.2s;
+    --o: 0.85;
+    --sw: 8px;
+    --swt: 5.4s;
+    --dx: 35px;
 }
 
 .yu>div:not([class]):nth-child(11) {
     left: 14.5%;
-    --s: 4.5px;
-    --t: 10.8s;
+    --s: 6px;
+    --t: 7.4s;
     --dl: -7.2s;
+    --o: 0.95;
+    --sw: 12px;
+    --swt: 3.3s;
+    --dx: 55px;
 }
 
 .yu>div:not([class]):nth-child(12) {
     left: 3.5%;
-    --s: 3.0px;
-    --t: 10.8s;
+    --s: 2.0px;
+    --t: 15.8s;
     --dl: -10.8s;
+    --o: 0.55;
+    --sw: 4px;
+    --swt: 4.1s;
+    --dx: 18px;
 }
 
 .yu>div:not([class]):nth-child(13) {
@@ -8748,6 +8797,10 @@ details.gm .cl-li::before {
     --s: 4.0px;
     --t: 13.7s;
     --dl: -5.5s;
+    --o: 0.85;
+    --sw: 8px;
+    --swt: 4.9s;
+    --dx: 35px;
 }
 
 .yu>div:not([class]):nth-child(14) {
@@ -8755,6 +8808,10 @@ details.gm .cl-li::before {
     --s: 4.0px;
     --t: 12.6s;
     --dl: -3.0s;
+    --o: 0.85;
+    --sw: 8px;
+    --swt: 5.7s;
+    --dx: 35px;
 }
 
 .yu>div:not([class]):nth-child(15) {
@@ -8762,6 +8819,10 @@ details.gm .cl-li::before {
     --s: 4.0px;
     --t: 15.0s;
     --dl: -1.6s;
+    --o: 0.85;
+    --sw: 8px;
+    --swt: 3.6s;
+    --dx: 35px;
 }
 
 .yu>div:not([class]):nth-child(16) {
@@ -8769,27 +8830,43 @@ details.gm .cl-li::before {
     --s: 3.0px;
     --t: 15.5s;
     --dl: -9.3s;
+    --o: 0.85;
+    --sw: 8px;
+    --swt: 4.4s;
+    --dx: 35px;
 }
 
 .yu>div:not([class]):nth-child(17) {
     left: 49.1%;
-    --s: 2.5px;
-    --t: 13.6s;
+    --s: 1.5px;
+    --t: 18.6s;
     --dl: -4.8s;
+    --o: 0.55;
+    --sw: 4px;
+    --swt: 5.2s;
+    --dx: 18px;
 }
 
 .yu>div:not([class]):nth-child(18) {
     left: 65.5%;
-    --s: 4.0px;
-    --t: 14.8s;
+    --s: 7px;
+    --t: 8.2s;
     --dl: -0.3s;
+    --o: 0.95;
+    --sw: 12px;
+    --swt: 6.0s;
+    --dx: 55px;
 }
 
 .yu>div:not([class]):nth-child(19) {
     left: 26.1%;
-    --s: 2.0px;
-    --t: 15.4s;
+    --s: 1.5px;
+    --t: 20.4s;
     --dl: -7.2s;
+    --o: 0.55;
+    --sw: 4px;
+    --swt: 3.9s;
+    --dx: 18px;
 }
 
 .yu>div:not([class]):nth-child(20) {
@@ -8797,34 +8874,54 @@ details.gm .cl-li::before {
     --s: 4.0px;
     --t: 15.1s;
     --dl: -4.3s;
+    --o: 0.85;
+    --sw: 8px;
+    --swt: 4.7s;
+    --dx: 35px;
 }
 
 .yu>div:not([class]):nth-child(21) {
     left: 95.2%;
-    --s: 2.5px;
-    --t: 13.7s;
+    --s: 1.5px;
+    --t: 18.7s;
     --dl: -1.7s;
+    --o: 0.55;
+    --sw: 4px;
+    --swt: 5.5s;
+    --dx: 18px;
 }
 
 .yu>div:not([class]):nth-child(22) {
     left: 19.0%;
-    --s: 2.5px;
-    --t: 11.2s;
+    --s: 1.5px;
+    --t: 16.2s;
     --dl: -4.2s;
+    --o: 0.55;
+    --sw: 4px;
+    --swt: 3.4s;
+    --dx: 18px;
 }
 
 .yu>div:not([class]):nth-child(23) {
     left: 89.6%;
     --s: 3.5px;
     --t: 11.2s;
-    --dl: -11.3s;
+    --dl: -0.1s;
+    --o: 0.85;
+    --sw: 8px;
+    --swt: 4.2s;
+    --dx: 35px;
 }
 
 .yu>div:not([class]):nth-child(24) {
     left: 37.8%;
-    --s: 5.0px;
-    --t: 14.4s;
+    --s: 7.5px;
+    --t: 8.6s;
     --dl: -3.8s;
+    --o: 0.95;
+    --sw: 12px;
+    --swt: 5.0s;
+    --dx: 55px;
 }
 
 .yu>div:not([class]):nth-child(25) {
@@ -8832,6 +8929,10 @@ details.gm .cl-li::before {
     --s: 3.0px;
     --t: 14.2s;
     --dl: -2.1s;
+    --o: 0.85;
+    --sw: 8px;
+    --swt: 5.8s;
+    --dx: 35px;
 }
 
 @keyframes yu-fall {
@@ -8840,7 +8941,7 @@ details.gm .cl-li::before {
     }
 
     100% {
-        transform: translateY(100%) translateX(35px);
+        transform: translateY(100%) translateX(var(--dx));
     }
 }
 
@@ -8863,6 +8964,16 @@ details.gm .cl-li::before {
 
     100% {
         opacity: 0;
+    }
+}
+
+@keyframes yu-sway {
+    0% {
+        translate: calc(var(--sw) * -1) 0;
+    }
+
+    100% {
+        translate: var(--sw) 0;
     }
 }
 
