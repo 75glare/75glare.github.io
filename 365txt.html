@@ -708,6 +708,25 @@ iframe {
     color: inherit;
 }
 
+.tw-acts .ex-ed.on {
+    color: inherit;
+}
+
+/* 貼った呟きを直す欄 */
+.ex-ed-box {
+    display: grid;
+    gap: 6px;
+    margin: 8px 0 0;
+}
+
+.ex-ed-box .ex-tw-time {
+    width: 9em;
+}
+
+.ex-ed-box textarea {
+    min-height: 60px;
+}
+
 /* 貼るだけの欄なので、広げずに 3 行くらいの高さのまま（中はスクロール） */
 #tw-src,
 .src-paste {
@@ -1356,7 +1375,12 @@ iframe {
             <textarea id="rv-src" class="short no-grow src-paste" spellcheck="false" placeholder="&lt;main&gt;&lt;h3 class=&quot;game&quot; …"></textarea>
             <p class="hint" id="rv-hint">編集画面の本文をまるごと貼ると、新しい感想をその中に入れたページが出てくるよ。</p>
             <div class="modes" id="rv-cats" hidden></div>
-            <p class="tw-step">② 新しい感想を書く</p>
+            <div id="rv-it-box" hidden>
+                <p class="tw-step">② 感想を選ぶ<span class="tw-opt">（前の感想を直すときだけ）</span></p>
+                <div class="modes" id="rv-its"></div>
+                <label class="check" id="rv-del-box" hidden><input id="rv-del" type="checkbox">この感想を消す</label>
+            </div>
+            <p class="tw-step" id="rv-write-step">② 新しい感想を書く</p>
         </div>
 
         <div data-for="gm" id="gm-box">
@@ -1724,7 +1748,7 @@ iframe {
                             <select id="tw-pin-sel"></select>
                         </div>
                         <div id="tw-ex-box">
-                            <button type="button" class="tw-fold" id="tw-ex-fold" aria-expanded="false"><span class="tw-fold-t">③ 貼った呟きにいいね・返信・固定する</span><span class="tw-fold-c" id="tw-ex-count"></span><i class="ph-light ph-caret-down"></i></button>
+                            <button type="button" class="tw-fold" id="tw-ex-fold" aria-expanded="false"><span class="tw-fold-t">③ 貼った呟きを直す・いいね・返信・固定する</span><span class="tw-fold-c" id="tw-ex-count"></span><i class="ph-light ph-caret-down"></i></button>
                             <div id="tw-ex" hidden></div>
                         </div>
                     </div>
@@ -2571,6 +2595,35 @@ iframe {
     // ---- 日記の呟きにいいね・返信する（貼ったタイムラインを読み込んで書き換える）
     let exRoot = null;
     let exOpen = -1;
+    // 直す欄を開いている呟き（並べ直しても開いたままにするので、要素で覚える）
+    const exEditing = new WeakSet();
+    // 日記の呟きの本文（.tl-tx）を、入力欄の書き方に戻す。曲（mu）は別の欄
+    const twText = (tx) => {
+        if (!tx) return '';
+        const c = tx.cloneNode(true);
+        c.querySelectorAll('mu').forEach((x) => x.remove());
+        return c.innerHTML
+            .replace(/(<(p|span) class="dl-it [gn]">[\s\S]*?<\/\2>)/g, '\n$1\n')
+            .replace(/<span class="dl-it ([gn])">([\s\S]*?)<\/span>/g, '<p class="dl-it $1">$2</p>')
+            .replace(/<br\s*\/?>/g, '\n').replace(/\n{3,}/g, '\n\n').trim()
+            .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
+    };
+    // 直した呟きを HTML に書き戻す（本文は新しい呟きと同じ div.tl-tx の形にする）
+    function exWriteTweet(el, box) {
+        const doc = el.ownerDocument;
+        const text = box.querySelector('.ex-tw-text').value;
+        const song = box.querySelector('.ex-tw-song').value.trim();
+        const tm = el.querySelector(':scope > .tl-tm');
+        if (tm) tm.textContent = box.querySelector('.ex-tw-time').value.trim();
+        const old = el.querySelector(':scope > .tl-tx');
+        const tx = doc.createElement('div');
+        tx.className = 'tl-tx';
+        tx.innerHTML = paragraphs(text, false) + (song ? `<mu>${safe(song)}</mu>` : '');
+        if (old) old.replaceWith(tx);
+        else (tm || el.querySelector(':scope > .tl-nm')).after(tx);
+        $('tw-src').value = exRoot.innerHTML;
+        render();
+    }
     const exItems = () => (exRoot ? [...exRoot.querySelectorAll('.tl-it')] : []);
     const exWho = (el) => (el.classList.contains('g') ? 'g' : 'n');
     function exReplies(el) {
@@ -2665,10 +2718,19 @@ iframe {
             const tm = ((el.querySelector('.tl-tm') || {}).textContent || '').trim();
             const liked = el.classList.contains('lk');
             const open = exOpen === k || replies.length > 0;
+            const txEl = el.querySelector('.tl-tx');
+            const song = ((txEl && txEl.querySelector('mu')) || {}).textContent || '';
+            const edit = exEditing.has(el) ? `<div class="ex-ed-box">
+                    <input type="text" class="ex-tw-time" autocomplete="off" value="${attr(tm)}" placeholder="00/00 00:00">
+                    <textarea class="short ex-tw-text" placeholder="${who === 'g' ? '五条' : '七海'}の呟き">${twText(txEl).replace(/&/g, '&amp;').replace(/</g, '&lt;')}</textarea>
+                    <input type="text" class="ex-tw-song" autocomplete="off" value="${attr(song.trim())}" placeholder="#nowplaying 曲名 - アーティスト（なくてもOK）">
+                </div>` : '';
             return `<div class="ex-it" data-k="${k}">
                 <div class="ex-head"><span class="ex-nm ${who}">${who === 'g' ? '五条' : '七海'}</span><span class="ex-tm">${attr(tm)}</span></div>
                 <div class="ex-tx">${attr(tx.length > 40 ? tx.slice(0, 40) + '…' : tx)}</div>
+                ${edit}
                 <div class="tw-acts">
+                    <button type="button" class="ex-ed${exEditing.has(el) ? ' on' : ''}"><i class="ph-light ph-pencil-simple"></i>直す</button>
                     <button type="button" class="ex-like${liked ? ' on' : ''}"><i class="ph-${liked ? 'fill' : 'light'} ph-heart"></i>いいね</button>
                     <button type="button" class="ex-like ex-pin${el.classList.contains('pin') ? ' on' : ''}"><i class="ph-${el.classList.contains('pin') ? 'fill' : 'light'} ph-push-pin"></i>固定</button>
                     <button type="button" class="ex-rp-add" data-who="${who === 'g' ? 'n' : 'g'}"><i class="ph-light ph-chat-circle"></i>返信${replies.length ? ` ${replies.length}` : ''}</button>
@@ -2676,7 +2738,7 @@ iframe {
                 ${open ? replies.map(exRpRow).join('') : ''}
             </div>`;
         }).join('');
-        requestAnimationFrame(() => $('tw-ex').querySelectorAll('.ex-rp-text').forEach((t) => grow(t)));
+        requestAnimationFrame(() => $('tw-ex').querySelectorAll('.ex-rp-text, .ex-tw-text').forEach((t) => grow(t)));
     }
     // ③ は長くなって文字の飾りが遠くなるので、ふだんは閉じておく
     $('tw-ex-fold').addEventListener('click', () => {
@@ -2689,6 +2751,7 @@ iframe {
     // ---- 感想：貼った感想のページに、新しい感想を入れる
     let rvRoot = null;
     const rvLists = () => (rvRoot ? [...rvRoot.querySelectorAll('.cl')] : []);
+    const rvIts = (cl) => (cl ? [...cl.querySelectorAll(':scope > details.cl-it')] : []);
     function rvLoad() {
         const src = $('rv-src').value.trim();
         rvRoot = null;
@@ -2697,10 +2760,61 @@ iframe {
         if (!Number.isInteger(state.rvCat) || state.rvCat >= lists.length) state.rvCat = 0;
         $('rv-cats').hidden = !lists.length;
         $('rv-cats').innerHTML = lists.map((cl, i) => `<button type="button" data-cat="${i}" aria-pressed="${i === state.rvCat}">${attr(rvCatName(cl, i))}</button>`).join('');
+        if (!Number.isInteger(state.rvIt) || state.rvIt >= rvIts(lists[state.rvCat]).length) state.rvIt = -1;
+        rvDraw();
         $('rv-hint').textContent = !src ? '編集画面の本文をまるごと貼ると、新しい感想をその中に入れたページが出てくるよ。'
             : lists.length ? '入れる場所を選んでね。感想は最後の感想の下に、タイトルだけのもの（観たいもの）はタイトルの一覧の一番下に入るよ。'
             : '感想の一覧（class="cl"）が見つからなかったよ。編集画面の本文をそのまま全部貼ってね。';
         rvDropShow();
+    }
+    // 選んだ枠の感想を並べる。選ぶと欄に出して直せる
+    function rvDraw() {
+        const its = rvIts(rvLists()[state.rvCat]);
+        $('rv-it-box').hidden = !its.length;
+        $('rv-its').innerHTML = its.map((m, i) => {
+            const t = gmName(m.querySelector(':scope > summary')) || `感想 ${i + 1}`;
+            return `<button type="button" data-it="${i}" aria-pressed="${i === state.rvIt}">${attr(shortText(t, 14))}（${m.classList.contains('cl-gjo') ? '五条' : '七海'}）</button>`;
+        }).join('') + `<button type="button" data-it="-1" aria-pressed="${state.rvIt === -1}">＋ 新しい感想</button>`;
+        $('rv-del-box').hidden = state.rvIt === -1;
+        $('rv-write-step').textContent = !its.length ? '② 新しい感想を書く' : state.rvIt === -1 ? '③ 新しい感想を書く' : '③ 感想を直す';
+    }
+    // 感想の本文（p.cl-tx でも div.cl-tx でも）を、入力欄の書き方に戻す。段落の間は空行、会話などのタグはその行のまま
+    const rvText = (tx) => (tx ? tx.innerHTML
+        .replace(/<p>([\s\S]*?)<\/p>/g, '$1\n\n')
+        .replace(/(<p class="dl-it [gn]">[\s\S]*?<\/p>)/g, '\n$1\n')
+        .replace(/<br\s*\/?>/g, '\n')
+        .split('\n').map((l) => l.trim()).join('\n').replace(/\n{3,}/g, '\n\n').trim()
+        .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ').replace(/&quot;/g, '"').replace(/&amp;/g, '&') : '');
+    // 選んだ感想をタイトル・一言・本文・書いた人の欄に出す（新しい感想のときは空にする）
+    function rvFill() {
+        const m = rvIts(rvLists()[state.rvCat])[state.rvIt];
+        $('rv-del').checked = false;
+        history.push(snap($('body')));
+        future.length = 0;
+        syncUndo();
+        const sm = m && m.querySelector(':scope > summary');
+        const head = sm ? sm.cloneNode(true) : null;
+        if (head) head.querySelectorAll('small').forEach((x) => x.remove());
+        $('title').value = head ? gmDecode(head.innerHTML.trim()) : '';
+        $('rv-one').value = sm ? gmDecode(((sm.querySelector('small') || {}).innerHTML || '').trim()) : '';
+        $('body').value = m ? rvText(m.querySelector(':scope > .cl-tx')) : '';
+        if (m) state.who = m.classList.contains('cl-gjo') ? 'g' : 'n';
+        grow($('body'));
+    }
+    // 選び直す前に、今の欄の変更をページ（①）に入れておく。選んだものは印を付けて、入れたあとの場所を探す
+    function rvCommit(pick) {
+        if (pick) pick.setAttribute('data-rv-pick', '');
+        const before = rvRoot.innerHTML;
+        const html = rvMerged(safe($('title').value.trim()), $('body').value, state.who === 'g' ? 'cl-gjo' : 'cl-nnm', false);
+        if (html !== null && html !== before) {
+            $('rv-src').value = html;
+            rvLoad();
+        }
+        const el = rvRoot && rvRoot.querySelector('[data-rv-pick]');
+        if (!el) return null;
+        el.removeAttribute('data-rv-pick');
+        if (html !== before) $('rv-src').value = rvRoot.innerHTML;
+        return el;
     }
     // 枠の名前：「Overseas（洋画・海外ドラマ）」。枠の中のたたみ（Queue の中など）は「Queue › 名前」
     function rvCatName(cl, i) {
@@ -2725,7 +2839,7 @@ iframe {
     }
     function rvDropShow() {
         const title = $('title').value.trim();
-        const hit = state.mode === 'review' && $('body').value.trim() && rvQueued(rvRoot, title).length;
+        const hit = state.mode === 'review' && state.rvIt === -1 && $('body').value.trim() && rvQueued(rvRoot, title).length;
         $('rv-drop-box').hidden = !hit;
         if (hit) $('rv-drop-label').textContent = `「${title}」がタイトルだけの一覧（観たいものなど）にあるから、そこから消す`;
     }
@@ -2741,7 +2855,17 @@ iframe {
         if (!lists.length) return null;
         const copy = rvRoot.cloneNode(true);
         const cl = copy.querySelectorAll('.cl')[state.rvCat] || copy.querySelector('.cl');
-        if (title || body.trim()) {
+        const old = rvIts(cl)[state.rvIt];
+        if (old) {
+            if ($('rv-del').checked) old.remove();
+            else if (body.trim()) {
+                const tmp = copy.ownerDocument.createElement('div');
+                tmp.innerHTML = `<details class="cl-it ${cls}">${rvSummary(title)}<div class="cl-tx">${rvBody(body)}</div></details>`;
+                const item = tmp.firstElementChild;
+                old.replaceWith(item);
+                if (forPreview) item.open = true;
+            }
+        } else if (title || body.trim()) {
             const doc = copy.ownerDocument;
             const tmp = doc.createElement('div');
             if (body.trim()) {
@@ -2776,14 +2900,46 @@ iframe {
         return copy.innerHTML;
     }
     const hasRvMerged = () => state.mode === 'review' && rvLists().length > 0;
-    $('rv-src').addEventListener('input', () => { rvLoad(); show(); render(); });
+    $('rv-src').addEventListener('input', () => { state.rvIt = -1; rvLoad(); show(); render(); });
     $('rv-drop').addEventListener('change', () => render());
+    $('rv-del').addEventListener('change', () => render());
     $('rv-cats').addEventListener('click', (ev) => {
         const b = ev.target.closest('button');
         if (!b) return;
+        // 前の感想を直している途中なら、ページに入れてから新しい感想に戻す
+        if (state.rvIt !== -1) {
+            rvCommit(null);
+            state.rvIt = -1;
+            rvFill();
+        }
         state.rvCat = Number(b.dataset.cat);
-        $('rv-cats').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+        $('rv-cats').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x.dataset.cat === b.dataset.cat));
+        rvDraw();
+        show();
         render();
+        save();
+    });
+    $('rv-its').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        const i = Number(b.dataset.it);
+        if (i === state.rvIt) return;
+        const lists = rvLists();
+        const el = rvCommit(i >= 0 ? rvIts(lists[state.rvCat])[i] : lists[state.rvCat]);
+        const nl = rvLists();
+        if (el && i >= 0) {
+            state.rvCat = nl.indexOf(el.parentElement);
+            state.rvIt = rvIts(nl[state.rvCat]).indexOf(el);
+        } else {
+            if (el) state.rvCat = nl.indexOf(el);
+            state.rvIt = -1;
+        }
+        if (state.rvCat < 0) state.rvCat = 0;
+        rvFill();
+        rvLoad();
+        show();
+        render();
+        save();
     });
 
     // ---- ゲームのページ：枠（Cards など）の中のゲームに、思い出を一番上に足す。貼らなければ 3 つの枠だけのページから
@@ -3377,7 +3533,10 @@ iframe {
         const k = Number(box.dataset.k);
         const el = exItems()[k];
         const replies = exState[k];
-        if (ev.target.closest('.ex-pin')) {
+        if (ev.target.closest('.ex-ed')) {
+            if (exEditing.has(el)) exEditing.delete(el);
+            else exEditing.add(el);
+        } else if (ev.target.closest('.ex-pin')) {
             exPin(el);
         } else if (ev.target.closest('.ex-like')) {
             el.classList.toggle('lk');
@@ -3463,6 +3622,17 @@ iframe {
         if (b) b.innerHTML = `<i class="ph-light ph-chat-circle"></i>返信${n ? ` ${n}` : ''}`;
     }
     $('tw-ex').addEventListener('input', (ev) => {
+        const ed = ev.target.closest('.ex-ed-box');
+        if (ed) {
+            const box = ev.target.closest('.ex-it');
+            const el = exItems()[Number(box.dataset.k)];
+            exWriteTweet(el, ed);
+            if (ev.target.classList.contains('ex-tw-text')) grow(ev.target);
+            const tx = ((el.querySelector('.tl-tx') || {}).textContent || '').trim().replace(/\s+/g, ' ');
+            box.querySelector('.ex-tx').textContent = tx.length > 40 ? tx.slice(0, 40) + '…' : tx;
+            box.querySelector('.ex-tm').textContent = ed.querySelector('.ex-tw-time').value.trim();
+            return;
+        }
         const rp = ev.target.closest('.tw-rp');
         if (!rp) return;
         const k = Number(ev.target.closest('.ex-it').dataset.k);
@@ -3476,6 +3646,17 @@ iframe {
         const n = exState[k].filter((x) => x.text.trim()).length;
         const b = ev.target.closest('.ex-it').querySelector('.ex-rp-add');
         if (b) b.innerHTML = `<i class="ph-light ph-chat-circle"></i>返信${n ? ` ${n}` : ''}`;
+    });
+
+    // 日時を直し終えたら、日時の新しい順の場所へ置き直す（固定した呟きはいちばん上のまま）
+    $('tw-ex').addEventListener('change', (ev) => {
+        if (!ev.target.classList.contains('ex-tw-time')) return;
+        const el = exItems()[Number(ev.target.closest('.ex-it').dataset.k)];
+        if (!el || el.classList.contains('pin')) return;
+        tlPlace(el.parentElement, el);
+        $('tw-src').value = exRoot.innerHTML;
+        exDraw();
+        render();
     });
 
     // カーソルがタイムラインの行（またはそのすぐ下の空いた行）にあるときは、そのタイムラインに呟きを足す
@@ -3974,6 +4155,7 @@ iframe {
             if (Array.isArray(d.chat) && d.chat.length) state.chat = d.chat;
             if (d.cwView) state.cwView = d.cwView;
             if (Number.isInteger(d.rvCat)) state.rvCat = d.rvCat;
+            if (Number.isInteger(d.rvIt)) state.rvIt = d.rvIt;
             if (Number.isInteger(d.gmCat)) state.gmCat = d.gmCat;
             if (Number.isInteger(d.gmGame)) state.gmGame = d.gmGame;
             if (typeof d.gmIcon === 'string') state.gmIcon = d.gmIcon;
@@ -4268,6 +4450,7 @@ iframe {
         state.vs = [{ k: '', s: '', n: '', g: '' }];
         state.noticeWho = 'n';
         exOpen = -1;
+        state.rvIt = -1;
         exLoad();
         rvLoad();
         gmLoad();
