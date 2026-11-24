@@ -712,6 +712,10 @@ iframe {
     color: inherit;
 }
 
+#rv-li-box .hint {
+    margin-top: 10px;
+}
+
 /* 貼った呟きを直す欄 */
 .ex-ed-box {
     display: grid;
@@ -1376,8 +1380,12 @@ iframe {
             <p class="hint" id="rv-hint">編集画面の本文をまるごと貼ると、新しい感想をその中に入れたページが出てくるよ。</p>
             <div class="modes" id="rv-cats" hidden></div>
             <div id="rv-it-box" hidden>
-                <p class="tw-step">② 感想を選ぶ<span class="tw-opt">（前の感想を直すときだけ）</span></p>
+                <p class="tw-step">② 感想を選ぶ<span class="tw-opt">（前の感想を直すときや、まだ感想がない作品に書くとき）</span></p>
                 <div class="modes" id="rv-its"></div>
+                <div id="rv-li-box" hidden>
+                    <p class="hint">まだ感想がない作品（押すと名前が入って、感想はその作品があった場所に入るよ）</p>
+                    <div class="modes" id="rv-lis"></div>
+                </div>
                 <label class="check" id="rv-del-box" hidden><input id="rv-del" type="checkbox">この感想を消す</label>
             </div>
             <p class="tw-step" id="rv-write-step">② 新しい感想を書く</p>
@@ -2752,6 +2760,7 @@ iframe {
     let rvRoot = null;
     const rvLists = () => (rvRoot ? [...rvRoot.querySelectorAll('.cl')] : []);
     const rvIts = (cl) => (cl ? [...cl.querySelectorAll(':scope > details.cl-it')] : []);
+    const rvLis = (cl) => (cl ? [...cl.querySelectorAll(':scope > ul.cl-ls > li.cl-li')] : []);
     function rvLoad() {
         const src = $('rv-src').value.trim();
         rvRoot = null;
@@ -2761,22 +2770,26 @@ iframe {
         $('rv-cats').hidden = !lists.length;
         $('rv-cats').innerHTML = lists.map((cl, i) => `<button type="button" data-cat="${i}" aria-pressed="${i === state.rvCat}">${attr(rvCatName(cl, i))}</button>`).join('');
         if (!Number.isInteger(state.rvIt) || state.rvIt >= rvIts(lists[state.rvCat]).length) state.rvIt = -1;
+        if (!Number.isInteger(state.rvLi) || state.rvIt !== -1 || state.rvLi >= rvLis(lists[state.rvCat]).length) state.rvLi = -1;
         rvDraw();
         $('rv-hint').textContent = !src ? '編集画面の本文をまるごと貼ると、新しい感想をその中に入れたページが出てくるよ。'
-            : lists.length ? '入れる場所を選んでね。感想は最後の感想の下に、タイトルだけのもの（観たいもの）はタイトルの一覧の一番下に入るよ。'
+            : lists.length ? '入れる場所を選んでね。新しい感想もタイトルだけのもの（観たいもの）も、枠のいちばん最後に入るよ。'
             : '感想の一覧（class="cl"）が見つからなかったよ。編集画面の本文をそのまま全部貼ってね。';
         rvDropShow();
     }
     // 選んだ枠の感想を並べる。選ぶと欄に出して直せる
     function rvDraw() {
         const its = rvIts(rvLists()[state.rvCat]);
-        $('rv-it-box').hidden = !its.length;
+        const lis = rvLis(rvLists()[state.rvCat]);
+        $('rv-it-box').hidden = !its.length && !lis.length;
         $('rv-its').innerHTML = its.map((m, i) => {
             const t = gmName(m.querySelector(':scope > summary')) || `感想 ${i + 1}`;
             return `<button type="button" data-it="${i}" aria-pressed="${i === state.rvIt}">${attr(shortText(t, 14))}（${m.classList.contains('cl-gjo') ? '五条' : '七海'}）</button>`;
-        }).join('') + `<button type="button" data-it="-1" aria-pressed="${state.rvIt === -1}">＋ 新しい感想</button>`;
+        }).join('') + `<button type="button" data-it="-1" aria-pressed="${state.rvIt === -1 && state.rvLi === -1}">＋ 新しい感想</button>`;
+        $('rv-li-box').hidden = !lis.length;
+        $('rv-lis').innerHTML = lis.map((li, i) => `<button type="button" data-li="${i}" aria-pressed="${i === state.rvLi}">${attr(shortText(li.textContent.trim(), 14))}</button>`).join('');
         $('rv-del-box').hidden = state.rvIt === -1;
-        $('rv-write-step').textContent = !its.length ? '② 新しい感想を書く' : state.rvIt === -1 ? '③ 新しい感想を書く' : '③ 感想を直す';
+        $('rv-write-step').textContent = !its.length && !lis.length ? '② 新しい感想を書く' : state.rvIt !== -1 ? '③ 感想を直す' : state.rvLi !== -1 ? '③ 感想を書く' : '③ 新しい感想を書く';
     }
     // 感想の本文（p.cl-tx でも div.cl-tx でも）を、入力欄の書き方に戻す。段落の間は空行、会話などのタグはその行のまま
     const rvText = (tx) => (tx ? tx.innerHTML
@@ -2795,7 +2808,8 @@ iframe {
         const sm = m && m.querySelector(':scope > summary');
         const head = sm ? sm.cloneNode(true) : null;
         if (head) head.querySelectorAll('small').forEach((x) => x.remove());
-        $('title').value = head ? gmDecode(head.innerHTML.trim()) : '';
+        const li = !m && rvLis(rvLists()[state.rvCat])[state.rvLi];
+        $('title').value = head ? gmDecode(head.innerHTML.trim()) : li ? gmDecode(li.innerHTML.trim()) : '';
         $('rv-one').value = sm ? gmDecode(((sm.querySelector('small') || {}).innerHTML || '').trim()) : '';
         $('body').value = m ? rvText(m.querySelector(':scope > .cl-tx')) : '';
         if (m) state.who = m.classList.contains('cl-gjo') ? 'g' : 'n';
@@ -2839,7 +2853,7 @@ iframe {
     }
     function rvDropShow() {
         const title = $('title').value.trim();
-        const hit = state.mode === 'review' && state.rvIt === -1 && $('body').value.trim() && rvQueued(rvRoot, title).length;
+        const hit = state.mode === 'review' && state.rvIt === -1 && state.rvLi === -1 && $('body').value.trim() && rvQueued(rvRoot, title).length;
         $('rv-drop-box').hidden = !hit;
         if (hit) $('rv-drop-label').textContent = `「${title}」がタイトルだけの一覧（観たいものなど）にあるから、そこから消す`;
     }
@@ -2856,7 +2870,28 @@ iframe {
         const copy = rvRoot.cloneNode(true);
         const cl = copy.querySelectorAll('.cl')[state.rvCat] || copy.querySelector('.cl');
         const old = rvIts(cl)[state.rvIt];
-        if (old) {
+        const li = !old && rvLis(cl)[state.rvLi];
+        if (li) {
+            // まだ感想がない作品：タイトルの一覧のその場所に入れる。一覧の途中なら、一覧を前と後ろに分ける
+            if (body.trim()) {
+                const tmp = copy.ownerDocument.createElement('div');
+                tmp.innerHTML = `<details class="cl-it ${cls}">${rvSummary(title)}<div class="cl-tx">${rvBody(body)}</div></details>`;
+                const item = tmp.firstElementChild;
+                const ul = li.parentElement;
+                const rest = [];
+                for (let n = li.nextElementSibling; n; n = n.nextElementSibling) rest.push(n);
+                if (!li.previousElementSibling) ul.before(item);
+                else ul.after(item);
+                if (rest.length && li.previousElementSibling) {
+                    const ul2 = ul.cloneNode(false);
+                    rest.forEach((n) => ul2.appendChild(n));
+                    item.after(ul2);
+                }
+                li.remove();
+                if (!ul.querySelector('li')) ul.remove();
+                if (forPreview) item.open = true;
+            }
+        } else if (old) {
             if ($('rv-del').checked) old.remove();
             else if (body.trim()) {
                 const tmp = copy.ownerDocument.createElement('div');
@@ -2876,16 +2911,12 @@ iframe {
                     li.remove();
                     if (ul && ul.matches('ul.cl-ls') && !ul.querySelector('li')) ul.remove();
                 });
-                const its = cl.querySelectorAll(':scope > details.cl-it');
-                const ls = cl.querySelector(':scope > ul.cl-ls');
-                if (its.length) its[its.length - 1].after(item);
-                else if (ls) ls.before(item);
-                else cl.appendChild(item);
+                cl.appendChild(item);
                 if (forPreview) item.open = true;
             } else {
                 tmp.innerHTML = `<li class="cl-li">${title}</li>`;
-                let ls = cl.querySelector(':scope > ul.cl-ls');
-                if (!ls) {
+                let ls = cl.lastElementChild;
+                if (!ls || !ls.matches('ul.cl-ls')) {
                     ls = doc.createElement('ul');
                     ls.className = 'cl-ls';
                     cl.appendChild(ls);
@@ -2900,16 +2931,17 @@ iframe {
         return copy.innerHTML;
     }
     const hasRvMerged = () => state.mode === 'review' && rvLists().length > 0;
-    $('rv-src').addEventListener('input', () => { state.rvIt = -1; rvLoad(); show(); render(); });
+    $('rv-src').addEventListener('input', () => { state.rvIt = -1; state.rvLi = -1; rvLoad(); show(); render(); });
     $('rv-drop').addEventListener('change', () => render());
     $('rv-del').addEventListener('change', () => render());
     $('rv-cats').addEventListener('click', (ev) => {
         const b = ev.target.closest('button');
         if (!b) return;
         // 前の感想を直している途中なら、ページに入れてから新しい感想に戻す
-        if (state.rvIt !== -1) {
+        if (state.rvIt !== -1 || state.rvLi !== -1) {
             rvCommit(null);
             state.rvIt = -1;
+            state.rvLi = -1;
             rvFill();
         }
         state.rvCat = Number(b.dataset.cat);
@@ -2923,7 +2955,7 @@ iframe {
         const b = ev.target.closest('button');
         if (!b) return;
         const i = Number(b.dataset.it);
-        if (i === state.rvIt) return;
+        if (i === state.rvIt && state.rvLi === -1) return;
         const lists = rvLists();
         const el = rvCommit(i >= 0 ? rvIts(lists[state.rvCat])[i] : lists[state.rvCat]);
         const nl = rvLists();
@@ -2934,7 +2966,27 @@ iframe {
             if (el) state.rvCat = nl.indexOf(el);
             state.rvIt = -1;
         }
+        state.rvLi = -1;
         if (state.rvCat < 0) state.rvCat = 0;
+        rvFill();
+        rvLoad();
+        show();
+        render();
+        save();
+    });
+    $('rv-lis').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        const i = Number(b.dataset.li);
+        if (i === state.rvLi) return;
+        const el = rvCommit(rvLis(rvLists()[state.rvCat])[i]);
+        const nl = rvLists();
+        state.rvIt = -1;
+        state.rvLi = -1;
+        if (el) {
+            state.rvCat = Math.max(0, nl.indexOf(el.parentElement.parentElement));
+            state.rvLi = rvLis(nl[state.rvCat]).indexOf(el);
+        }
         rvFill();
         rvLoad();
         show();
@@ -4156,6 +4208,7 @@ iframe {
             if (d.cwView) state.cwView = d.cwView;
             if (Number.isInteger(d.rvCat)) state.rvCat = d.rvCat;
             if (Number.isInteger(d.rvIt)) state.rvIt = d.rvIt;
+            if (Number.isInteger(d.rvLi)) state.rvLi = d.rvLi;
             if (Number.isInteger(d.gmCat)) state.gmCat = d.gmCat;
             if (Number.isInteger(d.gmGame)) state.gmGame = d.gmGame;
             if (typeof d.gmIcon === 'string') state.gmIcon = d.gmIcon;
@@ -4451,6 +4504,7 @@ iframe {
         state.noticeWho = 'n';
         exOpen = -1;
         state.rvIt = -1;
+        state.rvLi = -1;
         exLoad();
         rvLoad();
         gmLoad();
