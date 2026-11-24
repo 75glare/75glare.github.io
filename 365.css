@@ -3413,13 +3413,13 @@ main>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(+ details.mv) {
 }
 
 .g_box details summary:not(.cl-sm)::before {
-    content: "\E2FE";
+    content: "\E330";
     font-family: "Phosphor-Fill";
     color: color-mix(in srgb, var(--gjo) 60%, transparent);
 }
 
 .g_box details[open] summary:not(.cl-sm)::before {
-    content: "\E300";
+    content: "\E58E";
     animation: icon-swap 0.4s ease forwards;
 }
 
@@ -3449,12 +3449,77 @@ main>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(+ details.mv) {
 }
 
 :is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2[data-name="Gojo Satoru"]) details:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
-    content: "\E2FE";
+    content: "\E330";
     color: color-mix(in srgb, var(--gjo) 60%, transparent);
 }
 
 :is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2[data-name="Gojo Satoru"]) details[open]:not(.mv, .gm, .tc, .cv-lt) summary:not(.cl-sm)::before {
-    content: "\E300";
+    content: "\E58E";
+}
+
+:is(main:not(.at), .n_box, .g_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) details {
+    --fd-c: "\E3D4";
+    --fd-o: "\E32A";
+    --fd-f: "Phosphor-Light";
+    --fd-cc: currentColor;
+    --fd-oc: currentColor;
+}
+
+main:not(.at) details {
+    --fd-oc: var(--color);
+}
+
+:is(.n_box, :is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2[data-name="Nanami Kento"])) details {
+    --fd-c: "\E0E4";
+    --fd-o: "\E8F2";
+    --fd-f: "Phosphor-Fill";
+    --fd-cc: color-mix(in srgb, var(--nanami) 60%, transparent);
+    --fd-oc: var(--fd-cc);
+}
+
+:is(.g_box, :is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2[data-name="Gojo Satoru"])) details {
+    --fd-c: "\E330";
+    --fd-o: "\E58E";
+    --fd-f: "Phosphor-Fill";
+    --fd-cc: color-mix(in srgb, var(--gjo) 60%, transparent);
+    --fd-oc: var(--fd-cc);
+}
+
+:is(main:not(.at), .n_box, .g_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) details:not([class], .sw-it > details, :has(> summary > mark)) > summary:not(.cl-sm) {
+    position: relative;
+}
+
+:is(main:not(.at), .n_box, .g_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) details:not([class], .sw-it > details, :has(> summary > mark)):not(.mv, .gm) > summary:not(.cl-sm)::before {
+    transition: opacity 0.5s ease, color 0.3s ease;
+}
+
+:is(main:not(.at), .n_box, .g_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) details:not([class], .sw-it > details, :has(> summary > mark))[open]:not(.mv, .gm) > summary:not(.cl-sm)::before {
+    content: var(--fd-c);
+    font-family: var(--fd-f);
+    color: var(--fd-cc);
+    opacity: 0;
+    animation: none;
+}
+
+:is(main:not(.at), .n_box, .g_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) details:not([class], .sw-it > details, :has(> summary > mark)) > summary:not(.cl-sm)::after {
+    content: var(--fd-o);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    font-family: var(--fd-f);
+    color: var(--fd-oc);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+:is(main:not(.at), .n_box, .g_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) details:not([class], .sw-it > details, :has(> summary > mark))[open] > summary:not(.cl-sm)::after {
+    opacity: 1;
 }
 
 details[open]>*:not(summary) {
@@ -10234,7 +10299,8 @@ a.privacy-toggle mark {
 }
 
 body>a font,
-body>a span[style*="color"] {
+body>a span[style*="color"],
+body>span[style*="color"] {
     color: inherit !important;
 }
 
@@ -10424,7 +10490,6 @@ body>a span[style*="color"] {
 @keyframes lk-sh {
     50% {
         opacity: 0.85;
-        filter: blur(2.5px);
     }
 }
 
