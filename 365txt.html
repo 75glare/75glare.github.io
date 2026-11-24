@@ -1496,6 +1496,8 @@ iframe {
             <p class="tw-step">② 新しいメニューを足す<span class="tw-opt" id="sw-new-opt" hidden>（足さないときは料理名を空にしてね）</span></p>
             <label for="sw-name">料理名</label>
             <input id="sw-name" type="text" autocomplete="off">
+            <label for="sw-en">英語の名前<span class="tw-opt">（なくてもOK。料理名の下に小さく出る）</span></label>
+            <input id="sw-en" type="text" autocomplete="off" placeholder="French Toast">
             <label for="sw-note">メモ（リクエストの詳細など）</label>
             <textarea id="sw-note" class="short"></textarea>
             <label class="check"><input id="sw-done" type="checkbox">作った！</label>
@@ -1806,9 +1808,9 @@ iframe {
     const BLOCK = /^(?:<add>.*?<\/add>)?<(p|div|ul|ol|details|blockquote|h[1-6])[\s>]|^<span class="cl-(lb|dt)">/;
 
     const $ = (id) => document.getElementById(id);
-    const fields = ['dl-title', 'dl-code', 'vs-title', 'title', 'date', 'tag', 'time', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-date', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'rv-one', 'np-song', 'np-artist', 'np-len', 'np-ly', 'np-nt'];
+    const fields = ['dl-title', 'dl-code', 'vs-title', 'title', 'date', 'tag', 'time', 'body', 'song', 'artist', 'sw-name', 'sw-en', 'sw-note', 'sw-after', 'sw-date', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'rv-one', 'np-song', 'np-artist', 'np-len', 'np-ly', 'np-nt'];
     const checks = ['links', 'klee', 'scroll', 'sw-done', 'tl-wrap', 'aj-rain', 'aj-petal', 'um-yk'];
-    const PER_MODE = ['title', 'date', 'tag', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-date', 'sw-url'];
+    const PER_MODE = ['title', 'date', 'tag', 'body', 'song', 'artist', 'sw-name', 'sw-en', 'sw-note', 'sw-after', 'sw-date', 'sw-url'];
     const state = { dlog: { icon: 'E7F6', items: [{ who: 'n', text: '' }, { who: 'g', text: '' }] }, vs: [{ k: '', s: '', n: '', g: '' }], drafts: {}, np: { who: 'g', ic: '#' }, mode: 'n_box', who: 'n', box: 'hs', wrap: '', orPos: {}, or: 'H', cwView: 'g', tweets: [], chat: [{ who: 'g', text: '' }, { who: 'n', text: '' }] };
 
     const pad = (n) => String(n).padStart(2, '0');
@@ -3234,7 +3236,7 @@ iframe {
     let swRoot = null;
     let swOpen = -1;
     const swList = () => (swRoot ? swRoot.querySelector('ul.sw') : null);
-    function swItemHTML(name, note, done, after, date, url) {
+    function swItemHTML(name, note, done, after, date, url, en) {
         url = (url || '').trim();
         const lk = done && url ? `<a href="${attr(url)}" class="sw-lk"></a>` : '';
         const nt = `<span class="sw-nt">${note}</span>`;
@@ -3244,7 +3246,7 @@ iframe {
             const day = y ? `(<i class="ph">&#xED8E;</i>${y}.${m}.${d})` : '';
             ad = `<span class="sw-ad">${paragraphs(after, false)}${day}</span>`;
         }
-        return `<li class="sw-it${done ? ' done' : ''}"><details><summary><span class="sw-nm">${name}</span>${lk}</summary>${nt}${ad}</details></li>`;
+        return `<li class="sw-it${done ? ' done' : ''}"><details><summary><span class="sw-nm"${(en || '').trim() ? ` data-en="${attr(en.trim())}"` : ''}>${name}</span>${lk}</summary>${nt}${ad}</details></li>`;
     }
     function swMerged(item) {
         const ul = swList();
@@ -3272,6 +3274,7 @@ iframe {
         }
         return {
             name: nm ? nm.innerHTML : '',
+            en: nm ? nm.getAttribute('data-en') || '' : '',
             note: (li.querySelector('.sw-nt') || {}).innerHTML || '',
             done: li.classList.contains('done'),
             url: lk ? lk.getAttribute('href') || '' : '',
@@ -3282,7 +3285,7 @@ iframe {
     function swWrite(k, d) {
         const li = swList().querySelectorAll(':scope > li.sw-it')[k];
         const tmp = li.ownerDocument.createElement('ul');
-        tmp.innerHTML = swItemHTML(d.name, d.note, d.done, d.after, d.date, d.url);
+        tmp.innerHTML = swItemHTML(d.name, d.note, d.done, d.after, d.date, d.url, d.en);
         li.replaceWith(tmp.firstElementChild);
         $('sw-src').value = swRoot.innerHTML;
         render();
@@ -3313,8 +3316,16 @@ iframe {
                 ${nt ? `<div class="ex-tx">${attr(nt.length > 40 ? nt.slice(0, 40) + '…' : nt)}</div>` : ''}
                 <div class="tw-acts">
                     <button type="button" class="sw-ex-done tw-like${d.done ? ' on' : ''}"><i class="ph-${d.done ? 'fill' : 'light'} ph-check-circle"></i>作った！</button>
-                    ${d.done ? `<button type="button" class="sw-ex-edit"><i class="ph-light ph-pencil-simple"></i>感想・日付・リンク</button>` : ''}
+                    <button type="button" class="sw-ex-edit"><i class="ph-light ph-pencil-simple"></i>直す</button>
                 </div>
+                ${open ? `<div class="sw-ex-fields">
+                    <label>料理名</label>
+                    <input type="text" class="sw-ex-name" autocomplete="off" value="${attr(gmDecode(d.name))}">
+                    <label>英語の名前（なくてもOK）</label>
+                    <input type="text" class="sw-ex-en" autocomplete="off" value="${attr(d.en)}">
+                    <label>メモ（リクエストの詳細など）</label>
+                    <textarea class="sw-ex-note">${attr(gmDecode(d.note.replace(/<br\s*\/?>/g, '\n')))}</textarea>
+                </div>` : ''}
                 ${d.done && open ? `<div class="sw-ex-fields">
                     <label>作ったあとの感想（なくてもOK）</label>
                     <textarea class="sw-ex-after">${attr(d.after).replace(/</g, '&lt;')}</textarea>
@@ -3351,9 +3362,17 @@ iframe {
         if (!box) return;
         const k = Number(box.dataset.k);
         const d = swRead(swList().querySelectorAll(':scope > li.sw-it')[k]);
-        d.after = box.querySelector('.sw-ex-after').value;
-        d.date = box.querySelector('.sw-ex-date').value;
-        d.url = box.querySelector('.sw-ex-url').value;
+        const f = (c) => box.querySelector(c);
+        if (f('.sw-ex-name')) {
+            d.name = safe(f('.sw-ex-name').value.trim()) || d.name;
+            d.en = f('.sw-ex-en').value;
+            d.note = paragraphs(f('.sw-ex-note').value, false);
+        }
+        if (f('.sw-ex-after')) {
+            d.after = f('.sw-ex-after').value;
+            d.date = f('.sw-ex-date').value;
+            d.url = f('.sw-ex-url').value;
+        }
         swWrite(k, d);
     });
 
@@ -4001,7 +4020,7 @@ iframe {
             }
             case 'sw': {
                 const hasName = !!v['sw-name'].trim();
-                const item = (hasName || !swList()) ? swItemHTML(safe(v['sw-name'].trim()) || '料理名', paragraphs(v['sw-note'], false), $('sw-done').checked, v['sw-after'], v['sw-date'], v['sw-url']) : '';
+                const item = (hasName || !swList()) ? swItemHTML(safe(v['sw-name'].trim()) || '料理名', paragraphs(v['sw-note'], false), $('sw-done').checked, v['sw-after'], v['sw-date'], v['sw-url'], v['sw-en']) : '';
                 const merged = swMerged(item);
                 return merged || item;
             }

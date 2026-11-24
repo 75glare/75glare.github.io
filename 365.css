@@ -6413,14 +6413,6 @@ details.gm .cl-li::before {
     order: -20;
 }
 
-.sw-it.done:has(> details[open]) {
-    order: -25;
-}
-
-.sw-it:not(.done):has(> details[open]) {
-    order: -5;
-}
-
 .sw-it,
 .sw-it:has(> details) {
     padding: 0.85em 0 0.75em;
@@ -6493,7 +6485,7 @@ details.gm .cl-li::before {
     display: block;
     position: absolute;
     bottom: 0.9em;
-    left: 0;
+    right: 0;
     margin: 0;
     padding: 4px 2px;
 }
@@ -6514,6 +6506,14 @@ details.gm .cl-li::before {
 @media screen and (min-width: 768px) {
     .sw-it:has(> details[open]) {
         grid-column: 1 / -1;
+    }
+
+    .sw-it.done:has(> details[open]) {
+        order: -25;
+    }
+
+    .sw-it:not(.done):has(> details[open]) {
+        order: -5;
     }
 
     .sw-it>details[open]>:is(.sw-nt, .sw-ad) {
