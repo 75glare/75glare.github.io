@@ -9655,6 +9655,15 @@ details.plf > .pg-qt {
         margin-top: 3.4em;
     }
 
+    details.plf[open] > .pl {
+        margin-top: 0;
+        padding: 0 0.7em;
+        border: 1px solid oklch(100% 0 0 / 0.09);
+        border-top: 0;
+        border-radius: 0 0 10px 10px;
+        background: oklch(100% 0 0 / 0.04);
+    }
+
     .il.sg+details.plf > summary .ln {
         display: block;
         position: absolute;
