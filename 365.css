@@ -6380,6 +6380,148 @@ details.gm .cl-li::before {
     }
 }
 
+@font-face {
+    font-family: "SwSub";
+    src: local("Hiragino Sans W3"), local("HiraginoSans-W3"), local("Hiragino Kaku Gothic ProN W3"), local("Yu Gothic Medium"), local("YuGothic-Medium"), local("Meiryo"), local("Noto Sans CJK JP");
+    size-adjust: 44%;
+}
+
+.sw::before,
+.sw::after {
+    padding: 0.2em 0 0.35em;
+    border-top: 0;
+    font: 200 1.25em/1.6 "Playwrite DE LA", "SwSub", cursive;
+    letter-spacing: -0.02em;
+    word-spacing: -0.2em;
+    text-transform: none;
+}
+
+.sw::before {
+    content: "Kept\2002\2009\FF5C\2002\FF33\FF25\FF32\FF36\FF25\FF24\3000\FF37\FF29\FF34\FF28\3000\FF2C\FF2F\FF36\FF25";
+    order: -30;
+    margin-bottom: 0.7em;
+}
+
+.sw::after {
+    content: "Promised\2002\2009\FF5C\2002\FF23\FF2F\FF2D\FF29\FF2E\FF27\3000\FF33\FF2F\FF2F\FF2E";
+    order: -10;
+    margin-top: 2.2em;
+    margin-bottom: 0.7em;
+}
+
+.sw-it.done {
+    order: -20;
+}
+
+.sw-it.done:has(> details[open]) {
+    order: -25;
+}
+
+.sw-it:not(.done):has(> details[open]) {
+    order: -5;
+}
+
+.sw-it,
+.sw-it:has(> details) {
+    padding: 0.85em 0 0.75em;
+    border-bottom: 0 !important;
+}
+
+.sw-it:has(> details[open] .sw-lk) {
+    padding-bottom: 3.6em;
+}
+
+.sw-nm {
+    max-width: calc(100% - 4em);
+    line-height: 1.6;
+}
+
+.sw-nm[data-en]::after {
+    content: attr(data-en);
+    display: block;
+    margin-top: 0.1em;
+    font: 400 0.72em/1.5 var(--hd-font);
+    letter-spacing: 0.12em;
+    color: color-mix(in srgb, var(--black) 45%, transparent);
+    -webkit-text-stroke: 0;
+}
+
+.sw-it.done .sw-nm[data-en]::after {
+    color: color-mix(in srgb, var(--beige) 65%, transparent);
+}
+
+.sw .sw-it>details>summary:not(.cl-sm)::before {
+    content: "";
+    display: block;
+    order: 2;
+    flex: 1;
+    align-self: flex-start;
+    width: auto;
+    min-width: 1.2em;
+    height: 1.12em;
+    margin: 0 2.1em 0 0.8em;
+    border-bottom: 1px dotted color-mix(in srgb, var(--black) 30%, transparent);
+}
+
+.sw-it>details>summary {
+    align-items: flex-start;
+    line-height: 1.6;
+}
+
+.sw-it>details>summary::after {
+    display: none;
+}
+
+.sw-it .sw-nm::before,
+.sw-it.done .sw-nm::before {
+    top: 1.12em;
+    right: 0;
+    left: auto;
+    vertical-align: 0;
+    line-height: 1;
+}
+
+.sw-lk {
+    display: none;
+}
+
+.sw-it>details[open]>.sw-nt {
+    margin-top: 0.9em;
+}
+
+.sw-it>details[open] .sw-lk {
+    display: block;
+    position: absolute;
+    bottom: 0.9em;
+    left: 0;
+    margin: 0;
+    padding: 4px 2px;
+}
+
+.sw-it>details[open] .sw-lk::after {
+    content: "Tasting Notes\2002\E06C";
+    font: 200 0.95em/1 "Playwrite DE LA", "Phosphor-Light", cursive;
+    letter-spacing: 0.03em;
+    color: var(--beige);
+}
+
+@media (hover: hover) {
+    .sw-it>details>summary:hover .sw-nm {
+        color: var(--pure-white) !important;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .sw-it:has(> details[open]) {
+        grid-column: 1 / -1;
+    }
+
+    .sw-it>details[open]>:is(.sw-nt, .sw-ad) {
+        padding-right: 2.4em;
+        text-wrap: pretty;
+    }
+}
+
 /* =======================================
     Places & Gifts (.dt / .gf)
 ======================================= */
