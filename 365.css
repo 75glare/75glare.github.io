@@ -4223,6 +4223,14 @@ main.lib .gl-in .cl-nnm>.cl-sm {
     -webkit-text-stroke: 0.065px currentColor;
 }
 
+main.lib .gl-in .cl-tx {
+    margin: 2px 0 0 calc(14px + 1.05em);
+    padding: 0 0 6px;
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+
 main.lib details.mv:where([class*=" ic-"]):not([open])>summary .tp-tg {
     display: none;
 }
@@ -10486,7 +10494,8 @@ body>span[style*="color"] {
 .post-lock::after {
     content: "Some things are better left unspoken,\A kept behind a door that only the right hand can open,\A if you are not the one,\A please let them sleep.";
     display: block;
-    margin: 11px 0 0 4px;
+    margin: 11px 0 0 -4px;
+    padding-left: 8px;
     white-space: pre;
     overflow: hidden;
     font: 400 11px/1.9 "Zen Kaku Gothic Antique", sans-serif;
@@ -10554,7 +10563,7 @@ body>span[style*="color"] {
 }
 
 :is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) .post-lock::after {
-    margin-left: 0;
+    margin-left: -8px;
 }
 
 :is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) .post-lock:not(:has(.post-lock-msg)) {
