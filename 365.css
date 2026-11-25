@@ -5849,13 +5849,14 @@ main:has(.tl),
     width: 78px;
     height: 78px;
     box-sizing: border-box;
-    padding: 14px 6px 0;
-    font-family: var(--en-font);
-    font-size: 15px;
-    font-weight: 700;
+    padding: 19px 6px 0;
+    font-family: var(--hd-font);
+    font-size: 13px;
+    font-weight: 400;
     white-space: pre;
     line-height: 1.4;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     text-align: center;
     color: var(--red);
     border: 1.5px solid var(--red);
@@ -6549,8 +6550,8 @@ details.gm .cl-li::before {
     grid-template-columns: var(--x) 1fr;
     border-radius: 5px;
     background:
-        linear-gradient(105deg, oklch(100% 0 0 / 0.06), transparent 45%),
-        color-mix(in srgb, var(--c) 12%, oklch(27% 0.05 254 / 0.55));
+        linear-gradient(105deg, oklch(100% 0 0 / 0.05), transparent 45%),
+        oklch(100% 0 0 / 0.045);
     -webkit-mask:
         radial-gradient(circle at var(--x) 0, transparent 7px, black 7.5px) top / 100% 51% no-repeat,
         radial-gradient(circle at var(--x) 100%, transparent 7px, black 7.5px) bottom / 100% 51% no-repeat;
@@ -6657,24 +6658,21 @@ details.gm .cl-li::before {
 
 .dt::before,
 .dt::after {
-    content: "Been";
+    content: "Been\2002\2009\FF5C\2002\FF36\FF29\FF33\FF29\FF34\FF25\FF24";
     order: -3;
     display: block;
-    margin: 0.4em 0 -0.1em;
-    background: linear-gradient(color-mix(in srgb, var(--black) 16%, transparent), color-mix(in srgb, var(--black) 16%, transparent)) right center / calc(100% - 5.4em) 1px no-repeat;
-    font-family: var(--hd-font);
-    font-size: 0.78em;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
+    margin: 0.4em 0 0.15em;
+    font: 200 1.25em/1.6 "Playwrite DE LA", "SwSub", cursive;
+    letter-spacing: -0.02em;
+    word-spacing: -0.2em;
     text-align: left;
-    color: color-mix(in srgb, var(--black) 60%, transparent);
+    color: color-mix(in srgb, var(--black) 72%, transparent);
 }
 
 .dt::after {
-    content: "Someday";
+    content: "Someday\2002\2009\FF5C\2002\FF2F\FF30\FF25\FF2E\3000\FF34\FF29\FF23\FF2B\FF25\FF34\FF33";
     order: -1;
-    margin: 1.6em 0 -0.1em;
-    background-size: calc(100% - 7.6em) 1px;
+    margin: 1.6em 0 0.15em;
 }
 
 .dt:not(:has(.done))::before,
@@ -6727,7 +6725,7 @@ details.gm .cl-li::before {
 
 .gf {
     display: grid;
-    gap: 14px;
+    gap: 24px;
     list-style: none;
     margin: 1.8em 0 14px;
     padding: 0;
@@ -6735,32 +6733,50 @@ details.gm .cl-li::before {
 
 .gf-it {
     --c: var(--gjo);
+    --g: var(--nanami);
     position: relative;
     display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: baseline;
-    column-gap: 1em;
-    padding: 1.15em 1.4em 1.25em 3.9em;
-    background:
-        linear-gradient(to right, color-mix(in srgb, var(--c) 10%, transparent) 0 2.9em, transparent 2.9em),
-        radial-gradient(circle, color-mix(in srgb, var(--c) 45%, transparent) 0.8px, transparent 1.2px) 2.9em 0 / 3px 6px repeat-y,
-        linear-gradient(160deg, oklch(100% 0 0 / 0.06), transparent 50%),
-        linear-gradient(color-mix(in srgb, var(--c) 10%, transparent), color-mix(in srgb, var(--c) 10%, transparent)),
-        oklch(27% 0.05 254 / 0.55);
-    clip-path: polygon(16px 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
-    -webkit-mask: radial-gradient(circle at 1.45em 50%, transparent 2.6px, black 3.1px);
-    mask: radial-gradient(circle at 1.45em 50%, transparent 2.6px, black 3.1px);
+    grid-template-columns: 1fr;
+    padding: 0 0 0 3.7em;
+}
+
+.gf-it[data-ch="na"] {
+    --g: var(--gjo);
 }
 
 .gf-it::before {
+    content: "N";
+    position: absolute;
+    top: 0.1em;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 2.15em;
+    height: 2.15em;
+    padding: 0 0.1em 0 0;
+    border: 0.5px solid color-mix(in srgb, var(--g) 60%, transparent);
+    border-radius: 50%;
+    background: radial-gradient(circle closest-side, transparent calc(100% - 3.6px), color-mix(in srgb, var(--g) 40%, transparent) calc(100% - 3.4px) calc(100% - 2.8px), transparent calc(100% - 2.6px));
+    font: 200 1.22em/1 "Playwrite DE LA", cursive;
+    color: color-mix(in srgb, var(--g) 85%, transparent);
+    opacity: 0.9;
+    rotate: -12deg;
+}
+
+.gf-it[data-ch="na"]::before {
+    content: "G";
+    padding: 0 0.11em 0.24em 0;
+}
+
+.gf-it:not(:last-child)::after {
     content: "";
     position: absolute;
-    top: calc(50% - 7.5px);
-    left: calc(1.45em - 7.5px);
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: radial-gradient(circle, transparent 3px, color-mix(in srgb, var(--c) 55%, transparent) 3.4px 4.4px, transparent 4.8px);
+    top: calc(0.1em + 2.7em);
+    bottom: calc(-24px - 0.05em);
+    left: 1.3125em;
+    border-left: 1px dotted oklch(100% 0 0 / 0.22);
 }
 
 .gf-nm {
@@ -6773,14 +6789,15 @@ details.gm .cl-li::before {
 }
 
 .gf-it time {
-    grid-column: 2;
-    grid-row: 1;
-    justify-self: end;
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    margin-top: 0.3em;
     font-family: var(--hd-font);
     font-size: 0.72em;
     line-height: 1.5;
     letter-spacing: 0.07em;
-    text-align: right;
+    text-align: left;
     color: var(--nanami);
 }
 
@@ -6797,10 +6814,8 @@ details.gm .cl-li::before {
 }
 
 .gf-nt {
-    grid-column: 1 / -1;
-    margin-top: 0.5em;
-    padding-top: 0.65em;
-    border-top: 1px dotted color-mix(in srgb, var(--c) 45%, transparent);
+    grid-row: 3;
+    margin-top: 0.55em;
     font-size: 0.86em;
     line-height: 1.8;
     color: color-mix(in srgb, var(--color) 90%, transparent);
@@ -6845,21 +6860,6 @@ details.gm .cl-li::before {
 .dt-it time,
 .dt-it:not(.done)::before {
     color: color-mix(in srgb, var(--c) 90%, white);
-}
-
-.dt-it[data-ch="na"] {
-    background:
-        linear-gradient(105deg, oklch(100% 0 0 / 0.06), transparent 45%),
-        color-mix(in srgb, oklch(76% 0.13 88) 14%, oklch(27% 0.035 250 / 0.55));
-}
-
-.gf-it[data-ch="na"] {
-    background:
-        linear-gradient(to right, color-mix(in srgb, oklch(76% 0.13 88) 12%, transparent) 0 2.9em, transparent 2.9em),
-        radial-gradient(circle, color-mix(in srgb, var(--c) 45%, transparent) 0.8px, transparent 1.2px) 2.9em 0 / 3px 6px repeat-y,
-        linear-gradient(160deg, oklch(100% 0 0 / 0.06), transparent 50%),
-        linear-gradient(color-mix(in srgb, oklch(76% 0.13 88) 11%, transparent), color-mix(in srgb, oklch(76% 0.13 88) 11%, transparent)),
-        oklch(27% 0.035 250 / 0.55);
 }
 
 @media screen and (max-width: 767px) {
