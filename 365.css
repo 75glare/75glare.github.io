@@ -1618,7 +1618,8 @@ li.klee,
 .sw-nm,
 .sw-nt,
 .sw-ad,
-.bgm-ti {
+.bgm-ti,
+:is(.hs, .gx, .rn, .yu, .um, .aj, .mz):has(h2.klee, p.klee) details :is(summary, p) {
     font-feature-settings: normal;
 }
 
@@ -9540,9 +9541,9 @@ main:has(> .np:only-child) {
 
 .np-ly {
     margin: 2.6em 0 0;
-    font: 300 0.94em/2.3 var(--en-font);
-    letter-spacing: 0.05em;
-    color: color-mix(in srgb, var(--black) 74%, transparent);
+    font: 300 0.82em/2.4 var(--en-font);
+    letter-spacing: 0.08em;
+    color: color-mix(in srgb, var(--black) 58%, transparent);
 }
 
 .np-nt {
