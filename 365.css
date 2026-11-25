@@ -1330,11 +1330,15 @@ main {
 
 :is(.g_box, .n_box) a,
 :is(.g_box, .n_box) a:visited {
-    background: linear-gradient(color-mix(in srgb, var(--black) 45%, transparent), color-mix(in srgb, var(--black) 45%, transparent)) 0 100% / 100% 1px no-repeat;
-    color: var(--black) !important;
-    text-shadow:
-        0 0 1px color-mix(in srgb, var(--sky-moon) 90%, transparent),
-        0 0 3px color-mix(in srgb, var(--sky-moon) 40%, transparent) !important;
+    --lk: color-mix(in oklch, var(--black), var(--gjo) 85%);
+    background: linear-gradient(color-mix(in oklch, var(--lk) 55%, transparent), color-mix(in oklch, var(--lk) 55%, transparent)) 0 100% / 100% 1px no-repeat;
+    color: var(--lk) !important;
+    text-shadow: none !important;
+}
+
+.n_box a,
+.n_box a:visited {
+    --lk: color-mix(in oklch, var(--black), var(--nanami) 85%);
 }
 
 main p,
@@ -6397,7 +6401,7 @@ details.gm .cl-li::before {
 }
 
 .sw::before {
-    content: "Kept\2002\2009\FF5C\2002\FF33\FF25\FF32\FF36\FF25\FF24\3000\FF37\FF29\FF34\FF28\3000\FF2C\FF2F\FF36\FF25";
+    content: "Kept\2002\2009\FF5C\2002\FF26\FF32\FF2F\FF2D\3000\FF34\FF28\FF25\3000\FF2B\FF29\FF34\FF23\FF28\FF25\FF2E";
     order: -30;
     margin-bottom: 0.7em;
 }
