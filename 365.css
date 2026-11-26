@@ -1211,7 +1211,8 @@ main>*:last-child,
 }
 
 @supports (animation-timeline: view()) {
-    :is(main, .g_box, .n_box) {
+    :is(main, .g_box, .n_box),
+    .post-body > .post-lock {
         animation: box-in linear backwards;
         animation-timeline: view();
         animation-range: entry 0 cover 30vh;
