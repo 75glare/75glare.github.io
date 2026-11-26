@@ -1114,7 +1114,7 @@ main,
 :is(.g_box, .n_box) {
     --black: oklch(88% 0.018 235);
     --color: oklch(72% 0.025 240);
-    --glass-line: oklch(100% 0 0 / 0.04);
+    --glass-line: oklch(100% 0 0 / 0.07);
     --cap: "\E6A2\2002 Two cups on one table";
     --cap-color: color-mix(in srgb, var(--color) 55%, transparent);
 
@@ -1143,13 +1143,13 @@ main,
 }
 
 .g_box {
-    --glass-line: oklch(from var(--gjo) calc(l + 0.2) calc(c * 0.6) h / 0.07);
+    --glass-line: oklch(from var(--gjo) calc(l + 0.2) calc(c * 0.6) h / 0.12);
     --cap: "\E58E\2002 The moon was listening";
     --cap-color: color-mix(in srgb, var(--gjo) 55%, transparent);
 }
 
 .n_box {
-    --glass-line: oklch(from var(--nanami) calc(l + 0.2) calc(c * 0.6) h / 0.07);
+    --glass-line: oklch(from var(--nanami) calc(l + 0.2) calc(c * 0.6) h / 0.12);
     --cap: "\E1C2\2002 Until the coffee goes cold";
     --cap-color: color-mix(in srgb, var(--nanami) 55%, transparent);
 }
@@ -10366,7 +10366,7 @@ body>span[style*="color"] {
     margin: 31px 10px !important;
     --lk-tone: var(--color);
     padding: 56px 30px 46px;
-    --glass-line: oklch(100% 0 0 / 0.04);
+    --glass-line: oklch(100% 0 0 / 0.07);
     background: var(--glass-bg);
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
@@ -10425,11 +10425,11 @@ body>span[style*="color"] {
 }
 
 .post:has(a.name[href="mailto:g" i]) .post-body > .post-lock {
-    --glass-line: oklch(from var(--gjo) calc(l + 0.2) calc(c * 0.6) h / 0.07);
+    --glass-line: oklch(from var(--gjo) calc(l + 0.2) calc(c * 0.6) h / 0.12);
 }
 
 .post:has(a.name[href="mailto:n" i]) .post-body > .post-lock {
-    --glass-line: oklch(from var(--nanami) calc(l + 0.2) calc(c * 0.6) h / 0.07);
+    --glass-line: oklch(from var(--nanami) calc(l + 0.2) calc(c * 0.6) h / 0.12);
 }
 
 .post:has(a.name[href="mailto:n" i]) .post-lock::before {
