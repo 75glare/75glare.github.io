@@ -6137,6 +6137,12 @@ details.gm .cl-li::before {
 /* =======================================
     Sweets Menu Component (.sw)
 ======================================= */
+@font-face {
+    font-family: "SwSub";
+    src: local("Hiragino Sans W3"), local("HiraginoSans-W3"), local("Hiragino Kaku Gothic ProN W3"), local("Yu Gothic Medium"), local("YuGothic-Medium"), local("Meiryo"), local("Noto Sans CJK JP");
+    size-adjust: 44%;
+}
+
 .sw {
     counter-reset: todo kept all;
     display: flex;
@@ -6148,24 +6154,22 @@ details.gm .cl-li::before {
 
 .sw::before,
 .sw::after {
-    content: "Kept";
-    order: -3;
+    content: "Kept\2002\2009\FF5C\2002\FF26\FF32\FF2F\FF2D\3000\FF34\FF28\FF25\3000\FF2B\FF29\FF34\FF23\FF28\FF25\FF2E";
+    order: -30;
     display: block;
-    margin: 0 0 0.9em;
-    font-family: var(--hd-font);
-    font-size: 0.82em;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    margin: 0 0 0.7em;
+    padding: 0.2em 0 0.35em;
+    font: 200 1.25em/1.6 "Playwrite DE LA", "SwSub", cursive;
+    letter-spacing: -0.02em;
+    word-spacing: -0.2em;
     text-align: center;
     color: color-mix(in srgb, var(--beige) 80%, transparent);
 }
 
 .sw::after {
-    content: "Promised";
-    order: -1;
-    margin-top: 2em;
-    padding-top: 1.6em;
-    border-top: 1px solid color-mix(in srgb, var(--black) 14%, transparent);
+    content: "Promised\2002\2009\FF5C\2002\FF23\FF2F\FF2D\FF29\FF2E\FF27\3000\FF33\FF2F\FF2F\FF2E";
+    order: -10;
+    margin-top: 2.2em;
     color: color-mix(in srgb, var(--black) 60%, transparent);
 }
 
@@ -6178,28 +6182,27 @@ details.gm .cl-li::before {
 .sw-it {
     counter-increment: todo all;
     position: relative;
-    padding: 0.85em 0 0.8em calc(1.232em + 14px);
-    border-bottom: 1px dotted oklch(100% 0 0 / 0.09);
+    padding: 0.85em 0 0.75em;
+    border-bottom: 0 !important;
 }
 
 .sw-it.done {
     counter-increment: kept all;
-    order: -2;
+    order: -20;
 }
 
-.sw-it:not(.done):not(:has(~ .sw-it:not(.done))),
-.sw-it.done:not(:has(~ .sw-it.done)) {
-    border-bottom: 0;
+.sw-it:has(> details[open] .sw-lk) {
+    padding-bottom: 3.6em;
 }
-
 
 .sw-nm {
     display: block;
     width: fit-content;
+    max-width: calc(100% - 4em);
     font-family: var(--klee-font), cursive;
     font-size: 1.04em;
     font-weight: 400;
-    line-height: 14px;
+    line-height: 1.6;
     text-decoration: none !important;
     color: var(--black) !important;
     -webkit-text-stroke: 0.065px currentColor;
@@ -6208,23 +6211,34 @@ details.gm .cl-li::before {
 .sw-it .sw-nm::before {
     content: "\E18A";
     position: absolute;
-    left: 0;
+    top: 1.12em;
+    right: 0;
     font-family: "Phosphor-Light";
     font-size: 1.05em;
-    vertical-align: -2px;
+    line-height: 1;
+    vertical-align: 0;
     color: color-mix(in srgb, var(--black) 45%, transparent);
     -webkit-text-stroke: 0;
 }
 
 .sw-it.done .sw-nm::before {
     content: "\E184";
-    position: absolute;
-    left: 0;
     font-family: "Phosphor-Fill";
-    font-size: 1.05em;
-    vertical-align: -2px;
     color: var(--beige);
+}
+
+.sw-nm[data-en]::after {
+    content: attr(data-en);
+    display: block;
+    margin-top: 0.1em;
+    font: 400 0.72em/1.5 var(--hd-font);
+    letter-spacing: 0.12em;
+    color: color-mix(in srgb, var(--black) 45%, transparent);
     -webkit-text-stroke: 0;
+}
+
+.sw-it.done .sw-nm[data-en]::after {
+    color: color-mix(in srgb, var(--beige) 65%, transparent);
 }
 
 .sw-it.done a.sw-nm {
@@ -6305,155 +6319,11 @@ details.gm .cl-li::before {
     -webkit-text-stroke: 0;
 }
 
-.sw-it:has(> details) {
-    padding-top: 0.6em;
-    padding-bottom: 0.55em;
-}
-
 .sw-it>details>summary {
-    align-items: baseline;
+    align-items: flex-start;
     width: 100%;
     padding: 0;
-    line-height: 14px;
-}
-
-.sw .sw-it>details>summary:not(.cl-sm)::before {
-    content: none;
-    display: none;
-}
-
-.sw-it>details>summary::after {
-    content: "\E136";
-    order: 3;
-    margin-left: 0.5em;
-    font-family: "Phosphor-Light";
-    font-size: 0.85em;
-    line-height: 14px;
-    color: color-mix(in srgb, var(--black) 45%, transparent);
-    transition: transform 0.3s ease;
-}
-
-.sw-it>details[open]>summary::after {
-    transform: rotate(180deg);
-}
-
-.sw-it>details>:is(.sw-nt, .sw-ad) {
-    display: block;
-}
-
-.sw-lk {
-    order: 4;
-    display: inline-block;
-    margin-block: -6px;
-    margin-left: auto;
-    padding: 6px 2px 6px 18px;
-    line-height: 14px;
-    text-decoration: none !important;
-    text-shadow: none !important;
-}
-
-.sw-lk::after {
-    content: "\EBDC";
-    font-family: "Phosphor-Light";
-    font-size: 14px;
-    line-height: 14px;
-    color: var(--beige);
-    -webkit-font-smoothing: antialiased;
-}
-
-@media (hover: hover) {
-    .sw-lk:hover {
-        opacity: 0.7;
-    }
-}
-
-@media screen and (min-width: 768px) {
-    .sw {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        column-gap: 2.5em;
-    }
-
-    .sw::before,
-    .sw::after {
-        grid-column: 1 / -1;
-        margin-bottom: 1.4em;
-    }
-
-    .sw::before {
-        margin-top: 0.5em;
-    }
-
-    .sw::after {
-        padding-top: 2.1em;
-    }
-
-    .sw-it:not(.done):nth-child(odd of .sw-it:not(.done)):not(:has(~ .sw-it:not(.done) ~ .sw-it:not(.done))),
-    .sw-it.done:nth-child(odd of .sw-it.done):not(:has(~ .sw-it.done ~ .sw-it.done)) {
-        border-bottom: 0;
-    }
-}
-
-@font-face {
-    font-family: "SwSub";
-    src: local("Hiragino Sans W3"), local("HiraginoSans-W3"), local("Hiragino Kaku Gothic ProN W3"), local("Yu Gothic Medium"), local("YuGothic-Medium"), local("Meiryo"), local("Noto Sans CJK JP");
-    size-adjust: 44%;
-}
-
-.sw::before,
-.sw::after {
-    padding: 0.2em 0 0.35em;
-    border-top: 0;
-    font: 200 1.25em/1.6 "Playwrite DE LA", "SwSub", cursive;
-    letter-spacing: -0.02em;
-    word-spacing: -0.2em;
-    text-transform: none;
-}
-
-.sw::before {
-    content: "Kept\2002\2009\FF5C\2002\FF26\FF32\FF2F\FF2D\3000\FF34\FF28\FF25\3000\FF2B\FF29\FF34\FF23\FF28\FF25\FF2E";
-    order: -30;
-    margin-bottom: 0.7em;
-}
-
-.sw::after {
-    content: "Promised\2002\2009\FF5C\2002\FF23\FF2F\FF2D\FF29\FF2E\FF27\3000\FF33\FF2F\FF2F\FF2E";
-    order: -10;
-    margin-top: 2.2em;
-    margin-bottom: 0.7em;
-}
-
-.sw-it.done {
-    order: -20;
-}
-
-.sw-it,
-.sw-it:has(> details) {
-    padding: 0.85em 0 0.75em;
-    border-bottom: 0 !important;
-}
-
-.sw-it:has(> details[open] .sw-lk) {
-    padding-bottom: 3.6em;
-}
-
-.sw-nm {
-    max-width: calc(100% - 4em);
     line-height: 1.6;
-}
-
-.sw-nm[data-en]::after {
-    content: attr(data-en);
-    display: block;
-    margin-top: 0.1em;
-    font: 400 0.72em/1.5 var(--hd-font);
-    letter-spacing: 0.12em;
-    color: color-mix(in srgb, var(--black) 45%, transparent);
-    -webkit-text-stroke: 0;
-}
-
-.sw-it.done .sw-nm[data-en]::after {
-    color: color-mix(in srgb, var(--beige) 65%, transparent);
 }
 
 .sw .sw-it>details>summary:not(.cl-sm)::before {
@@ -6469,30 +6339,23 @@ details.gm .cl-li::before {
     border-bottom: 1px dotted color-mix(in srgb, var(--black) 30%, transparent);
 }
 
-.sw-it>details>summary {
-    align-items: flex-start;
-    line-height: 1.6;
-}
-
 .sw-it>details>summary::after {
     display: none;
 }
 
-.sw-it .sw-nm::before,
-.sw-it.done .sw-nm::before {
-    top: 1.12em;
-    right: 0;
-    left: auto;
-    vertical-align: 0;
-    line-height: 1;
-}
-
-.sw-lk {
-    display: none;
+.sw-it>details>:is(.sw-nt, .sw-ad) {
+    display: block;
 }
 
 .sw-it>details[open]>.sw-nt {
     margin-top: 0.9em;
+}
+
+.sw-lk {
+    display: none;
+    line-height: 14px;
+    text-decoration: none !important;
+    text-shadow: none !important;
 }
 
 .sw-it>details[open] .sw-lk {
@@ -6504,20 +6367,40 @@ details.gm .cl-li::before {
     padding: 4px 2px;
 }
 
-.sw-it>details[open] .sw-lk::after {
+.sw-lk::after {
     content: "Tasting Notes\2002\E06C";
     font: 200 0.95em/1 "Playwrite DE LA", "Phosphor-Light", cursive;
     letter-spacing: 0.03em;
     color: var(--beige);
+    -webkit-font-smoothing: antialiased;
 }
 
 @media (hover: hover) {
+    .sw-lk:hover {
+        opacity: 0.7;
+    }
+
     .sw-it>details>summary:hover .sw-nm {
         color: var(--pure-white) !important;
     }
 }
 
 @media screen and (min-width: 768px) {
+    .sw {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 2.5em;
+    }
+
+    .sw::before,
+    .sw::after {
+        grid-column: 1 / -1;
+    }
+
+    .sw::before {
+        margin-top: 0.5em;
+    }
+
     .sw-it:has(> details[open]) {
         grid-column: 1 / -1;
     }
@@ -6568,8 +6451,7 @@ details.gm .cl-li::before {
         radial-gradient(circle at var(--x) 100%, transparent 7px, black 7.5px) bottom / 100% 51% no-repeat;
 }
 
-.dt-it[data-ch="na"],
-.gf-it[data-ch="na"] {
+.dt-it[data-ch="na"] {
     --c: var(--nanami);
 }
 
@@ -6740,7 +6622,6 @@ details.gm .cl-li::before {
 }
 
 .gf-it {
-    --c: var(--gjo);
     --g: var(--nanami);
     position: relative;
     display: grid;
