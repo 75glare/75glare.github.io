@@ -4117,8 +4117,10 @@ main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open
         linear-gradient(to top right, transparent calc(50% - 0.5px), color-mix(in srgb, var(--black) 16%, transparent) calc(50% - 0.5px) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
         linear-gradient(to bottom right, transparent calc(50% - 0.5px), color-mix(in srgb, var(--black) 16%, transparent) calc(50% - 0.5px) calc(50% + 0.5px), transparent calc(50% + 0.5px));
     background-position: left top, right top;
-    background-size: 50% 24%;
+    background-size: 50% 46%;
     background-repeat: no-repeat;
+    aspect-ratio: 1.5;
+    padding-top: 24%;
 }
 
 main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]) > summary::before {
@@ -10247,7 +10249,7 @@ details.ss:not([open]) .ss-ti small::after {
 
 details.ss > .ss-tx {
     margin: 0.4em 0 0;
-    padding: 1.6em 1.4em 2em;
+    padding: 2.8em 1.4em 2.4em;
     text-align: left;
     letter-spacing: 0.06em;
     line-height: 2.2;
