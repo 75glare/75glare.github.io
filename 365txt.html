@@ -2249,7 +2249,7 @@ label[for="cw-date"],
     showMoon();
 
     // 天の川の手紙：夏の大三角の星空。押すと星座の線がつながり、最後に織姫と彦星が金の弧で結ばれて、短冊か手紙が出る
-    const star = { body: 'tz', who: 'g' };
+    const star = { body: 'lt', who: 'g' };
     $('tc-section').insertAdjacentHTML('afterend', `
         <div id="ss-section">
         <p class="hint">星空を押すと、こと座・はくちょう座・わし座の順に線がつながって、最後にベガとアルタイルが金の弧で結ばれるよ。そのあとに短冊か手紙が出る。</p>
@@ -2258,7 +2258,7 @@ label[for="cw-date"],
             <div><p>英文</p><input id="ss-en" type="text" autocomplete="off" placeholder="例：Across the river of stars."></div>
         </div>
         <p>線がつながったあとに出るもの</p>
-        <div class="tools" id="ss-body"><button type="button" data-body="tz">短冊</button><button type="button" data-body="lt">手紙</button></div>
+        <div class="tools" id="ss-body"><button type="button" data-body="lt">手紙</button><button type="button" data-body="tz">短冊</button></div>
         <div id="ss-tz-box">
             <div class="row">
                 <div><p>五条の短冊</p><input id="ss-tz-g" type="text" autocomplete="off" placeholder="例：来年も、隣で星を見られますように"></div>
@@ -2275,12 +2275,13 @@ label[for="cw-date"],
             <p>書いた人</p>
             <div class="tools" id="ss-who"><button type="button" data-who="g">五条</button><button type="button" data-who="n">七海</button></div>
             </div>
+            <div><p>宛名と日付</p><input id="ss-nt" type="text" autocomplete="off" placeholder="例：FOR NANAMI ／ 7.7"></div>
             <div class="row">
                 <div><p>書き出し（手書きの字）</p><input id="ss-to" type="text" autocomplete="off" placeholder="例：Dear Nanami,"></div>
                 <div><p>署名（手書きの字）</p><input id="ss-fr" type="text" autocomplete="off" placeholder="例：Satoru"></div>
             </div>
             <div><p>手紙の文章（空けた行で段落が分かれる）</p><textarea id="ss-text" class="short"></textarea></div>
-            <p class="hint">書き出しと署名は、空けておけば出ないよ。字の色は書いた人の色。</p>
+            <p class="hint">宛名と日付・書き出し・署名は、空けておけば出ないよ。宛名と日付を書くと、月の手紙と同じ封筒の印も出る。字の色は書いた人の色。</p>
         </div>
         <div class="tools"><button type="button" id="ss-insert">この星空を入れる</button></div>
         </div>
@@ -2301,9 +2302,10 @@ label[for="cw-date"],
         }
         const to = v('ss-to');
         const fr = v('ss-fr');
+        const nt = v('ss-nt');
         const paras = flat($('ss-text').value).trim().split(/\n\s*\n/).map((b) => b.split('\n').map((l) => safe(l.trim())).join('\n')).filter((b) => b);
         body = `<div class="ss-tx tc-tx">${to ? `<p class="tc-to">${to}</p>` : ''}${paras.map((b) => `<p>${b}</p>`).join('')}${fr ? `<p class="tc-fr"><small>from</small><b>${fr}</b></p>` : ''}</div>`;
-        return `<details class="ss ${starWho()}"><summary>${head}</summary>${body}</details>`;
+        return `<details class="ss ${starWho()}"><summary>${head}${nt ? `<span class="tc-nt">${nt}</span>` : ''}</summary>${body}</details>`;
     }
 
     function showStar() {
@@ -2312,6 +2314,7 @@ label[for="cw-date"],
         $('ss-tz-box').hidden = star.body !== 'tz';
         $('ss-lt-box').hidden = star.body !== 'lt';
         $('ss-to').placeholder = MOON_HINT[starWho()].to;
+        $('ss-nt').placeholder = starWho() === 'n' ? '例：FOR SATORU ／ 7.7' : '例：FOR NANAMI ／ 7.7';
         $('ss-fr').placeholder = MOON_HINT[starWho()].fr;
     }
 

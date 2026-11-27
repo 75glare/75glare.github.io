@@ -4121,6 +4121,10 @@ main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open
     background-repeat: no-repeat;
 }
 
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]) > summary::before {
+    content: none;
+}
+
 main.lib details:is(.gm, .mv:where([class*=" ic-"]))>summary small {
     display: block;
     font-size: 0.82em;
@@ -10022,6 +10026,14 @@ main details.mv[class][class][class] :is(details.tc, details.ss)[class] > summar
     content: none;
 }
 
+main details.mv[class][class][class] details.cv-lt[class] > summary.ti-tr.cv:not(.cl-sm)::before {
+    content: "";
+    font: inherit;
+    color: inherit;
+    transform: none;
+    animation: lk-tw 3.2s ease-in-out infinite;
+}
+
 .ss-sky {
     position: relative;
     display: block;
@@ -11045,22 +11057,22 @@ details.tc > summary {
 
 @keyframes tc-phase {
     0%,
-    25% {
+    8.33% {
         -webkit-mask-position: 39.5% 56.5%;
         mask-position: 39.5% 56.5%;
     }
 
-    45% {
+    30% {
         -webkit-mask-position: 6.6% 76.8%;
         mask-position: 6.6% 76.8%;
     }
 
-    45.01% {
+    30.01% {
         -webkit-mask-position: 93.4% 23.2%;
         mask-position: 93.4% 23.2%;
     }
 
-    75% {
+    70% {
         -webkit-mask-position: 50% 50%;
         mask-position: 50% 50%;
     }
@@ -11127,7 +11139,7 @@ details.tc > summary {
     transition: color 0.4s ease;
 }
 
-details.tc[open] .tc-nt::after {
+details:is(.tc, .ss)[open] .tc-nt::after {
     content: "\E21A";
     color: color-mix(in oklch, var(--gold) 90%, transparent);
 }
