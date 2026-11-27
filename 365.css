@@ -4123,7 +4123,7 @@ main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open
     padding-top: 24%;
 }
 
-main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]) > summary::before {
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"] > summary::before {
     content: none;
 }
 
@@ -11041,58 +11041,9 @@ details.tc > summary {
     width: 5em;
     height: 5em;
     border-radius: 50%;
+    box-shadow: -1.05em 0.65em 0 0 var(--gold);
+    filter: drop-shadow(0 0 7px color-mix(in oklch, var(--gold) 55%, transparent));
     opacity: 0.9;
-}
-
-.tc-moon::after {
-    content: "";
-    position: absolute;
-    inset: -0.9em;
-    z-index: -1;
-    border-radius: 50%;
-    background: radial-gradient(circle closest-side, color-mix(in oklch, var(--gold) 26%, transparent) 55%, color-mix(in oklch, var(--gold) 10%, transparent) 72%, transparent);
-    translate: -1.05em 0.65em;
-    pointer-events: none;
-}
-
-.tc-moon::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: var(--gold);
-    translate: -1.05em 0.65em;
-    -webkit-mask: radial-gradient(circle closest-side, transparent 33.6%, #000 34.3%) 39.5% 56.5% / 300% 300% no-repeat;
-    mask: radial-gradient(circle closest-side, transparent 33.6%, #000 34.3%) 39.5% 56.5% / 300% 300% no-repeat;
-    animation: tc-phase 24s ease-in-out infinite;
-}
-
-@keyframes tc-phase {
-    0%,
-    8.33% {
-        -webkit-mask-position: 39.5% 56.5%;
-        mask-position: 39.5% 56.5%;
-    }
-
-    30% {
-        -webkit-mask-position: 6.6% 76.8%;
-        mask-position: 6.6% 76.8%;
-    }
-
-    30.01% {
-        -webkit-mask-position: 93.4% 23.2%;
-        mask-position: 93.4% 23.2%;
-    }
-
-    70% {
-        -webkit-mask-position: 50% 50%;
-        mask-position: 50% 50%;
-    }
-
-    100% {
-        -webkit-mask-position: 39.5% 56.5%;
-        mask-position: 39.5% 56.5%;
-    }
 }
 
 .tc-sp {
