@@ -11309,6 +11309,41 @@ details.tc.n .tc-ti {
     color: color-mix(in srgb, var(--black) 90%, transparent);
 }
 
+details.ss .ss-ti,
+details.tc .tc-ti {
+    font-size: 1.38em;
+}
+
+details.ss .ss-ti small {
+    font-size: 0.5em;
+}
+
+details.tc .tc-sub {
+    font-size: 0.69em;
+}
+
+@media (max-width: 767px) {
+    .tc-tx,
+    details.cv-lt.l > .cv-tx {
+        container-type: inline-size;
+    }
+
+    :is(details.tc, details.ss, details.cv-lt) :is(.tc-tx, .cv-tx) > p:not([class]) {
+        font-size: calc((100cqi - 1px) / 25.44);
+        letter-spacing: 0.06em;
+    }
+
+    :is(details.tc, details.ss).n .tc-tx > p:not([class]) {
+        font-size: calc((100cqi - 1px) / 24.168);
+        letter-spacing: 0.007em;
+    }
+
+    :is(details.tc, details.ss) .tc-tx > p.tc-to,
+    details.cv-lt.l > .cv-tx > p.cv-to {
+        font-size: calc((100cqi - 1px) / 25.44 * 1.35);
+    }
+}
+
 /* =======================================
     Music Player
 ======================================= */
