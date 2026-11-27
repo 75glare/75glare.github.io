@@ -5760,54 +5760,73 @@ main:has(.tl),
     margin: 1.2em 0.3em;
     padding: 0;
     overflow: hidden;
-    border: 1px solid var(--ui-border);
-    border-radius: 6px;
+    border: 1px solid oklch(100% 0 0 / 0.09);
+    border-radius: 10px;
+    background: oklch(100% 0 0 / 0.04);
     text-align: left;
     scroll-margin-top: 35px;
 }
 
 .rc-hd {
     position: relative;
-    padding: 2em 1.5em 1em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    padding: 20px 16px 17px;
     border-left: none;
-    border-bottom: 1px solid var(--ui-border);
+    border-bottom: 1px solid oklch(100% 0 0 / 0.09);
 }
+
+.rc-hd::before,
+.rc-hd::after {
+    order: -1;
+    margin: 0 0 0.9em;
+    font-size: 0.72em;
+    line-height: 1.4;
+    color: color-mix(in srgb, var(--black) 55%, transparent);
+}
+
+.rc-hd::before {
+    content: "\E262";
+    margin-right: 0.6em;
+    font-size: 0.84em;
+    font-family: "Phosphor-Light";
+    -webkit-font-smoothing: antialiased;
+}
+
+.rc-hd::after {
+    content: "Tasted \2014  Notes by Gojo";
+    flex: 1 0 calc(100% - 2em);
+    font-family: var(--hd-font);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
 
 .rc-ti {
     display: flex;
     align-items: center;
     gap: 0.6em;
-    width: 100% !important;
-    margin: 0 0 5px 0 !important;
+    width: auto !important;
+    margin: 0 0.9em 0 0 !important;
     padding: 0 !important;
-    font-size: 1.05em;
+    font-size: 1.08em;
     font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: 0.08em;
+    line-height: 1.5;
+    letter-spacing: 0.12em;
     color: var(--black);
     border: none !important;
-}
-
-.rc-ti::before {
-    content: "\E262";
-    display: inline-block;
-    flex-shrink: 0;
-    font-family: "Phosphor-Light";
-    font-size: 14px;
-    color: var(--beige) !important;
-    -webkit-text-stroke: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 .rc-sub {
     display: block;
     margin: 0;
-    font-family: var(--klee-font);
-    font-size: 0.9em;
-    font-weight: 600;
-    line-height: 1.5;
-    color: var(--color);
+    font-family: var(--en-font);
+    font-size: 0.82em;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.08em;
+    color: color-mix(in srgb, var(--black) 60%, transparent);
 }
 
 .rc-bd {
@@ -5832,8 +5851,7 @@ main:has(.tl),
     flex-shrink: 0;
     gap: 3px;
     font-size: 1em;
-    color: var(--beige);
-    opacity: 0.7;
+    color: oklch(83% 0.075 82);
 }
 
 .rc-rt[data-r] {
@@ -5844,6 +5862,7 @@ main:has(.tl),
     font-family: "Phosphor-Light";
     content: "\E46A\E46A\E46A\E46A\E46A";
     letter-spacing: 2px;
+    opacity: 0.35;
 }
 
 .rc-rt[data-r="6"]::before {
@@ -5903,7 +5922,7 @@ main:has(.tl),
     position: relative;
     padding: 1.5em 1.5em 2.5em;
     background: transparent;
-    border-top: 1px solid var(--ui-border);
+    border-top: 1px solid oklch(100% 0 0 / 0.09);
     font-size: 1em;
     line-height: 2;
     color: var(--black);
@@ -5914,28 +5933,44 @@ main:has(.tl),
     position: absolute;
     bottom: 1em;
     right: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 78px;
     height: 78px;
     box-sizing: border-box;
-    padding: 19px 6px 0;
+    padding: 0 0 0 0.12em;
     font-family: var(--hd-font);
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 400;
     white-space: pre;
-    line-height: 1.4;
+    line-height: 1.35;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     text-align: center;
     color: var(--red);
-    border: 1.5px solid var(--red);
+    -webkit-text-stroke: 0.35px var(--red);
+    border: 1px solid var(--red);
     border-radius: 50%;
-    outline: 1.5px solid var(--red);
+    outline: 1px solid var(--red);
     outline-offset: 3px;
-    opacity: 0.35;
+    opacity: 0.4;
     transform: rotate(-10deg);
     z-index: 0;
     pointer-events: none;
     -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 768px) {
+    .rc-bd {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 2.5em;
+    }
+
+    .rc-rw:nth-last-child(2):nth-child(odd) {
+        border-bottom: none;
+    }
 }
 
 /* =======================================
@@ -11125,11 +11160,11 @@ body>span[style*="color"] {
     }
 
     .rc-ti {
-        font-size: 1em;
+        font-size: 1.05em;
     }
 
     .rc-hd {
-        padding: 1.6em 1.5em 0.8em;
+        padding: 14px 14px 11px;
     }
 
     .rc-bd {
