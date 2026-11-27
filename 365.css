@@ -2592,6 +2592,10 @@ cwti[rev]::before {
     font-family: "Phosphor-Fill" !important;
 }
 
+cwti {
+    font-size: 1.02em;
+}
+
 km,
 ks,
 kk {
@@ -3085,6 +3089,49 @@ main .line.plain:has(> i.cst) {
 .nk+.nk,
 .gs+.gs {
     margin-top: 2px;
+}
+
+.cb .cd {
+    display: table;
+    clear: both;
+    margin: -8px auto 10px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: oklch(100% 0 0 / 0.07);
+    color: oklch(94% 0.005 240 / 0.6);
+    font-size: 8.5px;
+    font-style: normal;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+}
+
+:is(.nk, .gs):is([data-t], [data-r])::after {
+    content: attr(data-r) "\A" attr(data-t);
+    position: absolute;
+    bottom: 1px;
+    white-space: pre;
+    color: oklch(94% 0.005 240 / 0.45);
+    font-size: 7.5px;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+}
+
+:is(.nk, .gs)[data-r]:not([data-t])::after {
+    content: attr(data-r);
+}
+
+.gs::after,
+.rev .nk::after {
+    right: calc(100% + 5px);
+    left: auto;
+    text-align: right;
+}
+
+.nk::after,
+.rev .gs::after {
+    right: auto;
+    left: calc(100% + 5px);
+    text-align: left;
 }
 
 /* =======================================

@@ -622,6 +622,36 @@ iframe {
     font-size: 0.95em;
 }
 
+.chat-time {
+    flex-shrink: 0;
+    width: 4.6em;
+    padding: 4px 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--field);
+    color: inherit;
+    font: inherit;
+    font-size: 0.78em;
+    text-align: center;
+}
+
+.chat-read {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--field);
+    color: var(--sub);
+    font: inherit;
+    font-size: 0.78em;
+    cursor: pointer;
+}
+
+.chat-read.on {
+    border-color: var(--accent);
+    color: inherit;
+}
+
 .chat-react {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(2.4em, 1fr));
@@ -1204,6 +1234,7 @@ iframe {
 /* まとまりの最初の見出しでも、すぐ上に欄やボタンがあるものは上をあける */
 #cw-notice-who-box>label,
 #cw-view-box>label,
+label[for="cw-date"],
 #line-opts>p:first-child {
     margin-top: 12px;
 }
@@ -1216,6 +1247,8 @@ iframe {
     .deco-row button,
     .chat-quote,
     .chat-react-btn,
+    .chat-time,
+    .chat-read,
     .tw-acts button {
         min-height: 36px;
     }
@@ -1558,13 +1591,15 @@ iframe {
                         <button type="button" data-view="g">五条</button>
                     </div>
                 </div>
+                <label for="cw-date">日付（なくてもOK。トークのいちばん上に出るよ）</label>
+                <input id="cw-date" type="text" autocomplete="off" placeholder="例：2026年11月27日(金)">
                 <label>発言</label>
                 <div id="chat-list"></div>
                 <div class="tools" id="chat-add">
                     <button type="button" class="g" data-add="g">＋ 五条の発言</button>
                     <button type="button" class="n" data-add="n">＋ 七海の発言</button>
                 </div>
-                <p class="hint">名前のボタンを押すと入れ替えられるよ。入力中に Enter を押すと、相手の発言欄が増える。発言の下で引用とリアクションを選べるよ。</p>
+                <p class="hint">名前のボタンを押すと入れ替えられるよ。入力中に Enter を押すと、相手の発言欄が増える。発言の下で引用・リアクション・時間を選べるよ。自分の発言には「既読」もつけられる。</p>
                 <div class="tools" id="cw-insert-box"><button type="button" id="cw-insert">このトーク履歴を本文に入れる</button></div>
             </div>
         </div>
@@ -1808,7 +1843,7 @@ iframe {
     const BLOCK = /^(?:<add>.*?<\/add>)?<(p|div|ul|ol|details|blockquote|h[1-6])[\s>]|^<span class="cl-(lb|dt)">/;
 
     const $ = (id) => document.getElementById(id);
-    const fields = ['dl-title', 'dl-code', 'vs-title', 'title', 'date', 'tag', 'time', 'body', 'song', 'artist', 'sw-name', 'sw-en', 'sw-note', 'sw-after', 'sw-date', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'rv-one', 'np-song', 'np-artist', 'np-len', 'np-ly', 'np-nt'];
+    const fields = ['dl-title', 'dl-code', 'vs-title', 'title', 'date', 'tag', 'time', 'body', 'song', 'artist', 'sw-name', 'sw-en', 'sw-note', 'sw-after', 'sw-date', 'sw-url', 'cw-title', 'cw-notice', 'cw-date', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'rv-one', 'np-song', 'np-artist', 'np-len', 'np-ly', 'np-nt'];
     const checks = ['links', 'klee', 'scroll', 'sw-done', 'tl-wrap', 'aj-rain', 'aj-petal', 'um-yk'];
     const PER_MODE = ['title', 'date', 'tag', 'body', 'song', 'artist', 'sw-name', 'sw-en', 'sw-note', 'sw-after', 'sw-date', 'sw-url'];
     const state = { dlog: { icon: 'E7F6', items: [{ who: 'n', text: '' }, { who: 'g', text: '' }] }, vs: [{ k: '', s: '', n: '', g: '' }], drafts: {}, np: { who: 'g', ic: '#' }, mode: 'n_box', who: 'n', box: 'hs', wrap: '', orPos: {}, or: 'H', cwView: 'g', tweets: [], chat: [{ who: 'g', text: '' }, { who: 'n', text: '' }] };
@@ -2323,11 +2358,13 @@ iframe {
                 <div class="chat-sub">
                     <select class="chat-quote" aria-label="引用する発言">${quoteOptions(i)}</select>
                     <button type="button" class="chat-react-btn${c.react ? ' on' : ''}">${c.react ? `<i class="ph-light ph-${c.react}"></i>` : 'リアクション'}</button>
+                    <input type="text" class="chat-time" autocomplete="off" value="${attr(c.time || '')}" placeholder="時間" aria-label="時間（例 0:59）">
+                    ${c.who === chatView() ? `<button type="button" class="chat-read${c.read ? ' on' : ''}" aria-pressed="${!!c.read}">既読</button>` : ''}
                 </div>
                 ${reactOpen === i ? `<div class="chat-react">${REACTIONS.map(([v, l]) => `<button type="button" data-react="${v}" title="${l}"${c.react === v ? ' class="on"' : ''}><i class="ph-light ph-${v}"></i></button>`).join('')}<button type="button" data-react="" class="chat-react-none">なし</button></div>` : ''}
             </div>`).join('');
         if (focusIndex != null) {
-            const input = $('chat-list').querySelectorAll('input')[focusIndex];
+            const input = $('chat-list').querySelectorAll('.chat-main input')[focusIndex];
             if (input) input.focus();
         }
     }
@@ -2365,6 +2402,11 @@ iframe {
             reactOpen = reactOpen === i ? -1 : i;
             drawChat();
         }
+        if (ev.target.closest('.chat-read')) {
+            state.chat[i].read = !state.chat[i].read;
+            drawChat();
+            render();
+        }
         const pick = ev.target.closest('[data-react]');
         if (pick) {
             state.chat[i].react = pick.dataset.react;
@@ -2394,7 +2436,12 @@ iframe {
     });
 
     $('chat-list').addEventListener('input', (ev) => {
-        if (!ev.target.matches('input[type="text"]')) return;
+        if (ev.target.matches('.chat-time')) {
+            state.chat[Number(ev.target.closest('.chat-row').dataset.i)].time = ev.target.value;
+            renderSoon();
+            return;
+        }
+        if (!ev.target.matches('.chat-main input')) return;
         const row = ev.target.closest('.chat-row');
         if (!row) return;
         state.chat[Number(row.dataset.i)].text = ev.target.value;
@@ -2407,7 +2454,7 @@ iframe {
     });
 
     $('chat-list').addEventListener('keydown', (ev) => {
-        if (ev.key !== 'Enter' || ev.isComposing || ev.keyCode === 229 || !ev.target.matches('input[type="text"]')) return;
+        if (ev.key !== 'Enter' || ev.isComposing || ev.keyCode === 229 || !ev.target.matches('.chat-main input')) return;
         const row = ev.target.closest('.chat-row');
         if (!row) return;
         ev.preventDefault();
@@ -2425,13 +2472,17 @@ iframe {
             const q = c.quote && state.chat.find((x) => x.id === c.quote && x.text.trim());
             const quote = q ? `<span class="rq ${q.who}">${safe(q.text.trim().replace(/\s+/g, ' '))}</span>` : '';
             const react = c.react ? `<i class="rx ph-light ph-${c.react}"></i>` : '';
-            return `<div class="${c.who === 'g' ? 'gs' : 'nk'}">${quote}${safe(c.text.trim())}</div>${react}`;
+            const read = c.read && c.who === chatView() ? ' data-r="既読"' : '';
+            const time = (c.time || '').trim() ? ` data-t="${attr(c.time.trim())}"` : '';
+            return `<div class="${c.who === 'g' ? 'gs' : 'nk'}"${read}${time}>${quote}${safe(c.text.trim())}</div>${react}`;
         }).join('');
+        const date = $('cw-date').value.trim();
+        const cd = date ? `<i class="cd">${safe(date)}</i>` : '';
         const title = $('cw-title').value.trim();
         const ti = title ? `<cwti${rev}>${safe(title)}</cwti>` : '';
         const notice = $('cw-notice').value.trim();
         const pn = notice ? `<details class="pn ${state.noticeWho || 'n'}"><summary>${safe(notice)}</summary></details>` : '';
-        return `<div class="cw">${ti}<div class="ch"></div>${pn}<div class="cb${rev}">${msgs}</div><div class="cf"></div></div>`;
+        return `<div class="cw">${ti}<div class="ch"></div>${pn}<div class="cb${rev}">${cd}${msgs}</div><div class="cf"></div></div>`;
     }
 
     $('cw-view').addEventListener('click', (ev) => {
@@ -2439,6 +2490,7 @@ iframe {
         if (!b) return;
         state.cwView = b.dataset.view;
         show();
+        drawChat();
         render();
     });
 
@@ -2448,6 +2500,7 @@ iframe {
         state.chat = [{ who: 'g', text: '' }, { who: 'n', text: '' }];
         $('cw-title').value = '';
         $('cw-notice').value = '';
+        $('cw-date').value = '';
         drawChat();
         render();
     });
@@ -4317,6 +4370,7 @@ iframe {
         if (state.mode === 'n_box') state.who = 'n';
         if (state.mode === 'g_box') state.who = 'g';
         show();
+        drawChat();
         showCover();
         showMoon();
         render();
@@ -4508,7 +4562,7 @@ iframe {
         // 書きかけの描き直しが後から走って、消した内容を戻さないように止める
         clearTimeout(renderTimer);
         remember();
-        ['title', 'tag', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-url', 'cw-title', 'cw-notice', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'rv-one', 'dl-title', 'dl-code', 'vs-title', 'bgm-song', 'bgm-artist', 'line-free', 'np-song', 'np-artist', 'np-len', 'np-ly', 'np-nt', 'cv-title', 'cv-en', 'cv-text', 'cv-top', 'cv-top2', 'cv-sign', 'cv-date', 'cv-to', 'tc-title', 'tc-en', 'tc-nt', 'tc-to', 'tc-text', 'tc-fr'].forEach((f) => { if ($(f)) $(f).value = ''; });
+        ['title', 'tag', 'body', 'song', 'artist', 'sw-name', 'sw-note', 'sw-after', 'sw-url', 'cw-title', 'cw-notice', 'cw-date', 'tw-src', 'rv-src', 'sw-src', 'dt-src', 'gf-src', 'gm-src', 'gm-name', 'gm-one', 'gm-rule', 'rv-one', 'dl-title', 'dl-code', 'vs-title', 'bgm-song', 'bgm-artist', 'line-free', 'np-song', 'np-artist', 'np-len', 'np-ly', 'np-nt', 'cv-title', 'cv-en', 'cv-text', 'cv-top', 'cv-top2', 'cv-sign', 'cv-date', 'cv-to', 'tc-title', 'tc-en', 'tc-nt', 'tc-to', 'tc-text', 'tc-fr'].forEach((f) => { if ($(f)) $(f).value = ''; });
         $('date').value = today;
         $('sw-date').value = today;
         $('time').value = stamp();
