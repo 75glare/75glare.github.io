@@ -4088,6 +4088,14 @@ main.lib:has(> details:is(.gm, .mv:where([class*=" ic-"])))>details:is(.gm, .mv:
     order: 3;
 }
 
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]) {
+    order: 4;
+}
+
+main.lib > details.mv[class*=" ic-"] ~ add {
+    margin-top: 2em;
+}
+
 main.lib details:is(.gm, .mv:where([class*=" ic-"]))>summary small {
     display: block;
     font-size: 0.82em;
@@ -4386,20 +4394,20 @@ main.lib details.dn-sw>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) {
     margin-top: 6px;
 }
 
-main.lib:has(> .ti-tr.cv, > add:first-child + details.mv) details.mv:where([class*=" ic-"]):not([open])>summary {
+main.lib:has(> .ti-tr.cv) details.mv:where([class*=" ic-"]):not([open])>summary {
     border-radius: 0;
     background: none;
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--black) 16%, transparent);
 }
 
 @media (hover: hover) {
-    main.lib:has(> .ti-tr.cv, > add:first-child + details.mv) details.mv:where([class*=" ic-"]):not([open])>summary:hover {
+    main.lib:has(> .ti-tr.cv) details.mv:where([class*=" ic-"]):not([open])>summary:hover {
         background: none;
         box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--black) 34%, transparent);
     }
 }
 
-main.lib:has(> .ti-tr.cv, > add:first-child + details.mv) details[open].mv:where([class*=" ic-"])>summary {
+main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary {
     border-radius: 0;
     background: none;
     box-shadow: none;
@@ -4409,12 +4417,12 @@ main.lib:has(> .ti-tr.cv, > add:first-child + details.mv) details[open].mv:where
     white-space: nowrap;
 }
 
-main.lib:has(> .ti-tr.cv, > add:first-child + details.mv) details[open].mv:where([class*=" ic-"])>summary>.tp-tg {
+main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary>.tp-tg {
     display: flex;
     min-width: 0;
 }
 
-main.lib:has(> .ti-tr.cv, > add:first-child + details.mv) details[open].mv:where([class*=" ic-"])>summary>.tp-tg bx {
+main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary>.tp-tg bx {
     display: block;
     min-width: 0;
     overflow: hidden;
