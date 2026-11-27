@@ -1804,7 +1804,7 @@ label[for="cw-date"],
             </div>
             <div class="tool-panel" data-panel="card">
                 <div class="icons-body" id="cards">
-                    <div class="tools" id="card-kinds" style="margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line);"><button type="button" data-kind="cv">星座</button><button type="button" data-kind="tc">月</button></div>
+                    <div class="tools" id="card-kinds" style="margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line);"><button type="button" data-kind="cv">星座</button><button type="button" data-kind="tc">月</button><button type="button" data-kind="ss">七夕</button></div>
                 </div>
             </div>
         </div>
@@ -2248,12 +2248,95 @@ label[for="cw-date"],
     $('tc-insert').addEventListener('click', () => insertAtCursor(moonHTML(), true));
     showMoon();
 
+    // 天の川の手紙：夏の大三角の星空。押すと星座の線がつながり、最後に織姫と彦星が金の弧で結ばれて、短冊か手紙が出る
+    const star = { body: 'tz', who: 'g' };
+    $('tc-section').insertAdjacentHTML('afterend', `
+        <div id="ss-section">
+        <p class="hint">星空を押すと、こと座・はくちょう座・わし座の順に線がつながって、最後にベガとアルタイルが金の弧で結ばれるよ。そのあとに短冊か手紙が出る。</p>
+        <div class="row">
+            <div><p>タイトル</p><input id="ss-title" type="text" autocomplete="off" placeholder="例：天の川の手紙"></div>
+            <div><p>英文</p><input id="ss-en" type="text" autocomplete="off" placeholder="例：Across the river of stars."></div>
+        </div>
+        <p>線がつながったあとに出るもの</p>
+        <div class="tools" id="ss-body"><button type="button" data-body="tz">短冊</button><button type="button" data-body="lt">手紙</button></div>
+        <div id="ss-tz-box">
+            <div class="row">
+                <div><p>五条の短冊</p><input id="ss-tz-g" type="text" autocomplete="off" placeholder="例：来年も、隣で星を見られますように"></div>
+                <div><p>署名</p><input id="ss-tz-gs" type="text" autocomplete="off" placeholder="例：悟"></div>
+            </div>
+            <div class="row">
+                <div><p>七海の短冊</p><input id="ss-tz-n" type="text" autocomplete="off" placeholder="例：この先も、同じ空の下で"></div>
+                <div><p>署名</p><input id="ss-tz-ns" type="text" autocomplete="off" placeholder="例：建人"></div>
+            </div>
+            <p class="hint">短冊は縦書き。空けた短冊は出ないので、一枚だけでもいいよ。</p>
+        </div>
+        <div id="ss-lt-box">
+            <div data-for="main box">
+            <p>書いた人</p>
+            <div class="tools" id="ss-who"><button type="button" data-who="g">五条</button><button type="button" data-who="n">七海</button></div>
+            </div>
+            <div class="row">
+                <div><p>書き出し（手書きの字）</p><input id="ss-to" type="text" autocomplete="off" placeholder="例：Dear Nanami,"></div>
+                <div><p>署名（手書きの字）</p><input id="ss-fr" type="text" autocomplete="off" placeholder="例：Satoru"></div>
+            </div>
+            <div><p>手紙の文章（空けた行で段落が分かれる）</p><textarea id="ss-text" class="short"></textarea></div>
+            <p class="hint">書き出しと署名は、空けておけば出ないよ。字の色は書いた人の色。</p>
+        </div>
+        <div class="tools"><button type="button" id="ss-insert">この星空を入れる</button></div>
+        </div>
+    `);
+
+    const starWho = () => (state.mode === 'n_box' ? 'n' : state.mode === 'g_box' ? 'g' : star.who);
+
+    function starHTML() {
+        const v = (id) => safe($(id).value.trim());
+        const title = v('ss-title');
+        const en = v('ss-en');
+        const head = `<span class="ss-sky"><i></i><i></i><i></i><i></i></span>${title || en ? `<span class="ss-ti">${title}${en ? `<small>${en}</small>` : ''}</span>` : ''}`;
+        let body;
+        if (star.body === 'tz') {
+            const tz = (c, t, sg) => (t ? `<div class="ss-tz ${c}">${t}${sg ? `<small>${sg}</small>` : ''}</div>` : '');
+            body = `<div class="ss-tzs">${tz('g', v('ss-tz-g'), v('ss-tz-gs'))}${tz('n', v('ss-tz-n'), v('ss-tz-ns'))}</div>`;
+            return `<details class="ss"><summary>${head}</summary>${body}</details>`;
+        }
+        const to = v('ss-to');
+        const fr = v('ss-fr');
+        const paras = flat($('ss-text').value).trim().split(/\n\s*\n/).map((b) => b.split('\n').map((l) => safe(l.trim())).join('\n')).filter((b) => b);
+        body = `<div class="ss-tx tc-tx">${to ? `<p class="tc-to">${to}</p>` : ''}${paras.map((b) => `<p>${b}</p>`).join('')}${fr ? `<p class="tc-fr"><small>from</small><b>${fr}</b></p>` : ''}</div>`;
+        return `<details class="ss ${starWho()}"><summary>${head}</summary>${body}</details>`;
+    }
+
+    function showStar() {
+        document.querySelectorAll('#ss-body button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.body === star.body));
+        document.querySelectorAll('#ss-who button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.who === star.who));
+        $('ss-tz-box').hidden = star.body !== 'tz';
+        $('ss-lt-box').hidden = star.body !== 'lt';
+        $('ss-to').placeholder = MOON_HINT[starWho()].to;
+        $('ss-fr').placeholder = MOON_HINT[starWho()].fr;
+    }
+
+    $('ss-body').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        star.body = b.dataset.body;
+        showStar();
+    });
+    $('ss-who').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        star.who = b.dataset.who;
+        showStar();
+    });
+    $('ss-insert').addEventListener('click', () => insertAtCursor(starHTML(), true));
+    showStar();
+
     // カードのタブ：星座と月を切り替える
     let cardKind = 'cv';
     function showCard() {
         document.querySelectorAll('#card-kinds button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.kind === cardKind));
         $('cv-section').hidden = cardKind !== 'cv';
         $('tc-section').hidden = cardKind !== 'tc';
+        $('ss-section').hidden = cardKind !== 'ss';
     }
     $('card-kinds').addEventListener('click', (ev) => {
         const b = ev.target.closest('button');
