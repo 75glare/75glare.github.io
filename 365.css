@@ -4123,7 +4123,7 @@ main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open
     padding-top: 24%;
 }
 
-main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"] > summary::before {
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]) > summary::before {
     content: none;
 }
 
@@ -4802,7 +4802,7 @@ details.cv-lt.l.n {
 }
 
 details.cv-lt.l > .cv-tx {
-    padding: 2em 1.4em 2.4em;
+    padding: 3.1em 1.4em 2.4em;
     font-size: 1em;
     text-align: left;
     letter-spacing: 0.06em;
@@ -10026,6 +10026,10 @@ details.ss > summary {
 
 main details.mv[class][class][class] :is(details.tc, details.ss)[class] > summary:not(.cl-sm)::before {
     content: none;
+}
+
+main details.mv[class][class][class] details.cv-lt[class] > summary.ti-tr.cv {
+    border-top: 0;
 }
 
 main details.mv[class][class][class] details.cv-lt[class] > summary.ti-tr.cv:not(.cl-sm)::before {
