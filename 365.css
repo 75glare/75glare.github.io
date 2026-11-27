@@ -11046,20 +11046,8 @@ details.tc > summary {
     height: 5em;
     border-radius: 50%;
     box-shadow: -1.05em 0.65em 0 0 var(--gold);
-    filter: drop-shadow(0 0 7px color-mix(in oklch, var(--gold) 55%, transparent));
+    filter: drop-shadow(0 0 7px color-mix(in oklch, var(--gold) 55%, transparent)) drop-shadow(0 0 18px color-mix(in oklch, var(--gold) 30%, transparent));
     opacity: 0.9;
-}
-
-.tc-moon::before {
-    content: "";
-    position: absolute;
-    top: -3.85em;
-    left: -5.55em;
-    width: 14em;
-    height: 14em;
-    border-radius: 50%;
-    background: radial-gradient(closest-side, color-mix(in oklch, var(--gold) 13%, transparent), color-mix(in oklch, var(--gold) 10%, transparent) 22%, color-mix(in oklch, var(--gold) 6%, transparent) 42%, color-mix(in oklch, var(--gold) 3%, transparent) 62%, color-mix(in oklch, var(--gold) 1%, transparent) 82%, transparent);
-    pointer-events: none;
 }
 
 .tc-art::before,
@@ -11322,11 +11310,21 @@ details.tc.n .tc-ti {
 
 details.ss .ss-ti,
 details.tc .tc-ti {
-    font-size: 1.38em;
+    font-size: 1.26em;
 }
 
-details.ss .ss-ti small {
-    font-size: 0.5em;
+details.ss .ss-ti small,
+details.cv-lt.l > summary.ti-tr.cv small {
+    font-size: 0.5475em;
+}
+
+details.cv-lt.l > summary.ti-tr.cv span {
+    font-size: 1.05em;
+}
+
+details.tc:not(.ln) > .tc-tx,
+details.ss > .ss-tx {
+    padding-bottom: 0;
 }
 
 details.tc .tc-sub {
