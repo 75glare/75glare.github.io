@@ -11050,6 +11050,18 @@ details.tc > summary {
     opacity: 0.9;
 }
 
+.tc-moon::before {
+    content: "";
+    position: absolute;
+    top: -3.85em;
+    left: -5.55em;
+    width: 14em;
+    height: 14em;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, color-mix(in oklch, var(--gold) 13%, transparent), color-mix(in oklch, var(--gold) 10%, transparent) 22%, color-mix(in oklch, var(--gold) 6%, transparent) 42%, color-mix(in oklch, var(--gold) 3%, transparent) 62%, color-mix(in oklch, var(--gold) 1%, transparent) 82%, transparent);
+    pointer-events: none;
+}
+
 .tc-art::before,
 .tc-art::after {
     content: "";
@@ -11091,8 +11103,7 @@ details.tc > summary {
         radial-gradient(circle 3.7px at 255.2px 19.3px, color-mix(in oklch, oklch(97% 0.039 240) 87%, transparent) 0 0.71px, color-mix(in oklch, oklch(85% 0.039 240) 35%, transparent) 1.29px, transparent),
         radial-gradient(circle 2.2px at 58.4px 67.7px, color-mix(in oklch, oklch(97% 0.054 64) 68%, transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.054 64) 27%, transparent) 0.95px, transparent),
         radial-gradient(circle 2.6px at 97.3px 70.6px, color-mix(in oklch, oklch(97% 0.034 240) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.034 240) 29%, transparent) 1.04px, transparent),
-        radial-gradient(circle 1.7px at 287.4px 34.6px, color-mix(in oklch, oklch(97% 0.022 240) 60%, transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.022 240) 24%, transparent) 0.80px, transparent),
-        radial-gradient(circle 70px at 145.3px 88.5px, color-mix(in oklch, var(--gold) 12%, transparent), color-mix(in oklch, var(--gold) 4%, transparent) 60%, transparent);
+        radial-gradient(circle 1.7px at 287.4px 34.6px, color-mix(in oklch, oklch(97% 0.022 240) 60%, transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.022 240) 24%, transparent) 0.80px, transparent);
     animation: tc-tw1 6.7s ease-in-out infinite;
 }
 
