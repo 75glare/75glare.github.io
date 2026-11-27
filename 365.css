@@ -4093,7 +4093,32 @@ main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open
 }
 
 main.lib > details.mv[class*=" ic-"] ~ add {
-    margin-top: 2em;
+    margin-top: 2.6em;
+    padding: 0 0.2em 0.9em;
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 20%, transparent);
+    font: 300 0.72em/1.6 var(--en-font);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-align: left;
+    color: color-mix(in srgb, var(--black) 72%, transparent);
+}
+
+main.lib > details.mv[class*=" ic-"] ~ add small {
+    display: block;
+    margin-top: 0.2em;
+    font-size: 1em;
+    letter-spacing: 0.12em;
+    text-transform: none;
+    color: color-mix(in srgb, var(--black) 55%, transparent);
+}
+
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]) > summary {
+    background-image:
+        linear-gradient(to top right, transparent calc(50% - 0.5px), color-mix(in srgb, var(--black) 16%, transparent) calc(50% - 0.5px) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+        linear-gradient(to bottom right, transparent calc(50% - 0.5px), color-mix(in srgb, var(--black) 16%, transparent) calc(50% - 0.5px) calc(50% + 0.5px), transparent calc(50% + 0.5px));
+    background-position: left top, right top;
+    background-size: 50% 24%;
+    background-repeat: no-repeat;
 }
 
 main.lib details:is(.gm, .mv:where([class*=" ic-"]))>summary small {
@@ -4303,7 +4328,7 @@ main.lib details.mv:where([class*=" ic-"]):not([open])>summary .tp-tg {
     display: none;
 }
 
-main.lib details.mv:has(> details.dn-sw[open])>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) {
+main.lib details.mv:has(> details.dn-sw[open])>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz, details.tc) {
     display: none;
 }
 
