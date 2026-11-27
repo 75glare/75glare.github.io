@@ -10203,7 +10203,42 @@ details.ss > .ss-tx {
     letter-spacing: 0.06em;
     line-height: 2.2;
     color: color-mix(in srgb, var(--black) 90%, transparent);
-    animation: ss-in 1.2s ease 6.01s both;
+}
+
+@supports selector(::details-content) {
+    details.ss[open]::details-content {
+        animation: ss-hold 6.01s linear, ss-show 1.2s ease 6.01s both;
+    }
+}
+
+@supports not selector(::details-content) {
+    details.ss[open] > .ss-tx {
+        animation: ss-hold 6.01s linear, ss-in 1.2s ease 6.01s both;
+    }
+
+    details.ss[open] > .ss-tzs {
+        animation: ss-hold 6.01s linear;
+    }
+}
+
+@keyframes ss-show {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes ss-hold {
+    from,
+    to {
+        max-height: 0;
+        margin-block: 0;
+        padding-block: 0;
+        overflow: hidden;
+    }
 }
 
 @keyframes ss-in {
@@ -10852,6 +10887,9 @@ details.ss > .ss-tzs {
     color: var(--black);
     background: linear-gradient(color-mix(in oklch, var(--c) 20%, transparent), color-mix(in oklch, var(--c) 11%, transparent));
     box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--c) 34%, transparent);
+}
+
+details.ss[open] .ss-tz {
     animation: ss-tz 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) 6.01s both;
 }
 
@@ -10865,6 +10903,9 @@ details.ss > .ss-tzs {
 
 .ss-tz + .ss-tz {
     margin-top: 1.4em;
+}
+
+details.ss[open] .ss-tz + .ss-tz {
     animation-delay: 6.35s;
 }
 
