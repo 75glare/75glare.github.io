@@ -11050,6 +11050,118 @@ details.tc > summary {
     opacity: 0.9;
 }
 
+.tc-art::before,
+.tc-art::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    width: 300px;
+    height: 176px;
+    margin: -104px 0 0 -150px;
+    -webkit-mask: radial-gradient(closest-side, #000 62%, transparent);
+    mask: radial-gradient(closest-side, #000 62%, transparent);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    pointer-events: none;
+}
+
+.tc-art::before {
+    background:
+        radial-gradient(circle 2.0px at 56.2px 118.4px, color-mix(in oklch, oklch(97% 0.054 64) 65%, transparent) 0 0.49px, color-mix(in oklch, oklch(85% 0.054 64) 26%, transparent) 0.89px, transparent),
+        radial-gradient(circle 1.7px at 10.9px 67.4px, color-mix(in oklch, oklch(97% 0.034 240) 60%, transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.034 240) 24%, transparent) 0.80px, transparent),
+        radial-gradient(circle 1.8px at 182.4px 13.5px, color-mix(in oklch, oklch(97% 0.054 64) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.054 64) 25%, transparent) 0.84px, transparent),
+        radial-gradient(circle 3.0px at 53.3px 138.8px, color-mix(in oklch, oklch(97% 0.039 240) 79%, transparent) 0 0.63px, color-mix(in oklch, oklch(85% 0.039 240) 32%, transparent) 1.15px, transparent),
+        radial-gradient(circle 3.0px at 228.5px 41.4px, color-mix(in oklch, oklch(97% 0.034 240) 79%, transparent) 0 0.63px, color-mix(in oklch, oklch(85% 0.034 240) 32%, transparent) 1.15px, transparent),
+        radial-gradient(circle 1.8px at 277.3px 88.2px, color-mix(in oklch, oklch(97% 0.054 64) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.054 64) 25%, transparent) 0.84px, transparent),
+        radial-gradient(circle 1.6px at 211.1px 166.9px, color-mix(in oklch, oklch(97% 0.039 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.039 240) 23%, transparent) 0.77px, transparent),
+        radial-gradient(circle 2.0px at 243.4px 61.2px, color-mix(in oklch, oklch(97% 0.022 240) 65%, transparent) 0 0.49px, color-mix(in oklch, oklch(85% 0.022 240) 26%, transparent) 0.89px, transparent),
+        radial-gradient(circle 2.2px at 199.3px 151.8px, color-mix(in oklch, oklch(97% 0.027 70) 68%, transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.027 70) 27%, transparent) 0.95px, transparent),
+        radial-gradient(circle 2.6px at 79.2px 148.2px, color-mix(in oklch, oklch(97% 0.034 240) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.034 240) 29%, transparent) 1.04px, transparent),
+        radial-gradient(circle 3.7px at 248.9px 113.3px, color-mix(in oklch, oklch(97% 0.027 70) 87%, transparent) 0 0.71px, color-mix(in oklch, oklch(85% 0.027 70) 35%, transparent) 1.29px, transparent),
+        radial-gradient(circle 1.6px at 285.4px 127.3px, color-mix(in oklch, oklch(97% 0.039 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.039 240) 23%, transparent) 0.77px, transparent),
+        radial-gradient(circle 1.8px at 17.9px 41.9px, color-mix(in oklch, oklch(97% 0.028 240) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.028 240) 25%, transparent) 0.84px, transparent),
+        radial-gradient(circle 2.6px at 278.4px 152.9px, color-mix(in oklch, oklch(97% 0.028 240) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.028 240) 29%, transparent) 1.04px, transparent),
+        radial-gradient(circle 2.6px at 71.5px 34.6px, color-mix(in oklch, oklch(97% 0.027 70) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.027 70) 29%, transparent) 1.04px, transparent),
+        radial-gradient(circle 1.6px at 231.4px 9.3px, color-mix(in oklch, oklch(97% 0.034 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.034 240) 23%, transparent) 0.77px, transparent),
+        radial-gradient(circle 1.6px at 238.9px 136.5px, color-mix(in oklch, oklch(97% 0.034 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.034 240) 23%, transparent) 0.77px, transparent),
+        radial-gradient(circle 1.5px at 91.7px 108.0px, color-mix(in oklch, oklch(97% 0.022 240) 56%, transparent) 0 0.41px, color-mix(in oklch, oklch(85% 0.022 240) 23%, transparent) 0.75px, transparent),
+        radial-gradient(circle 1.7px at 28.3px 113.3px, color-mix(in oklch, oklch(97% 0.034 240) 60%, transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.034 240) 24%, transparent) 0.80px, transparent),
+        radial-gradient(circle 3.7px at 255.2px 19.3px, color-mix(in oklch, oklch(97% 0.039 240) 87%, transparent) 0 0.71px, color-mix(in oklch, oklch(85% 0.039 240) 35%, transparent) 1.29px, transparent),
+        radial-gradient(circle 2.2px at 58.4px 67.7px, color-mix(in oklch, oklch(97% 0.054 64) 68%, transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.054 64) 27%, transparent) 0.95px, transparent),
+        radial-gradient(circle 2.6px at 97.3px 70.6px, color-mix(in oklch, oklch(97% 0.034 240) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.034 240) 29%, transparent) 1.04px, transparent),
+        radial-gradient(circle 1.7px at 287.4px 34.6px, color-mix(in oklch, oklch(97% 0.022 240) 60%, transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.022 240) 24%, transparent) 0.80px, transparent),
+        radial-gradient(circle 70px at 145.3px 88.5px, color-mix(in oklch, var(--gold) 12%, transparent), color-mix(in oklch, var(--gold) 4%, transparent) 60%, transparent);
+    animation: tc-tw1 6.7s ease-in-out infinite;
+}
+
+.tc-art::after {
+    background:
+        radial-gradient(circle 1.6px at 246.1px 166.4px, color-mix(in oklch, oklch(97% 0.028 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.028 240) 23%, transparent) 0.77px, transparent),
+        radial-gradient(circle 1.7px at 268.0px 119.0px, color-mix(in oklch, oklch(97% 0.027 70) 60%, transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.027 70) 24%, transparent) 0.80px, transparent),
+        radial-gradient(circle 1.8px at 204.3px 111.8px, color-mix(in oklch, oklch(97% 0.039 240) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.039 240) 25%, transparent) 0.84px, transparent),
+        radial-gradient(circle 2.2px at 62.3px 13.9px, color-mix(in oklch, oklch(97% 0.034 240) 68%, transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.034 240) 27%, transparent) 0.95px, transparent),
+        radial-gradient(circle 2.0px at 50.9px 93.7px, color-mix(in oklch, oklch(97% 0.004 74) 65%, transparent) 0 0.49px, color-mix(in oklch, oklch(85% 0.004 74) 26%, transparent) 0.89px, transparent),
+        radial-gradient(circle 3.0px at 118.2px 12.3px, color-mix(in oklch, oklch(97% 0.028 240) 79%, transparent) 0 0.63px, color-mix(in oklch, oklch(85% 0.028 240) 32%, transparent) 1.15px, transparent),
+        radial-gradient(circle 2.6px at 184.3px 36.9px, color-mix(in oklch, oklch(97% 0.004 74) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.004 74) 29%, transparent) 1.04px, transparent),
+        radial-gradient(circle 2.6px at 38.9px 18.5px, color-mix(in oklch, oklch(97% 0.027 70) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.027 70) 29%, transparent) 1.04px, transparent),
+        radial-gradient(circle 3.7px at 267.0px 34.1px, color-mix(in oklch, oklch(97% 0.004 74) 87%, transparent) 0 0.71px, color-mix(in oklch, oklch(85% 0.004 74) 35%, transparent) 1.29px, transparent),
+        radial-gradient(circle 2.0px at 217.6px 17.2px, color-mix(in oklch, oklch(97% 0.039 240) 65%, transparent) 0 0.49px, color-mix(in oklch, oklch(85% 0.039 240) 26%, transparent) 0.89px, transparent),
+        radial-gradient(circle 1.8px at 79.6px 71.1px, color-mix(in oklch, oklch(97% 0.028 240) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.028 240) 25%, transparent) 0.84px, transparent),
+        radial-gradient(circle 1.5px at 80.6px 161.4px, color-mix(in oklch, oklch(97% 0.054 64) 56%, transparent) 0 0.41px, color-mix(in oklch, oklch(85% 0.054 64) 23%, transparent) 0.75px, transparent),
+        radial-gradient(circle 2.2px at 16.6px 103.0px, color-mix(in oklch, oklch(97% 0.027 70) 68%, transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.027 70) 27%, transparent) 0.95px, transparent),
+        radial-gradient(circle 2.6px at 17.1px 79.5px, color-mix(in oklch, oklch(97% 0.034 240) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.034 240) 29%, transparent) 1.04px, transparent),
+        radial-gradient(circle 3.7px at 66.5px 127.1px, color-mix(in oklch, oklch(97% 0.039 240) 87%, transparent) 0 0.71px, color-mix(in oklch, oklch(85% 0.039 240) 35%, transparent) 1.29px, transparent),
+        radial-gradient(circle 1.8px at 249.2px 45.3px, color-mix(in oklch, oklch(97% 0.039 240) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.039 240) 25%, transparent) 0.84px, transparent),
+        radial-gradient(circle 1.8px at 162.7px 17.6px, color-mix(in oklch, oklch(97% 0.011 240) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.011 240) 25%, transparent) 0.84px, transparent),
+        radial-gradient(circle 2.2px at 27.8px 138.4px, color-mix(in oklch, oklch(97% 0.004 74) 68%, transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.004 74) 27%, transparent) 0.95px, transparent),
+        radial-gradient(circle 1.6px at 185.4px 137.2px, color-mix(in oklch, oklch(97% 0.039 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.039 240) 23%, transparent) 0.77px, transparent),
+        radial-gradient(circle 1.8px at 233.3px 71.8px, color-mix(in oklch, oklch(97% 0.054 64) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.054 64) 25%, transparent) 0.84px, transparent),
+        radial-gradient(circle 1.8px at 287.0px 9.0px, color-mix(in oklch, oklch(97% 0.022 240) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.022 240) 25%, transparent) 0.84px, transparent),
+        radial-gradient(circle 1.6px at 94.7px 159.0px, color-mix(in oklch, oklch(97% 0.034 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.034 240) 23%, transparent) 0.77px, transparent),
+        radial-gradient(circle 2.2px at 200.0px 67.5px, color-mix(in oklch, oklch(97% 0.011 240) 68%, transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.011 240) 27%, transparent) 0.95px, transparent);
+    animation: tc-tw2 4.9s ease-in-out -2.2s infinite;
+}
+
+@keyframes tc-tw1 {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    23% {
+        opacity: 0.72;
+    }
+
+    41% {
+        opacity: 0.95;
+    }
+
+    68% {
+        opacity: 0.66;
+    }
+}
+
+@keyframes tc-tw2 {
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    31% {
+        opacity: 1;
+    }
+
+    52% {
+        opacity: 0.7;
+    }
+
+    80% {
+        opacity: 0.92;
+    }
+}
+
 .tc-sp {
     position: absolute;
     width: 0.9em;
