@@ -11041,8 +11041,18 @@ details.tc > summary {
     width: 5em;
     height: 5em;
     border-radius: 50%;
-    filter: drop-shadow(0 0 7px color-mix(in oklch, var(--gold) 55%, transparent));
     opacity: 0.9;
+}
+
+.tc-moon::after {
+    content: "";
+    position: absolute;
+    inset: -0.9em;
+    z-index: -1;
+    border-radius: 50%;
+    background: radial-gradient(circle closest-side, color-mix(in oklch, var(--gold) 26%, transparent) 55%, color-mix(in oklch, var(--gold) 10%, transparent) 72%, transparent);
+    translate: -1.05em 0.65em;
+    pointer-events: none;
 }
 
 .tc-moon::before {
