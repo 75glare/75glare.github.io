@@ -11310,16 +11310,27 @@ details.tc.n .tc-ti {
 
 details.ss .ss-ti,
 details.tc .tc-ti {
-    font-size: 1.26em;
+    font-size: 1.38em;
 }
 
-details.ss .ss-ti small,
-details.cv-lt.l > summary.ti-tr.cv small {
-    font-size: 0.5475em;
+details.ss .ss-ti small {
+    font-size: 0.5em;
 }
 
-details.cv-lt.l > summary.ti-tr.cv span {
-    font-size: 1.05em;
+@media (max-width: 767px) {
+    details.ss .ss-ti,
+    details.tc .tc-ti {
+        font-size: 1.26em;
+    }
+
+    details.ss .ss-ti small,
+    details.cv-lt.l > summary.ti-tr.cv small {
+        font-size: 0.5475em;
+    }
+
+    details.cv-lt.l > summary.ti-tr.cv span {
+        font-size: 1.05em;
+    }
 }
 
 details.tc:not(.ln) > .tc-tx,
