@@ -4386,20 +4386,20 @@ main.lib details.dn-sw>:is(.hs, .gx, .rn, .yu, .um, .aj, .mz) {
     margin-top: 6px;
 }
 
-main.lib:has(> .ti-tr.cv) details.mv:where([class*=" ic-"]):not([open])>summary {
+main.lib:has(> .ti-tr.cv, > add:first-child + details.mv) details.mv:where([class*=" ic-"]):not([open])>summary {
     border-radius: 0;
     background: none;
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--black) 16%, transparent);
 }
 
 @media (hover: hover) {
-    main.lib:has(> .ti-tr.cv) details.mv:where([class*=" ic-"]):not([open])>summary:hover {
+    main.lib:has(> .ti-tr.cv, > add:first-child + details.mv) details.mv:where([class*=" ic-"]):not([open])>summary:hover {
         background: none;
         box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--black) 34%, transparent);
     }
 }
 
-main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary {
+main.lib:has(> .ti-tr.cv, > add:first-child + details.mv) details[open].mv:where([class*=" ic-"])>summary {
     border-radius: 0;
     background: none;
     box-shadow: none;
@@ -4409,12 +4409,12 @@ main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary {
     white-space: nowrap;
 }
 
-main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary>.tp-tg {
+main.lib:has(> .ti-tr.cv, > add:first-child + details.mv) details[open].mv:where([class*=" ic-"])>summary>.tp-tg {
     display: flex;
     min-width: 0;
 }
 
-main.lib:has(> .ti-tr.cv) details[open].mv:where([class*=" ic-"])>summary>.tp-tg bx {
+main.lib:has(> .ti-tr.cv, > add:first-child + details.mv) details[open].mv:where([class*=" ic-"])>summary>.tp-tg bx {
     display: block;
     min-width: 0;
     overflow: hidden;
@@ -9982,6 +9982,10 @@ details.ss > summary {
 
 :is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) details.ss > summary:not(.cl-sm)::before,
 :is(main, .g_box, .n_box, .hs, .gx, .rn, .yu, .um, .aj, .mz) details.ss[open] > summary:not(.cl-sm)::before {
+    content: none;
+}
+
+main details.mv[class][class][class] :is(details.tc, details.ss)[class] > summary:not(.cl-sm)::before {
     content: none;
 }
 
