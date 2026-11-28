@@ -12255,6 +12255,24 @@ details.tc .tc-sub {
     padding-top: 26px;
 }
 
+@media (max-width: 767px) {
+    .nb {
+        --nfs: 0.955em;
+    }
+
+    :is(.nb.g, .nb-st > div.g) {
+        --nfs: 0.909em;
+    }
+
+    .nb-st > div.n {
+        --nfs: 0.955em;
+    }
+
+    .nb-st > div > b {
+        font-size: 1em;
+    }
+}
+
 .nb.sb .nb-pg {
     background:
         radial-gradient(circle, color-mix(in srgb, var(--black) 13%, transparent) 0.8px, transparent 1.2px) center / 13px 13px,
