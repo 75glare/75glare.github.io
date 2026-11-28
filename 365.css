@@ -12174,6 +12174,14 @@ details.tc .tc-sub {
     padding-left: 22px;
 }
 
+.nb:is(.wn, .sb) .nb-st .nb-lb {
+    translate: -2px 0;
+}
+
+.nb.bk .nb-st .nb-lb {
+    translate: 11.5px 0;
+}
+
 .nb-st > div:first-child {
     align-items: center;
     padding-left: 18px;
