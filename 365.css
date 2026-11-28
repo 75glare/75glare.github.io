@@ -11829,7 +11829,7 @@ details.tc .tc-sub {
     height: 150px;
     margin: 0 auto;
     overflow: hidden;
-    border-radius: 130px 130px 12px 12px / 120px 120px 12px 12px;
+    border-radius: 130px 130px 12px 12px;
     background: oklch(11% 0.025 255);
     box-shadow:
         0 0 0 1px color-mix(in srgb, var(--black) 30%, transparent),
@@ -11838,11 +11838,11 @@ details.tc .tc-sub {
 
 .ps-dk {
     position: absolute;
-    top: 14px;
-    left: 50%;
+    top: 0;
+    left: 0;
     width: 300px;
     height: 300px;
-    margin-left: -150px;
+    zoom: 0.8667;
     border-radius: 50%;
     background:
         repeating-conic-gradient(color-mix(in srgb, var(--black) 40%, transparent) 0 0.5deg, transparent 0.5deg 7.5deg),
