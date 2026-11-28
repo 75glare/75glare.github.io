@@ -4704,11 +4704,6 @@ details.cv-lt > summary.ti-tr.cv::before {
         radial-gradient(circle 4.04px at 175.7px 52.9px, color-mix(in srgb, var(--nanami) 85%, white) 0 0.96px, color-mix(in srgb, var(--nanami) 30%, transparent) 1.79px, transparent),
         radial-gradient(circle 4.04px at 178.3px 67.0px, color-mix(in srgb, var(--nanami) 85%, white) 0 0.96px, color-mix(in srgb, var(--nanami) 30%, transparent) 1.79px, transparent),
         radial-gradient(circle 4.04px at 193.7px 81.8px, color-mix(in srgb, var(--nanami) 85%, white) 0 0.96px, color-mix(in srgb, var(--nanami) 30%, transparent) 1.79px, transparent),
-        radial-gradient(circle at 98.9px 50.3px,
-            oklch(97% 0.01 220 / var(--lk-tw)) 0 1.5px,
-            color-mix(in srgb, var(--color) calc(70% * var(--lk-tw)), transparent) 2.5px,
-            color-mix(in srgb, var(--color) calc(25% * var(--lk-tw)), transparent) 5px,
-            transparent 8px),
         linear-gradient(to top right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--gjo) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 24.1px 59.6px / 10.1px 12.3px no-repeat,
         linear-gradient(to bottom right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--gjo) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 24.1px 52.1px / 12.7px 7.5px no-repeat,
         linear-gradient(to top right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--gjo) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 35.8px 40.3px / 1.0px 11.8px no-repeat,
@@ -4720,7 +4715,23 @@ details.cv-lt > summary.ti-tr.cv::before {
         linear-gradient(to top right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--nanami) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 170.4px 35.8px / 5.3px 17.1px no-repeat,
         linear-gradient(to top right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--nanami) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 175.7px 52.9px / 2.6px 14.1px no-repeat,
         linear-gradient(to top right, transparent calc(50% - 0.4px), color-mix(in srgb, var(--nanami) 45%, transparent) calc(50% - 0.4px) calc(50% + 0.4px), transparent calc(50% + 0.4px)) 178.3px 67.0px / 15.4px 14.8px no-repeat;
-    animation: lk-tw 3.2s ease-in-out infinite;
+}
+
+.ti-tr.cv::after,
+details.cv-lt > summary.ti-tr.cv::after {
+    content: "";
+    order: -1;
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 42.3px 0 -58.3px;
+    background: radial-gradient(circle at 8px 8px,
+        oklch(97% 0.01 220) 0 1.5px,
+        color-mix(in srgb, var(--color) 70%, transparent) 2.5px,
+        color-mix(in srgb, var(--color) 25%, transparent) 5px,
+        transparent 8px);
+    pointer-events: none;
+    animation: lk-op 3.2s ease-in-out infinite;
 }
 
 .ti-tr.cv span {
@@ -4742,7 +4753,8 @@ details.cv-lt > summary.ti-tr.cv::before {
 }
 
 @media screen and (min-width: 768px) {
-    .ti-tr.cv::before {
+    .ti-tr.cv::before,
+    .ti-tr.cv::after {
         zoom: 1.5;
     }
 }
@@ -10048,7 +10060,7 @@ main details.mv[class][class][class] details.cv-lt[class] > summary.ti-tr.cv:not
     font: inherit;
     color: inherit;
     transform: none;
-    animation: lk-tw 3.2s ease-in-out infinite;
+    animation: none;
 }
 
 .ss-sky {
@@ -11821,27 +11833,27 @@ body>span[style*="color"] {
     position: absolute;
     inset: 0;
     pointer-events: none;
+}
+
+.post-lock .post-lock-msg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
     background:
         radial-gradient(circle at calc(100% - 27.5px) 23.5px,
-            oklch(97% 0.01 220 / var(--lk-tw)) 0 1.5px,
-            color-mix(in srgb, var(--lk-tone) calc(70% * var(--lk-tw)), transparent) 2.5px,
-            color-mix(in srgb, var(--lk-tone) calc(25% * var(--lk-tw)), transparent) 5px,
+            oklch(97% 0.01 220) 0 1.5px,
+            color-mix(in srgb, var(--lk-tone) 70%, transparent) 2.5px,
+            color-mix(in srgb, var(--lk-tone) 25%, transparent) 5px,
             transparent 8px),
         radial-gradient(circle at calc(100% - 49.5px) 37.5px,
-            color-mix(in srgb, var(--lk-tone) calc(60% * var(--lk-tw)), transparent) 0 0.9px,
+            color-mix(in srgb, var(--lk-tone) 60%, transparent) 0 0.9px,
             transparent 1.4px);
-    animation: lk-tw 3.2s ease-in-out infinite;
+    animation: lk-op 3.2s ease-in-out infinite;
 }
 
-@property --lk-tw {
-    syntax: "<number>";
-    inherits: true;
-    initial-value: 1;
-}
-
-@keyframes lk-tw {
+@keyframes lk-op {
     50% {
-        --lk-tw: 0.35;
+        opacity: 0.35;
     }
 }
 
