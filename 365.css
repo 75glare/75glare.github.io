@@ -3448,13 +3448,14 @@ details.ic-pop { --sm-icon: "\EB4E"; }
 details.ic-binoculars { --sm-icon: "\EA64"; }
 details.ic-planet { --sm-icon: "\E652"; }
 details.ic-notebook { --sm-icon: "\E34E"; }
+details.ic-notepad { --sm-icon: "\E63E"; }
 
 :is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details:is(.mv, .gm)[class*=" ic-"] summary:not(.cl-sm)::before,
 :is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details[open]:is(.mv, .gm)[class*=" ic-"] summary:not(.cl-sm)::before {
     content: var(--sm-icon);
 }
 
-main details.mv[class*=" ic-"]:is(.ic-sparkle, .ic-moon-stars, .ic-star, .ic-rain, .ic-snow, .ic-wave, .ic-flower, .ic-drop, .ic-binoculars, .ic-planet, .ic-notebook) summary:not(.cl-sm)::before {
+main details.mv[class*=" ic-"]:is(.ic-sparkle, .ic-moon-stars, .ic-star, .ic-rain, .ic-snow, .ic-wave, .ic-flower, .ic-drop, .ic-binoculars, .ic-planet, .ic-notebook, .ic-notepad) summary:not(.cl-sm)::before {
     font-family: "Phosphor-Light";
 }
 
@@ -11932,8 +11933,8 @@ details.tc .tc-sub {
 .ps-tx {
     display: grid;
     place-items: center;
-    min-height: 4.4em;
-    margin: 1.2em 0 1em;
+    min-height: 2em;
+    margin: 13px 0;
     line-height: 2;
     letter-spacing: 0.06em;
     color: var(--pure-white);
