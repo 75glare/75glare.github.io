@@ -120,7 +120,7 @@
     --moon-arc: 60.13%;
 
     /* --- Glass --- */
-    --glass-bg: linear-gradient(170deg, oklch(40% 0.075 252 / 0.26), oklch(33% 0.072 254 / 0.22) 55%, oklch(30% 0.068 256 / 0.24));
+    --glass-bg: linear-gradient(170deg, oklch(40% 0.075 252 / calc(0.26 * var(--lift))), oklch(33% 0.072 254 / calc(0.22 * var(--lift))) 55%, oklch(30% 0.068 256 / calc(0.24 * var(--lift))));
     --glass-top: inset 0 1px 0 oklch(100% 0 0 / 0.05);
 
     /* --- Board --- */
@@ -143,6 +143,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+
+:root {
+    --lift: 1;
+}
+
+@media (max-width: 767px) {
+    :root {
+        --lift: 1.3;
+    }
 }
 
 html {
@@ -629,82 +640,82 @@ body::before {
     font-size: 18px;
     color: transparent;
     text-shadow:
-        8vw calc(8 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(90% * var(--tw-a)), transparent),
-        8vw calc(8 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(90% * var(--tw-a)), transparent),
-        8vw calc(8 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(49.5% * var(--tw-a)), transparent),
-        8vw calc(8 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(27% * var(--tw-a)), transparent),
-        88vw calc(10 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(85% * var(--tw-b)), transparent),
-        88vw calc(10 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(85% * var(--tw-b)), transparent),
-        88vw calc(10 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(46.8% * var(--tw-b)), transparent),
-        88vw calc(10 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(25.5% * var(--tw-b)), transparent),
-        15vw calc(32 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(80% * var(--tw-c)), transparent),
-        15vw calc(32 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(80% * var(--tw-c)), transparent),
-        15vw calc(32 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(44% * var(--tw-c)), transparent),
-        15vw calc(32 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(24% * var(--tw-c)), transparent),
-        5vw calc(52 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(70% * var(--tw-a)), transparent),
-        5vw calc(52 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(70% * var(--tw-a)), transparent),
-        5vw calc(52 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(38.5% * var(--tw-a)), transparent),
-        5vw calc(52 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(21% * var(--tw-a)), transparent),
-        48vw calc(72 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(70% * var(--tw-b)), transparent),
-        48vw calc(72 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(70% * var(--tw-b)), transparent),
-        48vw calc(72 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(38.5% * var(--tw-b)), transparent),
-        48vw calc(72 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(21% * var(--tw-b)), transparent),
-        80vw calc(83 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(70% * var(--tw-c)), transparent),
-        80vw calc(83 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(70% * var(--tw-c)), transparent),
-        80vw calc(83 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(38.5% * var(--tw-c)), transparent),
-        80vw calc(83 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(21% * var(--tw-c)), transparent),
-        62vw calc(28 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(75% * var(--tw-a)), transparent),
-        62vw calc(28 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(75% * var(--tw-a)), transparent),
-        62vw calc(28 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(41.2% * var(--tw-a)), transparent),
-        62vw calc(28 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(22.5% * var(--tw-a)), transparent),
-        30vw calc(60 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(65% * var(--tw-b)), transparent),
-        30vw calc(60 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(65% * var(--tw-b)), transparent),
-        30vw calc(60 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(35.8% * var(--tw-b)), transparent),
-        30vw calc(60 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(19.5% * var(--tw-b)), transparent),
-        72vw calc(50 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(60% * var(--tw-c)), transparent),
-        72vw calc(50 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(60% * var(--tw-c)), transparent),
-        72vw calc(50 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(33% * var(--tw-c)), transparent),
-        72vw calc(50 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(18% * var(--tw-c)), transparent),
-        35vw calc(12 * var(--svu)) 0.5px color-mix(in srgb, var(--gjo) calc(70% * var(--tw-a)), transparent),
-        35vw calc(12 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(70% * var(--tw-a)), transparent),
-        35vw calc(12 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(38.5% * var(--tw-a)), transparent),
-        35vw calc(12 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(21% * var(--tw-a)), transparent),
-        25vw calc(48 * var(--svu)) 0.5px color-mix(in srgb, var(--sky-moon) calc(75% * var(--tw-b)), transparent),
-        25vw calc(48 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(75% * var(--tw-b)), transparent),
-        25vw calc(48 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(41.2% * var(--tw-b)), transparent),
-        25vw calc(48 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(22.5% * var(--tw-b)), transparent),
-        90vw calc(68 * var(--svu)) 0.5px color-mix(in srgb, var(--sky-moon) calc(60% * var(--tw-c)), transparent),
-        90vw calc(68 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(60% * var(--tw-c)), transparent),
-        90vw calc(68 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(33% * var(--tw-c)), transparent),
-        90vw calc(68 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(18% * var(--tw-c)), transparent),
-        52vw calc(38 * var(--svu)) 0 color-mix(in srgb, var(--nanami) calc(55% * var(--tw-a)), transparent),
-        52vw calc(38 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(55% * var(--tw-a)), transparent),
-        52vw calc(38 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(30.3% * var(--tw-a)), transparent),
-        52vw calc(38 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(16.5% * var(--tw-a)), transparent),
-        78vw calc(15 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(55% * var(--tw-b)), transparent),
-        78vw calc(15 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(55% * var(--tw-b)), transparent),
-        78vw calc(15 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(30.3% * var(--tw-b)), transparent),
-        78vw calc(15 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(16.5% * var(--tw-b)), transparent),
-        42vw calc(85 * var(--svu)) 0.5px color-mix(in srgb, var(--gjo) calc(45% * var(--tw-c)), transparent),
-        42vw calc(85 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(45% * var(--tw-c)), transparent),
-        42vw calc(85 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(24.8% * var(--tw-c)), transparent),
-        42vw calc(85 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(13.5% * var(--tw-c)), transparent),
-        96vw calc(42 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(50% * var(--tw-a)), transparent),
-        96vw calc(42 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(50% * var(--tw-a)), transparent),
-        96vw calc(42 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(27.5% * var(--tw-a)), transparent),
-        96vw calc(42 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(15% * var(--tw-a)), transparent),
-        55vw calc(5 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(65% * var(--tw-b)), transparent),
-        55vw calc(5 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(65% * var(--tw-b)), transparent),
-        55vw calc(5 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(35.8% * var(--tw-b)), transparent),
-        55vw calc(5 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(19.5% * var(--tw-b)), transparent),
-        44vw calc(40 * var(--svu)) 0.5px color-mix(in srgb, var(--sky-moon) calc(55% * var(--tw-c)), transparent),
-        44vw calc(40 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(55% * var(--tw-c)), transparent),
-        44vw calc(40 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(30.3% * var(--tw-c)), transparent),
-        44vw calc(40 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(16.5% * var(--tw-c)), transparent),
-        67vw calc(75 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(60% * var(--tw-a)), transparent),
-        67vw calc(75 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(60% * var(--tw-a)), transparent),
-        67vw calc(75 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(33% * var(--tw-a)), transparent),
-        67vw calc(75 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(18% * var(--tw-a)), transparent);
+        8vw calc(8 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(90% * var(--tw-a)) * var(--lift)), transparent),
+        8vw calc(8 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(90% * var(--tw-a)) * var(--lift)), transparent),
+        8vw calc(8 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(49.5% * var(--tw-a)) * var(--lift)), transparent),
+        8vw calc(8 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(27% * var(--tw-a)) * var(--lift)), transparent),
+        88vw calc(10 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(85% * var(--tw-b)) * var(--lift)), transparent),
+        88vw calc(10 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(85% * var(--tw-b)) * var(--lift)), transparent),
+        88vw calc(10 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(46.8% * var(--tw-b)) * var(--lift)), transparent),
+        88vw calc(10 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(25.5% * var(--tw-b)) * var(--lift)), transparent),
+        15vw calc(32 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(80% * var(--tw-c)) * var(--lift)), transparent),
+        15vw calc(32 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(80% * var(--tw-c)) * var(--lift)), transparent),
+        15vw calc(32 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(44% * var(--tw-c)) * var(--lift)), transparent),
+        15vw calc(32 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(24% * var(--tw-c)) * var(--lift)), transparent),
+        5vw calc(52 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(70% * var(--tw-a)) * var(--lift)), transparent),
+        5vw calc(52 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(70% * var(--tw-a)) * var(--lift)), transparent),
+        5vw calc(52 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(38.5% * var(--tw-a)) * var(--lift)), transparent),
+        5vw calc(52 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(21% * var(--tw-a)) * var(--lift)), transparent),
+        48vw calc(72 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(70% * var(--tw-b)) * var(--lift)), transparent),
+        48vw calc(72 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(70% * var(--tw-b)) * var(--lift)), transparent),
+        48vw calc(72 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(38.5% * var(--tw-b)) * var(--lift)), transparent),
+        48vw calc(72 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(21% * var(--tw-b)) * var(--lift)), transparent),
+        80vw calc(83 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(70% * var(--tw-c)) * var(--lift)), transparent),
+        80vw calc(83 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(70% * var(--tw-c)) * var(--lift)), transparent),
+        80vw calc(83 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(38.5% * var(--tw-c)) * var(--lift)), transparent),
+        80vw calc(83 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(21% * var(--tw-c)) * var(--lift)), transparent),
+        62vw calc(28 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(75% * var(--tw-a)) * var(--lift)), transparent),
+        62vw calc(28 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(75% * var(--tw-a)) * var(--lift)), transparent),
+        62vw calc(28 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(41.2% * var(--tw-a)) * var(--lift)), transparent),
+        62vw calc(28 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(22.5% * var(--tw-a)) * var(--lift)), transparent),
+        30vw calc(60 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(65% * var(--tw-b)) * var(--lift)), transparent),
+        30vw calc(60 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(65% * var(--tw-b)) * var(--lift)), transparent),
+        30vw calc(60 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(35.8% * var(--tw-b)) * var(--lift)), transparent),
+        30vw calc(60 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(19.5% * var(--tw-b)) * var(--lift)), transparent),
+        72vw calc(50 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(60% * var(--tw-c)) * var(--lift)), transparent),
+        72vw calc(50 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(60% * var(--tw-c)) * var(--lift)), transparent),
+        72vw calc(50 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(33% * var(--tw-c)) * var(--lift)), transparent),
+        72vw calc(50 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(18% * var(--tw-c)) * var(--lift)), transparent),
+        35vw calc(12 * var(--svu)) 0.5px color-mix(in srgb, var(--gjo) calc(calc(70% * var(--tw-a)) * var(--lift)), transparent),
+        35vw calc(12 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(70% * var(--tw-a)) * var(--lift)), transparent),
+        35vw calc(12 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(38.5% * var(--tw-a)) * var(--lift)), transparent),
+        35vw calc(12 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(21% * var(--tw-a)) * var(--lift)), transparent),
+        25vw calc(48 * var(--svu)) 0.5px color-mix(in srgb, var(--sky-moon) calc(calc(75% * var(--tw-b)) * var(--lift)), transparent),
+        25vw calc(48 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(75% * var(--tw-b)) * var(--lift)), transparent),
+        25vw calc(48 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(41.2% * var(--tw-b)) * var(--lift)), transparent),
+        25vw calc(48 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(22.5% * var(--tw-b)) * var(--lift)), transparent),
+        90vw calc(68 * var(--svu)) 0.5px color-mix(in srgb, var(--sky-moon) calc(calc(60% * var(--tw-c)) * var(--lift)), transparent),
+        90vw calc(68 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(60% * var(--tw-c)) * var(--lift)), transparent),
+        90vw calc(68 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(33% * var(--tw-c)) * var(--lift)), transparent),
+        90vw calc(68 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(18% * var(--tw-c)) * var(--lift)), transparent),
+        52vw calc(38 * var(--svu)) 0 color-mix(in srgb, var(--nanami) calc(calc(55% * var(--tw-a)) * var(--lift)), transparent),
+        52vw calc(38 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(55% * var(--tw-a)) * var(--lift)), transparent),
+        52vw calc(38 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(30.3% * var(--tw-a)) * var(--lift)), transparent),
+        52vw calc(38 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(16.5% * var(--tw-a)) * var(--lift)), transparent),
+        78vw calc(15 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(55% * var(--tw-b)) * var(--lift)), transparent),
+        78vw calc(15 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(55% * var(--tw-b)) * var(--lift)), transparent),
+        78vw calc(15 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(30.3% * var(--tw-b)) * var(--lift)), transparent),
+        78vw calc(15 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(16.5% * var(--tw-b)) * var(--lift)), transparent),
+        42vw calc(85 * var(--svu)) 0.5px color-mix(in srgb, var(--gjo) calc(calc(45% * var(--tw-c)) * var(--lift)), transparent),
+        42vw calc(85 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(45% * var(--tw-c)) * var(--lift)), transparent),
+        42vw calc(85 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(24.8% * var(--tw-c)) * var(--lift)), transparent),
+        42vw calc(85 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(13.5% * var(--tw-c)) * var(--lift)), transparent),
+        96vw calc(42 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(calc(50% * var(--tw-a)) * var(--lift)), transparent),
+        96vw calc(42 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(50% * var(--tw-a)) * var(--lift)), transparent),
+        96vw calc(42 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(27.5% * var(--tw-a)) * var(--lift)), transparent),
+        96vw calc(42 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(15% * var(--tw-a)) * var(--lift)), transparent),
+        55vw calc(5 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(calc(65% * var(--tw-b)) * var(--lift)), transparent),
+        55vw calc(5 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(65% * var(--tw-b)) * var(--lift)), transparent),
+        55vw calc(5 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(35.8% * var(--tw-b)) * var(--lift)), transparent),
+        55vw calc(5 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(19.5% * var(--tw-b)) * var(--lift)), transparent),
+        44vw calc(40 * var(--svu)) 0.5px color-mix(in srgb, var(--sky-moon) calc(calc(55% * var(--tw-c)) * var(--lift)), transparent),
+        44vw calc(40 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(55% * var(--tw-c)) * var(--lift)), transparent),
+        44vw calc(40 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(30.3% * var(--tw-c)) * var(--lift)), transparent),
+        44vw calc(40 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(16.5% * var(--tw-c)) * var(--lift)), transparent),
+        67vw calc(75 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(60% * var(--tw-a)) * var(--lift)), transparent),
+        67vw calc(75 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(60% * var(--tw-a)) * var(--lift)), transparent),
+        67vw calc(75 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(33% * var(--tw-a)) * var(--lift)), transparent),
+        67vw calc(75 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(18% * var(--tw-a)) * var(--lift)), transparent);
     animation:
         floatUpStars 90s cubic-bezier(0.4, 0, 0.6, 1) -45s infinite,
         twA 4.3s steps(3) infinite,
@@ -716,78 +727,78 @@ body::after {
     font-size: 12.5px;
     color: transparent;
     text-shadow:
-        18vw calc(4 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(60% * var(--tw-b)), transparent),
-        18vw calc(4 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(60% * var(--tw-b)), transparent),
-        18vw calc(4 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(33% * var(--tw-b)), transparent),
-        18vw calc(4 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(18% * var(--tw-b)), transparent),
-        88vw calc(35 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(50% * var(--tw-c)), transparent),
-        88vw calc(35 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(50% * var(--tw-c)), transparent),
-        88vw calc(35 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(27.5% * var(--tw-c)), transparent),
-        88vw calc(35 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(15% * var(--tw-c)), transparent),
-        65vw calc(65 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(55% * var(--tw-a)), transparent),
-        65vw calc(65 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(55% * var(--tw-a)), transparent),
-        65vw calc(65 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(30.3% * var(--tw-a)), transparent),
-        65vw calc(65 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(16.5% * var(--tw-a)), transparent),
-        40vw calc(20 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(45% * var(--tw-b)), transparent),
-        40vw calc(20 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(45% * var(--tw-b)), transparent),
-        40vw calc(20 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(24.8% * var(--tw-b)), transparent),
-        40vw calc(20 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(13.5% * var(--tw-b)), transparent),
-        55vw calc(45 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(50% * var(--tw-c)), transparent),
-        55vw calc(45 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(50% * var(--tw-c)), transparent),
-        55vw calc(45 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(27.5% * var(--tw-c)), transparent),
-        55vw calc(45 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(15% * var(--tw-c)), transparent),
-        10vw calc(78 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(45% * var(--tw-a)), transparent),
-        10vw calc(78 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(45% * var(--tw-a)), transparent),
-        10vw calc(78 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(24.8% * var(--tw-a)), transparent),
-        10vw calc(78 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(13.5% * var(--tw-a)), transparent),
-        70vw calc(3 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(55% * var(--tw-b)), transparent),
-        70vw calc(3 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(55% * var(--tw-b)), transparent),
-        70vw calc(3 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(30.3% * var(--tw-b)), transparent),
-        70vw calc(3 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(16.5% * var(--tw-b)), transparent),
-        82vw calc(58 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(45% * var(--tw-c)), transparent),
-        82vw calc(58 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(45% * var(--tw-c)), transparent),
-        82vw calc(58 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(24.8% * var(--tw-c)), transparent),
-        82vw calc(58 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(13.5% * var(--tw-c)), transparent),
-        25vw calc(22 * var(--svu)) 0 color-mix(in srgb, var(--nanami) calc(40% * var(--tw-a)), transparent),
-        25vw calc(22 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(40% * var(--tw-a)), transparent),
-        25vw calc(22 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(22% * var(--tw-a)), transparent),
-        25vw calc(22 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(12% * var(--tw-a)), transparent),
-        60vw calc(80 * var(--svu)) 0 color-mix(in srgb, var(--gjo) calc(35% * var(--tw-b)), transparent),
-        60vw calc(80 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(35% * var(--tw-b)), transparent),
-        60vw calc(80 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(19.2% * var(--tw-b)), transparent),
-        60vw calc(80 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(10.5% * var(--tw-b)), transparent),
-        94vw calc(12 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(50% * var(--tw-c)), transparent),
-        94vw calc(12 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(50% * var(--tw-c)), transparent),
-        94vw calc(12 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(27.5% * var(--tw-c)), transparent),
-        94vw calc(12 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(15% * var(--tw-c)), transparent),
-        37vw calc(68 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(40% * var(--tw-a)), transparent),
-        37vw calc(68 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(40% * var(--tw-a)), transparent),
-        37vw calc(68 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(22% * var(--tw-a)), transparent),
-        37vw calc(68 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(12% * var(--tw-a)), transparent),
-        3vw calc(55 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(45% * var(--tw-b)), transparent),
-        3vw calc(55 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(45% * var(--tw-b)), transparent),
-        3vw calc(55 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(24.8% * var(--tw-b)), transparent),
-        3vw calc(55 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(13.5% * var(--tw-b)), transparent),
-        48vw calc(30 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(50% * var(--tw-c)), transparent),
-        48vw calc(30 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(50% * var(--tw-c)), transparent),
-        48vw calc(30 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(27.5% * var(--tw-c)), transparent),
-        48vw calc(30 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(15% * var(--tw-c)), transparent),
-        86vw calc(18 * var(--svu)) 0 color-mix(in srgb, var(--gjo) calc(40% * var(--tw-a)), transparent),
-        86vw calc(18 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(40% * var(--tw-a)), transparent),
-        86vw calc(18 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(22% * var(--tw-a)), transparent),
-        86vw calc(18 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(12% * var(--tw-a)), transparent),
-        15vw calc(8 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(60% * var(--tw-b)), transparent),
-        15vw calc(8 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(60% * var(--tw-b)), transparent),
-        15vw calc(8 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(33% * var(--tw-b)), transparent),
-        15vw calc(8 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(18% * var(--tw-b)), transparent),
-        78vw calc(40 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(40% * var(--tw-c)), transparent),
-        78vw calc(40 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(40% * var(--tw-c)), transparent),
-        78vw calc(40 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(22% * var(--tw-c)), transparent),
-        78vw calc(40 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(12% * var(--tw-c)), transparent),
-        42vw calc(15 * var(--svu)) 0 color-mix(in srgb, var(--nanami) calc(35% * var(--tw-a)), transparent),
-        42vw calc(15 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(35% * var(--tw-a)), transparent),
-        42vw calc(15 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(19.2% * var(--tw-a)), transparent),
-        42vw calc(15 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(10.5% * var(--tw-a)), transparent);
+        18vw calc(4 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(60% * var(--tw-b)) * var(--lift)), transparent),
+        18vw calc(4 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(60% * var(--tw-b)) * var(--lift)), transparent),
+        18vw calc(4 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(33% * var(--tw-b)) * var(--lift)), transparent),
+        18vw calc(4 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(18% * var(--tw-b)) * var(--lift)), transparent),
+        88vw calc(35 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(50% * var(--tw-c)) * var(--lift)), transparent),
+        88vw calc(35 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(50% * var(--tw-c)) * var(--lift)), transparent),
+        88vw calc(35 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(27.5% * var(--tw-c)) * var(--lift)), transparent),
+        88vw calc(35 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(15% * var(--tw-c)) * var(--lift)), transparent),
+        65vw calc(65 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(55% * var(--tw-a)) * var(--lift)), transparent),
+        65vw calc(65 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(55% * var(--tw-a)) * var(--lift)), transparent),
+        65vw calc(65 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(30.3% * var(--tw-a)) * var(--lift)), transparent),
+        65vw calc(65 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(16.5% * var(--tw-a)) * var(--lift)), transparent),
+        40vw calc(20 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(45% * var(--tw-b)) * var(--lift)), transparent),
+        40vw calc(20 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(45% * var(--tw-b)) * var(--lift)), transparent),
+        40vw calc(20 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(24.8% * var(--tw-b)) * var(--lift)), transparent),
+        40vw calc(20 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(13.5% * var(--tw-b)) * var(--lift)), transparent),
+        55vw calc(45 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(50% * var(--tw-c)) * var(--lift)), transparent),
+        55vw calc(45 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(50% * var(--tw-c)) * var(--lift)), transparent),
+        55vw calc(45 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(27.5% * var(--tw-c)) * var(--lift)), transparent),
+        55vw calc(45 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(15% * var(--tw-c)) * var(--lift)), transparent),
+        10vw calc(78 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(45% * var(--tw-a)) * var(--lift)), transparent),
+        10vw calc(78 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(45% * var(--tw-a)) * var(--lift)), transparent),
+        10vw calc(78 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(24.8% * var(--tw-a)) * var(--lift)), transparent),
+        10vw calc(78 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(13.5% * var(--tw-a)) * var(--lift)), transparent),
+        70vw calc(3 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(calc(55% * var(--tw-b)) * var(--lift)), transparent),
+        70vw calc(3 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(55% * var(--tw-b)) * var(--lift)), transparent),
+        70vw calc(3 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(30.3% * var(--tw-b)) * var(--lift)), transparent),
+        70vw calc(3 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(16.5% * var(--tw-b)) * var(--lift)), transparent),
+        82vw calc(58 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(calc(45% * var(--tw-c)) * var(--lift)), transparent),
+        82vw calc(58 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(45% * var(--tw-c)) * var(--lift)), transparent),
+        82vw calc(58 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(24.8% * var(--tw-c)) * var(--lift)), transparent),
+        82vw calc(58 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(13.5% * var(--tw-c)) * var(--lift)), transparent),
+        25vw calc(22 * var(--svu)) 0 color-mix(in srgb, var(--nanami) calc(calc(40% * var(--tw-a)) * var(--lift)), transparent),
+        25vw calc(22 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(40% * var(--tw-a)) * var(--lift)), transparent),
+        25vw calc(22 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(22% * var(--tw-a)) * var(--lift)), transparent),
+        25vw calc(22 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(12% * var(--tw-a)) * var(--lift)), transparent),
+        60vw calc(80 * var(--svu)) 0 color-mix(in srgb, var(--gjo) calc(calc(35% * var(--tw-b)) * var(--lift)), transparent),
+        60vw calc(80 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(35% * var(--tw-b)) * var(--lift)), transparent),
+        60vw calc(80 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(19.2% * var(--tw-b)) * var(--lift)), transparent),
+        60vw calc(80 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(10.5% * var(--tw-b)) * var(--lift)), transparent),
+        94vw calc(12 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(50% * var(--tw-c)) * var(--lift)), transparent),
+        94vw calc(12 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(50% * var(--tw-c)) * var(--lift)), transparent),
+        94vw calc(12 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(27.5% * var(--tw-c)) * var(--lift)), transparent),
+        94vw calc(12 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(15% * var(--tw-c)) * var(--lift)), transparent),
+        37vw calc(68 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(calc(40% * var(--tw-a)) * var(--lift)), transparent),
+        37vw calc(68 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(40% * var(--tw-a)) * var(--lift)), transparent),
+        37vw calc(68 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(22% * var(--tw-a)) * var(--lift)), transparent),
+        37vw calc(68 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(12% * var(--tw-a)) * var(--lift)), transparent),
+        3vw calc(55 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(45% * var(--tw-b)) * var(--lift)), transparent),
+        3vw calc(55 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(45% * var(--tw-b)) * var(--lift)), transparent),
+        3vw calc(55 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(24.8% * var(--tw-b)) * var(--lift)), transparent),
+        3vw calc(55 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(13.5% * var(--tw-b)) * var(--lift)), transparent),
+        48vw calc(30 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(calc(50% * var(--tw-c)) * var(--lift)), transparent),
+        48vw calc(30 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(50% * var(--tw-c)) * var(--lift)), transparent),
+        48vw calc(30 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(27.5% * var(--tw-c)) * var(--lift)), transparent),
+        48vw calc(30 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(15% * var(--tw-c)) * var(--lift)), transparent),
+        86vw calc(18 * var(--svu)) 0 color-mix(in srgb, var(--gjo) calc(calc(40% * var(--tw-a)) * var(--lift)), transparent),
+        86vw calc(18 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(40% * var(--tw-a)) * var(--lift)), transparent),
+        86vw calc(18 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(22% * var(--tw-a)) * var(--lift)), transparent),
+        86vw calc(18 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(12% * var(--tw-a)) * var(--lift)), transparent),
+        15vw calc(8 * var(--svu)) 0 color-mix(in srgb, var(--sky-moon) calc(calc(60% * var(--tw-b)) * var(--lift)), transparent),
+        15vw calc(8 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(60% * var(--tw-b)) * var(--lift)), transparent),
+        15vw calc(8 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(33% * var(--tw-b)) * var(--lift)), transparent),
+        15vw calc(8 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(18% * var(--tw-b)) * var(--lift)), transparent),
+        78vw calc(40 * var(--svu)) 0 color-mix(in srgb, var(--pure-white) calc(calc(40% * var(--tw-c)) * var(--lift)), transparent),
+        78vw calc(40 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(40% * var(--tw-c)) * var(--lift)), transparent),
+        78vw calc(40 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(22% * var(--tw-c)) * var(--lift)), transparent),
+        78vw calc(40 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(12% * var(--tw-c)) * var(--lift)), transparent),
+        42vw calc(15 * var(--svu)) 0 color-mix(in srgb, var(--nanami) calc(calc(35% * var(--tw-a)) * var(--lift)), transparent),
+        42vw calc(15 * var(--svu)) 0.5px color-mix(in srgb, var(--pure-white) calc(calc(35% * var(--tw-a)) * var(--lift)), transparent),
+        42vw calc(15 * var(--svu)) 2.5px color-mix(in srgb, var(--sky-moon) calc(calc(19.2% * var(--tw-a)) * var(--lift)), transparent),
+        42vw calc(15 * var(--svu)) 6px color-mix(in srgb, var(--pure-white) calc(calc(10.5% * var(--tw-a)) * var(--lift)), transparent);
     animation:
         floatUpStars 70s cubic-bezier(0.3, 0, 0.7, 1) -35s infinite,
         twA 5.1s steps(3) -3.2s infinite,
@@ -937,11 +948,11 @@ header::before {
     z-index: 1;
     border-radius: 50%;
     background:
-        radial-gradient(circle 1.5px at 70% 20%, oklch(100% 0 0 / 0.38) 0 0.8px, transparent),
-        radial-gradient(circle 2.5px at 82% 55%, oklch(100% 0 0 / 0.28) 0 1.4px, transparent),
-        radial-gradient(circle at 68% 68%, oklch(94% 0.035 235 / 0.58) 0%, oklch(80% 0.1 250 / 0.32) 40%, oklch(65% 0.125 260 / 0.13) 70%, transparent 85%),
-        oklch(86% 0.06 248 / 0.21);
-    box-shadow: inset 4px 4px 15px oklch(100% 0 0 / 0.11), inset -6px -6px 20px oklch(94% 0.06 240 / 0.19);
+        radial-gradient(circle 1.5px at 70% 20%, oklch(100% 0 0 / calc(0.38 * var(--lift))) 0 0.8px, transparent),
+        radial-gradient(circle 2.5px at 82% 55%, oklch(100% 0 0 / calc(0.28 * var(--lift))) 0 1.4px, transparent),
+        radial-gradient(circle at 68% 68%, oklch(94% 0.035 235 / calc(0.58 * var(--lift))) 0%, oklch(80% 0.1 250 / calc(0.32 * var(--lift))) 40%, oklch(65% 0.125 260 / calc(0.13 * var(--lift))) 70%, transparent 85%),
+        oklch(86% 0.06 248 / calc(0.21 * var(--lift)));
+    box-shadow: inset 4px 4px 15px oklch(100% 0 0 / calc(0.11 * var(--lift))), inset -6px -6px 20px oklch(94% 0.06 240 / calc(0.19 * var(--lift)));
     -webkit-mask-image: radial-gradient(circle at 35% 35%, transparent var(--moon-arc), black calc(var(--moon-arc) + 2.87%));
     mask-image: radial-gradient(circle at 35% 35%, transparent var(--moon-arc), black calc(var(--moon-arc) + 2.87%));
     backdrop-filter: blur(12px);
@@ -956,7 +967,7 @@ header::after {
     inset: -30px;
     z-index: 0;
     border-radius: 50%;
-    background: radial-gradient(circle closest-side, transparent 76%, oklch(88% 0.06 238 / 0.36) 78.6%, oklch(84% 0.065 239 / 0.17) 81%, oklch(80% 0.07 240 / 0.06) 84.5%, oklch(80% 0.07 240 / 0.015) 88%, transparent 92%);
+    background: radial-gradient(circle closest-side, transparent 76%, oklch(88% 0.06 238 / calc(0.36 * var(--lift))) 78.6%, oklch(84% 0.065 239 / calc(0.17 * var(--lift))) 81%, oklch(80% 0.07 240 / calc(0.06 * var(--lift))) 84.5%, oklch(80% 0.07 240 / calc(0.015 * var(--lift))) 88%, transparent 92%);
     -webkit-mask-image: radial-gradient(circle at 38.2% 38.2%, transparent 57%, black 66%);
     mask-image: radial-gradient(circle at 38.2% 38.2%, transparent 57%, black 66%);
     transform: rotate(-15deg);
@@ -991,23 +1002,23 @@ header h1::before {
     margin: -135px 0 0 -135px;
     border-radius: 50%;
     background: radial-gradient(circle closest-side,
-        oklch(68.0% 0.070 222 / 0.1564) 0%,
-        oklch(67.6% 0.070 222 / 0.1357) 6%,
-        oklch(67.2% 0.070 222 / 0.1166) 12%,
-        oklch(66.9% 0.070 222 / 0.0990) 19%,
-        oklch(66.5% 0.070 222 / 0.0830) 25%,
-        oklch(66.1% 0.070 222 / 0.0686) 31%,
-        oklch(65.8% 0.070 222 / 0.0556) 38%,
-        oklch(65.4% 0.070 222 / 0.0441) 44%,
-        oklch(65.0% 0.070 222 / 0.0340) 50%,
-        oklch(64.6% 0.070 222 / 0.0254) 56%,
-        oklch(64.2% 0.070 222 / 0.0182) 62%,
-        oklch(63.9% 0.070 222 / 0.0122) 69%,
-        oklch(63.5% 0.070 222 / 0.0074) 75%,
-        oklch(63.1% 0.070 222 / 0.0039) 81%,
-        oklch(62.8% 0.070 222 / 0.0017) 88%,
-        oklch(62.4% 0.070 222 / 0.0004) 94%,
-        oklch(62.0% 0.070 222 / 0.0000) 100%);
+        oklch(68.0% 0.070 222 / calc(0.1564 * var(--lift))) 0%,
+        oklch(67.6% 0.070 222 / calc(0.1357 * var(--lift))) 6%,
+        oklch(67.2% 0.070 222 / calc(0.1166 * var(--lift))) 12%,
+        oklch(66.9% 0.070 222 / calc(0.0990 * var(--lift))) 19%,
+        oklch(66.5% 0.070 222 / calc(0.0830 * var(--lift))) 25%,
+        oklch(66.1% 0.070 222 / calc(0.0686 * var(--lift))) 31%,
+        oklch(65.8% 0.070 222 / calc(0.0556 * var(--lift))) 38%,
+        oklch(65.4% 0.070 222 / calc(0.0441 * var(--lift))) 44%,
+        oklch(65.0% 0.070 222 / calc(0.0340 * var(--lift))) 50%,
+        oklch(64.6% 0.070 222 / calc(0.0254 * var(--lift))) 56%,
+        oklch(64.2% 0.070 222 / calc(0.0182 * var(--lift))) 62%,
+        oklch(63.9% 0.070 222 / calc(0.0122 * var(--lift))) 69%,
+        oklch(63.5% 0.070 222 / calc(0.0074 * var(--lift))) 75%,
+        oklch(63.1% 0.070 222 / calc(0.0039 * var(--lift))) 81%,
+        oklch(62.8% 0.070 222 / calc(0.0017 * var(--lift))) 88%,
+        oklch(62.4% 0.070 222 / calc(0.0004 * var(--lift))) 94%,
+        oklch(62.0% 0.070 222 / calc(0.0000 * var(--lift))) 100%);
     pointer-events: none;
 }
 
@@ -1114,7 +1125,7 @@ main,
 :is(.g_box, .n_box) {
     --black: oklch(88% 0.018 235);
     --color: oklch(72% 0.025 240);
-    --glass-line: oklch(100% 0 0 / 0.07);
+    --glass-line: oklch(100% 0 0 / calc(0.07 * var(--lift)));
     --cap: "\E6A2\2002 Two cups on one table";
     --cap-color: color-mix(in srgb, var(--color) 55%, transparent);
 
@@ -1143,13 +1154,13 @@ main,
 }
 
 .g_box {
-    --glass-line: oklch(from var(--gjo) calc(l + 0.2) calc(c * 0.6) h / 0.12);
+    --glass-line: oklch(from var(--gjo) calc(l + 0.2) calc(c * 0.6) h / calc(0.12 * var(--lift)));
     --cap: "\E58E\2002 The moon was listening";
     --cap-color: color-mix(in srgb, var(--gjo) 55%, transparent);
 }
 
 .n_box {
-    --glass-line: oklch(from var(--nanami) calc(l + 0.2) calc(c * 0.6) h / 0.12);
+    --glass-line: oklch(from var(--nanami) calc(l + 0.2) calc(c * 0.6) h / calc(0.12 * var(--lift)));
     --cap: "\E1C2\2002 Until the coffee goes cold";
     --cap-color: color-mix(in srgb, var(--nanami) 55%, transparent);
 }
@@ -6122,7 +6133,7 @@ main:has(.tl),
     margin: 4px 0 0 8px;
     padding: 10px 14px;
     border-radius: 0 4px 4px 0;
-    background: color-mix(in srgb, var(--ui-border) 15%, transparent);
+    background: color-mix(in srgb, var(--ui-border) calc(15% * var(--lift)), transparent);
     font-size: 0.92em;
     line-height: 1.8;
     color: color-mix(in srgb, var(--black) 85%, transparent);
@@ -8815,26 +8826,26 @@ details.gm .cl-li::before {
     inset: 0;
     z-index: 0;
     background:
-        radial-gradient(circle 10px at 2.2% 48%, oklch(95% 0.05 228 / 0.36) 0 1.0px, oklch(84% 0.08 232 / 0.143) 2.3px, oklch(76% 0.09 240 / 0.038) 6.5px, transparent),
-        radial-gradient(circle 7px at 10.5% 66%, oklch(95% 0.05 228 / 0.195) 0 0.7px, oklch(84% 0.08 232 / 0.075) 1.6px, oklch(76% 0.09 240 / 0.022) 4.5px, transparent),
-        radial-gradient(circle 10px at 89.5% 17%, oklch(95% 0.05 228 / 0.465) 0 1.2px, oklch(84% 0.08 232 / 0.188) 2.8px, oklch(76% 0.09 240 / 0.045) 6.5px, transparent),
-        radial-gradient(circle 7px at 91.2% 21%, oklch(95% 0.05 228 / 0.24) 0 0.7px, oklch(84% 0.08 232 / 0.098) 1.6px, oklch(76% 0.09 240 / 0.022) 4.5px, transparent),
-        radial-gradient(circle 10px at 95.6% 36%, oklch(95% 0.05 228 / 0.375) 0 1.0px, oklch(84% 0.08 232 / 0.15) 2.3px, oklch(76% 0.09 240 / 0.038) 6.5px, transparent),
-        radial-gradient(circle 7px at 86.8% 47%, oklch(95% 0.05 228 / 0.21) 0 0.7px, oklch(84% 0.08 232 / 0.083) 1.6px, oklch(76% 0.09 240 / 0.022) 4.5px, transparent),
-        radial-gradient(ellipse 70px 52px at 91% 8%, oklch(70% 0.09 275 / 0.068) 0%, oklch(60% 0.09 280 / 0.034) 45%, oklch(50% 0.08 282 / 0.009) 75%, transparent),
-        radial-gradient(ellipse 35% 58% at 0% 0%, oklch(43% 0.13 288 / 0.3), oklch(37% 0.11 284 / 0.135) 40%, oklch(33% 0.09 280 / 0.045) 62%, oklch(30% 0.08 278 / 0.011) 80%, transparent 92%),
-        radial-gradient(ellipse 40% 66% at 100% 0%, oklch(42% 0.13 288 / 0.24), oklch(37% 0.11 284 / 0.112) 40%, oklch(33% 0.09 280 / 0.045) 62%, oklch(30% 0.08 278 / 0.011) 80%, transparent 92%),
-        radial-gradient(circle 12px at 18% 88%, oklch(96% 0.05 92 / 0.45) 0 1.3px, oklch(90% 0.06 92 / 0.135) 3.0px, oklch(85% 0.06 92 / 0.038) 6.5px, transparent),
-        radial-gradient(circle 10px at 31% 94%, oklch(96% 0.05 92 / 0.338) 0 1.1px, oklch(90% 0.06 92 / 0.105) 2.5px, oklch(85% 0.06 92 / 0.03) 5.5px, transparent),
-        radial-gradient(circle 9px at 83% 91%, oklch(96% 0.05 92 / 0.3) 0 1.0px, oklch(90% 0.06 92 / 0.09) 2.3px, oklch(85% 0.06 92 / 0.022) 5.0px, transparent),
-        radial-gradient(circle 1.5px at 30% 11%, oklch(95% 0.03 240 / 0.45), transparent),
-        radial-gradient(circle 1px at 45% 6%, oklch(95% 0.03 240 / 0.338), transparent),
-        radial-gradient(circle 1px at 57% 21%, oklch(95% 0.03 240 / 0.413), transparent),
-        radial-gradient(circle 1.5px at 66% 9%, oklch(95% 0.03 240 / 0.375), transparent),
-        radial-gradient(circle 1px at 22% 46%, oklch(95% 0.03 240 / 0.262), transparent),
-        radial-gradient(circle 1px at 40% 58%, oklch(95% 0.03 240 / 0.225), transparent),
-        radial-gradient(circle 1px at 63% 44%, oklch(95% 0.03 240 / 0.225), transparent),
-        radial-gradient(circle 1px at 76% 62%, oklch(95% 0.03 240 / 0.188), transparent);
+        radial-gradient(circle 10px at 2.2% 48%, oklch(95% 0.05 228 / calc(0.36 * var(--lift))) 0 1.0px, oklch(84% 0.08 232 / calc(0.143 * var(--lift))) 2.3px, oklch(76% 0.09 240 / calc(0.038 * var(--lift))) 6.5px, transparent),
+        radial-gradient(circle 7px at 10.5% 66%, oklch(95% 0.05 228 / calc(0.195 * var(--lift))) 0 0.7px, oklch(84% 0.08 232 / calc(0.075 * var(--lift))) 1.6px, oklch(76% 0.09 240 / calc(0.022 * var(--lift))) 4.5px, transparent),
+        radial-gradient(circle 10px at 89.5% 17%, oklch(95% 0.05 228 / calc(0.465 * var(--lift))) 0 1.2px, oklch(84% 0.08 232 / calc(0.188 * var(--lift))) 2.8px, oklch(76% 0.09 240 / calc(0.045 * var(--lift))) 6.5px, transparent),
+        radial-gradient(circle 7px at 91.2% 21%, oklch(95% 0.05 228 / calc(0.24 * var(--lift))) 0 0.7px, oklch(84% 0.08 232 / calc(0.098 * var(--lift))) 1.6px, oklch(76% 0.09 240 / calc(0.022 * var(--lift))) 4.5px, transparent),
+        radial-gradient(circle 10px at 95.6% 36%, oklch(95% 0.05 228 / calc(0.375 * var(--lift))) 0 1.0px, oklch(84% 0.08 232 / calc(0.15 * var(--lift))) 2.3px, oklch(76% 0.09 240 / calc(0.038 * var(--lift))) 6.5px, transparent),
+        radial-gradient(circle 7px at 86.8% 47%, oklch(95% 0.05 228 / calc(0.21 * var(--lift))) 0 0.7px, oklch(84% 0.08 232 / calc(0.083 * var(--lift))) 1.6px, oklch(76% 0.09 240 / calc(0.022 * var(--lift))) 4.5px, transparent),
+        radial-gradient(ellipse 70px 52px at 91% 8%, oklch(70% 0.09 275 / calc(0.068 * var(--lift))) 0%, oklch(60% 0.09 280 / calc(0.034 * var(--lift))) 45%, oklch(50% 0.08 282 / calc(0.009 * var(--lift))) 75%, transparent),
+        radial-gradient(ellipse 35% 58% at 0% 0%, oklch(43% 0.13 288 / calc(0.3 * var(--lift))), oklch(37% 0.11 284 / calc(0.135 * var(--lift))) 40%, oklch(33% 0.09 280 / calc(0.045 * var(--lift))) 62%, oklch(30% 0.08 278 / calc(0.011 * var(--lift))) 80%, transparent 92%),
+        radial-gradient(ellipse 40% 66% at 100% 0%, oklch(42% 0.13 288 / calc(0.24 * var(--lift))), oklch(37% 0.11 284 / calc(0.112 * var(--lift))) 40%, oklch(33% 0.09 280 / calc(0.045 * var(--lift))) 62%, oklch(30% 0.08 278 / calc(0.011 * var(--lift))) 80%, transparent 92%),
+        radial-gradient(circle 12px at 18% 88%, oklch(96% 0.05 92 / calc(0.45 * var(--lift))) 0 1.3px, oklch(90% 0.06 92 / calc(0.135 * var(--lift))) 3.0px, oklch(85% 0.06 92 / calc(0.038 * var(--lift))) 6.5px, transparent),
+        radial-gradient(circle 10px at 31% 94%, oklch(96% 0.05 92 / calc(0.338 * var(--lift))) 0 1.1px, oklch(90% 0.06 92 / calc(0.105 * var(--lift))) 2.5px, oklch(85% 0.06 92 / calc(0.03 * var(--lift))) 5.5px, transparent),
+        radial-gradient(circle 9px at 83% 91%, oklch(96% 0.05 92 / calc(0.3 * var(--lift))) 0 1.0px, oklch(90% 0.06 92 / calc(0.09 * var(--lift))) 2.3px, oklch(85% 0.06 92 / calc(0.022 * var(--lift))) 5.0px, transparent),
+        radial-gradient(circle 1.5px at 30% 11%, oklch(95% 0.03 240 / calc(0.45 * var(--lift))), transparent),
+        radial-gradient(circle 1px at 45% 6%, oklch(95% 0.03 240 / calc(0.338 * var(--lift))), transparent),
+        radial-gradient(circle 1px at 57% 21%, oklch(95% 0.03 240 / calc(0.413 * var(--lift))), transparent),
+        radial-gradient(circle 1.5px at 66% 9%, oklch(95% 0.03 240 / calc(0.375 * var(--lift))), transparent),
+        radial-gradient(circle 1px at 22% 46%, oklch(95% 0.03 240 / calc(0.262 * var(--lift))), transparent),
+        radial-gradient(circle 1px at 40% 58%, oklch(95% 0.03 240 / calc(0.225 * var(--lift))), transparent),
+        radial-gradient(circle 1px at 63% 44%, oklch(95% 0.03 240 / calc(0.225 * var(--lift))), transparent),
+        radial-gradient(circle 1px at 76% 62%, oklch(95% 0.03 240 / calc(0.188 * var(--lift))), transparent);
     pointer-events: none;
 }
 
@@ -10162,27 +10173,27 @@ details.ss[open] .ss-sky > i:nth-child(4) {
 .ss-sky::before {
     filter: drop-shadow(0 0 2px oklch(85% 0.06 240 / 0.5));
     background-image:
-        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
-        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / 0.6) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px));
+        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to top right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px)),
+        linear-gradient(to bottom right, transparent calc(50% - 0.45px), oklch(90% 0.035 240 / calc(0.6 * var(--lift))) calc(50% - 0.45px) calc(50% + 0.45px), transparent calc(50% + 0.45px));
     background-position: 85.8px 148.5px, 83.2px 146.0px, 66.5px 150.9px, 50.8px 157.3px, 23.0px 141.7px, 37.6px 135.5px, 132.3px 102.7px, 105.0px 80.6px, 82.8px 61.5px, 83.8px 65.7px, 63.2px 92.2px, 33.9px 102.9px, 88.0px 60.9px, 110.2px 38.7px, 210.4px 89.2px, 215.6px 86.6px, 226.8px 83.5px, 250.2px 83.3px, 214.8px 90.2px, 241.3px 116.9px, 235.5px 116.3px;
     background-size: 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px, 0.0px 0.0px;
 }
@@ -11069,57 +11080,57 @@ details.tc > summary {
 
 .tc-art::before {
     background:
-        radial-gradient(circle 2.0px at 56.2px 118.4px, color-mix(in oklch, oklch(97% 0.054 64) 65%, transparent) 0 0.49px, color-mix(in oklch, oklch(85% 0.054 64) 26%, transparent) 0.89px, transparent),
-        radial-gradient(circle 1.7px at 10.9px 67.4px, color-mix(in oklch, oklch(97% 0.034 240) 60%, transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.034 240) 24%, transparent) 0.80px, transparent),
-        radial-gradient(circle 1.8px at 182.4px 13.5px, color-mix(in oklch, oklch(97% 0.054 64) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.054 64) 25%, transparent) 0.84px, transparent),
-        radial-gradient(circle 3.0px at 53.3px 138.8px, color-mix(in oklch, oklch(97% 0.039 240) 79%, transparent) 0 0.63px, color-mix(in oklch, oklch(85% 0.039 240) 32%, transparent) 1.15px, transparent),
-        radial-gradient(circle 3.0px at 228.5px 41.4px, color-mix(in oklch, oklch(97% 0.034 240) 79%, transparent) 0 0.63px, color-mix(in oklch, oklch(85% 0.034 240) 32%, transparent) 1.15px, transparent),
-        radial-gradient(circle 1.8px at 277.3px 88.2px, color-mix(in oklch, oklch(97% 0.054 64) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.054 64) 25%, transparent) 0.84px, transparent),
-        radial-gradient(circle 1.6px at 211.1px 166.9px, color-mix(in oklch, oklch(97% 0.039 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.039 240) 23%, transparent) 0.77px, transparent),
-        radial-gradient(circle 2.0px at 243.4px 61.2px, color-mix(in oklch, oklch(97% 0.022 240) 65%, transparent) 0 0.49px, color-mix(in oklch, oklch(85% 0.022 240) 26%, transparent) 0.89px, transparent),
-        radial-gradient(circle 2.2px at 199.3px 151.8px, color-mix(in oklch, oklch(97% 0.027 70) 68%, transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.027 70) 27%, transparent) 0.95px, transparent),
-        radial-gradient(circle 2.6px at 79.2px 148.2px, color-mix(in oklch, oklch(97% 0.034 240) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.034 240) 29%, transparent) 1.04px, transparent),
-        radial-gradient(circle 3.7px at 248.9px 113.3px, color-mix(in oklch, oklch(97% 0.027 70) 87%, transparent) 0 0.71px, color-mix(in oklch, oklch(85% 0.027 70) 35%, transparent) 1.29px, transparent),
-        radial-gradient(circle 1.6px at 285.4px 127.3px, color-mix(in oklch, oklch(97% 0.039 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.039 240) 23%, transparent) 0.77px, transparent),
-        radial-gradient(circle 1.8px at 17.9px 41.9px, color-mix(in oklch, oklch(97% 0.028 240) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.028 240) 25%, transparent) 0.84px, transparent),
-        radial-gradient(circle 2.6px at 278.4px 152.9px, color-mix(in oklch, oklch(97% 0.028 240) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.028 240) 29%, transparent) 1.04px, transparent),
-        radial-gradient(circle 2.6px at 71.5px 34.6px, color-mix(in oklch, oklch(97% 0.027 70) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.027 70) 29%, transparent) 1.04px, transparent),
-        radial-gradient(circle 1.6px at 231.4px 9.3px, color-mix(in oklch, oklch(97% 0.034 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.034 240) 23%, transparent) 0.77px, transparent),
-        radial-gradient(circle 1.6px at 238.9px 136.5px, color-mix(in oklch, oklch(97% 0.034 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.034 240) 23%, transparent) 0.77px, transparent),
-        radial-gradient(circle 1.5px at 91.7px 108.0px, color-mix(in oklch, oklch(97% 0.022 240) 56%, transparent) 0 0.41px, color-mix(in oklch, oklch(85% 0.022 240) 23%, transparent) 0.75px, transparent),
-        radial-gradient(circle 1.7px at 28.3px 113.3px, color-mix(in oklch, oklch(97% 0.034 240) 60%, transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.034 240) 24%, transparent) 0.80px, transparent),
-        radial-gradient(circle 3.7px at 255.2px 19.3px, color-mix(in oklch, oklch(97% 0.039 240) 87%, transparent) 0 0.71px, color-mix(in oklch, oklch(85% 0.039 240) 35%, transparent) 1.29px, transparent),
-        radial-gradient(circle 2.2px at 58.4px 67.7px, color-mix(in oklch, oklch(97% 0.054 64) 68%, transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.054 64) 27%, transparent) 0.95px, transparent),
-        radial-gradient(circle 2.6px at 97.3px 70.6px, color-mix(in oklch, oklch(97% 0.034 240) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.034 240) 29%, transparent) 1.04px, transparent),
-        radial-gradient(circle 1.7px at 287.4px 34.6px, color-mix(in oklch, oklch(97% 0.022 240) 60%, transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.022 240) 24%, transparent) 0.80px, transparent);
+        radial-gradient(circle 2.0px at 56.2px 118.4px, color-mix(in oklch, oklch(97% 0.054 64) calc(65% * var(--lift)), transparent) 0 0.49px, color-mix(in oklch, oklch(85% 0.054 64) calc(26% * var(--lift)), transparent) 0.89px, transparent),
+        radial-gradient(circle 1.7px at 10.9px 67.4px, color-mix(in oklch, oklch(97% 0.034 240) calc(60% * var(--lift)), transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.034 240) calc(24% * var(--lift)), transparent) 0.80px, transparent),
+        radial-gradient(circle 1.8px at 182.4px 13.5px, color-mix(in oklch, oklch(97% 0.054 64) calc(62% * var(--lift)), transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.054 64) calc(25% * var(--lift)), transparent) 0.84px, transparent),
+        radial-gradient(circle 3.0px at 53.3px 138.8px, color-mix(in oklch, oklch(97% 0.039 240) calc(79% * var(--lift)), transparent) 0 0.63px, color-mix(in oklch, oklch(85% 0.039 240) calc(32% * var(--lift)), transparent) 1.15px, transparent),
+        radial-gradient(circle 3.0px at 228.5px 41.4px, color-mix(in oklch, oklch(97% 0.034 240) calc(79% * var(--lift)), transparent) 0 0.63px, color-mix(in oklch, oklch(85% 0.034 240) calc(32% * var(--lift)), transparent) 1.15px, transparent),
+        radial-gradient(circle 1.8px at 277.3px 88.2px, color-mix(in oklch, oklch(97% 0.054 64) calc(62% * var(--lift)), transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.054 64) calc(25% * var(--lift)), transparent) 0.84px, transparent),
+        radial-gradient(circle 1.6px at 211.1px 166.9px, color-mix(in oklch, oklch(97% 0.039 240) calc(58% * var(--lift)), transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.039 240) calc(23% * var(--lift)), transparent) 0.77px, transparent),
+        radial-gradient(circle 2.0px at 243.4px 61.2px, color-mix(in oklch, oklch(97% 0.022 240) calc(65% * var(--lift)), transparent) 0 0.49px, color-mix(in oklch, oklch(85% 0.022 240) calc(26% * var(--lift)), transparent) 0.89px, transparent),
+        radial-gradient(circle 2.2px at 199.3px 151.8px, color-mix(in oklch, oklch(97% 0.027 70) calc(68% * var(--lift)), transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.027 70) calc(27% * var(--lift)), transparent) 0.95px, transparent),
+        radial-gradient(circle 2.6px at 79.2px 148.2px, color-mix(in oklch, oklch(97% 0.034 240) calc(73% * var(--lift)), transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.034 240) calc(29% * var(--lift)), transparent) 1.04px, transparent),
+        radial-gradient(circle 3.7px at 248.9px 113.3px, color-mix(in oklch, oklch(97% 0.027 70) calc(87% * var(--lift)), transparent) 0 0.71px, color-mix(in oklch, oklch(85% 0.027 70) calc(35% * var(--lift)), transparent) 1.29px, transparent),
+        radial-gradient(circle 1.6px at 285.4px 127.3px, color-mix(in oklch, oklch(97% 0.039 240) calc(58% * var(--lift)), transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.039 240) calc(23% * var(--lift)), transparent) 0.77px, transparent),
+        radial-gradient(circle 1.8px at 17.9px 41.9px, color-mix(in oklch, oklch(97% 0.028 240) calc(62% * var(--lift)), transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.028 240) calc(25% * var(--lift)), transparent) 0.84px, transparent),
+        radial-gradient(circle 2.6px at 278.4px 152.9px, color-mix(in oklch, oklch(97% 0.028 240) calc(73% * var(--lift)), transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.028 240) calc(29% * var(--lift)), transparent) 1.04px, transparent),
+        radial-gradient(circle 2.6px at 71.5px 34.6px, color-mix(in oklch, oklch(97% 0.027 70) calc(73% * var(--lift)), transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.027 70) calc(29% * var(--lift)), transparent) 1.04px, transparent),
+        radial-gradient(circle 1.6px at 231.4px 9.3px, color-mix(in oklch, oklch(97% 0.034 240) calc(58% * var(--lift)), transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.034 240) calc(23% * var(--lift)), transparent) 0.77px, transparent),
+        radial-gradient(circle 1.6px at 238.9px 136.5px, color-mix(in oklch, oklch(97% 0.034 240) calc(58% * var(--lift)), transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.034 240) calc(23% * var(--lift)), transparent) 0.77px, transparent),
+        radial-gradient(circle 1.5px at 91.7px 108.0px, color-mix(in oklch, oklch(97% 0.022 240) calc(56% * var(--lift)), transparent) 0 0.41px, color-mix(in oklch, oklch(85% 0.022 240) calc(23% * var(--lift)), transparent) 0.75px, transparent),
+        radial-gradient(circle 1.7px at 28.3px 113.3px, color-mix(in oklch, oklch(97% 0.034 240) calc(60% * var(--lift)), transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.034 240) calc(24% * var(--lift)), transparent) 0.80px, transparent),
+        radial-gradient(circle 3.7px at 255.2px 19.3px, color-mix(in oklch, oklch(97% 0.039 240) calc(87% * var(--lift)), transparent) 0 0.71px, color-mix(in oklch, oklch(85% 0.039 240) calc(35% * var(--lift)), transparent) 1.29px, transparent),
+        radial-gradient(circle 2.2px at 58.4px 67.7px, color-mix(in oklch, oklch(97% 0.054 64) calc(68% * var(--lift)), transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.054 64) calc(27% * var(--lift)), transparent) 0.95px, transparent),
+        radial-gradient(circle 2.6px at 97.3px 70.6px, color-mix(in oklch, oklch(97% 0.034 240) calc(73% * var(--lift)), transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.034 240) calc(29% * var(--lift)), transparent) 1.04px, transparent),
+        radial-gradient(circle 1.7px at 287.4px 34.6px, color-mix(in oklch, oklch(97% 0.022 240) calc(60% * var(--lift)), transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.022 240) calc(24% * var(--lift)), transparent) 0.80px, transparent);
     animation: tc-tw1 6.7s ease-in-out infinite;
 }
 
 .tc-art::after {
     background:
-        radial-gradient(circle 1.6px at 246.1px 166.4px, color-mix(in oklch, oklch(97% 0.028 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.028 240) 23%, transparent) 0.77px, transparent),
-        radial-gradient(circle 1.7px at 268.0px 119.0px, color-mix(in oklch, oklch(97% 0.027 70) 60%, transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.027 70) 24%, transparent) 0.80px, transparent),
-        radial-gradient(circle 1.8px at 204.3px 111.8px, color-mix(in oklch, oklch(97% 0.039 240) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.039 240) 25%, transparent) 0.84px, transparent),
-        radial-gradient(circle 2.2px at 62.3px 13.9px, color-mix(in oklch, oklch(97% 0.034 240) 68%, transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.034 240) 27%, transparent) 0.95px, transparent),
-        radial-gradient(circle 2.0px at 50.9px 93.7px, color-mix(in oklch, oklch(97% 0.004 74) 65%, transparent) 0 0.49px, color-mix(in oklch, oklch(85% 0.004 74) 26%, transparent) 0.89px, transparent),
-        radial-gradient(circle 3.0px at 118.2px 12.3px, color-mix(in oklch, oklch(97% 0.028 240) 79%, transparent) 0 0.63px, color-mix(in oklch, oklch(85% 0.028 240) 32%, transparent) 1.15px, transparent),
-        radial-gradient(circle 2.6px at 184.3px 36.9px, color-mix(in oklch, oklch(97% 0.004 74) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.004 74) 29%, transparent) 1.04px, transparent),
-        radial-gradient(circle 2.6px at 38.9px 18.5px, color-mix(in oklch, oklch(97% 0.027 70) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.027 70) 29%, transparent) 1.04px, transparent),
-        radial-gradient(circle 3.7px at 267.0px 34.1px, color-mix(in oklch, oklch(97% 0.004 74) 87%, transparent) 0 0.71px, color-mix(in oklch, oklch(85% 0.004 74) 35%, transparent) 1.29px, transparent),
-        radial-gradient(circle 2.0px at 217.6px 17.2px, color-mix(in oklch, oklch(97% 0.039 240) 65%, transparent) 0 0.49px, color-mix(in oklch, oklch(85% 0.039 240) 26%, transparent) 0.89px, transparent),
-        radial-gradient(circle 1.8px at 79.6px 71.1px, color-mix(in oklch, oklch(97% 0.028 240) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.028 240) 25%, transparent) 0.84px, transparent),
-        radial-gradient(circle 1.5px at 80.6px 161.4px, color-mix(in oklch, oklch(97% 0.054 64) 56%, transparent) 0 0.41px, color-mix(in oklch, oklch(85% 0.054 64) 23%, transparent) 0.75px, transparent),
-        radial-gradient(circle 2.2px at 16.6px 103.0px, color-mix(in oklch, oklch(97% 0.027 70) 68%, transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.027 70) 27%, transparent) 0.95px, transparent),
-        radial-gradient(circle 2.6px at 17.1px 79.5px, color-mix(in oklch, oklch(97% 0.034 240) 73%, transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.034 240) 29%, transparent) 1.04px, transparent),
-        radial-gradient(circle 3.7px at 66.5px 127.1px, color-mix(in oklch, oklch(97% 0.039 240) 87%, transparent) 0 0.71px, color-mix(in oklch, oklch(85% 0.039 240) 35%, transparent) 1.29px, transparent),
-        radial-gradient(circle 1.8px at 249.2px 45.3px, color-mix(in oklch, oklch(97% 0.039 240) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.039 240) 25%, transparent) 0.84px, transparent),
-        radial-gradient(circle 1.8px at 162.7px 17.6px, color-mix(in oklch, oklch(97% 0.011 240) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.011 240) 25%, transparent) 0.84px, transparent),
-        radial-gradient(circle 2.2px at 27.8px 138.4px, color-mix(in oklch, oklch(97% 0.004 74) 68%, transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.004 74) 27%, transparent) 0.95px, transparent),
-        radial-gradient(circle 1.6px at 185.4px 137.2px, color-mix(in oklch, oklch(97% 0.039 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.039 240) 23%, transparent) 0.77px, transparent),
-        radial-gradient(circle 1.8px at 233.3px 71.8px, color-mix(in oklch, oklch(97% 0.054 64) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.054 64) 25%, transparent) 0.84px, transparent),
-        radial-gradient(circle 1.8px at 287.0px 9.0px, color-mix(in oklch, oklch(97% 0.022 240) 62%, transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.022 240) 25%, transparent) 0.84px, transparent),
-        radial-gradient(circle 1.6px at 94.7px 159.0px, color-mix(in oklch, oklch(97% 0.034 240) 58%, transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.034 240) 23%, transparent) 0.77px, transparent),
-        radial-gradient(circle 2.2px at 200.0px 67.5px, color-mix(in oklch, oklch(97% 0.011 240) 68%, transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.011 240) 27%, transparent) 0.95px, transparent);
+        radial-gradient(circle 1.6px at 246.1px 166.4px, color-mix(in oklch, oklch(97% 0.028 240) calc(58% * var(--lift)), transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.028 240) calc(23% * var(--lift)), transparent) 0.77px, transparent),
+        radial-gradient(circle 1.7px at 268.0px 119.0px, color-mix(in oklch, oklch(97% 0.027 70) calc(60% * var(--lift)), transparent) 0 0.44px, color-mix(in oklch, oklch(85% 0.027 70) calc(24% * var(--lift)), transparent) 0.80px, transparent),
+        radial-gradient(circle 1.8px at 204.3px 111.8px, color-mix(in oklch, oklch(97% 0.039 240) calc(62% * var(--lift)), transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.039 240) calc(25% * var(--lift)), transparent) 0.84px, transparent),
+        radial-gradient(circle 2.2px at 62.3px 13.9px, color-mix(in oklch, oklch(97% 0.034 240) calc(68% * var(--lift)), transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.034 240) calc(27% * var(--lift)), transparent) 0.95px, transparent),
+        radial-gradient(circle 2.0px at 50.9px 93.7px, color-mix(in oklch, oklch(97% 0.004 74) calc(65% * var(--lift)), transparent) 0 0.49px, color-mix(in oklch, oklch(85% 0.004 74) calc(26% * var(--lift)), transparent) 0.89px, transparent),
+        radial-gradient(circle 3.0px at 118.2px 12.3px, color-mix(in oklch, oklch(97% 0.028 240) calc(79% * var(--lift)), transparent) 0 0.63px, color-mix(in oklch, oklch(85% 0.028 240) calc(32% * var(--lift)), transparent) 1.15px, transparent),
+        radial-gradient(circle 2.6px at 184.3px 36.9px, color-mix(in oklch, oklch(97% 0.004 74) calc(73% * var(--lift)), transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.004 74) calc(29% * var(--lift)), transparent) 1.04px, transparent),
+        radial-gradient(circle 2.6px at 38.9px 18.5px, color-mix(in oklch, oklch(97% 0.027 70) calc(73% * var(--lift)), transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.027 70) calc(29% * var(--lift)), transparent) 1.04px, transparent),
+        radial-gradient(circle 3.7px at 267.0px 34.1px, color-mix(in oklch, oklch(97% 0.004 74) calc(87% * var(--lift)), transparent) 0 0.71px, color-mix(in oklch, oklch(85% 0.004 74) calc(35% * var(--lift)), transparent) 1.29px, transparent),
+        radial-gradient(circle 2.0px at 217.6px 17.2px, color-mix(in oklch, oklch(97% 0.039 240) calc(65% * var(--lift)), transparent) 0 0.49px, color-mix(in oklch, oklch(85% 0.039 240) calc(26% * var(--lift)), transparent) 0.89px, transparent),
+        radial-gradient(circle 1.8px at 79.6px 71.1px, color-mix(in oklch, oklch(97% 0.028 240) calc(62% * var(--lift)), transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.028 240) calc(25% * var(--lift)), transparent) 0.84px, transparent),
+        radial-gradient(circle 1.5px at 80.6px 161.4px, color-mix(in oklch, oklch(97% 0.054 64) calc(56% * var(--lift)), transparent) 0 0.41px, color-mix(in oklch, oklch(85% 0.054 64) calc(23% * var(--lift)), transparent) 0.75px, transparent),
+        radial-gradient(circle 2.2px at 16.6px 103.0px, color-mix(in oklch, oklch(97% 0.027 70) calc(68% * var(--lift)), transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.027 70) calc(27% * var(--lift)), transparent) 0.95px, transparent),
+        radial-gradient(circle 2.6px at 17.1px 79.5px, color-mix(in oklch, oklch(97% 0.034 240) calc(73% * var(--lift)), transparent) 0 0.57px, color-mix(in oklch, oklch(85% 0.034 240) calc(29% * var(--lift)), transparent) 1.04px, transparent),
+        radial-gradient(circle 3.7px at 66.5px 127.1px, color-mix(in oklch, oklch(97% 0.039 240) calc(87% * var(--lift)), transparent) 0 0.71px, color-mix(in oklch, oklch(85% 0.039 240) calc(35% * var(--lift)), transparent) 1.29px, transparent),
+        radial-gradient(circle 1.8px at 249.2px 45.3px, color-mix(in oklch, oklch(97% 0.039 240) calc(62% * var(--lift)), transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.039 240) calc(25% * var(--lift)), transparent) 0.84px, transparent),
+        radial-gradient(circle 1.8px at 162.7px 17.6px, color-mix(in oklch, oklch(97% 0.011 240) calc(62% * var(--lift)), transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.011 240) calc(25% * var(--lift)), transparent) 0.84px, transparent),
+        radial-gradient(circle 2.2px at 27.8px 138.4px, color-mix(in oklch, oklch(97% 0.004 74) calc(68% * var(--lift)), transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.004 74) calc(27% * var(--lift)), transparent) 0.95px, transparent),
+        radial-gradient(circle 1.6px at 185.4px 137.2px, color-mix(in oklch, oklch(97% 0.039 240) calc(58% * var(--lift)), transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.039 240) calc(23% * var(--lift)), transparent) 0.77px, transparent),
+        radial-gradient(circle 1.8px at 233.3px 71.8px, color-mix(in oklch, oklch(97% 0.054 64) calc(62% * var(--lift)), transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.054 64) calc(25% * var(--lift)), transparent) 0.84px, transparent),
+        radial-gradient(circle 1.8px at 287.0px 9.0px, color-mix(in oklch, oklch(97% 0.022 240) calc(62% * var(--lift)), transparent) 0 0.46px, color-mix(in oklch, oklch(85% 0.022 240) calc(25% * var(--lift)), transparent) 0.84px, transparent),
+        radial-gradient(circle 1.6px at 94.7px 159.0px, color-mix(in oklch, oklch(97% 0.034 240) calc(58% * var(--lift)), transparent) 0 0.42px, color-mix(in oklch, oklch(85% 0.034 240) calc(23% * var(--lift)), transparent) 0.77px, transparent),
+        radial-gradient(circle 2.2px at 200.0px 67.5px, color-mix(in oklch, oklch(97% 0.011 240) calc(68% * var(--lift)), transparent) 0 0.52px, color-mix(in oklch, oklch(85% 0.011 240) calc(27% * var(--lift)), transparent) 0.95px, transparent);
     animation: tc-tw2 4.9s ease-in-out -2.2s infinite;
 }
 
@@ -11658,7 +11669,7 @@ body>span[style*="color"] {
     margin: 31px 10px !important;
     --lk-tone: var(--color);
     padding: 56px 30px 46px;
-    --glass-line: oklch(100% 0 0 / 0.07);
+    --glass-line: oklch(100% 0 0 / calc(0.07 * var(--lift)));
     background: var(--glass-bg);
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
@@ -11717,11 +11728,11 @@ body>span[style*="color"] {
 }
 
 .post:has(a.name[href="mailto:g" i]) .post-body > .post-lock {
-    --glass-line: oklch(from var(--gjo) calc(l + 0.2) calc(c * 0.6) h / 0.12);
+    --glass-line: oklch(from var(--gjo) calc(l + 0.2) calc(c * 0.6) h / calc(0.12 * var(--lift)));
 }
 
 .post:has(a.name[href="mailto:n" i]) .post-body > .post-lock {
-    --glass-line: oklch(from var(--nanami) calc(l + 0.2) calc(c * 0.6) h / 0.12);
+    --glass-line: oklch(from var(--nanami) calc(l + 0.2) calc(c * 0.6) h / calc(0.12 * var(--lift)));
 }
 
 .post:has(a.name[href="mailto:n" i]) .post-lock::before {
