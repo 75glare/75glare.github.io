@@ -4102,16 +4102,24 @@ main.lib:has(> details:is(.gm, .mv:where([class*=" ic-"])))>details:is(.gm, .mv:
     order: 3;
 }
 
-main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]) {
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"][open] {
     order: 4;
 }
 
-main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"] ~ add {
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]) {
     order: 5;
 }
 
-main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]) {
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"] ~ add {
     order: 6;
+}
+
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"][open] {
+    order: 7;
+}
+
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]) {
+    order: 8;
 }
 
 main.lib > details.mv[class*=" ic-"] ~ add {
