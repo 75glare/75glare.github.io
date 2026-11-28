@@ -3449,13 +3449,15 @@ details.ic-binoculars { --sm-icon: "\EA64"; }
 details.ic-planet { --sm-icon: "\E652"; }
 details.ic-notebook { --sm-icon: "\E34E"; }
 details.ic-notepad { --sm-icon: "\E63E"; }
+details.ic-cheers { --sm-icon: "\EA4A"; }
+details.ic-magnifier { --sm-icon: "\E30C"; }
 
 :is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details:is(.mv, .gm)[class*=" ic-"] summary:not(.cl-sm)::before,
 :is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details[open]:is(.mv, .gm)[class*=" ic-"] summary:not(.cl-sm)::before {
     content: var(--sm-icon);
 }
 
-main details.mv[class*=" ic-"]:is(.ic-sparkle, .ic-moon-stars, .ic-star, .ic-rain, .ic-snow, .ic-wave, .ic-flower, .ic-drop, .ic-binoculars, .ic-planet, .ic-notebook, .ic-notepad) summary:not(.cl-sm)::before {
+main details.mv[class*=" ic-"]:is(.ic-sparkle, .ic-moon-stars, .ic-star, .ic-rain, .ic-snow, .ic-wave, .ic-flower, .ic-drop, .ic-binoculars, .ic-planet, .ic-notebook, .ic-notepad, .ic-cheers, .ic-magnifier) summary:not(.cl-sm)::before {
     font-family: "Phosphor-Light";
 }
 
@@ -11779,7 +11781,7 @@ details.tc .tc-sub {
     letter-spacing: 0.06em;
     text-align: center;
     text-wrap: balance;
-    color: var(--pure-white);
+    color: color-mix(in srgb, var(--black) 90%, transparent);
     animation: sc-fx linear both;
     animation-timeline: view(inline);
 }
@@ -11937,7 +11939,7 @@ details.tc .tc-sub {
     margin: 13px 0;
     line-height: 2;
     letter-spacing: 0.06em;
-    color: var(--pure-white);
+    color: color-mix(in srgb, var(--black) 90%, transparent);
 }
 
 .ps.n .ps-tx {
@@ -12029,6 +12031,18 @@ details.tc .tc-sub {
     display: block;
     letter-spacing: 0.4em;
     color: color-mix(in srgb, var(--black) 45%, transparent);
+}
+
+@media (max-width: 767px) {
+    .sc-tx,
+    .ps-tx > p:not(:first-child) {
+        font-size: 0.909em;
+    }
+
+    .sc.n .sc-tx,
+    .ps.n .ps-tx > p:not(:first-child) {
+        font-size: 0.955em;
+    }
 }
 
 /* =======================================
@@ -12153,7 +12167,7 @@ details.tc .tc-sub {
     min-height: 234px;
     padding: 20px 18px 22px 34px;
     text-align: left;
-    color: var(--pure-white);
+    color: color-mix(in srgb, var(--black) 90%, transparent);
 }
 
 .nb:is(.wn, .sb) .nb-st > div {
