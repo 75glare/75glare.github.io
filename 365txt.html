@@ -186,6 +186,18 @@ input[type="date"]::-webkit-date-and-time-value {
     .row>div+div {
         margin-top: 12px;
     }
+
+    .icons-body .row {
+        gap: 0;
+    }
+
+    .icons-body .row>div+div {
+        margin-top: 14px;
+    }
+
+    .row.nb-item>div+div {
+        margin-top: 0;
+    }
 }
 
 textarea {
@@ -469,6 +481,18 @@ iframe {
     margin: 10px 0 6px;
     font-size: 0.78em;
     color: var(--sub);
+}
+
+.icons-body :is(.row, div:has(> p:first-child)) + div:has(> p:first-child):not(.row > div) {
+    margin-top: 14px;
+}
+
+.icons-body .row > div > p:first-child {
+    margin-top: 0;
+}
+
+.icons-body textarea {
+    display: block;
 }
 
 .icons-body a {
@@ -1548,7 +1572,7 @@ label[for="cw-date"],
                     </div>
                 </div>
             </div>
-            <p class="hint" id="sw-part-hint">① に貼っていないときは、できた項目をスイーツメニューのリスト（&lt;ul class="sw"&gt; の中）の好きな位置に貼ってね。</p>
+            <p class="hint" id="sw-part-hint">① に貼っていないときは、できた項目を、日記のスイーツメニューに並んでいるメニューとメニューの間の、好きな位置に貼ってね。</p>
         </div>
 
         <div data-for="dt">
@@ -1766,6 +1790,7 @@ label[for="cw-date"],
                     <p>七海と僕の答えを項目ごとに並べる表だよ。1 行ずつ、項目と 2 人の答えを書いてね。</p>
                     <p>表の名前（なくてもOK。診断名など）</p>
                     <input id="vs-title" type="text" autocomplete="off" placeholder="例：ふたりの関係性診断">
+                    <p class="hint">金の線の欄が七海、青の線の欄が五条の答えだよ。</p>
                     <div id="vs-list"></div>
                     <div class="tools" id="vs-add"><button type="button">＋ 行を足す</button></div>
                     <p class="hint">項目の下の小さい説明はなくてもOK。七海と五条の欄は改行できるよ。全部空の行は入らないよ。</p>
@@ -2098,6 +2123,7 @@ label[for="cw-date"],
         </div>
         <p class="hint">線の上・英文・署名・日付は、空けておけば出ないよ。</p>
         <div class="tools"><button type="button" id="cv-insert">このカードを入れる</button></div>
+        <p class="hint" id="cv-empty" hidden>まだ何も書いていないよ。タイトルか文章を書いてから押してね。</p>
         </div>
     `);
 
@@ -2173,7 +2199,12 @@ label[for="cw-date"],
         showCover();
     });
 
-    $('cv-insert').addEventListener('click', () => insertAtCursor(coverHTML(), true));
+    $('cv-insert').addEventListener('click', () => {
+        const empty = ['cv-top', 'cv-top2', 'cv-title', 'cv-en', 'cv-to', 'cv-text', 'cv-sign', 'cv-date'].every((id) => !$(id).value.trim());
+        $('cv-empty').hidden = !empty;
+        if (!empty) insertAtCursor(coverHTML(), true);
+    });
+    $('cv-section').addEventListener('input', () => { $('cv-empty').hidden = true; });
     showCover();
 
     // 月の手紙：三日月ときらめきの表紙に、タイトルと英文。封筒の印を押すと手紙が開く。色は書いた人の色
@@ -2403,18 +2434,18 @@ label[for="cw-date"],
 
     // ノート：右のタブ（日付など）を押すとページが横にすべる。紙・表紙・ページの中身を自由に決める。ひな形を選ぶと項目名などが入る
     const NB_PRESET = {
-        ob: { paper: 'bk', hd: 'Field notes', name: '五条さんの観察日記', quote: false, items: ['Weather', 'Mood'], line: '例：11.02', title: '例：今日の五条さん', sub: '', text: '例：気づいたこと', owner: 'n' },
+        ob: { paper: 'bk', hd: 'Field notes', name: '観察日記', quote: false, items: ['Weather', 'Mood'], line: '例：11.02', title: '例：今日の様子', sub: '', text: '例：気づいたこと', owner: 'n' },
         tw: { paper: 'wn', hd: 'A table for two', name: '二人で食べたもの', quote: false, items: ['Menu', 'Note'], line: '例：11.02 — 銀座', title: '例：お店の名前', sub: '', text: '' },
         sb: { paper: 'sb', hd: 'Sweet log', name: '甘いもの帳', quote: false, items: ['Menu', 'Note'], line: '例：11.02 — 銀座', title: '例：お店の名前', sub: '', text: '', owner: 'g' },
         ex: { paper: 'bk', hd: 'Exchange diary', name: '交換日記', quote: false, items: [], line: '例：11.02 — from Satoru', title: '', sub: '', text: '例：ここに交換日記の文章が入る。', each: true },
         fr: { paper: 'bk', hd: 'Notebook', name: '自由帳', quote: false, items: [], line: '', title: '', sub: '', text: '' }
     };
-    const nb = { preset: 'ob', paper: 'bk', who: 'box', quote: false, pages: [] };
+    const nb = { preset: 'ob', paper: 'bk', who: 'box', quote: false, pages: [], cur: 0 };
     $('sky-section').insertAdjacentHTML('afterend', `
         <div id="nb-section">
-        <p class="hint">右のタブを押すと、ページが横にすべってめくれるノート。ページは 7 枚まで。最初は表紙（ラベル）が出ている。</p>
+        <p class="hint">右のタブを押すと、ページが横にすべってめくれるノートだよ。最初は表紙が出ていて、ページは 7 枚まで足せる。</p>
         <p>ひな形</p>
-        <div class="tools" id="nb-preset"><button type="button" data-p="ob">五条さんの観察日記</button><button type="button" data-p="ex">交換日記</button><button type="button" data-p="tw">二人で食べたもの</button><button type="button" data-p="sb">甘いもの帳</button><button type="button" data-p="fr">まっさら</button></div>
+        <div class="tools" id="nb-preset"><button type="button" data-p="ob">観察日記</button><button type="button" data-p="ex">交換日記</button><button type="button" data-p="tw">二人で食べたもの</button><button type="button" data-p="sb">甘いもの帳</button><button type="button" data-p="fr">まっさら</button></div>
         <p>紙</p>
         <div class="tools" id="nb-paper"><button type="button" data-v="bk">罫線</button><button type="button" data-v="sb">方眼の点</button><button type="button" data-v="wn">無地</button></div>
         <p>書いた人（色と字）</p>
@@ -2429,9 +2460,11 @@ label[for="cw-date"],
             <div><p>持ち主</p><input id="nb-owner" type="text" autocomplete="off"></div>
             <div><p>表紙の小さな字</p><input id="nb-hint" type="text" autocomplete="off" placeholder="Choose a date"></div>
         </div>
+        <p style="margin-top: 14px;">書くページ</p>
+        <div class="tools" id="nb-pick-row"><span id="nb-pick" style="display: contents;"></span><button type="button" id="nb-add">＋ ページを足す</button></div>
         <div id="nb-pages"></div>
-        <div class="tools"><button type="button" id="nb-add">ページを足す</button><button type="button" id="nb-insert">このノートを入れる</button></div>
-        <p class="hint">空けた欄は出ないよ。上の英文・表紙の名前・持ち主は、空けると薄く出ている字が入る。休みの日のページは、小さな 1 行と文章だけが真ん中に出る。</p>
+        <div class="tools"><button type="button" id="nb-insert">このノートを入れる</button></div>
+        <p class="hint">空けた欄は出ないよ。上の英文・表紙の名前・持ち主だけは、空けると薄く出ている字が入る。休みの日のページは、小さな 1 行と文章が真ん中に出るよ。タブの字を空けておくと、小さな 1 行の日付がタブになる。</p>
         </div>
     `);
 
@@ -2462,22 +2495,24 @@ label[for="cw-date"],
         const pr = NB_PRESET[nb.preset];
         const a = (t) => (t || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
         $('nb-pages').innerHTML = nb.pages.map((pg, i) => `
-            <div class="nb-page" style="margin-top: 14px; padding: 12px 0 4px; border-top: 1px solid var(--line);">
-                <p><b>${i + 1} 枚目</b></p>
+            <div class="nb-page" style="margin-top: 12px; padding: 2px 0 4px; border-top: 1px solid var(--line);" ${i === nb.cur ? '' : 'hidden'}>
                 <div class="row">
-                    <div><p>タブの字</p><input class="nb-tab" type="text" autocomplete="off" value="${a(pg.tab)}" placeholder="例：11.0${i + 2}"></div>
+                    <div><p>タブの字</p><input class="nb-tab" type="text" autocomplete="off" value="${a(pg.tab)}" placeholder="空けると小さな 1 行の日付"></div>
                     <div ${nb.who === 'each' ? '' : 'hidden'}><p>書いた人</p><select class="nb-pw"><option value="g"${pg.who === 'g' ? ' selected' : ''}>五条</option><option value="n"${pg.who === 'n' ? ' selected' : ''}>七海</option></select></div>
                 </div>
                 <label class="check"><input class="nb-off-ck" type="checkbox"${pg.off ? ' checked' : ''}>休みの日のページにする</label>
                 <div class="row">
                     <div><p>小さな 1 行</p><input class="nb-line" type="text" autocomplete="off" value="${a(pg.line)}" placeholder="${a(pr.line)}"></div>
-                    <div><p>題名</p><input class="nb-title" type="text" autocomplete="off" value="${a(pg.title)}" placeholder="${a(pr.title)}"></div>
+                    <div ${pg.off ? 'hidden' : ''}><p>題名</p><input class="nb-title" type="text" autocomplete="off" value="${a(pg.title)}" placeholder="${a(pr.title)}"></div>
                 </div>
-                <div><p>題名の下の小さな字</p><input class="nb-sub" type="text" autocomplete="off" value="${a(pg.sub)}" placeholder="${a(pr.sub)}"></div>
-                ${pg.items.map((it) => `<div class="row nb-item"><div><p>項目名</p><input class="nb-k" type="text" autocomplete="off" value="${a(it.k)}"></div><div><p>中身</p><input class="nb-v" type="text" autocomplete="off" value="${a(it.v)}"></div></div>`).join('')}
+                <div ${pg.off ? 'hidden' : ''}><p>題名の下の小さな字</p><input class="nb-sub" type="text" autocomplete="off" value="${a(pg.sub)}" placeholder="${a(pr.sub)}"></div>
+                ${pg.items.map((it) => `<div class="row nb-item" style="flex-direction: row; gap: 8px;" ${pg.off ? 'hidden' : ''}><div><p>項目名</p><input class="nb-k" type="text" autocomplete="off" value="${a(it.k)}"></div><div><p>中身</p><input class="nb-v" type="text" autocomplete="off" value="${a(it.v)}"></div></div>`).join('')}
                 <div><p>文章（改行で次の行へ）</p><textarea class="nb-text short" placeholder="${a(pr.text)}">${(pg.text || '').replace(/</g, '&lt;')}</textarea></div>
-                <div class="tools"><button type="button" class="nb-item-add">項目を足す</button><button type="button" class="nb-del">このページを消す</button></div>
+                <div class="tools"><button type="button" class="nb-item-add" ${pg.off ? 'hidden' : ''}>項目を足す</button><button type="button" class="nb-del" ${nb.pages.length > 1 ? '' : 'hidden'}>このページを消す</button></div>
             </div>`).join('');
+        const lb = (pg, i) => (pg.tab || '').trim() || (pg.line || '').trim().split(/\s+[—-]\s+/)[0] || `${i + 1} 枚目`;
+        nb.cur = Math.min(nb.cur, nb.pages.length - 1);
+        $('nb-pick').innerHTML = nb.pages.map((pg, i) => `<button type="button" data-i="${i}" aria-pressed="${i === nb.cur}">${a(lb(pg, i)).replace(/</g, '&lt;')}</button>`).join('');
         $('nb-add').disabled = nb.pages.length >= 7;
     }
 
@@ -2503,7 +2538,7 @@ label[for="cw-date"],
         const nm = 'nb' + Date.now().toString(36);
         const pages = nb.pages.slice(0, 7);
         const cls = ['nb', nb.paper, each ? 'ex' : '', w].filter((c) => c).join(' ');
-        const tabs = pages.map((pg, i) => `<details class="nb-n${each ? ' ' + pg.who : ''}" name="${nm}"><summary>${t(pg.tab) || String(i + 1)}</summary></details>`).join('');
+        const tabs = pages.map((pg, i) => `<details class="nb-n${each ? ' ' + pg.who : ''}" name="${nm}"><summary>${t(pg.tab) || t((pg.line || '').split(/\s+[—-]\s+/)[0]) || String(i + 1)}</summary></details>`).join('');
         const lines = (x) => flat(x || '').split('\n').map((l) => safe(l.trim())).filter((l) => l);
         const body = pages.map((pg) => {
             const pc = [pg.off ? 'nb-off' : '', each ? pg.who : ''].filter((c) => c).join(' ');
@@ -2529,13 +2564,17 @@ label[for="cw-date"],
     $('nb-preset').addEventListener('click', (ev) => {
         const b = ev.target.closest('button');
         if (!b) return;
+        nbSave();
         nb.preset = b.dataset.p;
         const pr = NB_PRESET[nb.preset];
         nb.paper = pr.paper;
         nb.quote = pr.quote;
         nb.who = pr.each ? 'each' : pr.owner || 'box';
-        nb.pages = [];
-        nb.pages.push(nbNewPage());
+        nbSave();
+        if (!nb.pages.length) nb.pages.push(nbNewPage());
+        nb.pages.forEach((pg) => {
+            if (pg.items.every((it) => !(it.v || '').trim())) pg.items = pr.items.map((k) => ({ k, v: '' }));
+        });
         showNb();
     });
     nbPick('nb-paper', 'paper', (b) => b.dataset.v);
@@ -2543,7 +2582,29 @@ label[for="cw-date"],
     nbPick('nb-quote', 'quote', (b) => b.dataset.v === '1');
     $('nb-add').addEventListener('click', () => {
         nbSave();
-        if (nb.pages.length < 7) nb.pages.push(nbNewPage());
+        if (nb.pages.length < 7) {
+            nb.pages.push(nbNewPage());
+            nb.cur = nb.pages.length - 1;
+        }
+        showNb();
+    });
+    $('nb-pick').addEventListener('click', (ev) => {
+        const b = ev.target.closest('button');
+        if (!b) return;
+        nbSave();
+        nb.cur = +b.dataset.i;
+        showNb();
+    });
+    $('nb-pages').addEventListener('input', (ev) => {
+        if (!ev.target.matches('.nb-tab, .nb-line')) return;
+        const pg = nb.pages[nb.cur];
+        nbSave();
+        const b = $('nb-pick').children[nb.cur];
+        if (b) b.textContent = (pg.tab || '').trim() || (pg.line || '').trim().split(/\s+[—-]\s+/)[0] || `${nb.cur + 1} 枚目`;
+    });
+    $('nb-pages').addEventListener('change', (ev) => {
+        if (!ev.target.classList.contains('nb-off-ck')) return;
+        nbSave();
         showNb();
     });
     $('nb-pages').addEventListener('click', (ev) => {
@@ -2551,7 +2612,10 @@ label[for="cw-date"],
         if (!b) return;
         const i = [...document.querySelectorAll('#nb-pages .nb-page')].indexOf(b.closest('.nb-page'));
         nbSave();
-        if (b.classList.contains('nb-del')) nb.pages.splice(i, 1);
+        if (b.classList.contains('nb-del') && nb.pages.length > 1) {
+            nb.pages.splice(i, 1);
+            nb.cur = Math.max(0, i - 1);
+        }
         if (b.classList.contains('nb-item-add')) nb.pages[i].items.push({ k: '', v: '' });
         showNb();
     });
@@ -2656,8 +2720,8 @@ label[for="cw-date"],
     // 引用できるのは、その発言より前の発言だけ
     function quoteOptions(i) {
         const c = state.chat[i];
-        return '<option value="">引用なし</option>' + state.chat.slice(0, i).filter((q) => q.text.trim()).map((q) =>
-            `<option value="${chatId(q)}"${c.quote === q.id ? ' selected' : ''}>${q.who === 'g' ? '五条' : '七海'}：${attr(shortText(q.text))}</option>`).join('');
+        return '<option value="">引用しない</option>' + state.chat.slice(0, i).filter((q) => q.text.trim()).map((q) =>
+            `<option value="${chatId(q)}"${c.quote === q.id ? ' selected' : ''}>引用：${q.who === 'g' ? '五条' : '七海'}「${attr(shortText(q.text))}」</option>`).join('');
     }
     let reactOpen = -1;
 
