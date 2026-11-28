@@ -2454,6 +2454,18 @@ main.at .int go {
     font-size: 0.96em !important;
 }
 
+main.at .int-ti::before {
+    content: "\E634";
+    font-size: 1.1em;
+    vertical-align: -0.02em;
+    color: var(--c);
+}
+
+main.at .int-ti[data-ch="na"]::before {
+    content: "\E4E6";
+    vertical-align: -0.1em;
+}
+
 main.at .int-ti details {
     display: inline-block;
     margin-left: 0.5em;
