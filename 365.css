@@ -3433,13 +3433,16 @@ details.ic-signpost { --sm-icon: "\E89C"; }
 details.ic-film { --sm-icon: "\E792"; }
 details.ic-slate { --sm-icon: "\E8C2"; }
 details.ic-pop { --sm-icon: "\EB4E"; }
+details.ic-binoculars { --sm-icon: "\EA64"; }
+details.ic-planet { --sm-icon: "\E652"; }
+details.ic-notebook { --sm-icon: "\E34E"; }
 
 :is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details:is(.mv, .gm)[class*=" ic-"] summary:not(.cl-sm)::before,
 :is(main, .hs, .gx, .rn, .yu, .um, .aj, .mz) details[open]:is(.mv, .gm)[class*=" ic-"] summary:not(.cl-sm)::before {
     content: var(--sm-icon);
 }
 
-main details.mv[class*=" ic-"]:is(.ic-sparkle, .ic-moon-stars, .ic-star, .ic-rain, .ic-snow, .ic-wave, .ic-flower, .ic-drop) summary:not(.cl-sm)::before {
+main details.mv[class*=" ic-"]:is(.ic-sparkle, .ic-moon-stars, .ic-star, .ic-rain, .ic-snow, .ic-wave, .ic-flower, .ic-drop, .ic-binoculars, .ic-planet, .ic-notebook) summary:not(.cl-sm)::before {
     font-family: "Phosphor-Light";
 }
 
@@ -4103,6 +4106,14 @@ main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open
     order: 4;
 }
 
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"] ~ add {
+    order: 5;
+}
+
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]) {
+    order: 6;
+}
+
 main.lib > details.mv[class*=" ic-"] ~ add {
     margin-top: 2.6em;
     padding: 0 0.2em 0.9em;
@@ -4123,7 +4134,7 @@ main.lib > details.mv[class*=" ic-"] ~ add small {
     color: color-mix(in srgb, var(--black) 55%, transparent);
 }
 
-main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]) > summary {
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]):not(main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"] ~ add ~ details.mv) > summary {
     background-image:
         linear-gradient(to top right, transparent calc(50% - 0.5px), color-mix(in srgb, var(--black) 16%, transparent) calc(50% - 0.5px) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
         linear-gradient(to bottom right, transparent calc(50% - 0.5px), color-mix(in srgb, var(--black) 16%, transparent) calc(50% - 0.5px) calc(50% + 0.5px), transparent calc(50% + 0.5px));
@@ -4134,7 +4145,7 @@ main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open
     padding-top: 24%;
 }
 
-main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]) > summary::before {
+main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"]:not([open]):not(main.lib > details.mv[class*=" ic-"] ~ add ~ details.mv[class*=" ic-"] ~ add ~ details.mv) > summary::before {
     content: none;
 }
 
@@ -10051,6 +10062,14 @@ main details.mv[class][class][class] :is(details.tc, details.ss)[class] > summar
     content: none;
 }
 
+main details.mv[class][class][class] :is(.nb-bt, .ps-bt) > details > summary:not(.cl-sm)::before {
+    content: none;
+}
+
+main details.mv > div > :is(.sc, .ps, .nb) {
+    margin-top: 26px;
+}
+
 main details.mv[class][class][class] details.cv-lt[class] > summary.ti-tr.cv {
     border-top: 0;
 }
@@ -11957,9 +11976,6 @@ details.tc .tc-sub {
 
 .ps:has(.ps-bt > details:nth-child(4)[open]) .ps-tx > p:nth-child(5) {
     display: block;
-}
-
-.ps:has(.ps-bt > details:nth-child(4)[open]) .ps-tx > p:nth-child(5) {
     letter-spacing: 0.4em;
     color: color-mix(in srgb, var(--black) 45%, transparent);
 }
@@ -12066,7 +12082,6 @@ details.tc .tc-sub {
         linear-gradient(90deg, transparent 22px, color-mix(in srgb, var(--c) 30%, transparent) 22px 23px, transparent 23px),
         repeating-linear-gradient(180deg, transparent 0 25px, color-mix(in srgb, var(--black) 9%, transparent) 25px 26px),
         var(--pp);
-    background-position: 0 0, 0 0, 0 0;
 }
 
 .nb.wn .nb-pg {
@@ -12124,14 +12139,6 @@ details.tc .tc-sub {
     letter-spacing: var(--nls);
 }
 
-.nb.bk .nb-st blockquote {
-    margin: 1em 0 0;
-    padding: 0 0 0 0.9em;
-    border-left: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
-    font: 400 var(--nfs)/2 var(--nf);
-    letter-spacing: var(--nls);
-}
-
 .nb .nb-st dl {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -12179,9 +12186,10 @@ details.tc .tc-sub {
 
 .nb.bk .nb-st blockquote {
     margin: 26px 0 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    line-height: 26px;
+    padding: 0 0 0 0.9em;
+    border-left: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
+    font: 400 var(--nfs)/26px var(--nf);
+    letter-spacing: var(--nls);
 }
 
 :is(.nb.bk, .nb.ex) .nb-st > div:is(:first-child, .nb-off) {
@@ -12238,10 +12246,6 @@ details.tc .tc-sub {
     background: none;
 }
 
-.nb.bk .nb-st dt {
-    line-height: 26px;
-}
-
 .nb-st p + p {
     margin-top: 0;
 }
@@ -12265,10 +12269,6 @@ details.tc .tc-sub {
 
 .nb.ex .nb-st > div > small:first-child {
     color: color-mix(in srgb, var(--c) 80%, transparent);
-}
-
-.nb.ex .nb-st > div > p {
-    line-height: 26px;
 }
 
 .nb-bt > details.g > summary {
