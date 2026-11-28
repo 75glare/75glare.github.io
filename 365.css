@@ -12077,7 +12077,7 @@ details.tc .tc-sub {
     background: var(--pp);
 }
 
-:is(.nb.bk, .nb.ex) .nb-pg {
+.nb.bk .nb-pg {
     background:
         linear-gradient(90deg, transparent 22px, color-mix(in srgb, var(--c) 30%, transparent) 22px 23px, transparent 23px),
         repeating-linear-gradient(180deg, transparent 0 25px, color-mix(in srgb, var(--black) 9%, transparent) 25px 26px),
@@ -12169,13 +12169,13 @@ details.tc .tc-sub {
     color: color-mix(in srgb, var(--black) 60%, transparent);
 }
 
-:is(.nb.bk, .nb.ex) .nb-st > div:not(:first-child, .nb-off) {
+.nb.bk .nb-st > div:not(:first-child, .nb-off) {
     justify-content: flex-start;
     padding-top: 26px;
     padding-bottom: 26px;
 }
 
-:is(.nb.bk, .nb.ex) .nb-st > div > * {
+.nb.bk .nb-st > div > * {
     margin: 0;
     line-height: 26px;
 }
@@ -12192,13 +12192,13 @@ details.tc .tc-sub {
     letter-spacing: var(--nls);
 }
 
-:is(.nb.bk, .nb.ex) .nb-st > div:is(:first-child, .nb-off) {
+.nb.bk .nb-st > div:is(:first-child, .nb-off) {
     justify-content: flex-start;
     padding-top: 78px;
     padding-bottom: 0;
 }
 
-:is(.nb.bk, .nb.ex) .nb-st > div:first-child {
+.nb.bk .nb-st > div:first-child {
     justify-content: center;
     padding: 18px;
 }
